@@ -1,0 +1,26 @@
+fo_profile_show:
+    path:     /{userUsername}
+    defaults: { _controller: "FfjvFoBundle:Profile:show" }
+
+fo_profile_edit:
+    path:     /edit/{userUsername}
+    defaults: { _controller: "FfjvFoBundle:Profile:editProfile" }
+
+fo_profile_update:
+    path:     /update/{userUsername}
+    defaults: { _controller: "FfjvFoBundle:Profile:updateProfile" }
+    methods: POST
+
+fo_profile_edit_password:
+    path:     /edit/password/{userUsername}
+    defaults: { _controller: "FfjvFoBundle:Profile:editProfilePassword" }
+
+fo_profile_update_password:
+    path:     /update/password/{userUsername}
+    defaults: { _controller: "FfjvFoBundle:Profile:updateProfilePassword" }
+    methods: POST
+
+fo_profile_delete:
+    path:     /delete/{userUsername}
+    defaults: { _controller: "FfjvFoBundle:Profile:deleteProfile" }
+    methods:  [POST, DELETE]

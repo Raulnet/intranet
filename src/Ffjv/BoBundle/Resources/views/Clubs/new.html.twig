@@ -1,0 +1,165 @@
+{% extends('@FfjvBo/layout.html.twig') %}
+{% set clubsMenu = true %}
+{% block breadcrumb %}
+    <h1>
+        Intranet FFJV
+        <small>Version 0.1</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="{{ path('ffjv_bo_home_index') }}"><i class="fa fa-cogs"></i> Administration</a></li>
+        <li><a href="{{ path('clubs') }}"><i class="fa fa-institution"></i> Clubs</a></li>
+        <li class="active"><i class="fa fa-institution"></i> create</li>
+    </ol>
+{% endblock %}
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-default">
+                    <div class="box-header">
+                        <h3 class="box-title">Clubs creation</h3>
+                        <a class="btn btn-default btn-sm pull-right" href="{{ path('clubs') }}">retour</a>
+                    </div>
+                    <div class="box-body">
+                        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ form_label(form.title, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.title) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.tag, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.tag) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.email, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.email) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.telFix, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.telFix) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.telMobile, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.telMobile) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.address1, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.address1) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.address2, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.address2) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.zipCode, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.zipCode) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.city, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.city) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.country, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.country) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ form_label(form.rna, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.rna) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.siren, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.siren) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.siret, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.siret) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.ape, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.ape) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.ligues, null, { 'label_attr': {'class': 'col-sm-12'} }) }}
+                                <div class="col-sm-12">
+                                    {{ form_widget(form.ligues) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.about, null, { 'label_attr': {'class': 'col-sm-12'} }) }}
+                                <div class="col-sm-12">
+                                    {{ form_widget(form.about) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    {{ form_widget(form.submit) }}
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block customCSS %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('public/lib/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('public/css/Bo/Clubs/new.css') }}">
+{% endblock %}
+{% block customJS %}
+    {#<script src="{{ asset('public/lib/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>#}
+    {#<script>#}
+    {#$(function () {#}
+    {#var options = {#}
+    {#toolbar: {#}
+    {#'font-styles': true,#}
+    {#'color': false,#}
+    {#'emphasis': {#}
+    {#'small': true#}
+    {#},#}
+    {#'blockquote': false,#}
+    {#'lists': false,#}
+    {#'html': false,#}
+    {#'link': false,#}
+    {#'image': false,#}
+    {#'smallmodals': false#}
+    {#}};#}
+    {#$("#ffjv_bobundle_clubs_about").wysihtml5(options);#}
+    {#});#}
+    {#</script>#}
+{% endblock %}

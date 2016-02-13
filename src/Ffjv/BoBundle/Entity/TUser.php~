@@ -1,0 +1,207 @@
+<?php
+
+namespace Ffjv\BoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TUser
+ *
+ * @ORM\Table(name="t_user", uniqueConstraints={@ORM\UniqueConstraint(name="email_UNIQUE", columns={"usr_email"}), @ORM\UniqueConstraint(name="username_UNIQUE", columns={"usr_username"}), @ORM\UniqueConstraint(name="licence_id_UNIQUE", columns={"licence_id"})}, indexes={@ORM\Index(name="fk_t_user_t_user1_idx", columns={"author_user_id"})})
+ * @ORM\Entity
+ */
+class TUser
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_username", type="string", length=100, nullable=false)
+     */
+    private $usrUsername;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_email", type="string", length=100, nullable=false)
+     */
+    private $usrEmail;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_password", type="string", length=100, nullable=false)
+     */
+    private $usrPassword;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_salt", type="string", length=100, nullable=false)
+     */
+    private $usrSalt;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="usr_roles", type="array", nullable=false)
+     */
+    private $usrRoles;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_nationality", type="string", length=2, nullable=false)
+     */
+    private $usrNationality = 'FR';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_first_name", type="string", length=50, nullable=false)
+     */
+    private $usrFirstName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_last_name", type="string", length=50, nullable=false)
+     */
+    private $usrLastName;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="usr_tel_mobile", type="integer", nullable=true)
+     */
+    private $usrTelMobile;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="usr_tel_fix", type="integer", nullable=true)
+     */
+    private $usrTelFix;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="usr_birthday", type="date", nullable=false)
+     */
+    private $usrBirthday;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_gender", type="string", length=1, nullable=false)
+     */
+    private $usrGender;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="usr_register_date", type="datetime", nullable=false)
+     */
+    private $usrRegisterDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_activation_code", type="string", length=100, nullable=false)
+     */
+    private $usrActivationCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_address_1", type="string", length=64, nullable=false)
+     */
+    private $usrAddress1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_address_2", type="string", length=64, nullable=true)
+     */
+    private $usrAddress2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_zip_code", type="string", length=12, nullable=false)
+     */
+    private $usrZipCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_id_zip_code", type="string", length=3, nullable=true)
+     */
+    private $usrIdZipCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_city", type="string", length=64, nullable=false)
+     */
+    private $usrCity;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_country_address", type="string", length=2, nullable=false)
+     */
+    private $usrCountryAddress = 'FR';
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="usr_last_update", type="datetime", nullable=false)
+     */
+    private $usrLastUpdate;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="usr_status", type="boolean", nullable=false)
+     */
+    private $usrStatus;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="usr_cgu", type="boolean", nullable=false)
+     */
+    private $usrCgu;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="usr_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $usrId;
+
+    /**
+     * @var \Ffjv\BoBundle\Entity\TUser
+     *
+     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\TUser")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="author_user_id", referencedColumnName="usr_id")
+     * })
+     */
+    private $authorUser;
+
+    /**
+     * @var \Ffjv\BoBundle\Entity\TLicencesUsers
+     *
+     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\TLicencesUsers")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="licence_id", referencedColumnName="lic_id")
+     * })
+     */
+    private $licence;
+
+
+}
+

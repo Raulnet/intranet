@@ -1,0 +1,17 @@
+{% extends('@FfjvBo/layout.html.twig') %}
+{% set clubsMenu = true %}
+
+{% block content %}
+    <h1>Clubs edit</h1>
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('clubs') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

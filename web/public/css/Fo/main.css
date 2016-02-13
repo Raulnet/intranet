@@ -1,0 +1,13 @@
+nav{
+    background-color: #223741!important;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
+}
+
+nav a{
+    color: #ffffff!important;
+}
+
+nav .dropdown-menu a {
+    color: #000000!important;
+}

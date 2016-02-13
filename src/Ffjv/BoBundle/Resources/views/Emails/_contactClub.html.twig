@@ -1,0 +1,3 @@
+{%  extends 'layout.html.twig' %}
+{% block email_lead %}{{ user.username }} vous transmet ce message depuis l'intranet FFJV{% endblock %}
+{% block email_content %}{{ message }}{% endblock %}

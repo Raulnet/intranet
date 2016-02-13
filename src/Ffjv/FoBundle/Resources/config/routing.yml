@@ -1,0 +1,61 @@
+ffjv_fo_home_index:
+    path:     /
+    defaults: { _controller: FfjvFoBundle:Home:index }
+
+ffjv_fo_home_colors:
+    path:     /colors/map
+    defaults: { _controller: FfjvFoBundle:Home:getColorsMap }
+    methods: GET|POST
+
+ffjv_fo_home_findclubs:
+    path:     /findclubs
+    defaults: { _controller: FfjvFoBundle:Home:findClubs }
+    methods: POST
+
+ffjv_fo_security_register:
+    path:     /inscription
+    defaults: { _controller: FfjvFoBundle:Security:register }
+
+ffjv_fo_security_confirmation:
+    path:     /confirmation/{userId}
+    defaults: { _controller: FfjvFoBundle:Security:getConfirmationRegistering }
+
+ffjv_fo_security_confirmation_email:
+    path:     /confirmation/email/{activationCode}
+    defaults: { _controller: FfjvFoBundle:Security:confirmEmailFromUser }
+
+ffjv_fo_security_new_password:
+    path:     /password/email/{email}/{activationCode}
+    defaults: { _controller: FfjvFoBundle:Security:registerNewPassword }
+
+ffjv_fo_security_set_new_password:
+    path:     /send/new/password
+    defaults: { _controller: FfjvFoBundle:Security:setNewPassword }
+    methods: POST
+
+ffjv_fo_security_send_mail_lostpassword:
+    path:     /send/email/password
+    defaults: { _controller: FfjvFoBundle:Security:sendMailLostPassword }
+    methods: POST
+
+ffjv_fo_security_send_mail_confirmation:
+    path:     /send/email
+    defaults: { _controller: FfjvFoBundle:Security:sendMailToConfirmation }
+    methods: POST
+
+ffjv_fo_security_createuser:
+    path:     /create/user
+    defaults: { _controller: FfjvFoBundle:Security:createUser }
+    methods: POST
+
+ffjv_fo_profile:
+    resource: "@FfjvFoBundle/Resources/config/routing/profile.yml"
+    prefix:   /profile
+
+ffjv_fo_clubs:
+    resource: "@FfjvFoBundle/Resources/config/routing/clubs.yml"
+    prefix:   /clubs
+
+ffjv_fo_userhasclubs:
+    resource: "@FfjvFoBundle/Resources/config/routing/userhasclubs.yml"
+    prefix:   /userhasclubs

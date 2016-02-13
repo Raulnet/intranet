@@ -1,0 +1,7 @@
+bo_messages:
+    path:     /
+    defaults: { _controller: "FfjvBoBundle:Messages:index" }
+
+bo_messages_show:
+    path:     /{messageId}/show
+    defaults: { _controller: "FfjvBoBundle:Messages:show" }

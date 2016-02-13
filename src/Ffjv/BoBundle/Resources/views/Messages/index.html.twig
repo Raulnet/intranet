@@ -1,0 +1,88 @@
+{% extends('@FfjvBo/layout.html.twig') %}
+{% set messagesMenu = true %}
+{% block breadcrumb %}
+    <h1>
+        Intranet FFJV
+        <small>Version 0.1</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="{{ path('ffjv_bo_home_index') }}"><i class="fa fa-cogs"></i> Administration</a></li>
+        <li class="active"><i class="fa fa-envelope"></i> Messages</li>
+    </ol>
+{% endblock %}
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Messages Board</h3>
+                    </div>
+                    <div class="box-body">
+                        <table id="clubs_board" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Author</th>
+                                    <th>send to</th>
+                                    <th>Subject</th>
+                                    <th>date send</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for mes in messages %}
+                                <tr>
+                                    <td><a href="{{ path('bo_messages_show', {'messageId':mes.id}) }}"><i class="fa fa-envelope"></i></a></td>
+                                    <td>
+                                        {% if mes.authorUser is not null %}
+                                            <a href="{{ path('user_show', {'id': mes.authorUser.id}) }}">{{ mes.authorUser }}</a>
+                                        {% endif %}
+                                    </td>
+                                    {% if mes.club is not null %}
+                                        <td>
+                                            <a href="{{ path('clubs_show', {'id': mes.club.id}) }}"><i class="fa fa-institution"></i> {{ mes.club }}</a>
+                                        </td>
+                                    {% elseif mes.ligue is not null %}
+                                        <td>
+                                            <a href="{{ path('ligues_show', {'id': mes.ligue.id}) }}"><i class="fa fa-factory"></i> {{ mes.ligue }}</a>
+                                        </td>
+                                    {% elseif mes.user is not null %}
+                                        <td>
+                                            <a href="{{ path('user_show', {'id': mes.user.id}) }}"><i class="fa fa-user"></i> {{ mes.user }}</a>
+                                        </td>
+                                    {% else %}
+                                        <td></td>
+                                    {% endif %}
+                                    <td>{{ mes.subject }}</td>
+                                    <td>{{ mes.message }}</td>
+                                    <td>{{ mes.creationDate|date('Y-m-d H:i') }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block customCSS %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('public/lib/datatables/dataTables.bootstrap.css') }}">
+{% endblock %}
+{% block customJS %}
+    <script src="{{ asset('public/lib/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('public/lib/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script>
+        $(function () {
+            $('#clubs_board').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
+        });
+    </script>
+{% endblock %}

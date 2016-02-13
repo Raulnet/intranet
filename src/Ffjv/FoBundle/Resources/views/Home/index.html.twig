@@ -1,0 +1,85 @@
+{% extends('@FfjvFo/layout.html.twig') %}
+ {% block customCSS %}
+     <link rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Home/index.css') }}">
+     <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/lib/jqueryMap/jqvmap.css') }}">
+ {% endblock %}
+{% block customJS %}
+    <script src="{{ asset('public/lib/jqueryMap/jquery.vmap.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/lib/jqueryMap/jquery.vmap.france.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/lib/jqueryMap/jquery.vmap.colorsFrance.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/lib/noty/js/noty/packaged/jquery.noty.packaged.min.js') }}"></script>
+    <script src="{{ asset('public/js/Home/index.js') }}" type="text/javascript"></script>
+{% endblock %}
+{% block header %}
+    <header>
+        <div class="jumbotron">
+            <div class="container">
+                <h1>BIENVENUE SUR VOTRE ESPACE MEMBRE FFJV</h1>
+                <p>La gestion du licencié, de ses équipes, de sa structure jusqu'à sa ligne nationale.</p>
+                <p>
+                    <a class="btn btn-default btn-lg" href="{{ path('login') }}" role="button">Connectez-vous</a>
+                    <a class="btn btn-primary btn-lg" href="{{ path('ffjv_fo_security_register') }}" role="button">Inscrivez-vous gratuitement</a>
+                </p>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+{% block content %}
+    <div class="col-xs-12">
+        <h3>Qu’est ce que l’espace membre ?</h3>
+        <p>En tant que club ou joueur affilié à la FFJV, vous bénéficiez d’un accès exclusif à l’espace membre de la Fédération. Cet outil sera pour ses utilisateurs une vraie place d’échange, où chacun pourra avoir accès, en fonction de son statut (manager, eSporteur, ...) aux données des licences le concernant.</p>
+    </div>
+    <div class="col-sm-4">
+        <h3>Où nous trouver ?</h3>
+        <p>Représenter le nombre de licenciés par département par des ronds bleus. -> Rond de diamètre différents en fonction du nombre de licenciés. Représenter le nombre de clubs par département par des ronds rouges. -> Zoom possible : quand on clique on voit le nom des clubs.</p>
+    </div>
+    <div class="col-sm-8">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#players" aria-controls="players" role="tab" data-toggle="tab">Players</a></li>
+            <li role="presentation"> <a href="#clubs" aria-controls="clubs" role="tab" data-toggle="tab">Clubs</a></li>
+        </ul>
+        <div id="panel_map" class="tab-content" data-url="{{ path('ffjv_fo_home_colors') }}">
+            <div role="tabpanel" class="tab-pane active" id="players">
+                <div id="francemap_players"  data-type="players"></div>
+                {# ##### MODAL PLAYERS ##### #}
+                <div class="modal fade" id="modal_players" tabindex="-1" role="dialog" aria-labelledby="modal_players_label">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="modal_players_label">Modal Players</h4>
+                            </div>
+                            <div id="modal_players_content" class="modal-body">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="clubs">
+                <div id="francemap_clubs" data-url="{{ path('ffjv_fo_home_colors') }}" data-type="clubs"></div>
+                {# ##### MODAL CLUBS ##### #}
+                <div class="modal fade" id="modal_clubs" tabindex="-1" role="dialog" aria-labelledby="modal_clubs_label" data-url="{{ path('ffjv_fo_home_findclubs') }}">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="modal_clubs_label">Modal Clubs</h4>
+                            </div>
+                            <div id="modal_clubs_content" class="modal-body">
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {# ##### ./MODAL CLUBS ##### #}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+h2 {
+    font-weight: 500;
+    line-height: 1.1;
+    margin: 0;
+    font-size: 24px;
+}
+
+.form-control{
+    border-radius: 0px;
+}
+
+.label_title{
+    text-align: right;
+}
+
+.form-control-date select{
+    border: 1px solid #d2d6de;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px;
+    background-color: white;
+    height: 30px;
+    padding: 5px 15px 5px 15px;
+}
+
+.form-control-date select:nth-child(1){
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.form-control-date select:nth-child(3){
+    border-left: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}

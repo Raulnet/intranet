@@ -1,0 +1,4 @@
+fo_request_user_has_club:
+    path:     /sendrequest
+    defaults: { _controller: FfjvFoBundle:UserHasClub:sendRequestToJoin }
+    methods: POST

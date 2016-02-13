@@ -1,0 +1,30 @@
+ligues:
+    path:     /
+    defaults: { _controller: "FfjvBoBundle:Ligues:index" }
+
+ligues_show:
+    path:     /{id}/show
+    defaults: { _controller: "FfjvBoBundle:Ligues:show" }
+
+ligues_new:
+    path:     /new
+    defaults: { _controller: "FfjvBoBundle:Ligues:new" }
+
+ligues_create:
+    path:     /create
+    defaults: { _controller: "FfjvBoBundle:Ligues:create" }
+    methods:  POST
+
+ligues_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FfjvBoBundle:Ligues:edit" }
+
+ligues_update:
+    path:     /{id}/update
+    defaults: { _controller: "FfjvBoBundle:Ligues:update" }
+    methods:  [POST, PUT]
+
+ligues_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FfjvBoBundle:Ligues:delete" }
+    methods:  [POST, DELETE]

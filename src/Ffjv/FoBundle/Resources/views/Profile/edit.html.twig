@@ -1,0 +1,154 @@
+{% extends('@FfjvFo/layoutManager.html.twig') %}
+{% block title %}FFJV-Profile {{ user.username }}{% endblock %}
+    {% block customCSS %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Profile/edit.css') }}">
+    {% endblock %}
+    {% block content %}
+        <section class="content-header">
+            <h2>{{ user.username }}</h2>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> Home</a></li>
+                <li><a href="{{ path('fo_profile_show', {'userUsername': app.user.username}) }}"><i class="fa fa-user"></i> Profile {{ user.username }}</a></li>
+                <li class="active"><i class="fa fa-cog"></i> Edit</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="box box-primary">
+                {{ form_start(editForm, {'attr': {'class': 'form-horizontal'}}) }}
+                <div class="box-header"></div>
+                <div class="box-body">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_label(editForm.username, 'Utilisateur*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(editForm.username) }}
+                                {{ form_errors(editForm.username) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(editForm.firstName, 'Prenom*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(editForm.firstName) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(editForm.lastName, 'Nom*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(editForm.lastName) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(editForm.nationality, 'Nationalité*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(editForm.nationality) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(editForm.birthday, 'Date de Naissance*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(editForm.birthday) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(editForm.gender, 'Genre*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(editForm.gender) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(editForm.email, 'Email*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(editForm.email) }}
+                                {{ form_errors(editForm.email) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(editForm.telFix, 'Tel fix', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(editForm.telFix) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(editForm.telMobile, 'Tel mobile', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(editForm.telMobile) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                            </div>
+                            <div class="col-sm-10 col-xs-12">
+                                <a class="btn btn-success btn-sm col-xs-12" href="{{ path('fo_profile_edit_password', {'userUsername': user.username}) }}">Edit Password</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(editForm.address1, 'Adresse*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(editForm.address1) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(editForm.address2, 'Adresse sup.', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(editForm.address2) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(editForm.zipCode, 'Code postal*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(editForm.zipCode) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(editForm.city, 'Ville*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(editForm.city) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(editForm.countryAddress, 'Pays*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(editForm.countryAddress) }}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <button type="button" class="btn btn-danger btn-sm col-sm-8 col-xs-12" data-toggle="modal" data-target="#deletProfile">
+                                    <i class="fa fa-trash"></i> Supprimer Profile {{ user.username }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                {{ form_row(editForm.submit, {'attr': {'class': 'btn btn-success col-sm-3 col-xs-12'}}) }}
+                                <p class="pull-right">*champ obligatoire</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{ form_end(editForm) }}
+            </div>
+
+            <div class="modal fade" id="deletProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Supprimer Profile {{ user.username }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            Attention ! Vous êtes sur le points de supprimer toutes vos données .<br/> Vos données ne pourront être restaurées !
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left btn-sm" data-dismiss="modal">Annuler</button>
+                            {{ form(deleteForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endblock %}

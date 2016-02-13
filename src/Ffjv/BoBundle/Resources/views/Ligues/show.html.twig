@@ -1,0 +1,228 @@
+{% extends('@FfjvBo/layout.html.twig') %}
+    {% set liguesMenu = true %}
+    {% block breadcrumb %}
+        <h1>
+            {{ ligue.title }}
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="{{ path('ffjv_bo_home_index') }}"><i class="fa fa-cogs"></i> Administration</a></li>
+            <li><a href="{{ path('ligues') }}"><i class="fa fa-institution"></i> ligues</a></li>
+            <li class="active">{{ ligue.title }}</li>
+        </ol>
+    {% endblock %}
+    {% block content %}
+        <section class="content">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="box box-warning">
+                        <div class="box-body box-profile">
+                            <img class="profile-user-img img-responsive img-circle" src="{{ asset('public/img/logo/logo_ffjv.png') }}" alt="User profile picture">
+                            <h3 class="profile-username text-center">{{ ligue.title }} - {{ ligue.tag }}</h3>
+                            <p class="text-muted text-center">RNA {{ ligue.rna }}</p>
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <b>Author</b><a class="pull-right">{{ ligue.user.firstname }} {{ ligue.user.lastname }}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Membres</b><a class="pull-right">0</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Clubs</b><a class="pull-right"><span class="badge bg-light-blue-active">{{ ligue.clubs|length }}</span> </a>
+                                </li>
+                            </ul>
+                            <a href="#" class="btn btn-primary btn-block"><b>Contact</b></a>
+                        </div>
+                    </div>
+                    <div class="box box-warning">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">About club</h3>
+                        </div>
+                        <div class="box-body">
+                            <strong><i class="fa fa-envelope margin-r-5"></i> Contact</strong>
+                            <p class="text-muted">{{ ligue.email }}</p>
+                            <hr>
+                            <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+
+                            <p class="text-muted">
+                                {{ ligue.address1 }}<br/>
+                                {{ ligue.address2 }}<br/>
+                                {{ ligue.zipcode }}, {{ ligue.city }}</p>
+                            <hr>
+                            <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+                            <p class="text-muted">
+                                {{ ligue.about }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li><a href="#members" data-toggle="tab">Membres</a></li>
+                            <li><a href="#clubs" data-toggle="tab">Clubs</a></li>
+                            <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="true">Settings</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane" id="members">
+                                <p>Membres</p>
+                            </div>
+                            <div class="tab-pane" id="clubs">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="box">
+                                            <div class="box-header">
+                                                <a class="btn btn-info btn-xs pull-right" href="{{ path('clubs_new') }}">Create a new clubs</a>
+                                            </div>
+                                            <div class="box-body">
+                                                <table id="teams_board" class="table table-bordered table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Title</th>
+                                                        <th>Tag</th>
+                                                        <th>Author</th>
+                                                        <th>Creationdate</th>
+                                                        <th>Lastupdate</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for club in ligue.clubs %}
+                                                        <tr>
+                                                            <td><a href="{{ path('clubs_show', { 'id': club.id }) }}">{{ club.title }}</a></td>
+                                                            <td>{{ club.tag }}</td>
+                                                            <td><a href="{{ path('user_show', {'id': club.user.id}) }}">{{ club.user }}</a> </td>
+                                                            <td>{% if club.creationDate %}{{ club.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                                            <td>{% if club.lastUpdate %}{{ club.lastUpdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane active" id="settings">
+                                {{ form_start(edit_form, {'attr': {'class': 'form-horizontal'}}) }}
+                                <div class="form-group">
+                                    {{ form_label(edit_form.title, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                    <div class="col-sm-10">
+                                        {{ form_widget(edit_form.title) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(edit_form.tag, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                    <div class="col-sm-10">
+                                        {{ form_widget(edit_form.tag) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(edit_form.rna, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                    <div class="col-sm-10">
+                                        {{ form_widget(edit_form.rna) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(edit_form.siren, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                    <div class="col-sm-10">
+                                        {{ form_widget(edit_form.siren) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(edit_form.siret, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                    <div class="col-sm-10">
+                                        {{ form_widget(edit_form.siret) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(edit_form.ape, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                    <div class="col-sm-10">
+                                        {{ form_widget(edit_form.ape) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(edit_form.email, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                    <div class="col-sm-10">
+                                        {{ form_widget(edit_form.email) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(edit_form.telFix, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                    <div class="col-sm-10">
+                                        {{ form_widget(edit_form.telFix) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(edit_form.telMobile, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                    <div class="col-sm-10">
+                                        {{ form_widget(edit_form.telMobile) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(edit_form.address1, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                    <div class="col-sm-10">
+                                        {{ form_widget(edit_form.address1) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(edit_form.address2, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                    <div class="col-sm-10">
+                                        {{ form_widget(edit_form.address2) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(edit_form.zipCode, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                    <div class="col-sm-10">
+                                        {{ form_widget(edit_form.zipCode) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(edit_form.city, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                    <div class="col-sm-10">
+                                        {{ form_widget(edit_form.city) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(edit_form.about, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                    <div class="col-sm-10">
+                                        {{ form_widget(edit_form.about) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-10 col-sm-offset-2">
+                                        {{ form_widget(edit_form.submit, {'attr': {'class': 'btn btn-success col-sm-4 col-xs-12'}}) }}
+                                        {{ form_end(edit_form) }}
+                                        <button type="button" class="btn btn-danger col-sm-4 col-sm-offset-4 col-xs-12" data-toggle="modal" data-target="#deleteModal">
+                                            Supprimer
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteLigue">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Supprimer la ligue {{ ligue.title }}</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                Attention, vous êtes sur le point de supprimer l'intégralité des données de la ligues
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Annuler</button>
+                                                {{ form_start(delete_form) }}
+                                                {{ form_widget(delete_form.submit, {'attr': {'class': 'btn btn-danger'}}) }}
+                                                {{ form_end(delete_form) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    {% endblock %}

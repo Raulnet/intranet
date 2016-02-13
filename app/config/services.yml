@@ -1,0 +1,40 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    clubs:
+        class: Ffjv\BoBundle\Service\Entity\ClubsService
+        arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]
+    teams:
+        class: Ffjv\BoBundle\Service\Entity\TeamsService
+        arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]
+    user:
+        class: Ffjv\BoBundle\Service\Entity\UserService
+        arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]
+    user_has_teams:
+        class: Ffjv\BoBundle\Service\Entity\UserHasTeams
+        arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]
+    user_has_clubs:
+        class: Ffjv\BoBundle\Service\Entity\UserHasClubs
+        arguments: ["@doctrine.orm.default_entity_manager", "@request_stack", "@service_container"]
+    licences_teams:
+        class: Ffjv\BoBundle\Service\Entity\LicencesTeamsService
+        arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]
+    licences_clubs:
+        class: Ffjv\BoBundle\Service\Entity\LicencesClubsService
+        arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]
+    licences_users:
+        class: Ffjv\BoBundle\Service\Entity\LicencesUsersService
+        arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]
+    messages:
+        class: Ffjv\BoBundle\Service\Entity\MessagesServices
+        arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]
+    contact:
+        class: Ffjv\BoBundle\Service\ContactService
+        arguments: ["@doctrine.orm.default_entity_manager", "@request_stack", "@service_container" ]
+

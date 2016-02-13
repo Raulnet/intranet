@@ -1,0 +1,71 @@
+{% extends('@FfjvBo/layout.html.twig') %}
+{% set teamsMenu = true %}
+{% block breadcrumb %}
+    <h1>
+        Intranet FFJV
+        <small>Version 0.1</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="{{ path('ffjv_bo_home_index') }}"><i class="fa fa-cogs"></i> Administration</a></li>
+        <li class="active"><i class="fa fa-users"></i> Teams</li>
+    </ol>
+{% endblock %}
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Teams Board</h3>
+                    </div>
+                    <div class="box-body">
+                        <table id="teams_board" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Clubs</th>
+                                <th>Team</th>
+                                <th>Tag</th>
+                                <th>Licence</th>
+                                <th>Creationdate</th>
+                                <th>Lastupdate</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for team in teams %}
+                                <tr>
+                                    <td><a href="{{ path('clubs_show', {'id': team.club.id}) }}">{{ team.club }}</a></td>
+                                    <td><a href="{{ path('teams_show', { 'id': team.id }) }}">{{ team.title }}</a></td>
+                                    <td>{{ team.tag }}</td>
+                                    <td>{{ team.licence }}</td>
+                                    <td>{% if team.creationDate %}{{ team.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td>{% if team.lastUpdate %}{{ team.lastUpdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block customCSS %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('public/lib/datatables/dataTables.bootstrap.css') }}">
+{% endblock %}
+{% block customJS %}
+    <script src="{{ asset('public/lib/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('public/lib/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script>
+        $(function () {
+            $('#teams_board').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
+        });
+    </script>
+{% endblock %}

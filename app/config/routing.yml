@@ -1,0 +1,25 @@
+ffjv_fo:
+    resource: "@FfjvFoBundle/Resources/config/routing.yml"
+    prefix:   /
+
+ffjv_bo:
+    resource: "@FfjvBoBundle/Resources/config/routing.yml"
+    prefix:   /administration
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+login:
+    path:  /login
+    defaults: { _controller: FfjvFoBundle:Security:login }
+
+status:
+    path:  /status
+    defaults: { _controller: FfjvFoBundle:Security:checkStatus }
+
+login_check:
+    path:  /login_check
+
+logout:
+    path:  /logout

@@ -1,0 +1,30 @@
+userhasclubs:
+    path:     /
+    defaults: { _controller: "FfjvBoBundle:UserHasClubs:index" }
+
+userhasclubs_show:
+    path:     /{id}/show
+    defaults: { _controller: "FfjvBoBundle:UserHasClubs:show" }
+
+userhasclubs_new:
+    path:     /new
+    defaults: { _controller: "FfjvBoBundle:UserHasClubs:new" }
+
+userhasclubs_create:
+    path:     /create
+    defaults: { _controller: "FfjvBoBundle:UserHasClubs:create" }
+    methods:  POST
+
+userhasclubs_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FfjvBoBundle:UserHasClubs:edit" }
+
+userhasclubs_update:
+    path:     /{id}/update
+    defaults: { _controller: "FfjvBoBundle:UserHasClubs:update" }
+    methods:  [POST, PUT]
+
+userhasclubs_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FfjvBoBundle:UserHasClubs:delete" }
+    methods:  [POST, DELETE]

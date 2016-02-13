@@ -1,0 +1,47 @@
+<?php
+
+namespace Ffjv\BoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TLicencesClubs
+ *
+ * @ORM\Table(name="t_licences_clubs", uniqueConstraints={@ORM\UniqueConstraint(name="lic_licence_UNIQUE", columns={"lic_licence"})})
+ * @ORM\Entity
+ */
+class TLicencesClubs
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="lic_register_date", type="datetime", nullable=false)
+     */
+    private $licRegisterDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="lic_activation_date", type="datetime", nullable=false)
+     */
+    private $licActivationDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lic_licence", type="string", length=50, nullable=true)
+     */
+    private $licLicence;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="lic_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $licId;
+
+
+}
+

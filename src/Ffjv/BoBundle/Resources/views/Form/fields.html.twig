@@ -1,0 +1,19 @@
+{%- block choice_widget_expanded -%}
+    <div {{ block('widget_container_attributes') }}>
+        <div class="row">
+            {% for child in form %}
+                <div class="check_roles">
+                    <div class="col-sm-1">
+                        {{ form_widget(child) }}
+                    </div>
+                    <div class="col-sm-11">
+                        {{ form_label(child, null, {translation_domain: choice_translation_domain}) }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock choice_widget_expanded %}
+{% block checkbox_widget %}
+    <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+{% endblock checkbox_widget %}

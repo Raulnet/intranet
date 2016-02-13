@@ -1,0 +1,67 @@
+<?php
+
+namespace Ffjv\BoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Licences
+ *
+ * @ORM\Table(name="t_licences")
+ * @ORM\Entity(repositoryClass="Ffjv\BoBundle\Repository\LicenceRepository")
+ */
+class Licences
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="lic_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="lic_register_date", type="datetime", nullable=false)
+     */
+    private $registerDate;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getRegisterDate()
+    {
+        return $this->registerDate;
+    }
+
+    /**
+     * @param \DateTime $registerDate
+     */
+    public function setRegisterDate($registerDate)
+    {
+        $this->registerDate = $registerDate;
+    }
+
+    /**
+     * @return string
+     */
+    function __toString()
+    {
+        return strval($this->getId());
+    }
+
+
+}
+

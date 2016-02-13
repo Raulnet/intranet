@@ -1,0 +1,55 @@
+fo_clubs_index:
+    path:     /
+    defaults: { _controller: "FfjvFoBundle:Clubs:index" }
+
+fo_clubs_show:
+    path:     /show/{clubTitle}
+    defaults: { _controller: "FfjvFoBundle:Clubs:show" }
+
+fo_clubs_new:
+    path:     /new
+    defaults: { _controller: "FfjvFoBundle:Clubs:new" }
+
+fo_clubs_create:
+    path:     /create
+    defaults: { _controller: "FfjvFoBundle:Clubs:create" }
+
+fo_clubs_edit:
+    path:     /edit/{clubTitle}
+    defaults: { _controller: "FfjvFoBundle:Clubs:edit" }
+
+fo_clubs_update:
+    path:     /update/{clubTitle}
+    defaults: { _controller: "FfjvFoBundle:Clubs:update" }
+
+fo_clubs_remove:
+    path:     /remove/{clubTitle}
+    defaults: { _controller: "FfjvFoBundle:Clubs:remove" }
+
+fo_clubs_delete:
+    path:     /delete/{clubTitle}
+    defaults: { _controller: "FfjvFoBundle:Clubs:delete" }
+    methods:  [POST, DELETE]
+
+fo_clubs_newteams:
+    path:     /newteams/{clubTitle}
+    defaults: { _controller: "FfjvFoBundle:Clubs:newTeam" }
+
+fo_clubs_createteams:
+    path:     /createteams/{clubTitle}
+    defaults: { _controller: "FfjvFoBundle:Clubs:createTeamToClub" }
+    methods: POST
+
+fo_clubs_newmembers:
+    path:     /newmembers/{clubTitle}
+    defaults: { _controller: "FfjvFoBundle:Clubs:newMember" }
+
+fo_clubs_createmembers:
+    path:     /createmembers/{clubTitle}
+    defaults: { _controller: "FfjvFoBundle:Clubs:createMemberToClub" }
+    methods: POST
+
+fo_clubs_contact:
+    path:     /sendmail
+    defaults: { _controller: "FfjvFoBundle:Clubs:contactClub" }
+    methods:  POST

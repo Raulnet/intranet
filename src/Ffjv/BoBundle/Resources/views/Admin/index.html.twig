@@ -1,0 +1,147 @@
+{% extends('@FfjvBo/layout.html.twig') %}
+{% set adminMenu = true %}
+{% block breadcrumb %}
+    <h1>
+        Intranet FFJV
+        <small>Version 0.1</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> Home</a></li>
+        <li class="active"><i class="fa fa-cogs"></i> Administration</li>
+    </ol>
+{% endblock %}
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <i class="fa fa-user"></i>
+                        <h3 class="box-title">Last user registered</h3>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>Username</th>
+                            <th>Licence</th>
+                            <th>Register Date</th>
+                        </tr>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td><a href="{{ path('user_show', {'id': user.id}) }}">{{ user.username }}</a></td>
+                                <td>{{ user.licence }}</td>
+                                <td>{{ user.registerDate|date('Y-m-d H:i') }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <i class="fa fa-institution"></i>
+                        <h3 class="box-title">Last Club registered</h3>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Register Date</th>
+                        </tr>
+                        {% for club in clubs %}
+                            <tr>
+                                <td>{{ club.id }}</td>
+                                <td><a href="{{ path('clubs_show', {'id': club.id}) }}">{{ club.title }}</a></td>
+                                <td><a href="{{ path('user_show', {'id': club.userId}) }}">{{ club.username }}</a></td>
+                                <td>{{ club.creationDate|date('Y-m-d H:i') }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <i class="fa fa-envelope"></i>
+                        <h3 class="box-title">Last Messages send</h3>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>Author</th>
+                            <th>Subject</th>
+                            <th>send to</th>
+                            <th>date send</th>
+                        </tr>
+                        {% for mes in messages %}
+                                <tr>
+                                    <td><a href="{{ path('bo_messages_show', {'messageId': mes.id}) }}"><i class="fa fa-envelope"></i></a> </td>
+                                    <td><a href="{{ path('user_show', {'id': mes.authorId}) }}">{{ mes.author }}</a></td>
+                                    <td>{{ mes.subject }}</td>
+                                    {% if mes.clubId is not null %}
+                                        <td>
+                                            <a href="{{ path('clubs_show', {'id': mes.clubId}) }}"><i class="fa fa-institution"></i> {{ mes.clubTitle }}</a>
+                                        </td>
+                                    {% elseif mes.ligueId is not null %}
+                                        <td>
+                                            <a href="{{ path('ligues_show', {'id': mes.ligueId}) }}"><i class="fa fa-factory"></i> {{ mes.ligueTitle }}</a>
+                                        </td>
+                                    {% elseif mes.userId is not null %}
+                                        <td>
+                                            <a href="{{ path('user_show', {'id': mes.userId}) }}"><i class="fa fa-user"></i> {{ mes.username}}</a>
+                                        </td>
+                                    {% else %}
+                                        <td></td>
+                                    {% endif %}
+                                    <td>{{ mes.creationDate|date('Y-m-d H:i') }}</td>
+                                </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box box-danger">
+                    <div class="box-header with-border">
+                        <i class="fa fa-users"></i>
+                        <h3 class="box-title">Last Teams</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table class="table">
+                            <tr>
+                                <th>#</th>
+                                <th>Club</th>
+                                <th>Title</th>
+                                <th>Licence</th>
+                                <th>Register Date</th>
+                            </tr>
+                            {% for team in teams %}
+                                <tr>
+                                    <td>{{ team.id }}</td>
+                                    <td><a href="{{ path('clubs_show', {'id': team.clubId}) }}">{{ team.club }}</a></td>
+                                    <td><a href="{{ path('teams_show', {'id': team.id}) }}">{{ team.title }}</a></td>
+                                    <td>{{ team.licence }}</td>
+                                    <td>{{ team.creationDate|date('Y-m-d H:i') }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block customJS %}
+    <script src="{{ asset('public/lib/flot/jquery.flot.min.js') }}"></script>
+    <script src="{{ asset('public/lib/flot/jquery.flot.resize.min.js') }}"></script>
+    <script src="{{ asset('public/lib/flot/jquery.flot.pie.min.js') }}"></script>
+    <script src="{{ asset('public/lib/flot/jquery.flot.categories.min.js') }}"></script>
+{% endblock %}

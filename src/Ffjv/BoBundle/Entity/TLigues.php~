@@ -1,0 +1,162 @@
+<?php
+
+namespace Ffjv\BoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TLigues
+ *
+ * @ORM\Table(name="t_ligues", uniqueConstraints={@ORM\UniqueConstraint(name="title_UNIQUE", columns={"lig_title"})}, indexes={@ORM\Index(name="fk_ligues_user1_idx", columns={"user_id"})})
+ * @ORM\Entity
+ */
+class TLigues
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lig_title", type="string", length=80, nullable=false)
+     */
+    private $ligTitle;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lig_tag", type="string", length=10, nullable=false)
+     */
+    private $ligTag;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="lig_creation_date", type="datetime", nullable=false)
+     */
+    private $ligCreationDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lig_rna", type="string", length=10, nullable=true)
+     */
+    private $ligRna;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="lig_siren", type="integer", nullable=true)
+     */
+    private $ligSiren;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="lig_siret", type="integer", nullable=true)
+     */
+    private $ligSiret;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lig_ape", type="string", length=5, nullable=true)
+     */
+    private $ligApe;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lig_email", type="string", length=100, nullable=false)
+     */
+    private $ligEmail;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="lig_tel_fix", type="integer", nullable=true)
+     */
+    private $ligTelFix;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="lig_tel_mobile", type="integer", nullable=true)
+     */
+    private $ligTelMobile;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lig_address_1", type="string", length=100, nullable=true)
+     */
+    private $ligAddress1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lig_address_2", type="string", length=100, nullable=true)
+     */
+    private $ligAddress2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lig_zip_code", type="string", length=12, nullable=true)
+     */
+    private $ligZipCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lig_city", type="string", length=64, nullable=true)
+     */
+    private $ligCity;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lig_about", type="text", nullable=true)
+     */
+    private $ligAbout;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="lig_last_update", type="datetime", nullable=false)
+     */
+    private $ligLastUpdate;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="lig_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $ligId;
+
+    /**
+     * @var \Ffjv\BoBundle\Entity\TUser
+     *
+     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\TUser")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="usr_id")
+     * })
+     */
+    private $user;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Ffjv\BoBundle\Entity\TClubs", mappedBy="tLigue")
+     */
+    private $tClub;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tClub = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

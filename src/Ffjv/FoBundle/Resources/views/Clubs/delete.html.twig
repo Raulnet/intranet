@@ -1,0 +1,99 @@
+{% extends('@FfjvFo/layoutManager.html.twig') %}
+{% set clubsMenu = true %}
+{% set clubTitle = club.title %}
+
+    {% block title %}FFJV-Club {{ club.title }}{% endblock %}
+    {% block customCSS %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Profile/show.css') }}">
+    {% endblock %}
+    {% block content %}
+        <section class="content-header">
+            <h2>{{ club.title }}</h2>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> Home</a></li>
+                <li class="active"><i class="fa fa-institution"></i> Delete Club {{ club.title }}</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-sm-4 col-md-3">
+                    <div class="box box-danger">
+                        <div class="box-body box-profile">
+                            <img class="profile-user-img img-responsive img-circle" src="{{ asset('public/img/logo/logo_ffjv.png') }}" alt="User profile picture">
+
+                            <h3 class="profile-username text-center">{{ club.title }} - {{ club.tag }}</h3>
+
+                            <p class="text-muted text-center">RNA {{ club.rna }}</p>
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <b>Author</b><a class="pull-right">{{ club.user.firstname }} {{ club.user.lastname }}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Membres</b><a class="pull-right">0</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Teams</b><a class="pull-right"><span class="badge bg-light-blue-active">{{ club.teams|length }}</span> </a>
+                                </li>
+                            </ul>
+                            <a href="{{ path('fo_clubs_show', {'clubTitle': club.title}) }}" class="btn btn-primary btn-block"><b><i class="fa fa-arrow-left"></i> Retour Club </b></a>
+                        </div>
+                    </div>
+                    <div class="box box-danger">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">About club</h3>
+                        </div>
+                        <div class="box-body">
+                            <strong><i class="fa fa-envelope margin-r-5"></i> Contact</strong>
+
+                            <p class="text-muted">{{ club.email }}</p>
+                            <hr>
+                            <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+
+                            <p class="text-muted">
+                                {{ club.address1 }}<br/>
+                                {{ club.address2 }}<br/>
+                                {{ club.zipcode }}, {{ club.city }}</p>
+                            <hr>
+                            <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+
+                            <p class="text-muted">
+                                {{ club.about }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-9">
+                    <div class="box box-danger">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">supprimer {{ club.title }}</h3>
+                        </div>
+                        <div class="box-body">
+                            <button type="button" class="btn btn-danger col-xs-12 col-sm-offset-3 col-sm-6" data-toggle="modal" data-target="#deleteClubModal">
+                                Supprimer {{ club.title }}
+                            </button>
+                            <div class="modal fade" id="deleteClubModal" tabindex="-1" role="dialog" aria-labelledby="deleteClubModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Supprimer {{ club.title }}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4>Attention !!!</h4>
+                                            <p>Vous êtes sur le point de supprimer toute les données liées au clubs!<br />
+                                            Sans possibilité de retour !</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                                            {{ form(deleteForm) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    {% endblock %}

@@ -1,0 +1,46 @@
+<nav class="navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Espace-membre.FFJV.org</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('ffjv_fo_home_index') }}">Espace-membre.FFJV.org</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ path('ffjv_fo_home_index') }}"><span class="glyphicon glyphicon-home"></span> Accueil</a></li>
+                {% if app.user and is_granted('ROLE_ADMIN') %}
+                <li class="{% if adminMenu is defined %}active{% endif %}"><a href="{{ path('ffjv_bo_home_index') }}"><span
+                                class="glyphicon glyphicon-cog"></span> Administration</a></li>
+                {% endif %}
+                {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-user"></span>
+                            Bienvenue, {{ app.user.username }} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            {% if app.user and is_granted('ROLE_USER_CONFIRMED') %}
+                                <li><a href="{{ path('fo_profile_show', {'userUsername': app.user.username}) }}">Mon profile</a></li>
+                                {% else %}
+                                <li><a href="{{ path('ffjv_fo_security_confirmation', {'userId': app.user.id}) }}">Mon profile</a></li>
+                            {% endif %}
+                            <li><a href="{{ path('logout') }}">Log out</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-user"></span> mon compte <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('login') }}">Connexion</a></li>
+                            <li><a href="{{ path('ffjv_fo_security_register') }}">Inscription</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

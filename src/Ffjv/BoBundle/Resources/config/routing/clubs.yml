@@ -1,0 +1,35 @@
+clubs:
+    path:     /
+    defaults: { _controller: "FfjvBoBundle:Clubs:index" }
+
+clubs_show:
+    path:     /{id}/show
+    defaults: { _controller: "FfjvBoBundle:Clubs:show" }
+
+clubs_new:
+    path:     /new
+    defaults: { _controller: "FfjvBoBundle:Clubs:new" }
+
+clubs_create:
+    path:     /create
+    defaults: { _controller: "FfjvBoBundle:Clubs:create" }
+    methods:  POST
+
+clubs_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FfjvBoBundle:Clubs:edit" }
+
+clubs_update:
+    path:     /{id}/update
+    defaults: { _controller: "FfjvBoBundle:Clubs:update" }
+    methods:  [POST, PUT]
+
+clubs_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FfjvBoBundle:Clubs:delete" }
+    methods:  [POST, DELETE]
+
+clubs_contact:
+    path:     /sendmail
+    defaults: { _controller: "FfjvBoBundle:Clubs:contactClub" }
+    methods:  POST

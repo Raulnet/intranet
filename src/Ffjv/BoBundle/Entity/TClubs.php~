@@ -1,0 +1,215 @@
+<?php
+
+namespace Ffjv\BoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TClubs
+ *
+ * @ORM\Table(name="t_clubs", uniqueConstraints={@ORM\UniqueConstraint(name="title_UNIQUE", columns={"clu_title"}), @ORM\UniqueConstraint(name="UNIQ_1B0C575A26EF07C9", columns={"licence_id"})}, indexes={@ORM\Index(name="fk_clubs_user1_idx", columns={"user_id"})})
+ * @ORM\Entity
+ */
+class TClubs
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clu_title", type="string", length=80, nullable=false)
+     */
+    private $cluTitle;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clu_tag", type="string", length=10, nullable=false)
+     */
+    private $cluTag;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="clu_creation_date", type="datetime", nullable=false)
+     */
+    private $cluCreationDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clu_rna", type="string", length=10, nullable=false)
+     */
+    private $cluRna;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="clu_siren", type="integer", nullable=true)
+     */
+    private $cluSiren;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="clu_siret", type="integer", nullable=true)
+     */
+    private $cluSiret;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clu_ape", type="string", length=5, nullable=true)
+     */
+    private $cluApe;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clu_email", type="string", length=100, nullable=false)
+     */
+    private $cluEmail;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="clu_tel_fix", type="integer", nullable=true)
+     */
+    private $cluTelFix;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="clu_tel_mobile", type="integer", nullable=true)
+     */
+    private $cluTelMobile;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clu_country", type="string", length=2, nullable=false)
+     */
+    private $cluCountry = 'FR';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clu_address_1", type="string", length=100, nullable=false)
+     */
+    private $cluAddress1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clu_address_2", type="string", length=100, nullable=true)
+     */
+    private $cluAddress2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clu_zip_code", type="string", length=12, nullable=false)
+     */
+    private $cluZipCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clu_id_zip_code", type="string", length=3, nullable=true)
+     */
+    private $cluIdZipCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clu_city", type="string", length=64, nullable=false)
+     */
+    private $cluCity;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clu_about", type="text", nullable=true)
+     */
+    private $cluAbout;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="clu_last_update", type="datetime", nullable=false)
+     */
+    private $cluLastUpdate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clu_activation_code", type="string", length=100, nullable=false)
+     */
+    private $cluActivationCode;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="clu_validate", type="integer", nullable=false)
+     */
+    private $cluValidate;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="clu_status", type="boolean", nullable=false)
+     */
+    private $cluStatus;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="clu_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $cluId;
+
+    /**
+     * @var \Ffjv\BoBundle\Entity\TLicencesClubs
+     *
+     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\TLicencesClubs")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="licence_id", referencedColumnName="lic_id")
+     * })
+     */
+    private $licence;
+
+    /**
+     * @var \Ffjv\BoBundle\Entity\TUser
+     *
+     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\TUser")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="usr_id")
+     * })
+     */
+    private $user;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Ffjv\BoBundle\Entity\TLigues", inversedBy="tClub")
+     * @ORM\JoinTable(name="t_clubs_has_ligues",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="t_club_id", referencedColumnName="clu_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="t_ligue_id", referencedColumnName="lig_id")
+     *   }
+     * )
+     */
+    private $tLigue;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tLigue = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

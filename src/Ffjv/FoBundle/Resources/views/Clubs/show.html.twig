@@ -1,0 +1,227 @@
+{% extends('@FfjvFo/layoutManager.html.twig') %}
+{% set clubsMenu = true %}
+{% set clubTitle = club.title %}
+    {% block title %}FFJV-Club {{ club.title }}{% endblock %}
+    {% block customCSS %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Profile/show.css') }}">
+    {% endblock %}
+    {% block content %}
+        <section class="content-header">
+            <h2>{{ club.title }}</h2>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> Home</a></li>
+                <li class="active"><i class="fa fa-institution"></i> Club {{ club.title }}</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-sm-4 col-md-3">
+                    <div class="box box-primary">
+                        <div class="box-body box-profile">
+                            <img class="profile-user-img img-responsive img-circle" src="{{ asset('public/img/logo/logo_ffjv.png') }}" alt="User profile picture">
+                            <h3 class="profile-username text-center">{{ club.title }} - {{ club.tag }}</h3>
+                            {% if club.licence %}<p class="text-muted text-center">Licence {{ club.licence }}</p>{% endif %}
+                            <p class="text-muted text-center">RNA {{ club.rna }}</p>
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <b>Author</b><a class="pull-right">{% if club.user %}{{ club.user.firstname }} {{ club.user.lastname }}{% else %}utilisateur supprimer{% endif %}</a>
+                                </li>
+                                <li class="list-group-item">
+<<<<<<< HEAD
+                                    <b>Membres</b><a class="pull-right">{{ count_members.count_active }}</a>
+=======
+                                    <b>Membres</b><a class="pull-right">{{ members|length }}</a>
+>>>>>>> 4b975c8f7ad2164d80513024f0bb8f7bc3fac9ea
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Teams</b><a class="pull-right"><span class="badge bg-light-blue-active">{{ club.teams|length }}</span> </a>
+                                </li>
+                            </ul>
+                            {% if user_is_member == false %}
+                                <div class="btn-group btn-block" role="group">
+                                    <a href="#" class="btn btn-primary col-xs-6" data-toggle="modal" data-target="#contactClub"><b>Contact</b></a>
+                                    <a href="#" class="btn btn-success col-xs-6" data-toggle="modal" data-target="#joinClub"><b>Rejoindre</b></a>
+                                </div>
+                            {% else %}
+                                <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#contactClub"><b>Contact</b></a>
+                            {% endif %}
+                            {# ***** MODAL CONTACT ***** #}
+                            <div class="modal fade" id="contactClub" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Contacter le Club {{ club.title }}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{ form_start(contact_form) }}
+                                            <div class="form-group">
+                                                {{ form_label(contact_form.subject) }}
+                                                {{ form_widget(contact_form.subject, {'attr': {'class': 'form-control'}}) }}
+                                            </div>
+                                            <div class="form-group">
+                                                {{ form_label(contact_form.content) }}
+                                                {{ form_widget(contact_form.content, {'attr': {'class': 'form-control'}}) }}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                {{ form_widget(contact_form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                                            </div>
+                                            {{ form_end(contact_form) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {# ***** ./MODAL CONTACT ***** #}
+                            {# ***** MODAL JOIN ***** #}
+                            <div class="modal fade" id="joinClub" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Rejoindre le Club {{ club.title }}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{ form_start(join_club_form) }}
+
+                                            <div class="form-group">
+                                                {{ form_label(join_club_form.content) }}
+                                                {{ form_widget(join_club_form.content, {'attr': {'class': 'form-control'}}) }}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                                {{ form_widget(join_club_form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                                            </div>
+                                            {{ form_end(join_club_form) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {# ***** ./MODAL JOIN ***** #}
+                        </div>
+                    </div>
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">About club</h3>
+                        </div>
+                        <div class="box-body">
+                            <strong><i class="fa fa-envelope margin-r-5"></i> Contact</strong>
+                            <p class="text-muted">{{ club.email }}</p>
+                            <hr>
+                            <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+                            <p class="text-muted">
+                                {{ club.address1 }}<br/>
+                                {{ club.address2 }}<br/>
+                                {{ club.zipcode }}, {{ club.city }}</p>
+                            <hr>
+                            <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+                            <p>{{ club.about }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-9">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#teams" data-toggle="tab">Teams</a></li>
+                            {% if club in app.user.clubs %}
+                                <li><a href="#members" data-toggle="tab" aria-expanded="true">Membres</a></li>{% endif %}
+                        </ul>
+                        <div class="tab-content">
+                            {% if club in app.user.clubs %}
+                                <div class="tab-pane" id="members">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="box">
+                                                <div class="box-header">
+                                                    <h3 class="box-title">Members Board</h3>{% if club in app.user.clubs %}<a class="btn btn-info btn-xs pull-right" href="{{ path('fo_clubs_newmembers',{'clubTitle': club.title}) }}">Create a new Member</a>{% endif %}
+                                                </div>
+                                                <div class="box-body">
+                                                    <table id="teams_board" class="table table-bordered table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Username</th>
+                                                            <th>Licence</th>
+                                                            <th>Roles</th>
+                                                            <th>Creationdate</th>
+                                                            <th>Lastupdate</th>
+                                                            <th>Authors</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for member in members %}
+                                                            <tr>
+                                                                <td>
+                                                                    {% if member.user.status %}
+                                                                        <i style="color: green;" class="fa fa-check fa-lg"></i>
+                                                                    {% else %}
+                                                                        <i style="color: red;" class="fa fa-close fa-lg"></i>
+                                                                    {% endif %}
+                                                                </td>
+                                                                <td>{{ member.user }}</td>
+                                                                <td>{{ member.user.licence }}</td>
+                                                                <td>
+                                                                    <ul>
+                                                                        {% for role in member.roles %}
+                                                                            <li>{{ role }}</li>
+                                                                        {% endfor %}
+                                                                    </ul>
+                                                                </td>
+                                                                <td>{{ member.user.registerDate|date('Y-m-d H:i:s') }}</td>
+                                                                <td>{{ member.user.lastUpdate|date('Y-m-d H:i:s') }}</td>
+                                                                <td>{{ member.user.authorUser }}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="tab-pane active" id="teams">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="box">
+                                            <div class="box-header">
+                                                <h3 class="box-title">Teams Board</h3>{% if club in app.user.clubs %}<a class="btn btn-info btn-xs pull-right" href="{{ path('fo_clubs_newteams',{'clubTitle': club.title}) }}">Create a new teams</a>{% endif %}
+                                            </div>
+                                            <div class="box-body">
+                                                <table id="teams_board" class="table table-bordered table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Title</th>
+                                                        <th>Tag</th>
+                                                        <th>Licence</th>
+                                                        <th>Creationdate</th>
+                                                        <th>Lastupdate</th>
+                                                        <th>Authors</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for team in club.teams %}
+                                                        <tr>
+                                                            <td><a href="{{ path('teams_show', { 'id': team.id }) }}">{{ team.title }}</a></td>
+                                                            <td>{{ team.tag }}</td>
+                                                            <td>{{ team.licence }}</td>
+                                                            <td>{% if team.creationDate %}{{ team.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                                            <td>{% if team.lastUpdate %}{{ team.lastUpdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                                            <td>
+                                                                <a href="{{ path('user_show', {'id': team.user.id}) }}">{{ team.user }}</a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endblock %}

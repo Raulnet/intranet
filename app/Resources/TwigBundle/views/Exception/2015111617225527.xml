@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ImportEudonet version="1.0">
+  <Fichier idPrestataire="18" TypeFlux="BILLETTERIE" IdSession="238" DateCreation="16/11/2015">
+    <Contact idContact="" idContactPrestataire="26283762" Civilite="Mme" Nom="miglianico" Prenom="maelle" DateNaissance="" Email="maelle.miglianico@comexposium.com" Telephone="" Portable="0624830180" Langue="" RaisonSocialSociete="" TailleSociete="" TelephoneSociete="" FaxSociete="" SiteWeb="" DateSaisie="2015-10-16 16:54:53" CNIL="" Smatphone="" OptinComexposium="" OptinPartenaire="" OptinSalon="" OptinNewsletter="" OptinInformation="" OptinEnquete="" OptinPartenaireSalon="" OptinMarque="" ObjectifVisite="" CodeMarketing="" CategorieVisiteur="VISITEUR" TypeInscription="" NumBillet="" Source="">
+      <Adresse IdAdresse="" Societe="" FonctionPostal="" RaisonSocialPostal="" Adresse1="8 rue petel" Adresse2="" Adresse3="" etatComte="" codePostal="75015" ville="paris" pays=""/>
+      <Role/>
+      <CentreInteret/>
+      <SecteurActivite/>
+      <Univers/>
+      <Fonction/>
+      <Service/>
+      <Filiaire/>
+      <Effectif/>
+      <EvenementPre/>
+      <EvenementVenu/>
+      <Marche/>
+      <Jour/>
+      <TypeSociete/>
+      <StyleDeVie>
+        <Choix Code="" Valeur="" Text=""/>
+        <Choix Code="" Valeur="" Text=""/>
+      </StyleDeVie>
+      <StatutVisiteur/>
+      <StatutContact/>
+      <TypeBillet/>
+      <CategorieBillet/>
+      <IntentionCommande/>
+      <MoyenTransport/>
+      <ZoneGeo/>
+      <Divers>
+        <Choix Code="NBBILLET" Valeur="1" Text=""/>
+      </Divers>
+    </Contact>
+    <Contact idContact="" idContactPrestataire="26290467" Civilite="Mme" Nom="Miglianico" Prenom="Maëlle" DateNaissance="15/06/1985" Email="maelle.miglianico@comexposium.com" Telephone="" Portable="0624830180" Langue="" RaisonSocialSociete="" TailleSociete="" TelephoneSociete="" FaxSociete="" SiteWeb="" DateSaisie="2015-10-16 18:37:50" CNIL="" Smatphone="" OptinComexposium="oui" OptinPartenaire="non" OptinSalon="" OptinNewsletter="" OptinInformation="" OptinEnquete="" OptinPartenaireSalon="" OptinMarque="" ObjectifVisite="" CodeMarketing="" CategorieVisiteur="VISITEUR" TypeInscription="" NumBillet="" Source="">
+      <Adresse IdAdresse="" Societe="" FonctionPostal="" RaisonSocialPostal="" Adresse1="8 rue Petel" Adresse2="" Adresse3="" etatComte="" codePostal="75015" ville="Paris" pays="FR"/>
+      <Role/>
+      <CentreInteret/>
+      <SecteurActivite/>
+      <Univers/>
+      <Fonction/>
+      <Service/>
+      <Filiaire/>
+      <Effectif/>
+      <EvenementPre/>
+      <EvenementVenu/>
+      <Marche/>
+      <Jour/>
+      <TypeSociete/>
+      <StyleDeVie>
+        <Choix Code="" Valeur="1000 à 2000€" Text=""/>
+        <Choix Code="" Valeur="France - Est" Text=""/>
+      </StyleDeVie>
+      <StatutVisiteur/>
+      <StatutContact/>
+      <TypeBillet/>
+      <CategorieBillet/>
+      <IntentionCommande/>
+      <MoyenTransport/>
+      <ZoneGeo/>
+      <Divers>
+        <Choix Code="NBBILLET" Valeur="2" Text=""/>
+      </Divers>
+    </Contact>
+  </Fichier>
+</ImportEudonet>

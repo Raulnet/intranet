@@ -1,0 +1,188 @@
+{% extends('@FfjvFo/layoutManager.html.twig') %}
+{% form_theme edit_form 'FfjvFoBundle:Form:fields.html.twig' %}
+{% set clubsMenu = true %}
+{% set clubTitle = club.title %}
+
+    {% block title %}FFJV-Club Edit {{ club.title }}{% endblock %}
+    {% block customCSS %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Profile/show.css') }}">
+    {% endblock %}
+    {% block content %}
+        <section class="content-header">
+            <h2>Edition {{ club.title }}</h2>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> Home</a></li>
+                <li class="active"><i class="fa fa-institution"></i> Edit Club {{ club.title }}</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-sm-4 col-md-3">
+                    <div class="box box-success">
+                        <div class="box-body box-profile">
+                            <img class="profile-user-img img-responsive img-circle" src="{{ asset('public/img/logo/logo_ffjv.png') }}" alt="User profile picture">
+
+                            <h3 class="profile-username text-center">{{ club.title }} - {{ club.tag }}</h3>
+
+                            <p class="text-muted text-center">RNA {{ club.rna }}</p>
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <b>Author</b><a class="pull-right">{{ club.user.firstname }} {{ club.user.lastname }}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Membres</b><a class="pull-right">0</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Teams</b><a class="pull-right"><span class="badge bg-light-blue-active">{{ club.teams|length }}</span> </a>
+                                </li>
+                            </ul>
+                            <a href="#" class="btn btn-primary btn-block"><b>Contact</b></a>
+                        </div>
+                    </div>
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">About club</h3>
+                        </div>
+                        <div class="box-body">
+                            <strong><i class="fa fa-envelope margin-r-5"></i> Contact</strong>
+
+                            <p class="text-muted">{{ club.email }}</p>
+                            <hr>
+                            <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+
+                            <p class="text-muted">
+                                {{ club.address1 }}<br/>
+                                {{ club.address2 }}<br/>
+                                {{ club.zipcode }}, {{ club.city }}</p>
+                            <hr>
+                            <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+
+                            <p class="text-muted">
+                                {{ club.about }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-9">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Editer</h3>
+                        </div>
+                        <div class="box-body">
+                            {{ form_start(edit_form, {'attr': {'class': 'form-horizontal'}}) }}
+                            <div class="form-group">
+                                {{ form_label(edit_form.title, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(edit_form.title) }}
+                                    {{ form_errors(edit_form.title) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(edit_form.tag, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(edit_form.tag) }}
+                                    {{ form_errors(edit_form.tag) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(edit_form.rna, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(edit_form.rna) }}
+                                    {{ form_errors(edit_form.rna) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(edit_form.siren, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(edit_form.siren) }}
+                                    {{ form_errors(edit_form.siren) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(edit_form.siret, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(edit_form.siret) }}
+                                    {{ form_errors(edit_form.siret) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(edit_form.ape, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(edit_form.ape) }}
+                                    {{ form_errors(edit_form.ape) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(edit_form.email, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(edit_form.email) }}
+                                    {{ form_errors(edit_form.email) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(edit_form.telFix, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(edit_form.telFix) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(edit_form.telMobile, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(edit_form.telMobile) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(edit_form.country, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(edit_form.country) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(edit_form.address1, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(edit_form.address1) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(edit_form.address2, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(edit_form.address2) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(edit_form.zipCode, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(edit_form.zipCode) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(edit_form.city, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(edit_form.city) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(edit_form.about, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(edit_form.about) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(edit_form.ligues, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(edit_form.ligues) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    {{ form_row(edit_form.submit, {'attr': {'class': 'btn btn-success col-sm-3 col-xs-12'}}) }}
+                                    <p class="pull-right">*champ obligatoire</p>
+                                </div>
+                            </div>
+                            {{ form_end(edit_form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endblock %}

@@ -1,0 +1,71 @@
+{% extends('@FfjvFo/layoutManager.html.twig') %}
+{% set clubsMenu = true %}
+{% set clubsList = true %}
+
+{% block title %}FFJV-Clubs{% endblock %}
+
+{% block content %}
+    <section class="content-header">
+        <h2><i class="fa fa-institution"></i> Clubs</h2>
+        <ol class="breadcrumb">
+            <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> Home</a></li>
+            <li class="active"><i class="fa fa-institution"></i> Clubs</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-body">
+                        <table id="clubs_board" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Tag</th>
+                                    <th>Licence</th>
+                                    <th>zipcode</th>
+                                    <th>Country</th>
+                                    <th>Creationdate</th>
+                                    <th>Lastupdate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for club in clubs %}
+                                <tr>
+                                    <td><a href="{{ path('fo_clubs_show', {'clubTitle': club.title} ) }}">{{ club.title }}</a></td>
+                                    <td>{{ club.tag }}</td>
+                                    <td>{{ club.licence }}</td>
+                                    <td>{{ club.zipCode }}</td>
+                                    <td>{{ club.country }}</td>
+                                    <td>{% if club.creationDate %}{{ club.creationDate|date('Y-m-d H:i') }}{% endif %}</td>
+                                    <td>{% if club.lastUpdate %}{{ club.lastUpdate|date('Y-m-d H:i') }}{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block customCSS %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('public/lib/datatables/dataTables.bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Profile/show.css') }}">
+{% endblock %}
+{% block customJS %}
+    <script src="{{ asset('public/lib/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('public/lib/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script>
+        $(function () {
+            $('#clubs_board').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
+        });
+    </script>
+{% endblock %}

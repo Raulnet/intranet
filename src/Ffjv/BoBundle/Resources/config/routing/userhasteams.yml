@@ -1,0 +1,30 @@
+userhasteams:
+    path:     /
+    defaults: { _controller: "FfjvBoBundle:UserHasTeams:index" }
+
+userhasteams_show:
+    path:     /{id}/show
+    defaults: { _controller: "FfjvBoBundle:UserHasTeams:show" }
+
+userhasteams_new:
+    path:     /new
+    defaults: { _controller: "FfjvBoBundle:UserHasTeams:new" }
+
+userhasteams_create:
+    path:     /create
+    defaults: { _controller: "FfjvBoBundle:UserHasTeams:create" }
+    methods:  POST
+
+userhasteams_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FfjvBoBundle:UserHasTeams:edit" }
+
+userhasteams_update:
+    path:     /{id}/update
+    defaults: { _controller: "FfjvBoBundle:UserHasTeams:update" }
+    methods:  [POST, PUT]
+
+userhasteams_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FfjvBoBundle:UserHasTeams:delete" }
+    methods:  [POST, DELETE]

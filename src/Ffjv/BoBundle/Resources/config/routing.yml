@@ -1,0 +1,31 @@
+ffjv_bo_ligues:
+    resource: "@FfjvBoBundle/Resources/config/routing/ligues.yml"
+    prefix:   /ligues
+
+ffjv_bo_userhasteams:
+    resource: "@FfjvBoBundle/Resources/config/routing/userhasteams.yml"
+    prefix:   /userhasteams
+
+ffjv_bo_userhasclubs:
+    resource: "@FfjvBoBundle/Resources/config/routing/userhasclubs.yml"
+    prefix:   /userhasclubs
+
+ffjv_bo_teams:
+    resource: "@FfjvBoBundle/Resources/config/routing/teams.yml"
+    prefix:   /teams
+
+ffjv_bo_clubs:
+    resource: "@FfjvBoBundle/Resources/config/routing/clubs.yml"
+    prefix:   /clubs
+
+ffjv_bo_user:
+    resource: "@FfjvBoBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+
+ffjv_bo_messages:
+    resource: "@FfjvBoBundle/Resources/config/routing/messages.yml"
+    prefix:   /messages
+
+ffjv_bo_home_index:
+    path:     /
+    defaults: { _controller: FfjvBoBundle:Admin:index }

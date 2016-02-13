@@ -1,0 +1,23 @@
+{% set typeMessage = ['success', 'info', 'warning', 'error'] %}
+<div class="col-xs-12">
+    {% for type in typeMessage %}
+        {% for flashMessage in app.session.flashbag.get(type) %}
+            <script>
+                var type = '{{ type }}';
+                var n = noty({
+                    text: '{{ flashMessage }}',
+                    type: type,
+                    dismissQueue: true, // If you want to use queue feature set this true
+                    layout      : 'bottomRight',
+                    animation: {
+                        open: 'animated bounceInUp', // Animate.css class names
+                        close: 'animated flipOutX', // Animate.css class names
+                        easing: 'swing', // unavailable - no need
+                        speed: 400 // unavailable - no need
+                    },
+                    timeout: 6000
+                });
+            </script>
+        {% endfor %}
+    {% endfor %}
+</div>

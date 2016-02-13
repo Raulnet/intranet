@@ -1,0 +1,67 @@
+<?php
+
+namespace Ffjv\BoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TUserHasClubs
+ *
+ * @ORM\Table(name="t_user_has_clubs", indexes={@ORM\Index(name="fk_clubs_has_users_user1_idx", columns={"user_id"}), @ORM\Index(name="fk_clubs_has_users_clubs1_idx", columns={"clubs_id"})})
+ * @ORM\Entity
+ */
+class TUserHasClubs
+{
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="uhc_roles", type="array", nullable=false)
+     */
+    private $uhcRoles;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="uhc_creation_date", type="datetime", nullable=false)
+     */
+    private $uhcCreationDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="uhc_last_update", type="datetime", nullable=false)
+     */
+    private $uhcLastUpdate;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="uhc_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $uhcId;
+
+    /**
+     * @var \Ffjv\BoBundle\Entity\TUser
+     *
+     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\TUser")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="usr_id")
+     * })
+     */
+    private $user;
+
+    /**
+     * @var \Ffjv\BoBundle\Entity\TClubs
+     *
+     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\TClubs")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="clubs_id", referencedColumnName="clu_id")
+     * })
+     */
+    private $clubs;
+
+
+}
+

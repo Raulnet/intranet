@@ -1,0 +1,73 @@
+{% extends('@FfjvBo/layout.html.twig') %}
+{% set clubsMenu = true %}
+{% block breadcrumb %}
+    <h1>
+        Intranet FFJV
+        <small>Version 0.1</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="{{ path('ffjv_bo_home_index') }}"><i class="fa fa-cogs"></i> Administration</a></li>
+        <li class="active"><i class="fa fa-institution"></i> Clubs</li>
+    </ol>
+{% endblock %}
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Clubs Board</h3><a class="btn btn-info btn-xs pull-right" href="{{ path('clubs_new') }}">Create a new clubs</a>
+                    </div>
+                    <div class="box-body">
+                        <table id="clubs_board" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Tag</th>
+                                <th>Licence</th>
+                                <th>zipcode</th>
+                                <th>Country</th>
+                                <th>Creationdate</th>
+                                <th>Lastupdate</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for club in clubs %}
+                                <tr>
+                                    <td><a href="{{ path('clubs_show', { 'id': club.id }) }}">{{ club.title }}</a></td>
+                                    <td>{{ club.tag }}</td>
+                                    <td>{{ club.licence }}</td>
+                                    <td>{{ club.zipCode }}</td>
+                                    <td>{{ club.country }}</td>
+                                    <td>{% if club.creationDate %}{{ club.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td>{% if club.lastUpdate %}{{ club.lastUpdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block customCSS %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('public/lib/datatables/dataTables.bootstrap.css') }}">
+{% endblock %}
+{% block customJS %}
+    <script src="{{ asset('public/lib/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('public/lib/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script>
+        $(function () {
+            $('#clubs_board').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
+        });
+    </script>
+{% endblock %}

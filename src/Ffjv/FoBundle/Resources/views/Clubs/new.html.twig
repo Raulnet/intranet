@@ -1,0 +1,179 @@
+{% extends('@FfjvFo/layoutManager.html.twig') %}
+{% form_theme form 'FfjvFoBundle:Form:fields.html.twig' %}
+{% set clubsMenu = true %}
+
+    {% block title %}FFJV-Club Create{% endblock %}
+    {% block customCSS %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Profile/show.css') }}">
+    {% endblock %}
+    {% block content %}
+        <section class="content">
+            <div class="row">
+                <div class="col-md-3 col-sm-4">
+                    <div class="box box-primary">
+                        <div class="box-body box-profile">
+                            <img class="profile-user-img img-responsive img-circle" src="{{ asset('public/img/logo/logo_ffjv.png') }}" alt="User profile picture">
+                            <h3 class="profile-username text-center">{{ user.firstname }} {{ user.Lastname }}</h3>
+                            {% if user.licence %}<p class="text-muted text-center">Licencier {{ user.licence }}</p>{% endif %}
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <b>Clubs</b>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Teams</b>
+                                </li>
+                            </ul>
+                            <a href="{{ path('fo_profile_show', {'userUsername': user.username}) }}" class="btn btn-primary btn-block"><b><i class="fa fa-arrow-left"></i> Retour Profile</b></a>
+                        </div>
+                    </div>
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">About Me</h3>
+                        </div>
+                        <div class="box-body">
+                            <strong><i class="fa fa-envelope margin-r-5"></i> Contact</strong>
+                            <p class="text-muted">{{ user.email }}</p>
+                            <hr>
+                            <strong><i class="fa fa-map-marker margin-r-5"></i> Adresse</strong>
+
+                            <p class="text-muted">
+                                {{ user.address1 }}<br/>
+                                {{ user.address2 }}<br/>
+                                {{ user.zipcode }}, {{ user.city }}</p>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-9">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Créer un nouveau Club</h3>
+                        </div>
+                        <div class="box-body">
+                            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                            <div class="form-group">
+                                {{ form_label(form.title, null, {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.title) }}
+                                    {{ form_errors(form.title) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.tag, null, {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.tag) }}
+                                    {{ form_errors(form.tag) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.rna, null, {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.rna) }}
+                                    {{ form_errors(form.rna) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.siren, null, {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.siren) }}
+                                    {{ form_errors(form.siren) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.siret, null, {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.siret) }}
+                                    {{ form_errors(form.siret) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.ape, null, {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.ape) }}
+                                    {{ form_errors(form.ape) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.email, null, {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.email) }}
+                                    {{ form_errors(form.email) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.telFix, null, {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.telFix) }}
+                                    {{ form_errors(form.telFix) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.telMobile, null, {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.telMobile) }}
+                                    {{ form_errors(form.telMobile) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.country, null, {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.country) }}
+                                    {{ form_errors(form.country) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.address1, null, {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.address1) }}
+                                    {{ form_errors(form.address1) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.address2, null, {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.address2) }}
+                                    {{ form_errors(form.address2) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.zipCode, null, {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.zipCode) }}
+                                    {{ form_errors(form.zipCode) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.city, null, {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.city) }}
+                                    {{ form_errors(form.city) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.about, null, {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.about) }}
+                                    {{ form_errors(form.about) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.ligues, null, {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.ligues) }}
+                                    {{ form_errors(form.ligues) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    {{ form_row(form.submit, {'attr': {'class': 'btn btn-success col-sm-3 col-xs-12'}}) }}
+                                    <p class="pull-right">*champ obligatoire</p>
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    {% endblock %}

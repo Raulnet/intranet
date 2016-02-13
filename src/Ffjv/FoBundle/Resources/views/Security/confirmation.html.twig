@@ -1,0 +1,13 @@
+{% extends('@FfjvFo/layout.html.twig') %}
+
+    {% block title %}User confirmation{% endblock %}
+    {% block customCSS %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/css/Home/index.css') }}">
+        <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/css/Home/register.css') }}">
+    {% endblock %}
+    {% block content %}
+        <div class="col-md-12">
+            <h2 class="text-center">{{ block('title') }}</h2>
+            <p>vous ête maintenant enregistrer ! Veuillez confirmer votre adresse email . <br />Si vous n'avez pas reçus d'email {{ form(form) }}</p>
+        </div>
+     {% endblock %}

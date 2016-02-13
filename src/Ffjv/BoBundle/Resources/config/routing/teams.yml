@@ -1,0 +1,30 @@
+teams:
+    path:     /
+    defaults: { _controller: "FfjvBoBundle:Teams:index" }
+
+teams_show:
+    path:     /{id}/show
+    defaults: { _controller: "FfjvBoBundle:Teams:show" }
+
+teams_new:
+    path:     /new/{clubId}
+    defaults: { _controller: "FfjvBoBundle:Teams:new" }
+
+teams_create:
+    path:     /create/{clubId}
+    defaults: { _controller: "FfjvBoBundle:Teams:create" }
+    methods:  POST
+
+teams_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FfjvBoBundle:Teams:edit" }
+
+teams_update:
+    path:     /{id}/update
+    defaults: { _controller: "FfjvBoBundle:Teams:update" }
+    methods:  [POST, PUT]
+
+teams_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FfjvBoBundle:Teams:delete" }
+    methods:  [POST, DELETE]

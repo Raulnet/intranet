@@ -1,0 +1,102 @@
+$(document).ready(function() {
+
+    var url = $("#panel_map").data('url');
+    findColors(url);
+
+    $("a[aria-controls='players']").on('click', function(){
+        $('svg').attr('width', $('#panel_map').width());
+        var scale = $('#panel_map').width()/735;
+        $('svg g').attr('transform', 'scale(' + scale + ') translate(' + scale + ', ' + 0 + ')');
+    });
+
+    $("a[aria-controls='clubs']").on('click', function(){
+        $('svg').attr('width', $('#panel_map').width());
+        var scale = $('#panel_map').width()/735;
+        $('svg g').attr('transform', 'scale(' + scale + ') translate(' + scale + ', ' + 0 + ')');
+
+    });
+
+
+    function findColors(url){
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                type: 'map'
+            },
+            success: function (response) {
+               colorMapPlayers(response.players);
+               colorMapClubs(response.clubs);
+            }
+        })
+    }
+
+    function colorMapPlayers(colors){
+        $('#francemap_players').vectorMap({
+            map: 'france_fr',
+            hoverOpacity: 0.5,
+            hoverColor: false,
+            backgroundColor: "#ffffff",
+            colors: colors,
+            borderColor: "#000000",
+            enableZoom: false,
+            showTooltip: true,
+            onRegionClick: function(element, code, region)
+            {
+                $('#modal_players_label').html("Players "+region+" - "+code);
+                $('#modal_players_content').html('contenus');
+                $('#modal_players').modal('toggle');
+            }
+        });
+    }
+
+    /**
+     *
+     * @param colors
+     */
+    function colorMapClubs(colors){
+        $('#francemap_clubs').vectorMap({
+            map: 'france_fr',
+            hoverOpacity: 0.5,
+            hoverColor: false,
+            backgroundColor: "#ffffff",
+            colors: colors,
+            borderColor: "#000000",
+            selectedColor: "#EC0000",
+            enableZoom: false,
+            showTooltip: true,
+            onRegionClick: function(element, code, region)
+            {
+                $('#modal_clubs_label').html("Clubs "+region+" - "+code);
+                getClubByRegion(code);
+                $('#modal_clubs').modal('toggle');
+            }
+        });
+    }
+
+    /**
+     *
+     * @param regionId
+     */
+    function getClubByRegion(regionId){
+        $.ajax({
+            type: "POST",
+            url: $('#modal_clubs').data('url'),
+            data: {
+                regionId: regionId
+            },
+            success: function (response) {
+             displayClub(response);
+            }
+        })
+    }
+
+    function displayClub(clubs){
+        $(clubs).each(function( key, club ) {
+            $(".link_club").remove();
+            $('#modal_clubs_content').append('<a class="link_club" href="'+club.url+'">'+club.title+'</a>');
+        });
+    }
+
+});
