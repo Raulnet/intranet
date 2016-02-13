@@ -93,6 +93,18 @@ class ContactService
         return $this->sendMail($source, $message->getEmail(), $message->getSubject(), $content);
     }
 
+    /**
+     * @param $url
+     * @param $data
+     * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormInterface
+     */
+    public function getFormContactClub($url, $data){
+        return $this->formFactory->create(new ContactClubType(), $data, array(
+            'method' => 'POST',
+            'action' => $url
+        ));
+    }
+
     /** *********** METHOD ********** */
 
     /**
@@ -117,6 +129,8 @@ class ContactService
 
         return true;
     }
+
+
 
 
 }
