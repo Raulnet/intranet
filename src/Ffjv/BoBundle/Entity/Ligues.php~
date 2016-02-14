@@ -160,7 +160,7 @@ class Ligues
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Ffjv\BoBundle\Entity\Clubs", mappedBy="ligues", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Ffjv\BoBundle\Entity\Clubs", mappedBy="ligues")
      */
     private $clubs;
 

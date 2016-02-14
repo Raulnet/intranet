@@ -2,3 +2,12 @@ fo_request_user_has_club:
     path:     /sendrequest
     defaults: { _controller: FfjvFoBundle:UserHasClub:sendRequestToJoin }
     methods: POST
+
+fo_request_user_has_club_edit_request:
+    path:     /{membersHasClubId}/editRequest
+    defaults: { _controller: "FfjvFoBundle:UserHasClub:editJoinRequest" }
+
+fo_user_has_club_set_request:
+    path:     /setrequest
+    defaults: { _controller: FfjvFoBundle:UserHasClub:setRequestJoinClub}
+    methods: POST

@@ -37,7 +37,8 @@ class ClubsController extends Controller
     public function showAction($clubTitle = '')
     {
         $club = $this->getDoctrine()->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('title' => $clubTitle));
-        $members = $this->getDoctrine()->getRepository('FfjvBoBundle:UserHasClubs')->findBy(array('club' => $club));
+        $members = $this->getDoctrine()->getRepository('FfjvBoBundle:UserHasClubs')->findBy(array('club' => $club, 'requestToJoin' => 0));
+        $userRequestTojoin = $this->getDoctrine()->getRepository('FfjvBoBundle:UserHasClubs')->getRequestUserToJoin($club);
         $countMembersActive = $this->get('clubs')->getCountMemberActive($club->getId());
 
         $contactForm = $this->getContactForm($this->generateUrl('fo_clubs_contact'), array(
@@ -53,6 +54,7 @@ class ClubsController extends Controller
         return $this->render('@FfjvFo/Clubs/show.html.twig', array(
             'club'      => $club,
             'members'    => $members,
+            'requestMembers'    => $userRequestTojoin,
             'user_is_member' => $this->isMember($club),
             'count_members' => $countMembersActive,
             'contact_form'  => $contactForm->createView(),
@@ -353,7 +355,7 @@ class ClubsController extends Controller
             $em->persist($user);
             $em->flush();
             //add user has club
-           $this->addMemberToClub($club, $user);
+            $this->addMemberToClub($club, $user);
 
             $this->addFlash('success', 'Votre nouveau membre a été créé .');
             return $this->redirectToRoute('fo_clubs_show', array('clubTitle' => $clubTitle));
@@ -402,6 +404,7 @@ class ClubsController extends Controller
         $this->addFlash('error', 'Une erreur c\'est produite');
         return $this->redirectToRoute('fo_profile_show', array('id' => $this->getUser()->getId()));
     }
+
 
     /* ****** PRIVATE ***************************************** */
 

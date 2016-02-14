@@ -63,6 +63,13 @@ class UserHasClubs
     private $club;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="uhc_request_to_join", type="integer", length=1, nullable=false)
+     */
+    private $requestToJoin = 0;
+
+    /**
      * UserHasClubs constructor.
      */
     public function __construct()

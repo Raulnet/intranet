@@ -63,6 +63,16 @@ class UserHasClubs
     private $club;
 
     /**
+     * @var int
+     * O no request => accepted on club
+     * 1 refused
+     * 2 in Progress
+     *
+     * @ORM\Column(name="uhc_request_to_join", type="integer", length=1, nullable=false)
+     */
+    private $requestToJoin = 0;
+
+    /**
      * UserHasClubs constructor.
      */
     public function __construct()
@@ -200,5 +210,29 @@ class UserHasClubs
     public function getClub()
     {
         return $this->club;
+    }
+
+    /**
+     * Set requestToJoin
+     *
+     * @param integer $requestToJoin
+     *
+     * @return UserHasClubs
+     */
+    public function setRequestToJoin($requestToJoin)
+    {
+        $this->requestToJoin = $requestToJoin;
+
+        return $this;
+    }
+
+    /**
+     * Get requestToJoin
+     *
+     * @return integer
+     */
+    public function getRequestToJoin()
+    {
+        return $this->requestToJoin;
     }
 }

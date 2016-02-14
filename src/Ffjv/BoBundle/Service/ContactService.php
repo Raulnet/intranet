@@ -94,6 +94,17 @@ class ContactService
     }
 
     /**
+     * @param Messages $message
+     * @param string $source
+     * @return bool
+     * @throws \Twig_Error
+     */
+    public function sendRequestResponseToJoinCLub(Messages $message, $source = 'contact@ffjv.org'){
+        $content = $this->templating->render($this->template['default'], array('message' => $message->getMessage(), 'user' => $message->getAuthorUser()));
+        return $this->sendMail($source, $message->getEmail(), $message->getSubject(), $content);
+    }
+
+    /**
      * @param $url
      * @param $data
      * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormInterface

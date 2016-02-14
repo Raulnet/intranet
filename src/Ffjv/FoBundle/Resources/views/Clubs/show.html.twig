@@ -27,12 +27,13 @@
                                     <b>Author</b><a class="pull-right">{% if club.user %}{{ club.user.firstname }} {{ club.user.lastname }}{% else %}utilisateur supprimer{% endif %}</a>
                                 </li>
                                 <li class="list-group-item">
-<<<<<<< HEAD
                                     <b>Membres</b><a class="pull-right">{{ count_members.count_active }}</a>
-=======
-                                    <b>Membres</b><a class="pull-right">{{ members|length }}</a>
->>>>>>> 4b975c8f7ad2164d80513024f0bb8f7bc3fac9ea
                                 </li>
+                                {% if club in app.user.clubs %}
+                                    <li class="list-group-item">
+                                        <b>Request to join</b><a class="pull-right"> {{ requestMembers|length }}</a>
+                                    </li>
+                                {% endif %}
                                 <li class="list-group-item">
                                     <b>Teams</b><a class="pull-right"><span class="badge bg-light-blue-active">{{ club.teams|length }}</span> </a>
                                 </li>
@@ -124,7 +125,9 @@
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#teams" data-toggle="tab">Teams</a></li>
                             {% if club in app.user.clubs %}
-                                <li><a href="#members" data-toggle="tab" aria-expanded="true">Membres</a></li>{% endif %}
+                                <li><a href="#members" data-toggle="tab" aria-expanded="true">Membres</a></li>
+                                <li><a href="#requetes" data-toggle="tab" aria-expanded="true">Requêtes <span class="badge bg-light-blue-active">{{ requestMembers|length }}</span></a></li>
+                            {% endif %}
                         </ul>
                         <div class="tab-content">
                             {% if club in app.user.clubs %}
@@ -170,6 +173,51 @@
                                                                 <td>{{ member.user.registerDate|date('Y-m-d H:i:s') }}</td>
                                                                 <td>{{ member.user.lastUpdate|date('Y-m-d H:i:s') }}</td>
                                                                 <td>{{ member.user.authorUser }}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="requetes">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="box">
+                                                <div class="box-header">
+                                                    <h3 class="box-title">Request Members Board</h3>
+                                                </div>
+                                                <div class="box-body">
+                                                    <table id="teams_board" class="table table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Username</th>
+                                                                <th>Country</th>
+                                                                <th>Licence</th>
+                                                                <th>RegisterDate</th>
+                                                                <th>RequestDate</th>
+                                                                <th>action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for member in requestMembers %}
+                                                            <tr>
+                                                                <td>
+                                                                    {% if member.requestToJoin == 2 %}
+                                                                        <i style="color: green;" class="fa fa-circle-o fa-lg"></i>
+                                                                    {% else %}
+                                                                        <i style="color: red;" class="fa fa-close fa-lg"></i>
+                                                                    {% endif %}
+                                                                </td>
+                                                                <td>{{ member.user }}</td>
+                                                                <td>{{ member.user.nationality }}</td>
+                                                                <td>{{ member.user.licence }}</td>
+                                                                <td>{{ member.user.registerDate|date('Y-m-d H:i:s') }}</td>
+                                                                <td>{{ member.creationDate|date('Y-m-d H:i:s') }}</td>
+                                                                <td><a href="{{ path('fo_request_user_has_club_edit_request', {'membersHasClubId': member.id}) }}" class="btn btn-xs btn-primary">editer</a></td>
                                                             </tr>
                                                         {% endfor %}
                                                         </tbody>
