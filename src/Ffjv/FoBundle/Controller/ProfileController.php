@@ -25,11 +25,14 @@ class ProfileController extends Controller
         if($userUsername != $this->getUser()->getUsername()){
             return $this->redirectToRoute('ffjv_fo_home_index');
         }
+        $em = $this->getDoctrine()->getManager();
 
         $user = $this->get('user')->findOneByUsername($userUsername);
+        $clubsMember = $em->getRepository('FfjvBoBundle:UserHasClubs')->getCLubMemberByUser($this->getUser());
 
         return $this->render('@FfjvFo/Profile/show.html.twig', array(
-            'user' => $user
+            'user' => $user,
+            'clubsMember' => $clubsMember
         ));
     }
 

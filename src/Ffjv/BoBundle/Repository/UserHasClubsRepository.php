@@ -4,6 +4,7 @@ namespace Ffjv\BoBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Ffjv\BoBundle\Entity\Clubs;
+use Ffjv\BoBundle\Entity\User;
 
 /**
  * UserHasClubsRepository
@@ -26,5 +27,20 @@ class UserHasClubsRepository extends EntityRepository
             WHERE uhc.club = :club
             AND uhc.requestToJoin > 0
             ")->setParameter('club', $club)->getResult();
+    }
+
+    /**
+     * @param User $user
+     * @return array
+     */
+    public function getCLubMemberByUser(User $user){
+        return $this->getEntityManager()->createQuery("
+            SELECT uhc, u, c, l
+            FROM FfjvBoBundle:UserHasClubs uhc
+            JOIN uhc.user u
+            JOIN uhc.club c
+            JOIN c.licence l
+            WHERE uhc.user = :user
+        ")->setParameter('user', $user)->getArrayResult();
     }
 }

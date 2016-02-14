@@ -106,7 +106,28 @@
                                         </div>
                                     </div>
                                     <div class="box-body">
-
+                                        <table id="clubs_board" class="table table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>Licence</th>
+                                                <th>Country</th>
+                                                <th>joinDate</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for member in clubsMember %}
+                                                <tr>
+                                                    <td><a href="{{ path('fo_clubs_show', {'clubTitle': member.club.title} ) }}">{{ member.club.title }}</a></td>
+                                                    <td>{{ member.club.licence.licence }}</td>
+                                                    <td>{{ member.club.country }}</td>
+                                                    <td>{{ member.creationDate|date('Y-m-d H:i') }}</td>
+                                                    <td><a href="#" class="btn btn-success btn-xs" disabled="disabled">editer</a> </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
