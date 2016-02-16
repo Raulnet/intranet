@@ -58,4 +58,4 @@ ffjv_fo_clubs:
 
 ffjv_fo_userhasclubs:
     resource: "@FfjvFoBundle/Resources/config/routing/userhasclubs.yml"
-    prefix:   /userhasclubs
+    prefix:   /members

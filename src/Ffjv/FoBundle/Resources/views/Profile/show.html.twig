@@ -41,11 +41,9 @@
                         </div>
                         <div class="box-body">
                             <strong><i class="fa fa-envelope margin-r-5"></i> Contact</strong>
-
                             <p class="text-muted">{{ user.email }}</p>
                             <hr>
                             <strong><i class="fa fa-map-marker margin-r-5"></i> Adresse</strong>
-
                             <p class="text-muted">
                                 {{ user.address1 }}<br/>
                                 {{ user.address2 }}<br/>
@@ -72,15 +70,15 @@
                                     <div class="box-body">
                                         <table id="clubs_board" class="table table-bordered table-striped">
                                             <thead>
-                                                <tr>
-                                                    <th>Title</th>
-                                                    <th>Tag</th>
-                                                    <th>Licence</th>
-                                                    <th>zipcode</th>
-                                                    <th>Country</th>
-                                                    <th>Creationdate</th>
-                                                    <th>Lastupdate</th>
-                                                </tr>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>Tag</th>
+                                                <th>Licence</th>
+                                                <th>zipcode</th>
+                                                <th>Country</th>
+                                                <th>Creationdate</th>
+                                                <th>Lastupdate</th>
+                                            </tr>
                                             </thead>
                                             <tbody>
                                             {% for club in app.user.clubs %}
@@ -108,20 +106,26 @@
                                     <div class="box-body">
                                         <table id="clubs_board" class="table table-bordered table-striped">
                                             <thead>
-                                            <tr>
-                                                <th>Title</th>
-                                                <th>Licence</th>
-                                                <th>Country</th>
-                                                <th>joinDate</th>
-                                                <th>Action</th>
-                                            </tr>
+                                                <tr>
+                                                    <th>Title</th>
+                                                    <th>Licence</th>
+                                                    <th>Role</th>
+                                                    <th>joinDate</th>
+                                                    <th>Action</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
                                             {% for member in clubsMember %}
                                                 <tr>
                                                     <td><a href="{{ path('fo_clubs_show', {'clubTitle': member.club.title} ) }}">{{ member.club.title }}</a></td>
                                                     <td>{{ member.club.licence.licence }}</td>
-                                                    <td>{{ member.club.country }}</td>
+                                                    <td>
+                                                        <ul>
+                                                            {% for role in member.roles %}
+                                                                <li>{{ role }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </td>
                                                     <td>{{ member.creationDate|date('Y-m-d H:i') }}</td>
                                                     <td><a href="#" class="btn btn-success btn-xs" disabled="disabled">editer</a> </td>
                                                 </tr>

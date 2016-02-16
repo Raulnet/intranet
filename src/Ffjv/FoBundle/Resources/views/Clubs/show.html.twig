@@ -149,6 +149,7 @@
                                                             <th>Creationdate</th>
                                                             <th>Lastupdate</th>
                                                             <th>Authors</th>
+                                                            <th></th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -173,6 +174,7 @@
                                                                 <td>{{ member.user.registerDate|date('Y-m-d H:i:s') }}</td>
                                                                 <td>{{ member.user.lastUpdate|date('Y-m-d H:i:s') }}</td>
                                                                 <td>{{ member.user.authorUser }}</td>
+                                                                <td><a class="btn btn-success btn-sm" href="#">edit</a> </td>
                                                             </tr>
                                                         {% endfor %}
                                                         </tbody>

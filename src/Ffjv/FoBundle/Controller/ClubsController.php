@@ -30,13 +30,13 @@ class ClubsController extends Controller
     }
 
     /**
-     * @param string $clubTitle
+     * @param string $clubId
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction($clubTitle = '')
+    public function showAction($clubId = '')
     {
-        $club = $this->getDoctrine()->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('title' => $clubTitle));
+        $club = $this->getDoctrine()->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
         $members = $this->getDoctrine()->getRepository('FfjvBoBundle:UserHasClubs')->findBy(array('club' => $club, 'requestToJoin' => 0));
         $userRequestTojoin = $this->getDoctrine()->getRepository('FfjvBoBundle:UserHasClubs')->getRequestUserToJoin($club);
         $countMembersActive = $this->get('clubs')->getCountMemberActive($club->getId());
@@ -103,7 +103,7 @@ class ClubsController extends Controller
 
             $this->addFlash('success', 'Félicitaion votre club a été créé');
 
-            return $this->redirect($this->generateUrl('fo_clubs_show', array('clubTitle' => $club->getTitle())));
+            return $this->redirect($this->generateUrl('fo_clubs_show', array('clubId' => $club->getId())));
         }
         $this->addFlash('error', 'une erreur c\'est produite');
 
@@ -114,17 +114,17 @@ class ClubsController extends Controller
     }
 
     /**
-     * @param string $clubTitle
+     * @param string $clubId
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function editAction($clubTitle = '')
+    public function editAction($clubId = '')
     {
         $em   = $this->getDoctrine()->getManager();
-        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('title' => $clubTitle));
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
         //if user is author
         if ($club->getUser() == $this->getUser()) {
-            $path = $this->generateUrl('fo_clubs_update', array('clubTitle' => $clubTitle));
+            $path = $this->generateUrl('fo_clubs_update', array('clubId' => $clubId));
             $form = $this->getClubForm($club, $path);
 
             return $this->render('FfjvFoBundle:Clubs:edit.html.twig', array(
@@ -138,21 +138,21 @@ class ClubsController extends Controller
 
     /**
      * @param Request $request
-     * @param string  $clubTitle
+     * @param string  $clubId
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction(Request $request, $clubTitle = '')
+    public function updateAction(Request $request, $clubId = '')
     {
         $em   = $this->getDoctrine()->getManager();
-        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('title' => $clubTitle));
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
         //if club not esixt || user is not author
         if (!$club || $club->getUser() != $this->getUser()) {
             $this->addFlash('error', 'une erreur c\'est produite');
 
             return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
         }
-        $path = $this->generateUrl('fo_clubs_update', array('clubTitle' => $clubTitle));
+        $path = $this->generateUrl('fo_clubs_update', array('clubId' => $clubId));
         $form = $this->getClubForm($club, $path);
         $form->handleRequest($request);
         if ($form->isValid()) {
@@ -164,7 +164,7 @@ class ClubsController extends Controller
             // TODO AJOUTER L'ENVOIE DE MAIL DE CONFIRMATION
             $this->addFlash('success', 'Félicitaion votre club a été édité');
 
-            return $this->redirectToRoute('fo_clubs_show', array('clubTitle' => $clubTitle));
+            return $this->redirectToRoute('fo_clubs_show', array('clubId' => $clubId));
         }
         $this->addFlash('error', 'une erreur c\'est produite');
 
@@ -175,21 +175,21 @@ class ClubsController extends Controller
     }
 
     /**
-     * @param string $clubTitle
+     * @param string $clubId
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function removeAction($clubTitle = '')
+    public function removeAction($clubId = '')
     {
         $em   = $this->getDoctrine()->getManager();
-        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('title' => $clubTitle));
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
         //if club not esixt || user is not author
         if (!$club || $club->getUser() != $this->getUser()) {
             $this->addFlash('error', 'une erreur c\'est produite');
 
             return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
         }
-        $form = $this->getDeleteClubForm($clubTitle);
+        $form = $this->getDeleteClubForm($clubId);
 
         return $this->render('@FfjvFo/Clubs/delete.html.twig', array(
             'deleteForm' => $form->createView(),
@@ -199,17 +199,17 @@ class ClubsController extends Controller
 
     /**
      * @param Request $request
-     * @param string  $clubTitle
+     * @param string  $clubId
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction(Request $request, $clubTitle = '')
+    public function deleteAction(Request $request, $clubId = '')
     {
-        $form = $this->getDeleteClubForm($clubTitle);
+        $form = $this->getDeleteClubForm($clubId);
         $form->handleRequest($request);
         if ($form->isValid()) {
             $em   = $this->getDoctrine()->getManager();
-            $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('title' => $clubTitle));
+            $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
             //if club not esixt || user is not author
             if (!$club || $club->getUser() != $this->getUser()) {
                 $this->addFlash('error', 'une erreur c\'est produite');
@@ -230,14 +230,14 @@ class ClubsController extends Controller
     }
 
     /**
-     * @param string $clubTitle
+     * @param string $clubId
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function newTeamAction($clubTitle = ''){
+    public function newTeamAction($clubId = ''){
 
         $em = $this->getDoctrine()->getManager();
-        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('title' => $clubTitle));
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
         //if club not esixt || user is not author
         if (!$club || $club->getUser() != $this->getUser()) {
             $this->addFlash('error', 'une erreur c\'est produite');
@@ -246,7 +246,7 @@ class ClubsController extends Controller
         }
         $team = new Teams();
 
-        $url = $this->generateUrl('fo_clubs_createteams', array('clubTitle' => $clubTitle));
+        $url = $this->generateUrl('fo_clubs_createteams', array('id' => $clubId));
         $form = $this->getTeamsForm($team, $url);
 
         return $this->render('@FfjvFo/Clubs/newTeams.html.twig', array(
@@ -257,14 +257,14 @@ class ClubsController extends Controller
 
     /**
      * @param Request $request
-     * @param string  $clubTitle
+     * @param string  $clubId
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function createTeamToClubAction(Request $request, $clubTitle = ''){
+    public function createTeamToClubAction(Request $request, $clubId = ''){
 
         $em = $this->getDoctrine()->getManager();
-        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('title' => $clubTitle));
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
         //if club not esixt || user is not author
         if (!$club || $club->getUser() != $this->getUser()) {
             $this->addFlash('error', 'une erreur c\'est produite');
@@ -273,7 +273,7 @@ class ClubsController extends Controller
         }
 
         $team = new Teams();
-        $url = $this->generateUrl('fo_clubs_createteams', array('clubTitle' => $clubTitle));
+        $url = $this->generateUrl('fo_clubs_createteams', array('clubId' => $clubId));
         $form = $this->getTeamsForm($team, $url);
         $form->handleRequest($request);
         if($form->isValid()){
@@ -288,19 +288,19 @@ class ClubsController extends Controller
             $em->persist($club);
             $em->flush();
             $this->addFlash('success', 'Votre nouvelle team a été créée .');
-            return $this->redirectToRoute('fo_clubs_show', array('clubTitle' => $clubTitle));
+            return $this->redirectToRoute('fo_clubs_show', array('clubId' => $clubId));
         }
         $this->addFlash('error', 'une erreur c\'est produite');
-        return $this->redirectToRoute('fo_clubs_show', array('clubTitle' => $clubTitle));
+        return $this->redirectToRoute('fo_clubs_show', array('clubId' => $clubId));
     }
 
     /**
-     * @param string $clubTitle
+     * @param string $clubId
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newMemberAction($clubTitle = ''){
+    public function newMemberAction($clubId = ''){
         $em = $this->getDoctrine()->getManager();
-        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('title' => $clubTitle));
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
         //if club not esixt || user is not author
         if (!$club || $club->getUser() != $this->getUser()) {
             $this->addFlash('error', 'une erreur c\'est produite');
@@ -309,7 +309,7 @@ class ClubsController extends Controller
         }
         $user = new User();
 
-        $url = $this->generateUrl('fo_clubs_createmembers', array('clubTitle' => $clubTitle));
+        $url = $this->generateUrl('fo_clubs_createmembers', array('clubId' => $clubId));
         $form = $this->getUserForm($user, $url);
 
         return $this->render('@FfjvFo/Clubs/newMembers.html.twig', array(
@@ -320,14 +320,14 @@ class ClubsController extends Controller
 
     /**
      * @param Request $request
-     * @param string  $clubTitle
+     * @param string  $clubId
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function createMemberToClubAction(Request $request, $clubTitle = ''){
+    public function createMemberToClubAction(Request $request, $clubId = ''){
 
         $em = $this->getDoctrine()->getManager();
-        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('title' => $clubTitle));
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
 
         //if club not esixt || user is not author
         if (!$club || $club->getUser() != $this->getUser()) {
@@ -336,7 +336,7 @@ class ClubsController extends Controller
         }
 
         $user = new User();
-        $url = $this->generateUrl('fo_clubs_createmembers', array('clubTitle' => $clubTitle));
+        $url = $this->generateUrl('fo_clubs_createmembers', array('clubId' => $clubId));
         $form = $this->getUserForm($user, $url);
         $form->handleRequest($request);
         if($form->isValid()){
@@ -358,7 +358,7 @@ class ClubsController extends Controller
             $this->addMemberToClub($club, $user);
 
             $this->addFlash('success', 'Votre nouveau membre a été créé .');
-            return $this->redirectToRoute('fo_clubs_show', array('clubTitle' => $clubTitle));
+            return $this->redirectToRoute('fo_clubs_show', array('clubId' => $clubId));
         }
         $this->addFlash('error', 'une erreur c\'est produite');
         return $this->render('@FfjvFo/Clubs/newMembers.html.twig', array(
@@ -399,7 +399,7 @@ class ClubsController extends Controller
             } else {
                 $this->addFlash('error', 'Une erreur c\'est produite ! Votre message n\'a pus être envoyé .');
             }
-            return $this->redirectToRoute('fo_clubs_show', array('clubTitle' => $club->getTitle()));
+            return $this->redirectToRoute('fo_clubs_show', array('clubId' => $club->getId()));
         }
         $this->addFlash('error', 'Une erreur c\'est produite');
         return $this->redirectToRoute('fo_profile_show', array('id' => $this->getUser()->getId()));
@@ -487,21 +487,21 @@ class ClubsController extends Controller
     }
 
     /**
-     * @param string $clubTitle
+     * @param string $clubId
      *
      * @return \Symfony\Component\Form\Form
      */
-    private function getDeleteClubForm($clubTitle = '')
+    private function getDeleteClubForm($clubId = '')
     {
         $form = $this->createFormBuilder();
         $form->add('title', 'hidden', array(
-            'attr' => array('value' => $clubTitle)
+            'attr' => array('value' => $clubId)
         ));
         $form->add('submit', 'submit', array(
             'label' => 'supprimer',
             'attr'  => array('class' => 'btn btn-danger')
         ));
-        $form->setAction($this->generateUrl('fo_clubs_delete', array('clubTitle' => $clubTitle)));
+        $form->setAction($this->generateUrl('fo_clubs_delete', array('clubId' => $clubId)));
         $form->setMethod('POST');
 
         return $form->getForm();

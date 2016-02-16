@@ -178,7 +178,7 @@ class UserHasClubController extends Controller
         $this->get('contact')->sendRequestResponseToJoinCLub($message);
 
         $this->addFlash('success', 'La reponse a été envoyer');
-        return $this->redirectToRoute('fo_clubs_show', array('clubTitle' => $userHasClub->getClub()));
+        return $this->redirectToRoute('fo_clubs_show', array('clubId' => $userHasClub->getClub()->getId()));
     }
 
     /**
@@ -203,7 +203,7 @@ class UserHasClubController extends Controller
         $this->get('contact')->sendRequestResponseToJoinCLub($message);
 
         $this->addFlash('success', 'La reponse a été envoyer');
-        return $this->redirectToRoute('fo_clubs_show', array('clubTitle' => $userHasClub->getClub()));
+        return $this->redirectToRoute('fo_clubs_show', array('clubId' => $userHasClub->getClub()->getId()));
     }
 
     /**
@@ -225,6 +225,6 @@ class UserHasClubController extends Controller
         $this->get('contact')->sendRequestResponseToJoinCLub($message);
 
         $this->addFlash('success', 'La reponse a été envoyer');
-        return $this->redirectToRoute('fo_clubs_show', array('clubTitle' => $userHasClub->getClub()));
+        return $this->redirectToRoute('fo_clubs_show', array('clubId' => $userHasClub->getClub()->getId()));
     }
 }

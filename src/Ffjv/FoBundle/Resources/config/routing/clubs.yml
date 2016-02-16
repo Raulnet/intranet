@@ -3,7 +3,7 @@ fo_clubs_index:
     defaults: { _controller: "FfjvFoBundle:Clubs:index" }
 
 fo_clubs_show:
-    path:     /show/{clubTitle}
+    path:     /show/{clubId}
     defaults: { _controller: "FfjvFoBundle:Clubs:show" }
 
 fo_clubs_new:
@@ -15,37 +15,37 @@ fo_clubs_create:
     defaults: { _controller: "FfjvFoBundle:Clubs:create" }
 
 fo_clubs_edit:
-    path:     /edit/{clubTitle}
+    path:     /edit/{clubId}
     defaults: { _controller: "FfjvFoBundle:Clubs:edit" }
 
 fo_clubs_update:
-    path:     /update/{clubTitle}
+    path:     /update/{clubId}
     defaults: { _controller: "FfjvFoBundle:Clubs:update" }
 
 fo_clubs_remove:
-    path:     /remove/{clubTitle}
+    path:     /remove/{clubId}
     defaults: { _controller: "FfjvFoBundle:Clubs:remove" }
 
 fo_clubs_delete:
-    path:     /delete/{clubTitle}
+    path:     /delete/{clubId}
     defaults: { _controller: "FfjvFoBundle:Clubs:delete" }
     methods:  [POST, DELETE]
 
 fo_clubs_newteams:
-    path:     /newteams/{clubTitle}
+    path:     /newteams/{clubId}
     defaults: { _controller: "FfjvFoBundle:Clubs:newTeam" }
 
 fo_clubs_createteams:
-    path:     /createteams/{clubTitle}
+    path:     /createteams/{clubId}
     defaults: { _controller: "FfjvFoBundle:Clubs:createTeamToClub" }
     methods: POST
 
 fo_clubs_newmembers:
-    path:     /newmembers/{clubTitle}
+    path:     /newmembers/{clubId}
     defaults: { _controller: "FfjvFoBundle:Clubs:newMember" }
 
 fo_clubs_createmembers:
-    path:     /createmembers/{clubTitle}
+    path:     /createmembers/{clubId}
     defaults: { _controller: "FfjvFoBundle:Clubs:createMemberToClub" }
     methods: POST
 
