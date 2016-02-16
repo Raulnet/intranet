@@ -24,9 +24,9 @@
                 <li class="{% if (clubTitle is defined) and (clubTitle == club.title) %}active{% endif %}">
                     <a href="#"><i class="fa fa-university"></i> {{ club.title }} <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ path('fo_clubs_show', {'clubTitle': club.title} ) }}"><i class="fa fa-institution"></i> {{ club.title }}</a></li>
-                        <li><a href="{{ path('fo_clubs_edit', {'clubTitle': club.title} ) }}"><i class="fa fa-edit"></i> Editer</a></li>
-                        <li><a href="{{ path('fo_clubs_remove', {'clubTitle': club.title} ) }}"><i class="fa fa-trash"></i> Supprimer</a></li>
+                        <li><a href="{{ path('fo_clubs_show', {'clubId': club.id} ) }}"><i class="fa fa-institution"></i> {{ club.title }}</a></li>
+                        <li><a href="{{ path('fo_clubs_edit', {'clubId': club.id} ) }}"><i class="fa fa-edit"></i> Editer</a></li>
+                        <li><a href="{{ path('fo_clubs_remove', {'clubId': club.id} ) }}"><i class="fa fa-trash"></i> Supprimer</a></li>
                     </ul>
                 </li>
                 {% endfor %}

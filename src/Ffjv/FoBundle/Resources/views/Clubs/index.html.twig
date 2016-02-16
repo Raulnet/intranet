@@ -32,7 +32,7 @@
                             <tbody>
                             {% for club in clubs %}
                                 <tr>
-                                    <td><a href="{{ path('fo_clubs_show', {'clubTitle': club.title} ) }}">{{ club.title }}</a></td>
+                                    <td><a href="{{ path('fo_clubs_show', {'clubId': club.id} ) }}">{{ club.title }}</a></td>
                                     <td>{{ club.tag }}</td>
                                     <td>{{ club.licence }}</td>
                                     <td>{{ club.zipCode }}</td>
