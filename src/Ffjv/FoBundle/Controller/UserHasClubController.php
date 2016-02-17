@@ -10,6 +10,7 @@ namespace Ffjv\FoBundle\Controller;
 use Ffjv\BoBundle\Entity\Clubs;
 use Ffjv\BoBundle\Entity\User;
 use Ffjv\BoBundle\Entity\UserHasClubs;
+use Ffjv\FoBundle\Form\MemberType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Ffjv\BoBundle\Entity\Messages;
@@ -21,12 +22,13 @@ class UserHasClubController extends Controller
      * @param int $membersHasClubId
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function editJoinRequestAction($membersHasClubId = 0){
+    public function editJoinRequestAction($membersHasClubId = 0)
+    {
         $em = $this->getDoctrine()->getManager();
         $userHasClubs = $em->getRepository('FfjvBoBundle:UserHasClubs')->find($membersHasClubId);
         $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(['id' => $userHasClubs->getClub()->getId()]);
-        if($userHasClubs->getRequestToJoin() == 0){
-            return $this->redirectToRoute('fo_clubs_show', ['clubTitle' => $club->getTitle()]);
+        if ($userHasClubs->getRequestToJoin() == 0) {
+            return $this->redirectToRoute('fo_clubs_show', ['clubId' => $club->getId()]);
         }
         $countMembersActive = $this->get('clubs')->getCountMemberActive($club->getId());
         $message = $em->getRepository('FfjvBoBundle:Messages')->getLastRequestJoinClubByUser($club, $userHasClubs->getUser());
@@ -40,19 +42,24 @@ class UserHasClubController extends Controller
         ]);
     }
 
-    public function setRequestJoinClubAction(Request $request){
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function setRequestJoinClubAction(Request $request)
+    {
 
         $form = $this->getResponseRequestForm();
         $form->handleRequest($request);
-        if($form->isValid()){
+        if ($form->isValid()) {
             $data = $request->request->get('form');
-            if(array_key_exists('accepter', $data)){
+            if (array_key_exists('accepter', $data)) {
                 return $this->acceptRequestJoinClub($data);
             }
-            if(array_key_exists('supprimer', $data)){
+            if (array_key_exists('supprimer', $data)) {
                 return $this->deleteRequestJoinClub($data);
             }
-            if(array_key_exists('refuser', $data)){
+            if (array_key_exists('refuser', $data)) {
                 return $this->refuseRequestJoinClub($data);
             }
         }
@@ -66,11 +73,12 @@ class UserHasClubController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function sendRequestToJoinAction(Request $request){
+    public function sendRequestToJoinAction(Request $request)
+    {
 
         $form = $this->get('user_has_clubs')->getJoinClubForm('', array());
         $form->handleRequest($request);
-        if($form->isValid()){
+        if ($form->isValid()) {
             $data = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $id = $data['club'];
@@ -78,8 +86,7 @@ class UserHasClubController extends Controller
             if (!$club) {
                 throw $this->createNotFoundException('Unable to find Clubs club.');
             }
-            if($this->addUserToRequestClub($club, $this->getUser())) {
-
+            if ($this->addUserToRequestClub($club, $this->getUser())) {
 
                 // create and save Mesage
                 $message = new Messages();
@@ -104,14 +111,79 @@ class UserHasClubController extends Controller
     }
 
     /**
+     * @param int $memberId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editMemberAction($memberId = 0)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $member = $em->getRepository('FfjvBoBundle:UserHasClubs')->find($memberId);
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(['id' => $member->getClub()->getId()]);
+        if (!$member) {
+            return $this->redirectToRoute('fo_clubs_show', ['clubTitle' => $club->getTitle()]);
+        }
+        $countMembersActive = $this->get('clubs')->getCountMemberActive($club->getId());
+
+        $form = $this->getFormUpdateMember($member);
+
+        return $this->render('FfjvFoBundle:UserHasClubs:editMember.html.twig', [
+            'member' => $member,
+            'club' => $club,
+            'count_members' => $countMembersActive,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param int $memberId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function updateMemberAction(Request $request, $memberId = 0)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $member = $em->getRepository('FfjvBoBundle:UserHasClubs')->find($memberId);
+
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(['id' => $member->getClub()->getId()]);
+        //if club not esixt || user is not author
+        if (!$club || $club->getUser() != $this->getUser()) {
+            $this->addFlash('error', 'une erreur c\'est produite ! ce club n\'existe pas');
+            return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
+        }
+        //if member not existe
+        if (!$member) {
+            $this->addFlash('error', 'une erreur c\'est produite ! ce membre n\'existe pas .');
+            return $this->redirectToRoute('fo_clubs_show', ['clubTitle' => $club->getTitle()]);
+        }
+        $form = $this->getFormUpdateMember($member);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em->flush();
+            $this->addFlash('success', 'votre membre à bien été mis a jour');
+            return $this->redirectToRoute('fo_clubs_show', ['clubId' => $club->getId()]);
+        }
+
+        $countMembersActive = $this->get('clubs')->getCountMemberActive($club->getId());
+        $this->addFlash('error', 'une erreur c\'est produite');
+        return $this->render('FfjvFoBundle:UserHasClubs:editMember.html.twig', [
+            'member' => $member,
+            'club' => $club,
+            'count_members' => $countMembersActive,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
      * @param Clubs $club
      * @param User $user
      * @return bool
      */
-    private function addUserToRequestClub(Clubs $club, User $user){
+    private function addUserToRequestClub(Clubs $club, User $user)
+    {
 
         $em = $this->getDoctrine()->getManager();
-        if($em->getRepository('FfjvBoBundle:UserHasClubs')->findBy(array('user' => $user, 'club' => $club))){
+        if ($em->getRepository('FfjvBoBundle:UserHasClubs')->findBy(array('user' => $user, 'club' => $club))) {
             $this->addFlash('error', 'Votre demande n\'a pus aboutir, vous avez déjà fait une requête à ce club');
             return false;
         }
@@ -129,7 +201,8 @@ class UserHasClubController extends Controller
      * @param $userHasClubId
      * @return \Symfony\Component\Form\Form
      */
-    private function getResponseRequestForm($userHasClubId = null){
+    private function getResponseRequestForm($userHasClubId = null)
+    {
         $form = $this->createFormBuilder();
         $form->add('user_has_club', 'hidden', array(
             'attr' => array('value' => $userHasClubId)
@@ -139,15 +212,15 @@ class UserHasClubController extends Controller
         ));
         $form->add('accepter', 'submit', array(
             'label' => 'accepter',
-            'attr'  => array('class' => 'btn btn-success')
+            'attr' => array('class' => 'btn btn-success')
         ));
         $form->add('refuser', 'submit', array(
             'label' => 'refuser',
-            'attr'  => array('class' => 'btn btn-warning')
+            'attr' => array('class' => 'btn btn-warning')
         ));
         $form->add('supprimer', 'submit', array(
             'label' => 'supprimer',
-            'attr'  => array('class' => 'btn btn-danger')
+            'attr' => array('class' => 'btn btn-danger')
         ));
         $form->setAction($this->generateUrl('fo_user_has_club_set_request', array('userHasClubId' => $userHasClubId)));
         $form->setMethod('POST');
@@ -159,7 +232,8 @@ class UserHasClubController extends Controller
      * @param array $data
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    private function acceptRequestJoinClub(array $data){
+    private function acceptRequestJoinClub(array $data)
+    {
         $em = $this->getDoctrine()->getManager();
         $userHasClub = $em->getRepository('FfjvBoBundle:UserHasClubs')->find($data['user_has_club']);
         $userHasClub->setRoles(array('ROLE_MEMBER'));
@@ -172,7 +246,7 @@ class UserHasClubController extends Controller
         $message->setUser($userHasClub->getUser());
         $message->setEmail($userHasClub->getUser()->getEmail());
         $message->setMessage($data['message']);
-        $message->setSubject('Demande de rejoindre le club '.$userHasClub->getClub().' acceptée' );
+        $message->setSubject('Demande de rejoindre le club ' . $userHasClub->getClub() . ' acceptée');
         $em->persist($message);
         $em->flush();
         $this->get('contact')->sendRequestResponseToJoinCLub($message);
@@ -185,7 +259,8 @@ class UserHasClubController extends Controller
      * @param array $data
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    private function refuseRequestJoinClub(array $data){
+    private function refuseRequestJoinClub(array $data)
+    {
         $em = $this->getDoctrine()->getManager();
         $userHasClub = $em->getRepository('FfjvBoBundle:UserHasClubs')->find($data['user_has_club']);
         $userHasClub->setRequestToJoin(1);
@@ -197,7 +272,7 @@ class UserHasClubController extends Controller
         $message->setUser($userHasClub->getUser());
         $message->setEmail($userHasClub->getUser()->getEmail());
         $message->setMessage($data['message']);
-        $message->setSubject('Demande de rejoindre le club '.$userHasClub->getClub().' refusée' );
+        $message->setSubject('Demande de rejoindre le club ' . $userHasClub->getClub() . ' refusée');
         $em->persist($message);
         $em->flush();
         $this->get('contact')->sendRequestResponseToJoinCLub($message);
@@ -210,7 +285,8 @@ class UserHasClubController extends Controller
      * @param array $data
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    private function deleteRequestJoinClub(array $data){
+    private function deleteRequestJoinClub(array $data)
+    {
         $em = $this->getDoctrine()->getManager();
         $userHasClub = $em->getRepository('FfjvBoBundle:UserHasClubs')->find($data['user_has_club']);
         $em->remove($userHasClub);
@@ -219,12 +295,24 @@ class UserHasClubController extends Controller
         $message->setUser($userHasClub->getUser());
         $message->setEmail($userHasClub->getUser()->getEmail());
         $message->setMessage($data['message']);
-        $message->setSubject('Demande de rejoindre le club '.$userHasClub->getClub().' refusée' );
+        $message->setSubject('Demande de rejoindre le club ' . $userHasClub->getClub() . ' refusée');
         $em->persist($message);
         $em->flush();
         $this->get('contact')->sendRequestResponseToJoinCLub($message);
 
         $this->addFlash('success', 'La reponse a été envoyer');
         return $this->redirectToRoute('fo_clubs_show', array('clubId' => $userHasClub->getClub()->getId()));
+    }
+
+    /**
+     * @param UserHasClubs $member
+     * @return \Symfony\Component\Form\Form
+     */
+    private function getFormUpdateMember(UserHasClubs $member)
+    {
+        return $this->createForm(new MemberType(), $member, [
+            "action" => $this->generateUrl('fo_user_has_club_update_member', ['memberId' => $member->getId()]),
+            "method" => "PUT"
+        ]);
     }
 }

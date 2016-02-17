@@ -38,3 +38,17 @@ h2 {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+
+.form-control{
+    box-shadow: 1px 1px 5px 1px rgba(100, 100, 100, 0.1) inset!important;
+}
+
+.check_roles {
+    padding: 5px;
+    margin: 2px 5px 2px 5px;
+    min-height: 40px;
+}
+
+.check_roles:nth-child(2n+1) {
+    background-color: #f1f1f1;
+}
