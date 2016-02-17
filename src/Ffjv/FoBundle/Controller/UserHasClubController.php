@@ -159,6 +159,9 @@ class UserHasClubController extends Controller
         $form = $this->getFormUpdateMember($member);
         $form->handleRequest($request);
         if ($form->isValid()) {
+            $data = $form->getData();
+            $member->setRoles($data->getRoles());
+            $em->persist($member);
             $em->flush();
             $this->addFlash('success', 'votre membre à bien été mis a jour');
             return $this->redirectToRoute('fo_clubs_show', ['clubId' => $club->getId()]);

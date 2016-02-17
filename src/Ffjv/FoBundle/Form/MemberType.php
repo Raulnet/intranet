@@ -5,6 +5,7 @@ namespace Ffjv\FoBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Ffjv\BoBundle\Entity\UserHasClubs;
 
 class MemberType extends AbstractType
 {
@@ -12,17 +13,9 @@ class MemberType extends AbstractType
     {
         $builder
             ->add('roles', 'choice', [
-                'choices' => [
-                    'ROLE_CLUB_PRESIDENT' => 'president',
-                    'ROLE_CLUB_SUB_PRESIDENT' => 'vice-president',
-                    'ROLE_CLUB_TREASOR' => 'tresorier',
-                    'ROLE_CLUB_SUB_TREASOR' => 'vice-tresorier',
-                    'ROLE_CLUB_SECRETARY' => 'secretaire',
-                    'ROLE_CLUB_SUB_SECRETARY' => 'vice-secretaire',
-                    'ROLE_MEMBER' => 'membre',
-                ],
-                'multiple' => true,
-                'expanded' => true,
+                'choices'   => UserHasClubs::$listRoles,
+                'multiple'  => true,
+                'expanded'  => true,
             ])
             ->add('submit', 'submit', [
                 'label' => 'editer',

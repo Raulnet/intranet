@@ -150,7 +150,7 @@
                                     <div class="col-xs-12">
                                         <div class="box">
                                             <div class="box-header">
-                                                <h3 class="box-title">Members Board</h3>{% if club in app.user.clubs %}<a class="btn btn-info btn-xs pull-right" href="{{ path('fo_clubs_newmembers',{'clubTitle': club.title}) }}">Create a new Member</a>{% endif %}
+                                                <h3 class="box-title">Members Board</h3>{% if club in app.user.clubs %}<a class="btn btn-info btn-xs pull-right" href="{{ path('fo_clubs_newmembers',{'clubId': club.id}) }}">Create a new Member</a>{% endif %}
                                             </div>
                                             <div class="box-body">
                                                 <table id="teams_board" class="table table-bordered table-striped">
@@ -180,7 +180,7 @@
                                                             <td>
                                                                 <ul>
                                                                     {% for role in member.roles %}
-                                                                        <li>{{ role }}</li>
+                                                                        <li>{{ role|rolesMember }}</li>
                                                                     {% endfor %}
                                                                 </ul>
                                                             </td>

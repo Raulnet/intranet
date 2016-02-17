@@ -12,6 +12,23 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserHasClubs
 {
+    const ROLE_CLUB_PRESIDENT = 'ROLE_CLUB_PRESIDENT';
+    const ROLE_CLUB_SUB_PRESIDENT = 'ROLE_CLUB_SUB_PRESIDENT';
+    const ROLE_CLUB_TREASOR = 'ROLE_CLUB_TREASOR';
+    const ROLE_CLUB_SUB_TREASOR = 'ROLE_CLUB_SUB_TREASOR';
+    const ROLE_CLUB_SECRETARY = 'ROLE_CLUB_SECRETARY';
+    const ROLE_CLUB_SUB_SECRETARY = 'ROLE_CLUB_SUB_SECRETARY';
+    const ROLE_MEMBER = 'ROLE_MEMBER';
+
+    public static $listRoles = [
+        self::ROLE_CLUB_PRESIDENT => 'president',
+        self::ROLE_CLUB_SUB_PRESIDENT => 'vice-president',
+        self::ROLE_CLUB_TREASOR => 'tresorier',
+        self::ROLE_CLUB_SUB_TREASOR => 'vice-tresorier',
+        self::ROLE_CLUB_SECRETARY => 'secretaire',
+        self::ROLE_CLUB_SUB_SECRETARY => 'vice-secretaire',
+        self::ROLE_MEMBER => 'membre',];
+
     /**
      * @var array
      *

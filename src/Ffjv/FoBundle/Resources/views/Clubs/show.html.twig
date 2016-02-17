@@ -165,9 +165,9 @@
                                                                 <td>{{ member.user }}</td>
                                                                 <td>{{ member.user.licence }}</td>
                                                                 <td>
-                                                                    <ul>
+                                                                    <ul class="list-group">
                                                                         {% for role in member.roles %}
-                                                                            <li>{{ role }}</li>
+                                                                            <li class="list-group-item">{{ role|rolesMember }}</li>
                                                                         {% endfor %}
                                                                     </ul>
                                                                 </td>

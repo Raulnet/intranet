@@ -37,4 +37,8 @@ services:
     contact:
         class: Ffjv\BoBundle\Service\ContactService
         arguments: ["@doctrine.orm.default_entity_manager", "@request_stack", "@service_container" ]
-
+    app.twig_extension:
+        class: Ffjv\FoBundle\Twig\AppExtension
+        public: false
+        tags:
+            - { name: twig.extension }
