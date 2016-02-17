@@ -1,0 +1,9 @@
+.list-group{
+    margin-bottom: 0px;!important;
+}
+.list-group-item:first-child, .list-group-item:last-child{
+    border-radius: 0px;!important;
+}
+.list-group-item {
+    padding: 5px 8px;
+}

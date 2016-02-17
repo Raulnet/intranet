@@ -174,7 +174,7 @@
                                                                 <td>{{ member.user.registerDate|date('Y-m-d H:i:s') }}</td>
                                                                 <td>{{ member.user.lastUpdate|date('Y-m-d H:i:s') }}</td>
                                                                 <td>{{ member.user.authorUser }}</td>
-                                                                <td><a class="btn btn-success btn-sm" href="{{ path('fo_user_has_club_edit_member', {'memberId': member.id}) }}">edit</a> </td>
+                                                                <td>{% if member.user != club.user %}<a class="btn btn-success btn-sm" href="{{ path('fo_user_has_club_edit_member', {'memberId': member.id}) }}">edit</a> {% endif %}</td>
                                                             </tr>
                                                         {% endfor %}
                                                         </tbody>

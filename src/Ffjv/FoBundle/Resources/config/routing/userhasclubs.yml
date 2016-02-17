@@ -20,3 +20,8 @@ fo_user_has_club_update_member:
     path:     /{memberId}/update
     defaults: { _controller: FfjvFoBundle:UserHasClub:updateMember}
     methods: PUT
+
+fo_user_has_club_remove_member:
+    path:     /{memberId}/remove
+    defaults: { _controller: FfjvFoBundle:UserHasClub:removeMember}
+    methods: DELETE

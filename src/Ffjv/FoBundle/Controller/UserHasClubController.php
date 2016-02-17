@@ -104,7 +104,7 @@ class UserHasClubController extends Controller
                 } else {
                     $this->addFlash('error', 'Une erreur c\'est produite ! Votre message n\'a pus être envoyé .');
                 }
-                return $this->redirectToRoute('fo_clubs_show', array('clubTitle' => $club->getTitle()));
+                return $this->redirectToRoute('fo_clubs_show', array('clubId' => $club->getId()));
             }
         }
         return $this->redirectToRoute('ffjv_fo_home_index');
@@ -121,17 +121,19 @@ class UserHasClubController extends Controller
         $member = $em->getRepository('FfjvBoBundle:UserHasClubs')->find($memberId);
         $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(['id' => $member->getClub()->getId()]);
         if (!$member) {
-            return $this->redirectToRoute('fo_clubs_show', ['clubTitle' => $club->getTitle()]);
+            return $this->redirectToRoute('fo_clubs_show', ['clubId' => $club->getId()]);
         }
         $countMembersActive = $this->get('clubs')->getCountMemberActive($club->getId());
 
         $form = $this->getFormUpdateMember($member);
+        $formRemove = $this->getFormRemoveMember($memberId);
 
         return $this->render('FfjvFoBundle:UserHasClubs:editMember.html.twig', [
             'member' => $member,
             'club' => $club,
             'count_members' => $countMembersActive,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'form_remove' => $formRemove->createView()
         ]);
     }
 
@@ -154,7 +156,7 @@ class UserHasClubController extends Controller
         //if member not existe
         if (!$member) {
             $this->addFlash('error', 'une erreur c\'est produite ! ce membre n\'existe pas .');
-            return $this->redirectToRoute('fo_clubs_show', ['clubTitle' => $club->getTitle()]);
+            return $this->redirectToRoute('fo_clubs_show', ['clubId' => $club->getId()]);
         }
         $form = $this->getFormUpdateMember($member);
         $form->handleRequest($request);
@@ -166,6 +168,7 @@ class UserHasClubController extends Controller
             $this->addFlash('success', 'votre membre à bien été mis a jour');
             return $this->redirectToRoute('fo_clubs_show', ['clubId' => $club->getId()]);
         }
+        $formRemove = $this->getFormRemoveMember($memberId);
 
         $countMembersActive = $this->get('clubs')->getCountMemberActive($club->getId());
         $this->addFlash('error', 'une erreur c\'est produite');
@@ -173,8 +176,40 @@ class UserHasClubController extends Controller
             'member' => $member,
             'club' => $club,
             'count_members' => $countMembersActive,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'form_remove' => $formRemove->createView()
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param $memberId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function removeMemberAction(Request $request, $memberId){
+
+        $em = $this->getDoctrine()->getManager();
+        $member = $em->getRepository('FfjvBoBundle:UserHasClubs')->find($memberId);
+        if(!$member){
+            $this->addFlash('error', 'une erreur c\'est produite !');
+            return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
+        }
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(['id' => $member->getClub()->getId()]);
+        //if club not esixt || user is not author
+        if (!$club || $club->getUser() != $this->getUser()) {
+            $this->addFlash('error', 'une erreur c\'est produite !');
+            return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
+        }
+        $form = $this->getFormRemoveMember($memberId);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em->remove($member);
+            $em->flush();
+            $this->addFlash('success', 'votre membre à bien été mis a jour');
+            return $this->redirectToRoute('fo_clubs_show', ['clubId' => $club->getId()]);
+        }
+        $this->addFlash('error', 'une erreur c\'est produite !');
+        return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
     }
 
     /**
@@ -317,5 +352,15 @@ class UserHasClubController extends Controller
             "action" => $this->generateUrl('fo_user_has_club_update_member', ['memberId' => $member->getId()]),
             "method" => "PUT"
         ]);
+    }
+
+    private function getFormRemoveMember($memberId)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('fo_user_has_club_remove_member', array('memberId' => $memberId)))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', array('label' => 'confirmer', 'attr'=> array('class' => 'btn btn-danger')))
+            ->getForm()
+            ;
     }
 }
