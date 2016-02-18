@@ -59,6 +59,11 @@ class TeamsController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param int $teamId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function deleteAction(Request $request, $teamId = 0){
         $em = $this->getDoctrine()->getManager();
         $team = $em->getRepository('FfjvBoBundle:Teams')->find($teamId);
