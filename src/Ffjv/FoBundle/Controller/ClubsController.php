@@ -234,10 +234,9 @@ class ClubsController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function newTeamAction($clubId = ''){
-
+    public function newTeamAction($clubId){
         $em = $this->getDoctrine()->getManager();
-        $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->find($clubId);
         //if club not esixt || user is not author
         if (!$club || $club->getUser() != $this->getUser()) {
             $this->addFlash('error', 'une erreur c\'est produite');
@@ -246,7 +245,7 @@ class ClubsController extends Controller
         }
         $team = new Teams();
 
-        $url = $this->generateUrl('fo_clubs_createteams', array('id' => $clubId));
+        $url = $this->generateUrl('fo_clubs_createteams', array('clubId' => $club->getId()));
         $form = $this->getTeamsForm($team, $url);
 
         return $this->render('@FfjvFo/Clubs/newTeams.html.twig', array(
