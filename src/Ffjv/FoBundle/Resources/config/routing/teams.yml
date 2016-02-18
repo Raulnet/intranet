@@ -1,0 +1,13 @@
+fo_teams_show:
+    path:     /show/{teamId}
+    defaults: { _controller: "FfjvFoBundle:Teams:show" }
+
+fo_teams_update:
+    path:     /update/{teamId}
+    defaults: { _controller: "FfjvFoBundle:Teams:update" }
+    methods: PUT
+
+fo_teams_delete:
+    path:     /delete/{teamId}
+    defaults: { _controller: "FfjvFoBundle:Teams:delete" }
+    methods: DELETE

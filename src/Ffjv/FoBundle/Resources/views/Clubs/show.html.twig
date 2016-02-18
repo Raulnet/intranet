@@ -252,7 +252,7 @@
                                                     <tbody>
                                                     {% for team in club.teams %}
                                                         <tr>
-                                                            <td><a href="{{ path('teams_show', { 'id': team.id }) }}">{{ team.title }}</a></td>
+                                                            <td><a href="{{ path('fo_teams_show', { 'teamId': team.id }) }}">{{ team.title }}</a></td>
                                                             <td>{{ team.tag }}</td>
                                                             <td>{{ team.licence }}</td>
                                                             <td>{% if team.creationDate %}{{ team.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
