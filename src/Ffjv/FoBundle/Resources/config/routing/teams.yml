@@ -11,3 +11,8 @@ fo_teams_delete:
     path:     /delete/{teamId}
     defaults: { _controller: "FfjvFoBundle:Teams:delete" }
     methods: DELETE
+
+fo_teams_clubs_contact:
+    path:     /sendmail/{teamId}
+    defaults: { _controller: "FfjvFoBundle:Teams:contactClubTeam" }
+    methods:  POST

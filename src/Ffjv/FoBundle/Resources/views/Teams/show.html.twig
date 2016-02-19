@@ -23,7 +23,7 @@
 
                             <h3 class="profile-username text-center">{{ team.title }} - {{ team.tag }}</h3>
                             {% if team.licence %}<p class="text-muted text-center">Licence : {{ team.licence }}</p>{% endif %}
-                            <p class="text-muted text-center"><a href="{{ path('clubs_show', {'id': team.club.id}) }}"><i class="fa fa-institution"></i> Club {{ team.club }}</a></p>
+                            <p class="text-muted text-center"><a href="{{ path('fo_clubs_show', {'clubId': team.club.id}) }}"><i class="fa fa-institution"></i> Club {{ team.club }}</a></p>
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
                                     <b>Author</b><a class="pull-right">{{ team.user.firstname }} {{ team.user.lastname }}</a>
@@ -32,7 +32,34 @@
                                     <b>Membres</b><a class="pull-right">0</a>
                                 </li>
                             </ul>
-                            <a href="#" class="btn btn-primary btn-block"><b>Contact - club</b></a>
+                            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#contactClub"><b>Contact - club</b></a>
+                            {# ***** MODAL CONTACT ***** #}
+                            <div class="modal fade" id="contactClub" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Contacter le Club {{ team.club }}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{ form_start(contact_form) }}
+                                            <div class="form-group">
+                                                {{ form_label(contact_form.subject) }}
+                                                {{ form_widget(contact_form.subject, {'attr': {'class': 'form-control'}}) }}
+                                            </div>
+                                            <div class="form-group">
+                                                {{ form_label(contact_form.content) }}
+                                                {{ form_widget(contact_form.content, {'attr': {'class': 'form-control'}}) }}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                {{ form_widget(contact_form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                                            </div>
+                                            {{ form_end(contact_form) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="box box-primary">
