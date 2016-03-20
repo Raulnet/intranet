@@ -90,10 +90,57 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="members">
-                                <p>Membres</p>
+                                <div class="box">
+                                    {% if members %}
+                                        <div class="box-body">
+                                            <a class="btn btn-info btn-xs pull-right" href="{{ path('fo_user_has_teams_select_member', {'teamId': team.id}) }}">ajouter un membre</a>
+                                            <table id="team_members_board" class="table table-bordered table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Username</th>
+                                                    <th>Licence</th>
+                                                    <th>Roles</th>
+                                                    <th>Creationdate</th>
+                                                    <th>Lastupdate</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for member in members %}
+                                                    <tr>
+                                                        <td>
+                                                            {% if member.user.status %}
+                                                                <i style="color: green;" class="fa fa-check fa-lg"></i>
+                                                            {% else %}
+                                                                <i style="color: red;" class="fa fa-close fa-lg"></i>
+                                                            {% endif %}
+                                                        </td>
+                                                        <td>{{ member.user }}</td>
+                                                        <td>{{ member.user.licence }}</td>
+                                                        <td>
+                                                            <ul class="list-group">
+                                                                {% for role in member.roles %}
+                                                                    <li class="list-group-item">{{ role|rolesTeamMember }}</li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                        </td>
+                                                        <td>{{ member.user.registerDate|date('Y-m-d H:i:s') }}</td>
+                                                        <td>{{ member.user.lastUpdate|date('Y-m-d H:i:s') }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    {% else %}
+                                        <div class="box-body">
+                                            <p class="pull-left">Aucun membres</p>
+                                            <a class="btn btn-info btn-xs pull-right" href="{{ path('fo_user_has_teams_select_member', {'teamId': team.id}) }}">ajouter un membre</a>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    {% endif %}
+                                </div>
                             </div>
                             <div class="tab-pane" id="settings">
-
                                 {{ form_start(editForm, {'attr': {'class': 'form-horizontal'}}) }}
                                 <div class="form-group">
                                     {{ form_label(editForm.title, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
@@ -111,7 +158,6 @@
                                     <div class="col-sm-10 col-sm-offset-2">
                                         <a href="#" class="btn btn-danger pull-right" data-toggle="modal" data-target="#deleteTeam">supprimer</a>
                                         {{ form_end(editForm) }}
-
                                         <div class="modal fade" id="deleteTeam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -139,3 +185,17 @@
             </div>
         </section>
     {% endblock %}
+{% block customJS %}
+    <script>
+        $(function () {
+            $('#teams_members_board').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
+        });
+    </script>
+{% endblock %}

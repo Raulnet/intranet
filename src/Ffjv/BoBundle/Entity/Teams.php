@@ -3,6 +3,7 @@
 namespace Ffjv\BoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Teams
@@ -80,12 +81,20 @@ class Teams
     private $club;
 
     /**
+     * @var ArrayCollection $members
+     *
+     * @ORM\OneToMany(targetEntity="Ffjv\BoBundle\Entity\UserHasTeams", mappedBy="team", cascade={"persist", "remove"})
+     */
+    private $members = array();
+
+    /**
      * Clubs constructor.
      */
     public function __construct()
     {
         $this->creationDate = new \DateTime('now');
         $this->lastUpdate   = new \DateTime('now');
+        $this->members = new ArrayCollection();
     }
 
     /**
@@ -272,5 +281,39 @@ class Teams
     public function getClub()
     {
         return $this->club;
+    }
+
+    /**
+     * Add member
+     *
+     * @param \Ffjv\BoBundle\Entity\UserHasTeams $member
+     *
+     * @return Teams
+     */
+    public function addMember(\Ffjv\BoBundle\Entity\UserHasTeams $member)
+    {
+        $this->members[] = $member;
+
+        return $this;
+    }
+
+    /**
+     * Remove member
+     *
+     * @param \Ffjv\BoBundle\Entity\UserHasTeams $member
+     */
+    public function removeMember(\Ffjv\BoBundle\Entity\UserHasTeams $member)
+    {
+        $this->members->removeElement($member);
+    }
+
+    /**
+     * Get members
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMembers()
+    {
+        return $this->members;
     }
 }

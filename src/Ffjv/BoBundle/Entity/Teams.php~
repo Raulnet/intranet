@@ -3,6 +3,7 @@
 namespace Ffjv\BoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Teams
@@ -80,12 +81,20 @@ class Teams
     private $club;
 
     /**
+     * @var ArrayCollection $members
+     *
+     * @ORM\OneToMany(targetEntity="Ffjv\BoBundle\Entity\UserHasTeams", mappedBy="team", cascade={"persist", "remove"})
+     */
+    private $members = array();
+
+    /**
      * Clubs constructor.
      */
     public function __construct()
     {
         $this->creationDate = new \DateTime('now');
         $this->lastUpdate   = new \DateTime('now');
+        $this->members = new ArrayCollection();
     }
 
     /**

@@ -59,8 +59,6 @@ class LicencesClubs
         return $this->licence;
     }
 
-
-
     /**
      * Set registerDate
      *

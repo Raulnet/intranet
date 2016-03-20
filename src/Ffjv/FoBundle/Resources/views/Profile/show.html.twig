@@ -120,9 +120,9 @@
                                                     <td><a href="{{ path('fo_clubs_show', {'clubId': member.club.id} ) }}">{{ member.club.title }}</a></td>
                                                     <td>{{ member.club.licence.licence }}</td>
                                                     <td>
-                                                        <ul>
+                                                        <ul class="list-group">
                                                             {% for role in member.roles %}
-                                                                <li>{{ role }}</li>
+                                                                <li class="list-group-item">{{ role|rolesMember }}</li>
                                                             {% endfor %}
                                                         </ul>
                                                     </td>

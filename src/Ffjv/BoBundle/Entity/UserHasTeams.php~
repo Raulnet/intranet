@@ -12,6 +12,20 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserHasTeams
 {
+    const ROLE_TEAM_MEMBER = 'ROLE_TEAM_MEMBER';
+    const ROLE_TEAM_SUB_MEMBER = 'ROLE_TEAM_SUB_MEMBER';
+    const ROLE_TEAM_LEADER = 'ROLE_TEAM_LEADER';
+    const ROLE_TEAM_SUB_LEADER = 'ROLE_TEAM_SUB_LEADER';
+
+    /**
+     * @var array
+     */
+    public static $listRoles = [
+        self::ROLE_TEAM_MEMBER => 'membre',
+        self::ROLE_TEAM_SUB_MEMBER => 'remplaçant',
+        self::ROLE_TEAM_LEADER => 'leader',
+        self::ROLE_TEAM_SUB_LEADER => 'second',];
+
     /**
      * @var array
      *
@@ -62,6 +76,15 @@ class UserHasTeams
      */
     private $user;
 
+    /**
+     * UserHasTeams constructor.
+     */
+    public function __construct()
+    {
+        $this->creationDate = new \DateTime('now');
+        $this->lastUpdate = new \DateTime('now');
+        $this->roles = [self::ROLE_TEAM_MEMBER];
+    }
 
 
     /**

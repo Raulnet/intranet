@@ -18,6 +18,7 @@ class TeamsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $team = $em->getRepository('FfjvBoBundle:Teams')->find($teamId);
+        $teamMembers = $em->getRepository('FfjvBoBundle:UserHasTeams')->findBy(['team' => $team]);
         $editForm = $this->getFormTeamEdit($team);
         $deleteForm = $this->getDeleteForm($team);
         $contactForm = $this->getContactForm($this->generateUrl('fo_teams_clubs_contact', ['teamId' => $teamId]), array(
@@ -25,10 +26,11 @@ class TeamsController extends Controller
             'club' => $team->getClub()->getId()
         ));
         return $this->render('FfjvFoBundle:Teams:show.html.twig', [
-            'team' => $team,
-            'editForm' => $editForm->createView(),
-            'deleteForm' => $deleteForm->createView(),
-            'contact_form' => $contactForm->createView()
+            'team'          => $team,
+            'editForm'      => $editForm->createView(),
+            'deleteForm'    => $deleteForm->createView(),
+            'contact_form'  => $contactForm->createView(),
+            'members'       => $teamMembers
         ]);
     }
 
