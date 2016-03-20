@@ -31,6 +31,7 @@ class createAdminCommand extends ContainerAwareCommand
         $data = true;
         $password = $input->getArgument('password');
         $email = $input->getArgument('email');
+
         if(!$password){
             $data = false;
             $output->writeln('<error>password not provided.</error>');
@@ -48,9 +49,6 @@ class createAdminCommand extends ContainerAwareCommand
             $output->writeln('<error>Administrator already created !!!</error>');
             exit();
         }
-        $encoder = $this->getContainer()->get('security.password_encoder');
-        $encoded = $encoder->encodePassword($user, $user->getPassword());
-        $user->setPassword($encoded);
         $user->setEmail($email);
         $user->setUsername(self::ADMIN_USERNAME);
         $user->setFirstName('Ffjv');
@@ -67,6 +65,10 @@ class createAdminCommand extends ContainerAwareCommand
         $user->setZipCode('01000');
         $user->setCity('admin');
         $user->setCountryAddress('admin');
+        
+        $encoder = $this->getContainer()->get('security.password_encoder');
+        $encoded = $encoder->encodePassword($user, $password);
+        $user->setPassword($encoded);
 
         $userService->saveUserEntity($user);
         $output->writeln('<info>Administrator inserer</info>');
