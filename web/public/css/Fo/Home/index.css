@@ -39,4 +39,11 @@ header .jumbotron .btn{
     height:500px;
 }
 
+.footer{
+    margin-top: 15px;
+    min-height: 100px;
+    box-shadow: 1px -1px 3px rgba(0,0,0,0.1);
+    border-top: 1px solid lightgrey;
+}
+
 

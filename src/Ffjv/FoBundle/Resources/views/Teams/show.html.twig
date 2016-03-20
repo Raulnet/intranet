@@ -126,6 +126,11 @@
                                                         </td>
                                                         <td>{{ member.user.registerDate|date('Y-m-d H:i:s') }}</td>
                                                         <td>{{ member.user.lastUpdate|date('Y-m-d H:i:s') }}</td>
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <a href="{{ path('fo_user_has_teams_edit_member', {"memberId": member.id, "teamId": team.id}) }}" class="btn btn-success btn-xs">editer</a><a href="{{ path('fo_user_has_teams_remove_member', {"memberId": member.id, "teamId": team.id}) }}" class="btn btn-danger btn-xs">remove</a>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                 {% endfor %}
                                                 </tbody>

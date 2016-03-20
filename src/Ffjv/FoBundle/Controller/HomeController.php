@@ -12,10 +12,6 @@ class HomeController extends Controller
      */
     public function indexAction()
     {
-        // TODO PREVOIRE LA REFONTE DU DESIGN DU FRONT
-        // TODO REFAIRE LE DESIGN DU BO EN SUIVANT LES NOUVELLES FOCNTIONNALITER
-        // TODO UN ADMIN DE CLUB PEU LUI MÊME CREER C'EST ADHERANT, C'EST TEAM
-
         return $this->render('@FfjvFo/Home/index.html.twig', array());
     }
 
@@ -47,7 +43,7 @@ class HomeController extends Controller
             $listClubs[] = array(
                 'id' => $club->getId(),
                 'title' => $club->getTitle(),
-                'url'   => $this->generateUrl('clubs_show', array('id' => $club->getId()))
+                'url'   => $this->generateUrl('fo_clubs_show', array('clubId' => $club->getId()))
             );
         }
         return new JsonResponse($listClubs);

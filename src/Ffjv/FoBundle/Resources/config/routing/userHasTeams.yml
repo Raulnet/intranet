@@ -3,10 +3,23 @@ fo_user_has_teams_select_member:
     defaults: { _controller: FfjvFoBundle:UserHasTeams:selectMember }
 
 fo_user_has_teams_set_member:
-    path:     /parametrer/{clubMemberId}/{teamId}
+    path:     /ajouter/{clubMemberId}/{teamId}
     defaults: { _controller: FfjvFoBundle:UserHasTeams:setMemberTeam }
+
+fo_user_has_teams_edit_member:
+    path:     /editer/{memberId}/{teamId}/
+    defaults: { _controller: FfjvFoBundle:UserHasTeams:editMember }
 
 fo_user_has_teams_add_member:
     path:     /ajouter/{teamId}/
     defaults: { _controller: FfjvFoBundle:UserHasTeams:addMember }
     methods: POST
+
+fo_user_has_teams_update_member:
+    path:     /update/{teamId}/
+    defaults: { _controller: FfjvFoBundle:UserHasTeams:updateMember }
+    methods: POST
+
+fo_user_has_teams_remove_member:
+    path:     /retirer/{memberId}/{teamId}/
+    defaults: { _controller: FfjvFoBundle:UserHasTeams:removeMember }

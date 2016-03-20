@@ -29,18 +29,18 @@
         <h3>Qu’est ce que l’espace membre ?</h3>
         <p>En tant que club ou joueur affilié à la FFJV, vous bénéficiez d’un accès exclusif à l’espace membre de la Fédération. Cet outil sera pour ses utilisateurs une vraie place d’échange, où chacun pourra avoir accès, en fonction de son statut (manager, eSporteur, ...) aux données des licences le concernant.</p>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-12">
         <h3>Où nous trouver ?</h3>
-        <p>Représenter le nombre de licenciés par département par des ronds bleus. -> Rond de diamètre différents en fonction du nombre de licenciés. Représenter le nombre de clubs par département par des ronds rouges. -> Zoom possible : quand on clique on voit le nom des clubs.</p>
+
     </div>
-    <div class="col-sm-8">
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#players" aria-controls="players" role="tab" data-toggle="tab">Players</a></li>
-            <li role="presentation"> <a href="#clubs" aria-controls="clubs" role="tab" data-toggle="tab">Clubs</a></li>
-        </ul>
-        <div id="panel_map" class="tab-content" data-url="{{ path('ffjv_fo_home_colors') }}">
-            <div role="tabpanel" class="tab-pane active" id="players">
-                <div id="francemap_players"  data-type="players"></div>
+    <div class="row">
+    <div id="panel_map" class="col-sm-12" data-url="{{ path('ffjv_fo_home_colors') }}">
+        <div class="col-sm-6">
+            <div class="panel panel-info" id="players">
+                <div class="panel-heading">Licenciers</div>
+                <div class="panel-body">
+                    <div id="francemap_players"  data-type="players"></div>
+                </div>
                 {# ##### MODAL PLAYERS ##### #}
                 <div class="modal fade" id="modal_players" tabindex="-1" role="dialog" aria-labelledby="modal_players_label">
                     <div class="modal-dialog" role="document">
@@ -58,8 +58,13 @@
                     </div>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="clubs">
-                <div id="francemap_clubs" data-url="{{ path('ffjv_fo_home_colors') }}" data-type="clubs"></div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-danger" id="clubs">
+                <div class="panel-heading">Clubs</div>
+                <div class="panel-body">
+                    <div id="francemap_clubs" data-url="{{ path('ffjv_fo_home_colors') }}" data-type="clubs"></div>
+                </div>
                 {# ##### MODAL CLUBS ##### #}
                 <div class="modal fade" id="modal_clubs" tabindex="-1" role="dialog" aria-labelledby="modal_clubs_label" data-url="{{ path('ffjv_fo_home_findclubs') }}">
                     <div class="modal-dialog" role="document">
@@ -79,7 +84,15 @@
                 </div>
                 {# ##### ./MODAL CLUBS ##### #}
             </div>
+        </div>
+    </div>
+        </div>
+{% endblock %}
+{% block footer %}
+    <div class="footer">
+        <div class="container">
 
         </div>
     </div>
+
 {% endblock %}
