@@ -1,0 +1,12 @@
+fo_user_has_teams_select_member:
+    path:     /selectionner/{teamId}
+    defaults: { _controller: FfjvFoBundle:UserHasTeams:selectMember }
+
+fo_user_has_teams_set_member:
+    path:     /parametrer/{clubMemberId}/{teamId}
+    defaults: { _controller: FfjvFoBundle:UserHasTeams:setMemberTeam }
+
+fo_user_has_teams_add_member:
+    path:     /ajouter/{teamId}/
+    defaults: { _controller: FfjvFoBundle:UserHasTeams:addMember }
+    methods: POST

@@ -1,0 +1,45 @@
+<!-- Header Navbar: style can be found in header.less -->
+<nav class="navbar navbar-static-top" role="navigation">
+    <!-- Sidebar toggle button-->
+    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+    </a>
+    <!-- Navbar Right Menu -->
+    <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+            <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="{{ asset('public/img/logo/logo_ffjv.png') }}" class="user-image" alt="User Image">
+                    <span class="hidden-xs">{{ app.user.firstname }} {{ app.user.lastname }}</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <!-- User image -->
+                    <li class="user-header">
+                        <img src="{{ asset('public/img/logo/logo_ffjv.png') }}" class="img-circle" alt="User Image">
+                        <p>{{ app.user.firstname }} {{ app.user.lastname }}
+                            <small>Member since {{ app.user.registerDate|date('M Y') }}</small>
+                        </p>
+                    </li>
+                    <!-- Menu Body -->
+                    <li class="user-body">
+                        <div class="col-xs-6 text-center">
+                            <a href="#">Clubs</a>
+                        </div>
+                        <div class="col-xs-6 text-center">
+                            <a href="#">Teams</a>
+                        </div>
+                    </li>
+                    <!-- Menu Footer-->
+                    <li class="user-footer">
+                        <div class="pull-left">
+                            <a href="{{ path('user_show', {'id': app.user.id}) }}" class="btn btn-default btn-flat">Profile</a>
+                        </div>
+                        <div class="pull-right">
+                            <a href="{{ path('logout') }}" class="btn btn-default btn-flat">Log out</a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
