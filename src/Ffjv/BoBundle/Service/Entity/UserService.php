@@ -10,6 +10,7 @@ namespace Ffjv\BoBundle\Service\Entity;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Ffjv\BoBundle\Entity\User;
 
 class UserService {
 
@@ -97,6 +98,18 @@ class UserService {
             return $zipCode;
         }
         return substr($zipCode, 0, 2);
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function saveUserEntity(User $user){
+        
+        $this->em->persist($user);
+        $this->em->flush();
+        return true;        
+        
     }
 
 }
