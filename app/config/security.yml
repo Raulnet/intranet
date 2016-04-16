@@ -44,4 +44,8 @@ security:
 
     access_control:
         - { path: ^/profile, roles:  ROLE_USER_CONFIRMED }
+        - { path: ^/clubs, roles:  ROLE_USER_CONFIRMED }
+        - { path: ^/members, roles:  ROLE_USER_CONFIRMED }
+        - { path: ^/club, roles:  ROLE_USER_CONFIRMED }
+        - { path: ^/team, roles:  ROLE_USER_CONFIRMED }
         - { path: ^/administration, roles: ROLE_ADMIN }
