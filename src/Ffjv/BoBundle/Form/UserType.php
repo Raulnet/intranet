@@ -41,12 +41,12 @@ class UserType extends AbstractType
             ->add('birthday', 'birthday', array(
                 'attr' => array('class' => 'form-control-date')
             ))
-            ->add('telFix', 'integer', array(
-                'attr' => array('class' => 'form-control'),
+            ->add('telFix', 'text', array(
+                'attr' => array('class' => 'form-control', 'max' => 20),
                 'required' => false,
             ))
-            ->add('telMobile', 'integer', array(
-                'attr' => array('class' => 'form-control'),
+            ->add('telMobile', 'text', array(
+                'attr' => array('class' => 'form-control', 'max' => 20),
                 'required' => false,
             ))
             ->add('gender', 'choice', array(

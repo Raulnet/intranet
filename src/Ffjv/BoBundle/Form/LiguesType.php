@@ -67,14 +67,14 @@ class LiguesType extends AbstractType
                 'required' => false,
                 'attr' => array(
                     'placeholder' => 'Téléphone fix de la ligue',
-                    'class' => 'form-control')
+                    'class' => 'form-control', 'max' => 20)
             ))
             ->add('telMobile', 'integer', array(
                 'label' => 'Tel. Mobile ',
                 'required' => false,
                 'attr' => array(
                     'placeholder' => 'Téléphone mobile de la ligue',
-                    'class' => 'form-control')
+                    'class' => 'form-control', 'max' => 20)
             ))
             ->add('address1', 'text', array(
                 'label' => 'Adresse ',

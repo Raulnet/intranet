@@ -16,6 +16,8 @@ $(document).ready(function() {
 
     });
 
+    var countPlayer = [];
+
 
     function findColors(url){
 
@@ -26,8 +28,9 @@ $(document).ready(function() {
                 type: 'map'
             },
             success: function (response) {
-               colorMapPlayers(response.players);
+               colorMapPlayers(response.players.color);
                colorMapClubs(response.clubs);
+                countPlayer = response.players.count;
             }
         })
     }
@@ -45,7 +48,7 @@ $(document).ready(function() {
             onRegionClick: function(element, code, region)
             {
                 $('#modal_players_label').html("Players "+region+" - "+code);
-                $('#modal_players_content').html('contenus');
+                $('#modal_players_content').html('<p style="color: #00acd6; font-size: 20px"><i class="glyphicon glyphicon-user" ></i> '+ countPlayer[code]+'</p>');
                 $('#modal_players').modal('toggle');
             }
         });

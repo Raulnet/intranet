@@ -11,3 +11,10 @@
             <p>vous ête maintenant enregistrer ! Veuillez confirmer votre adresse email . <br />Si vous n'avez pas reçus d'email {{ form(form) }}</p>
         </div>
      {% endblock %}
+{% bloc customJS %}
+<script>
+    setTimeout(function() {
+        window.location.replace("{{ path('logout') }}");
+    }, 10000);
+</script>
+{% endblock %}

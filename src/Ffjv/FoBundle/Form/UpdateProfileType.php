@@ -36,11 +36,11 @@ class UpdateProfileType extends AbstractType
                 'attr' => array('class' => 'form-control-date')
             ))
             ->add('telFix', 'number', array(
-                'attr' => array('class' => 'form-control'),
+                'attr' => array('class' => 'form-control', 'max' => 20),
                 'required' => false,
             ))
-            ->add('telMobile', 'number', array(
-                'attr' => array('class' => 'form-control'),
+            ->add('telMobile', 'text', array(
+                'attr' => array('class' => 'form-control', 'max' => 20),
                 'required' => false,
             ))
             ->add('gender', 'choice', array(

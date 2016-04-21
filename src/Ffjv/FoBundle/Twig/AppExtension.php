@@ -26,6 +26,7 @@ class AppExtension extends \Twig_Extension
     {
         $roles = UserHasClubs::$listRoles;
         $roles['ROLE_AUTHOR'] = 'auteur';
+        $roles['ROLE_USER'] = 'enregistrer';
         $roles['ROLES_REQUEST_TO_JOIN'] = 'postulant';
         return$roles[$role];
     }

@@ -60,7 +60,8 @@ class HomeController extends Controller
     {
         $colors = array();
         foreach ($counts as $count) {
-            $colors[$count['idZipCode']] = $this->getColorByCount($count['count_zipcode']);
+            $colors['color'][$count['idZipCode']] = $this->getColorByCount($count['count_zipcode']);
+            $colors['count'][$count['idZipCode']] = $count['count_zipcode'];
         }
 
         return $colors;

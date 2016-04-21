@@ -77,14 +77,14 @@ class User implements UserInterface
     /**
      * @var integer
      *
-     * @ORM\Column(name="usr_tel_mobile", type="integer", nullable=true)
+     * @ORM\Column(name="usr_tel_mobile", type="string", length=20, nullable=true)
      */
     private $telMobile;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="usr_tel_fix", type="integer", nullable=true)
+     * @ORM\Column(name="usr_tel_fix", type="string", length=20, nullable=true)
      */
     private $telFix;
 

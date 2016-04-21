@@ -79,14 +79,14 @@ class Clubs
     /**
      * @var integer
      *
-     * @ORM\Column(name="clu_tel_fix", type="integer", nullable=true)
+     * @ORM\Column(name="clu_tel_fix", type="string", length=20, nullable=true)
      */
     private $telFix;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="clu_tel_mobile", type="integer", nullable=true)
+     * @ORM\Column(name="clu_tel_mobile", type="string", length=20, nullable=true)
      */
     private $telMobile;
 

@@ -61,19 +61,21 @@ class ClubsType extends AbstractType
                     'placeholder' => 'Email de l\'association',
                     'class' => 'form-control')
             ))
-            ->add('telFix', 'integer', array(
+            ->add('telFix', 'text', array(
                 'label' => 'Tel. Fix ',
                 'required' => false,
                 'attr' => array(
                     'placeholder' => 'Téléphone fix de l\'association',
-                    'class' => 'form-control')
+                    'class' => 'form-control',
+                    'max' => 20)
             ))
-            ->add('telMobile', 'integer', array(
+            ->add('telMobile', 'text', array(
                 'label' => 'Tel. Mobile ',
                 'required' => false,
                 'attr' => array(
                     'placeholder' => 'Téléphone mobile de l\'association',
-                    'class' => 'form-control')
+                    'class' => 'form-control',
+                    'max' => 20)
             ))
             ->add('country', 'choice', array(
                 'empty_value' => 'Séléctionner le pays de l\'association',
