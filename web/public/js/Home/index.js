@@ -29,7 +29,7 @@ $(document).ready(function() {
             },
             success: function (response) {
                colorMapPlayers(response.players.color);
-               colorMapClubs(response.clubs);
+               colorMapClubs(response.clubs.color);
                 countPlayer = response.players.count;
             }
         })
