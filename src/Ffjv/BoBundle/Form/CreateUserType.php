@@ -60,7 +60,7 @@ class CreateUserType extends AbstractType
                     'BE' => 'Belge',
                     'CH' => 'Suisse'
                 ),
-                'empty_value' => 'Séléctionner votre nationalité',
+                'placeholder' => 'Séléctionner votre nationalité',
                 'attr' => array('class' => 'form-control')
             ))
             ->add('firstName', null, array(
@@ -101,7 +101,7 @@ class CreateUserType extends AbstractType
                     'BE' => 'Belgique',
                     'CH' => 'Suisse'
                 ),
-                'empty_value' => 'Séléctionner votre pays',
+                'placeholder' => 'Séléctionner votre pays',
                 'attr' => array('class' => 'form-control')
             ));
 

@@ -7,156 +7,158 @@
         <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Home/register.css') }}">
     {% endblock %}
     {% block content %}
-        <h2 class="text-center">{{ block('title') }}</h2>
-        {% for flashMessage in app.session.flashbag.get('success') %}
-            <div class="alert alert-success">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-        <div class="well">
-            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-            <div class="col-md-6">
-                <div class="form-group">
-                    {{ form_label(form.username, 'Utilisateur*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
-                    <div class="col-sm-10">
-                        {{ form_widget(form.username) }}
-                        {{ form_errors(form.username) }}
-                    </div>
+        <div class="main-wrapper">
+            <h4 class="text-center">{{ block('title') }}</h4>
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">
+                    {{ flashMessage }}
                 </div>
-                <div class="form-group">
-                    {{ form_label(form.firstName, 'Prenom*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
-                    <div class="col-sm-10">
-                        {{ form_widget(form.firstName) }}
+            {% endfor %}
+            <div class="well z-depth-1">
+                {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form_label(form.username, 'Utilisateur*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                        <div class="col-sm-10">
+                            {{ form_widget(form.username) }}
+                            {{ form_errors(form.username) }}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.lastName, 'Nom*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
-                    <div class="col-sm-10">
-                        {{ form_widget(form.lastName) }}
+                    <div class="form-group">
+                        {{ form_label(form.firstName, 'Prenom*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                        <div class="col-sm-10">
+                            {{ form_widget(form.firstName) }}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.birthday, 'Date de Naissance*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
-                    <div class="col-sm-10">
-                        {{ form_widget(form.birthday) }}
+                    <div class="form-group">
+                        {{ form_label(form.lastName, 'Nom*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                        <div class="col-sm-10">
+                            {{ form_widget(form.lastName) }}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.nationality, 'Nationalité', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
-                    <div class="col-sm-10">
-                        {{ form_widget(form.nationality) }}
+                    <div class="form-group">
+                        {{ form_label(form.birthday, 'Date de Naissance*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                        <div class="col-sm-10">
+                            {{ form_widget(form.birthday) }}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.gender, 'Genre*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
-                    <div class="col-sm-10">
-                        {{ form_widget(form.gender) }}
+                    <div class="form-group">
+                        {{ form_label(form.nationality, 'Nationalité', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                        <div class="col-sm-10">
+                            {{ form_widget(form.nationality) }}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.email, 'Email*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
-                    <div class="col-sm-10">
-                        {{ form_widget(form.email) }}
-                        {{ form_errors(form.email) }}
+                    <div class="form-group">
+                        {{ form_label(form.gender, 'Genre*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                        <div class="col-sm-10">
+                            {{ form_widget(form.gender) }}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.telFix, 'Tel fix', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
-                    <div class="col-sm-10">
-                        {{ form_widget(form.telFix) }}
+                    <div class="form-group">
+                        {{ form_label(form.email, 'Email*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                        <div class="col-sm-10">
+                            {{ form_widget(form.email) }}
+                            {{ form_errors(form.email) }}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.telMobile, 'Tel mobile', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
-                    <div class="col-sm-10">
-                        {{ form_widget(form.telMobile) }}
+                    <div class="form-group">
+                        {{ form_label(form.telFix, 'Tel fix', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                        <div class="col-sm-10">
+                            {{ form_widget(form.telFix) }}
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    {{ form_label(form.password.first, 'Password*', { 'label_attr':  {'class': 'col-sm-2 control-label'}}) }}
-                    <div class="col-sm-10">
-                        {{ form_widget(form.password.first, {'attr': {'class': 'form-control', 'placeholder': 'password'}}) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.password.second, 'Repeat-Password*', { 'label_attr':  {'class': 'col-sm-2 control-label'}}) }}
-                    <div class="col-sm-10">
-                        {{ form_widget(form.password.second, {'attr': {'class': 'form-control', 'placeholder': 'repeat-password'}}) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.address1, 'Adresse*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
-                    <div class="col-sm-10">
-                        {{ form_widget(form.address1) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.address2, 'Adresse sup.', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
-                    <div class="col-sm-10">
-                        {{ form_widget(form.address2) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.zipCode, 'Code postal*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
-                    <div class="col-sm-10">
-                        {{ form_widget(form.zipCode) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.city, 'Ville*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
-                    <div class="col-sm-10">
-                        {{ form_widget(form.city) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.countryAddress, 'Pays*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
-                    <div class="col-sm-10">
-                        {{ form_widget(form.countryAddress) }}
-                    </div>
-                </div>
-                {# ****** CGU_MODAL ****** #}
-                <div class="modal fade" id="cgu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Conditions général d'utilisation</h4>
-                            </div>
-                            <div class="modal-body">
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam deserunt dignissimos dolor enim expedita, fuga iure nisi nulla provident ratione suscipit. Aliquam eligendi et libero necessitatibus ratione repudiandae, vitae!</p>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam deserunt dignissimos dolor enim expedita, fuga iure nisi nulla provident ratione suscipit. Aliquam eligendi et libero necessitatibus ratione repudiandae, vitae!</p>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam deserunt dignissimos dolor enim expedita, fuga iure nisi nulla provident ratione suscipit. Aliquam eligendi et libero necessitatibus ratione repudiandae, vitae!</p>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam deserunt dignissimos dolor enim expedita, fuga iure nisi nulla provident ratione suscipit. Aliquam eligendi et libero necessitatibus ratione repudiandae, vitae!</p>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam deserunt dignissimos dolor enim expedita, fuga iure nisi nulla provident ratione suscipit. Aliquam eligendi et libero necessitatibus ratione repudiandae, vitae!</p>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam deserunt dignissimos dolor enim expedita, fuga iure nisi nulla provident ratione suscipit. Aliquam eligendi et libero necessitatibus ratione repudiandae, vitae!</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
+                    <div class="form-group">
+                        {{ form_label(form.telMobile, 'Tel mobile', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                        <div class="col-sm-10">
+                            {{ form_widget(form.telMobile) }}
                         </div>
                     </div>
                 </div>
-                {# ****** ./CGU_MODAL ****** #}
-                {# ****** CGU_FORM ****** #}
-                <div class="form-group">
-                    <label class="col-xs-2 label_title" for="cgu"><a data-toggle="modal" data-target="#cgu">CGU*</a></label>
-                    <div class="col-xs-10">
-                        {{ form_widget(form.cgu) }}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form_label(form.password.first, 'Password*', { 'label_attr':  {'class': 'col-sm-2 control-label'}}) }}
+                        <div class="col-sm-10">
+                            {{ form_widget(form.password.first, {'attr': {'class': 'form-control', 'placeholder': 'password'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.password.second, 'Repeat-Password*', { 'label_attr':  {'class': 'col-sm-2 control-label'}}) }}
+                        <div class="col-sm-10">
+                            {{ form_widget(form.password.second, {'attr': {'class': 'form-control', 'placeholder': 'repeat-password'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.address1, 'Adresse*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                        <div class="col-sm-10">
+                            {{ form_widget(form.address1) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.address2, 'Adresse sup.', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                        <div class="col-sm-10">
+                            {{ form_widget(form.address2) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.zipCode, 'Code postal*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                        <div class="col-sm-10">
+                            {{ form_widget(form.zipCode) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.city, 'Ville*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                        <div class="col-sm-10">
+                            {{ form_widget(form.city) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.countryAddress, 'Pays*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                        <div class="col-sm-10">
+                            {{ form_widget(form.countryAddress) }}
+                        </div>
+                    </div>
+                    {# ****** CGU_MODAL ****** #}
+                    <div class="modal fade" id="cgu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Conditions général d'utilisation</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam deserunt dignissimos dolor enim expedita, fuga iure nisi nulla provident ratione suscipit. Aliquam eligendi et libero necessitatibus ratione repudiandae, vitae!</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam deserunt dignissimos dolor enim expedita, fuga iure nisi nulla provident ratione suscipit. Aliquam eligendi et libero necessitatibus ratione repudiandae, vitae!</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam deserunt dignissimos dolor enim expedita, fuga iure nisi nulla provident ratione suscipit. Aliquam eligendi et libero necessitatibus ratione repudiandae, vitae!</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam deserunt dignissimos dolor enim expedita, fuga iure nisi nulla provident ratione suscipit. Aliquam eligendi et libero necessitatibus ratione repudiandae, vitae!</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam deserunt dignissimos dolor enim expedita, fuga iure nisi nulla provident ratione suscipit. Aliquam eligendi et libero necessitatibus ratione repudiandae, vitae!</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam deserunt dignissimos dolor enim expedita, fuga iure nisi nulla provident ratione suscipit. Aliquam eligendi et libero necessitatibus ratione repudiandae, vitae!</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {# ****** ./CGU_MODAL ****** #}
+                    {# ****** CGU_FORM ****** #}
+                    <div class="form-group">
+                        <label class="col-xs-2 label_title" for="cgu"><a data-toggle="modal" data-target="#cgu">CGU*</a></label>
+                        <div class="col-xs-10">
+                            {{ form_widget(form.cgu) }}
+                        </div>
+                    </div>
+                    {# ****** ./CGU_FORM ****** #}
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            {{ form_row(form.submit, {'attr': {'class': 'btn btn-success col-sm-3 col-xs-12'}}) }}
+                            <p class="pull-right">*champ obligatoire</p>
+                        </div>
                     </div>
                 </div>
-                {# ****** ./CGU_FORM ****** #}
+                {{ form_end(form) }}
+                <div class="clearfix"></div>
             </div>
-            <div class="col-md-12">
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        {{ form_row(form.submit, {'attr': {'class': 'btn btn-success col-sm-3 col-xs-12'}}) }}
-                        <p class="pull-right">*champ obligatoire</p>
-                    </div>
-                </div>
-            </div>
-            {{ form_end(form) }}
-            <div class="clearfix"></div>
         </div>
     {% endblock %}

@@ -2,13 +2,13 @@
 {% block title %}FFJV - Intranet{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{ asset('public/lib/bootstrap/css/bootstrap.min.css') }}">
-    {#<link rel="stylesheet" type="text/css" href="{{ asset('public/lib/bootstrap/css/bootstrap-theme.min.css') }}">#}
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/mdb.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/lib/noty/css/animate.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/main.css') }}">
     {% block customCSS %}{% endblock %}
 {% endblock %}
 {% block javascripts %}
-    <script src="{{ asset('public/lib/jQuery/jquery-1.11.2.min.js') }}"></script>
+    <script src="{{ asset('public/lib/jQuery/jQuery-2.1.4.min.js') }}"></script>
     <script src="{{ asset('public/lib/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('public/lib/noty/js/noty/packaged/jquery.noty.packaged.min.js') }}"></script>
     {% block customJS %}{% endblock %}

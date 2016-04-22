@@ -11,7 +11,7 @@
     <script src="{{ asset('public/js/Home/index.js') }}" type="text/javascript"></script>
 {% endblock %}
 {% block header %}
-    <header>
+    <header class="z-depth-1">
         <div class="jumbotron">
             <div class="container">
                 <h1>BIENVENUE SUR VOTRE ESPACE MEMBRE FFJV</h1>
@@ -26,67 +26,66 @@
 {% endblock %}
 {% block content %}
     <div class="col-xs-12">
-        <h3>Qu’est ce que l’espace membre ?</h3>
+        <h4>Qu’est ce que l’espace membre ?</h4>
         <p>En tant que club ou joueur affilié à la FFJV, vous bénéficiez d’un accès exclusif à l’espace membre de la Fédération. Cet outil sera pour ses utilisateurs une vraie place d’échange, où chacun pourra avoir accès, en fonction de son statut (manager, eSporteur, ...) aux données des licences le concernant.</p>
     </div>
     <div class="col-sm-12">
-        <h3>Où nous trouver ?</h3>
-
+        <h4>Où nous trouver ?</h4>
     </div>
     <div class="row">
-    <div id="panel_map" class="col-sm-12" data-url="{{ path('ffjv_fo_home_colors') }}">
-        <div class="col-sm-6">
-            <div class="panel panel-info" id="players">
-                <div class="panel-heading">Licenciers</div>
-                <div class="panel-body">
-                    <div id="francemap_players"  data-type="players"></div>
-                </div>
-                {# ##### MODAL PLAYERS ##### #}
-                <div class="modal fade" id="modal_players" tabindex="-1" role="dialog" aria-labelledby="modal_players_label">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="modal_players_label">Modal Players</h4>
-                            </div>
-                            <div id="modal_players_content" class="modal-body">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <div id="panel_map" class="col-sm-12" data-url="{{ path('ffjv_fo_home_colors') }}">
+            <div class="col-sm-6">
+                <div class="panel panel-primary z-depth-1" id="players">
+                    <div class="panel-heading">Licenciers</div>
+                    <div class="panel-body">
+                        <div id="francemap_players"  data-type="players"></div>
+                    </div>
+                    {# ##### MODAL PLAYERS ##### #}
+                    <div class="modal fade" id="modal_players" tabindex="-1" role="dialog" aria-labelledby="modal_players_label">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="modal_players_label">Modal Players</h4>
+                                </div>
+                                <div id="modal_players_content" class="modal-body">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="panel panel-danger" id="clubs">
-                <div class="panel-heading">Clubs</div>
-                <div class="panel-body">
-                    <div id="francemap_clubs" data-url="{{ path('ffjv_fo_home_colors') }}" data-type="clubs"></div>
-                </div>
-                {# ##### MODAL CLUBS ##### #}
-                <div class="modal fade" id="modal_clubs" tabindex="-1" role="dialog" aria-labelledby="modal_clubs_label" data-url="{{ path('ffjv_fo_home_findclubs') }}">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="modal_clubs_label">Modal Clubs</h4>
-                            </div>
-                            <div id="modal_clubs_content" class="modal-body">
+            <div class="col-sm-6">
+                <div class="panel panel-danger z-depth-1" id="clubs">
+                    <div class="panel-heading">Clubs</div>
+                    <div class="panel-body">
+                        <div id="francemap_clubs" data-url="{{ path('ffjv_fo_home_colors') }}" data-type="clubs"></div>
+                    </div>
+                    {# ##### MODAL CLUBS ##### #}
+                    <div class="modal fade" id="modal_clubs" tabindex="-1" role="dialog" aria-labelledby="modal_clubs_label" data-url="{{ path('ffjv_fo_home_findclubs') }}">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="modal_clubs_label">Modal Clubs</h4>
+                                </div>
+                                <div id="modal_clubs_content" class="modal-body">
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {# ##### ./MODAL CLUBS ##### #}
                 </div>
-                {# ##### ./MODAL CLUBS ##### #}
             </div>
         </div>
     </div>
-        </div>
 {% endblock %}
 {% block footer %}
     <div class="footer">
