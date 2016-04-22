@@ -35,11 +35,4 @@ class AppKernel extends Kernel
     {
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
     }
-
-    public function init()
-    {
-        // get rid of Warning: date_default_timezone_get(): It is not safe to rely on the system's timezone
-        date_default_timezone_set( 'Europe/Paris' );
-        parent::init();
-    }
 }

@@ -19,9 +19,9 @@ class UserRepository extends EntityRepository
      * @return array
      */
     public function getLastRegister($number = 10){
-
+        
         return $this->getEntityManager()->createQuery(
-            "SELECT u.id, u.username, u.registerDate, l.id as licence
+            "SELECT u.id, u.username, u.registerDate, l.licence as licence
             FROM FfjvBoBundle:User u
             LEFT JOIN u.licence l
             ORDER BY u.registerDate DESC

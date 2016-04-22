@@ -29,7 +29,7 @@ $(document).ready(function() {
             },
             success: function (response) {
                colorMapPlayers(response.players.color);
-               colorMapClubs(response.clubs);
+               colorMapClubs(response.clubs.color);
                 countPlayer = response.players.count;
             }
         })
@@ -48,7 +48,13 @@ $(document).ready(function() {
             onRegionClick: function(element, code, region)
             {
                 $('#modal_players_label').html("Players "+region+" - "+code);
-                $('#modal_players_content').html('<p style="color: #00acd6; font-size: 20px"><i class="glyphicon glyphicon-user" ></i> '+ countPlayer[code]+'</p>');
+
+                var count = 0;
+                if(countPlayer[code] != undefined){
+                    count = countPlayer[code];
+                }
+
+                $('#modal_players_content').html('<p style="color: #00acd6; font-size: 20px"><i class="glyphicon glyphicon-user" ></i> '+ count +'</p>');
                 $('#modal_players').modal('toggle');
             }
         });
