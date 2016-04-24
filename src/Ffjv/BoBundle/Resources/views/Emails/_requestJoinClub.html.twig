@@ -1,3 +1,10 @@
 {% extends('@FfjvBo/Emails/layout.html.twig') %}
-{% block email_lead %}{{ user.username }} vous transmet ce message depuis l'intranet FFJV{% endblock %}
-{% block email_content %}{{ message }}{% endblock %}
+{% block email_lead %} vous transmet ce message depuis l'intranet FFJV{% endblock %}
+{% block email_content %}
+    <p>Bonjour {{ club.user }},</p><br />
+    <p>Le joueur <a href="{{ path('fo_profile_show', {'userUsername': user.username }) }}">{{ user.username }}</a> souhaite rejoindre votre club {{ club }}.<br />
+    Vous pouvez accepter ou refuser, depuis l'intranet FFJV<br /></p>
+    <p>Nous vous souhaitons une bonne saison ! </p>
+    <p>eSportivement,</p>
+    <p>Le service Administration de la FFJV</p>
+{% endblock %}

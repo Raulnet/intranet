@@ -189,7 +189,7 @@ class Clubs
     /**
      * @var \Ffjv\BoBundle\Entity\User
      *
-     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\User", inversedBy="clubs")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="usr_id", onDelete="SET NULL")
      * })

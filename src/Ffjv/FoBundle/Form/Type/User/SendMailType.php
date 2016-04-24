@@ -4,6 +4,8 @@ namespace Ffjv\FoBundle\Form\Type\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class SendMailType extends AbstractType
 {
@@ -24,12 +26,12 @@ class SendMailType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('userId', 'hidden', array(
+            ->add('userId', HiddenType::class, array(
                 'attr' => array(
                     'value' => $this->userId
                 )
             ))
-            ->add('submit', 'submit', array(
+            ->add('submit', SubmitType::class, array(
                 'label' => 'cliquez-ici'
             ));
     }

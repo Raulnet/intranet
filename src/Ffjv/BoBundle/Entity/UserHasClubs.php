@@ -72,7 +72,7 @@ class UserHasClubs
     /**
      * @var \Ffjv\BoBundle\Entity\Clubs
      *
-     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\Clubs")
+     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\Clubs", inversedBy="members")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="clubs_id", referencedColumnName="clu_id")
      * })

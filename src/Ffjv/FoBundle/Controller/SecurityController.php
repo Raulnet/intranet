@@ -5,6 +5,11 @@ namespace Ffjv\FoBundle\Controller;
 use Ffjv\BoBundle\Entity\User;
 use Ffjv\BoBundle\Form\CreateUserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Ffjv\FoBundle\Form\Type\User\SendMailType;
@@ -214,7 +219,7 @@ class SecurityController extends Controller
                 $em->flush();
 
                 $this->addFlash('success', 'Votre mot de passe à été mis a jours.');
-                return $this->redirectToRoute('login');
+                return $this->redirectToRoute('logout');
 
             }
 
@@ -247,12 +252,14 @@ class SecurityController extends Controller
                 //persiste and flush
                 $em->persist($user);
                 $em->flush();
-                $this->sendMailToNewPassword($user->getEmail(), $activationCode);
+                $this->sendMailToNewPassword($user, $activationCode);
                 $type = 'success';
                 $message = 'Un email vous a été envoyé pour renouveller votre mot de passe.';
             } else {
                 $message = 'Cette email n\'exist pas';
             }
+            $this->addFlash($type, $message);
+            return $this->redirectToRoute('logout');
         }
 
         $this->addFlash($type, $message);
@@ -271,22 +278,22 @@ class SecurityController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('ffjv_fo_security_set_new_password'))
             ->setMethod('POST')
-            ->add('activationCode', 'hidden', array(
+            ->add('activationCode', HiddenType::class, array(
                 'attr'  => array(
                     'value' => $activationCode
                 )
             ))
-            ->add('email', 'email', array(
+            ->add('email', EmailType::class, array(
                 'label' => 'Votre email:',
                 'attr'  => array(
                     'class' => 'form-control'
                 )
             ))
-            ->add('birthday', 'birthday', array(
+            ->add('birthday', BirthdayType::class, array(
                 'label' => 'Votre date de naissance:',
                 'attr' => array('class' => 'form-control-date')
             ))
-            ->add('password', 'repeated', array(
+            ->add('password', RepeatedType::class, array(
                 'type'            => 'password',
                 'invalid_message' => 'The password fields must match.',
                 'options'         => array('required' => true),
@@ -306,13 +313,13 @@ class SecurityController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('ffjv_fo_security_send_mail_lostpassword'))
             ->setMethod('POST')
-            ->add('email', 'email', array(
+            ->add('email', EmailType::class, array(
                 'label' => 'Votre email:',
                 'attr'  => array(
                     'class' => 'form-control'
                 )
             ))
-            ->add('submit', 'submit', array('label' => 'Envoyer', 'attr' => array('class' => 'btn btn-sm btn-success')))
+            ->add('submit', SubmitType::class, array('label' => 'Envoyer', 'attr' => array('class' => 'btn btn-success')))
             ->getForm();
     }
 
@@ -340,7 +347,7 @@ class SecurityController extends Controller
             'action' => $this->generateUrl('ffjv_fo_security_createuser'),
             'method' => 'POST'
         ));
-        $registerForm->add('submit', 'submit', array(
+        $registerForm->add('submit', SubmitType::class, array(
             'label' => 'enregistrer'
         ));
         return $registerForm;
@@ -369,12 +376,11 @@ class SecurityController extends Controller
     }
 
     /**
-     * @param string    $email
-     * @param string    $activationCode
-     *
+     * @param User $user
+     * @param $activationCode
      * @return bool
      */
-    private function sendMailToNewPassword($email, $activationCode){
+    private function sendMailToNewPassword(User $user, $activationCode){
 
         $message = \Swift_Message::newInstance()
             ->setSubject('FFjv Nouveau mot de passe')
@@ -383,7 +389,7 @@ class SecurityController extends Controller
             ->setBody(
                 $this->renderView('@FfjvFo/Emails/newPassword.html.twig',
                     array('code' => $activationCode,
-                        'email' => $email)
+                        'user' => $user)
                 ),
                 'text/html'
             );

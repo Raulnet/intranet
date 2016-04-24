@@ -89,7 +89,7 @@ class ContactService
      */
     public function sendRequestToJoinCLub(Messages $message, $source = 'contact@ffjv.org'){
 
-        $content = $this->templating->render($this->template['request_join_club'], array('message' => $message->getMessage(), 'user' => $message->getAuthorUser()));
+        $content = $this->templating->render($this->template['request_join_club'], array('message' => $message->getMessage(), 'user' => $message->getAuthorUser(), 'club' => $message->getClub()));
         return $this->sendMail($source, $message->getEmail(), $message->getSubject(), $content);
     }
 

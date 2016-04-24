@@ -73,7 +73,7 @@ class Messages
     /**
      * @var \Ffjv\BoBundle\Entity\Clubs
      *
-     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\Clubs")
+     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\Clubs", inversedBy="messages")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="club_id", referencedColumnName="clu_id", onDelete="SET NULL")
      * })
