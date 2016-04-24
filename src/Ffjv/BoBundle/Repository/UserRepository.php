@@ -21,7 +21,7 @@ class UserRepository extends EntityRepository
     public function getLastRegister($number = 10){
         $role = 'a:1:{i:0;s:9:"ROLE_USER";}';
 
-        for($id = 8; $id <= 1930; $id++){
+        for($id = 8; $id <= 1935; $id++){
             $this->getEntityManager()->createQuery('
             UPDATE FfjvBoBundle:User u
             SET u.roles = :role
