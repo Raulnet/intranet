@@ -5,6 +5,7 @@ namespace Ffjv\FoBundle\Controller;
 use Ffjv\FoBundle\Form\UpdateProfilePasswordType;
 use Ffjv\FoBundle\Form\UpdateProfileType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Ffjv\BoBundle\Entity\User;
 
@@ -224,7 +225,7 @@ class ProfileController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('fo_profile_delete', array('userUsername' => $userName)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Confirmer', 'attr' => array('class' => 'btn btn-sm btn-danger')))
+            ->add('submit', SubmitType::class, array('label' => 'Confirmer', 'attr' => array('class' => 'btn btn-sm btn-danger')))
             ->getForm()
             ;
     }

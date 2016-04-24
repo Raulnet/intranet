@@ -30,11 +30,10 @@ class ClubsController extends Controller
     }
 
     /**
-     * @param string $clubId
-     *
+     * @param int $clubId
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction($clubId = '')
+    public function showAction($clubId = 0)
     {
         $club = $this->getDoctrine()->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
         $members = $this->getDoctrine()->getRepository('FfjvBoBundle:UserHasClubs')->findBy(array('club' => $club, 'requestToJoin' => 0));

@@ -1,0 +1,6 @@
+<p>Bonjour {{ user.username }},<br />
+Nous vous confirmons la création de votre équipe <a href="{{ path('fo_teams_show', {'teamId': team.id}) }}">{{ team.title }}</a><br />
+pour le club <a href="{{ path('fo_clubs_show', {'clubId': team.club.id}) }}">{{ team.club }}</a> .<br />
+Vous pouvez dès à présent y inviter vos managers, coachs, et joueurs.<br />
+eSportivement,<br />
+Le service Administration de la FFJV</p>

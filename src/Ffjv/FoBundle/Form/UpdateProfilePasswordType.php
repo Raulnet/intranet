@@ -3,6 +3,8 @@
 namespace Ffjv\FoBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -10,7 +12,7 @@ class UpdateProfilePasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('password', 'repeated', array(
+        $builder->add('password', RepeatedType::class, array(
             'type'            => 'password',
             'invalid_message' => 'The password fields must match.',
             'options'         => array('required' => true),
@@ -18,7 +20,7 @@ class UpdateProfilePasswordType extends AbstractType
             'second_options'  => array('label' => 'Repeat password'),
             'attr' => array('class' => 'form-control')
         ));
-        $builder->add('username', 'hidden', array());
+        $builder->add('username', HiddenType::class, array());
     }
 
     public function configureOptions(OptionsResolver $resolver)

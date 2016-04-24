@@ -3,6 +3,11 @@
 namespace Ffjv\FoBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -11,67 +16,68 @@ class UpdateProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', null, array(
+            ->add('username', TextType::class, array(
                 'attr' => array('class' => 'form-control')
             ))
-            ->add('email', 'email', array(
+            ->add('email', EmailType::class, array(
                 'attr' => array('class' => 'form-control')
             ))
-            ->add('nationality', 'choice', array(
+            ->add('nationality', ChoiceType::class, array(
+                'choices_as_values' => true,
                 'choices' => array(
                     'FR' => 'Français',
                     'BE' => 'Belge',
                     'CH' => 'Suisse'
                 ),
-                'empty_value' => 'Séléctionner votre nationalité',
+                'placeholder' => 'Séléctionner votre nationalité',
                 'attr' => array('class' => 'form-control')
             ))
-            ->add('firstName', null, array(
+            ->add('firstName', TextType::class, array(
                 'attr' => array('class' => 'form-control')
             ))
-            ->add('lastName', null, array(
+            ->add('lastName', TextType::class, array(
                 'attr' => array('class' => 'form-control')
             ))
-            ->add('birthday', 'birthday', array(
+            ->add('birthday', BirthdayType::class, array(
                 'attr' => array('class' => 'form-control-date')
             ))
-            ->add('telFix', 'number', array(
+            ->add('telFix', TextType::class, array(
                 'attr' => array('class' => 'form-control', 'max' => 20),
                 'required' => false,
             ))
-            ->add('telMobile', 'text', array(
+            ->add('telMobile', TextType::class, array(
                 'attr' => array('class' => 'form-control', 'max' => 20),
                 'required' => false,
             ))
-            ->add('gender', 'choice', array(
-                'choices' => array(
+            ->add('gender', ChoiceType::class, array(
+                'choices_as_values' => true,
+                'choices' => [
                     'M' => 'Homme',
                     'F' => 'Femme'
-                ),
-                'expanded' => false,
-                'multiple' => false,
+                ],
                 'attr' => array('class' => 'form-control')
             ))
-            ->add('address1', null, array(
+            ->add('address1', TextType::class, array(
                 'attr' => array('class' => 'form-control', 'placeholder' => 'adresse')
             ))
-            ->add('address2', null, array(
+            ->add('address2', TextType::class, array(
                 'attr' => array('class' => 'form-control'),
                 'required' => false,
             ))
-            ->add('zipCode', null, array(
+            ->add('zipCode', NumberType::class, array(
                 'attr' => array('class' => 'form-control', 'placeholder' => '75000')
             ))
-            ->add('city', null, array(
+            ->add('city', TextType::class, array(
                 'attr' => array('class' => 'form-control', 'placeholder' => 'Paris')
             ))
-            ->add('countryAddress', 'choice', array(
+            ->add('countryAddress', ChoiceType::class, array(
+                'choices_as_values' => true,
                 'choices' => array(
                     'FR' => 'France',
                     'BE' => 'Belgique',
                     'CH' => 'Suisse'
                 ),
-                'empty_value' => 'Séléctionner votre pays d\'adresse',
+                'placeholder' => 'Séléctionner votre pays d\'adresse',
                 'attr' => array('class' => 'form-control')
             ));
 
@@ -80,10 +86,5 @@ class UpdateProfileType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
 
-    }
-
-    public function getName()
-    {
-        return 'ffjv_fo_bundle_update_profile_type';
     }
 }
