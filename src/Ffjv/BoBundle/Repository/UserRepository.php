@@ -35,7 +35,7 @@ class UserRepository extends EntityRepository
             "SELECT u.id, u.username, u.registerDate, l.licence as licence
             FROM FfjvBoBundle:User u
             LEFT JOIN u.licence l
-            ORDER BY u.registerDate DESC
+            ORDER BY u.registerDate ASC
             "
         )->setMaxResults($number)->getArrayResult();
     }
