@@ -3,6 +3,13 @@
 namespace Ffjv\BoBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -41,20 +48,20 @@ class CreateUserType extends AbstractType
                     'class' => 'form-control',
                     'placeholder' => 'Pseudo'
                 ),
-
             ))
-            ->add('email', 'email', array(
+            ->add('email', EmailType::class, array(
                 'attr' => array('class' => 'form-control')
             ))
-            ->add('telFix', 'number', array(
+            ->add('telFix', TextType::class, array(
                 'attr' => array('class' => 'form-control'),
                 'required' => false,
             ))
-            ->add('telMobile', 'number', array(
+            ->add('telMobile', TextType::class, array(
                 'attr' => array('class' => 'form-control'),
                 'required' => false,
             ))
-            ->add('nationality', 'choice', array(
+            ->add('nationality', ChoiceType::class, array(
+                'choices_as_values' => true,
                 'choices' => array(
                     'FR' => 'Français',
                     'BE' => 'Belge',
@@ -65,15 +72,15 @@ class CreateUserType extends AbstractType
             ))
             ->add('firstName', null, array(
                 'attr' => array('class' => 'form-control', 'placeholder' => 'Prenom'),
-
             ))
             ->add('lastName', null, array(
                 'attr' => array('class' => 'form-control', 'placeholder' => 'Nom')
             ))
-            ->add('birthday', 'birthday', array(
+            ->add('birthday', BirthdayType::class, array(
                 'attr' => array('class' => 'form-control-date')
             ))
-            ->add('gender', 'choice', array(
+            ->add('gender', ChoiceType::class, array(
+                'choices_as_values' => true,
                 'choices' => array(
                     'M' => 'Homme',
                     'F' => 'Femme'
@@ -95,7 +102,8 @@ class CreateUserType extends AbstractType
             ->add('city', null, array(
                 'attr' => array('class' => 'form-control', 'placeholder' => 'Paris')
             ))
-            ->add('countryAddress', 'choice', array(
+            ->add('countryAddress', ChoiceType::class, array(
+                'choices_as_values' => true,
                 'choices' => array(
                     'FR' => 'France',
                     'BE' => 'Belgique',
@@ -106,19 +114,19 @@ class CreateUserType extends AbstractType
             ));
 
         if(!$this->generated){
-            $builder->add('password', 'repeated', array(
-                'type'            => 'password',
+            $builder->add('password', RepeatedType::class, array(
+                'type'            => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
                 'options'         => array('required' => true),
                 'first_options'   => array('label' => 'Password'),
                 'second_options'  => array('label' => 'Repeat password'),
                 'attr' => array('class' => 'form-control')
             ))
-                ->add('cgu', 'checkbox', array('attr' => array()));
+                ->add('cgu', CheckboxType::class, array('attr' => array()));
         }
 
         if(!$this->registering){
-            $builder->add('status', 'checkbox', array(
+            $builder->add('status', CheckboxType::class, array(
                 'required' => false
             ));
         }
@@ -127,10 +135,5 @@ class CreateUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
 
-    }
-
-    public function getName()
-    {
-        return 'ffjv_bo_bundle_create_user';
     }
 }

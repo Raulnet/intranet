@@ -6,7 +6,7 @@ header{
 
 header>.jumbotron{
     color: white;
-    background-image: url("http://www.gtfusion.eu/images/bandeau.jpg");
+    background-image: url("/web/public/img/bandeau.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Lato, HelveticaNeue, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;

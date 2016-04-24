@@ -34,9 +34,4 @@ class RegisterType extends AbstractType
     {
 
     }
-
-    public function getName()
-    {
-        return 'ffjv_fo_bundle_user_register';
-    }
 }
