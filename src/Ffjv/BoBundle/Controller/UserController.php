@@ -24,6 +24,8 @@ class UserController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+   
+
 
         $users = $em->getRepository('FfjvBoBundle:User')->findAll();
 
