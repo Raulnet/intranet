@@ -19,23 +19,12 @@ class UserRepository extends EntityRepository
      * @return array
      */
     public function getLastRegister($number = 10){
-        $role = 'a:1:{i:0;s:9:"ROLE_USER";}';
-
-        for($id = 8; $id <= 1935; $id++){
-            $this->getEntityManager()->createQuery('
-            UPDATE FfjvBoBundle:User u
-            SET u.roles = :role
-            WHERE u.id = :id
-            ')->setParameters(['role' => $role, 'id' => $id])->execute();
-        }
-
-
 
         return $this->getEntityManager()->createQuery(
             "SELECT u.id, u.username, u.registerDate, l.licence as licence
             FROM FfjvBoBundle:User u
             LEFT JOIN u.licence l
-            ORDER BY u.registerDate ASC
+            ORDER BY u.registerDate DESC
             "
         )->setMaxResults($number)->getArrayResult();
     }
