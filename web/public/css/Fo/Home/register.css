@@ -33,3 +33,11 @@ text-align: right;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+
+.modal-cgu{
+    padding: 20px;
+}
+
+.modal-cgu p{
+    line-height: 1.3;
+}
