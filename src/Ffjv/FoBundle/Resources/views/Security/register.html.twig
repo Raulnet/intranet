@@ -3,9 +3,22 @@
 
     {% block title %}User registering{% endblock %}
     {% block customCSS %}
+        <link type="text/css" rel="stylesheet" href="{{ asset('public/lib/bootstrap-switch/css/bootstrap-switch.min.css') }}">
         <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Home/index.css') }}">
         <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Home/register.css') }}">
+
     {% endblock %}
+{% block customJS %}
+    <script src="{{ asset('public/lib/bootstrap-switch/js/bootstrap-switch.js') }}"></script>
+    <script>
+        $.fn.bootstrapSwitch.defaults.size = 'small';
+        $.fn.bootstrapSwitch.defaults.onColor = 'primary';
+        $.fn.bootstrapSwitch.defaults.labelText = 'Accepter';
+        $.fn.bootstrapSwitch.defaults.onText = 'Oui';
+        $.fn.bootstrapSwitch.defaults.offText = 'Non';
+        $("#create_user_cgu").bootstrapSwitch();
+    </script>
+{% endblock %}
     {% block content %}
         <div class="main-wrapper">
             <h4 class="text-center">{{ block('title') }}</h4>
@@ -125,7 +138,7 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     <h4 class="modal-title" id="myModalLabel">Conditions général d'utilisation</h4>
                                 </div>
-                                <div class="modal-body modal-cgu">
+                                <div class="modal-body ">
                                     <p>Mentions légales - Conditions Générales d&#39;utilisation</p>
                                     <p>Conformément aux dispositions des articles 6-III et 19 de la loi pour la Confiance dans l&#39;Économie Numérique, nous vous informons que :</p><br />
 
@@ -157,7 +170,7 @@
                     {# ****** CGU_FORM ****** #}
                     <div class="form-group">
                         <label class="col-xs-2 label_title" for="cgu"><a data-toggle="modal" data-target="#cgu">CGU*</a></label>
-                        <div class="col-xs-10">
+                        <div id="cgu_container" class="col-xs-10">
                             {{ form_widget(form.cgu) }}
                         </div>
                     </div>

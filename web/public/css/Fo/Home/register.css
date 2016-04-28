@@ -34,9 +34,33 @@ text-align: right;
     border-bottom-right-radius: 5px;
 }
 
+.main-wrapper .bootstrap-switch, .bootstrap-switch-container{
+    border-radius: 0px;
+}
+
+#cgu_container .bootstrap-switch .bootstrap-switch-handle-on{
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+#cgu_container .bootstrap-switch .bootstrap-switch-handle-off{
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
 .modal-cgu{
     padding: 20px;
 }
+
+
 
 .modal-cgu p{
     line-height: 1.3;
