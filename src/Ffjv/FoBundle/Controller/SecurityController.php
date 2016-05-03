@@ -381,11 +381,11 @@ class SecurityController extends Controller
      * @return bool
      */
     private function sendMailToNewPassword(User $user, $activationCode){
-
+        
         $message = \Swift_Message::newInstance()
             ->setSubject('FFjv Nouveau mot de passe')
             ->setFrom('contact@ffjv.org')
-            ->setTo($email)
+            ->setTo($user->getEmail())
             ->setBody(
                 $this->renderView('@FfjvFo/Emails/newPassword.html.twig',
                     array('code' => $activationCode,
