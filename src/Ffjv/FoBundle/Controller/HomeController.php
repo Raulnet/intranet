@@ -75,10 +75,10 @@ class HomeController extends Controller
      */
     private function getColorByCount($count)
     {
-        if ($count >= 50) {
+        if ($count >= 60) {
             return "#FF1000";
         }
-        if ($count >= 25) {
+        if ($count >= 30) {
             return "#FF7000";
         }
         if ($count >= 15) {
