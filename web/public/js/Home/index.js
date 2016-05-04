@@ -102,10 +102,14 @@ $(document).ready(function() {
     }
 
     function displayClub(clubs){
+        $(".link_club").remove();
+        $('#modal_clubs_content').append('<div class="row">');
         $(clubs).each(function( key, club ) {
-            $(".link_club").remove();
-            $('#modal_clubs_content').append('<a class="link_club" href="'+club.url+'">'+club.title+'</a>');
+            $('#modal_clubs_content').append('<div class="col-xs-4"><a class="link_club" href="'+club.url+'">'+club.title+'</a></div>');
         });
+        $('#modal_clubs_content').append('<div class="clearfix"></div>');
+        $('#modal_clubs_content').append('</div>');
+
     }
 
 });
