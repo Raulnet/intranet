@@ -8,37 +8,37 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
     clubs:
-        class: Ffjv\BoBundle\Service\Entity\ClubsService
+        class: FfjvBoBundle\Service\Entity\ClubsService
         arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]
     teams:
-        class: Ffjv\BoBundle\Service\Entity\TeamsService
+        class: FfjvBoBundle\Service\Entity\TeamsService
         arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]
     user:
-        class: Ffjv\BoBundle\Service\Entity\UserService
+        class: FfjvBoBundle\Service\Entity\UserService
         arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]
     user_has_teams:
-        class: Ffjv\BoBundle\Service\Entity\UserHasTeams
+        class: FfjvBoBundle\Service\Entity\UserHasTeams
         arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]
     user_has_clubs:
-        class: Ffjv\BoBundle\Service\Entity\UserHasClubs
+        class: FfjvBoBundle\Service\Entity\UserHasClubs
         arguments: ["@doctrine.orm.default_entity_manager", "@request_stack", "@service_container"]
     licences_teams:
-        class: Ffjv\BoBundle\Service\Entity\LicencesTeamsService
+        class: FfjvBoBundle\Service\Entity\LicencesTeamsService
         arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]
     licences_clubs:
-        class: Ffjv\BoBundle\Service\Entity\LicencesClubsService
+        class: FfjvBoBundle\Service\Entity\LicencesClubsService
         arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]
     licences_users:
-        class: Ffjv\BoBundle\Service\Entity\LicencesUsersService
+        class: FfjvBoBundle\Service\Entity\LicencesUsersService
         arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]
     messages:
-        class: Ffjv\BoBundle\Service\Entity\MessagesServices
+        class: FfjvBoBundle\Service\Entity\MessagesServices
         arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]
     contact:
-        class: Ffjv\BoBundle\Service\ContactService
+        class: FfjvBoBundle\Service\ContactService
         arguments: ["@doctrine.orm.default_entity_manager", "@request_stack", "@service_container" ]
     app.twig_extension:
-        class: Ffjv\FoBundle\Twig\AppExtension
+        class: FfjvFoBundle\Twig\AppExtension
         public: false
         tags:
             - { name: twig.extension }

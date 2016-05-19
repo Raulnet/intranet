@@ -1,0 +1,4 @@
+services:
+#    ffjv_bo.example:
+#        class: FfjvBoBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

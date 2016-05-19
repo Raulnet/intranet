@@ -1,0 +1,163 @@
+{% extends('@FfjvBo/layout.html.twig') %}
+{% block breadcrumb %}
+    <h1>
+        Create user
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="{{ path('ffjv_bo_home_index') }}"><i class="fa fa-cogs"></i> Administration</a></li>
+        <li><a href="{{ path('user') }}"><i class="fa fa-user"></i> Utilisateurs</a></li>
+        <li class="active">Create user</li>
+    </ol>
+{% endblock %}
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">User creation</h3>
+                        <a class="btn btn-default btn-sm pull-right" href="{{ path('user') }}">Retour</a>
+                    </div>
+                    <div class="box-body">
+                        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ form_label(form.username, 'Utilisateur*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.username) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.firstName, 'Prenom*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.firstName) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.lastName, 'Nom*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.lastName) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.birthday, 'Date de Naissance*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.birthday) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.nationality, 'Genre*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.nationality) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.gender, 'Genre*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.gender) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.email, 'Email*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.email) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.telFix, 'Tel fix', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.telFix) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.telMobile, 'Tel mobile', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.telMobile) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ form_label(form.password.first, 'Password*', { 'label_attr':  {'class': 'col-sm-2 control-label'}}) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.password.first, {'attr': {'class': 'form-control', 'placeholder': 'password'}}) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.password.second, 'Repeat-Password*', { 'label_attr':  {'class': 'col-sm-2 control-label'}}) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.password.second, {'attr': {'class': 'form-control', 'placeholder': 'repeat-password'}}) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.countryAddress, 'Pays*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.countryAddress) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.address1, 'Adresse*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.address1) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.address2, 'Adresse sup.', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.address2) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.zipCode, 'Code postal*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.zipCode) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.city, 'Ville*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.city) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.cgu, 'CGU*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.cgu) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.status, 'Actif', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                                <div class="col-sm-10">
+                                    {{ form_widget(form.status) }}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    {{ form_row(form.submit, {'attr': {'class': 'btn btn-success col-sm-2 col-xs-12'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block customCSS %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('public/css/User/show.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('public/lib/bootstrap-switch/css/bootstrap-switch.min.css') }}">
+{% endblock %}
+{% block customJS %}
+    <script src="{{ asset('public/lib/bootstrap-switch/js/bootstrap-switch.js') }}"></script>
+    <script>
+        $.fn.bootstrapSwitch.defaults.size = 'small';
+        $.fn.bootstrapSwitch.defaults.onColor = 'primary';
+        $.fn.bootstrapSwitch.defaults.labelText = 'actif';
+        $("#create_user_status").bootstrapSwitch();
+    </script>
+{% endblock %}

@@ -2,7 +2,7 @@
 # http://symfony.com/doc/current/book/security.html
 security:
     encoders:
-        Ffjv\BoBundle\Entity\User:
+        FfjvBoBundle\Entity\User:
             algorithm:          sha512
             encode_as_base64:   true
             iterations:         11023
@@ -20,7 +20,7 @@ security:
 #                   admin: { password: adminpass, roles: ['ROLE_ADMIN'] }
         main:
             entity:
-                class: Ffjv\BoBundle\Entity\User
+                class: FfjvBoBundle\Entity\User
                 property: email
 
     firewalls:
