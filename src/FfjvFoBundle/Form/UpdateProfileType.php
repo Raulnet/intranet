@@ -1,23 +1,18 @@
 <?php
 
-namespace FfjvBoBundle\Form;
+namespace FfjvFoBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType
+class UpdateProfileType extends AbstractType
 {
-
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -28,15 +23,15 @@ class UserType extends AbstractType
                 'attr' => array('class' => 'form-control')
             ))
             ->add('nationality', ChoiceType::class, array(
+                'choices_as_values' => true,
                 'choices' => array(
-                    'Séléctionner votre pays' => null,
-                    'France' => 'FR',
-                    'Belgique' => 'BE',
-                    'Suisse' => 'CH'
+                    'FR' => 'Français',
+                    'BE' => 'Belge',
+                    'CH' => 'Suisse'
                 ),
+                'placeholder' => 'Séléctionner votre nationalité',
                 'attr' => array('class' => 'form-control')
             ))
-            ->add('status', CheckboxType::class, array())
             ->add('firstName', TextType::class, array(
                 'attr' => array('class' => 'form-control')
             ))
@@ -55,23 +50,12 @@ class UserType extends AbstractType
                 'required' => false,
             ))
             ->add('gender', ChoiceType::class, array(
-                'choices' => array(
-                    'Homme' => 'M',
-                    'Femme' => 'F'
-                ),
-                'expanded' => false,
-                'multiple' => false,
+                'choices_as_values' => true,
+                'choices' => [
+                    'M' => 'Homme',
+                    'F' => 'Femme'
+                ],
                 'attr' => array('class' => 'form-control')
-            ))
-            ->add('roles', ChoiceType::class, array(
-                'choices' => array(
-                    'Utilisateur' => 'ROLE_USER',
-                    'Utilisateur email confirmer' => 'ROLE_USER_CONFIRMED',
-                    'Administrateur' => 'ROLE_ADMIN',
-                    'Super Administrateur' => 'ROLE_SUPER_ADMIN'
-                ),
-                'expanded' => true,
-                'multiple' => true,
             ))
             ->add('address1', TextType::class, array(
                 'attr' => array('class' => 'form-control', 'placeholder' => 'adresse')
@@ -80,35 +64,27 @@ class UserType extends AbstractType
                 'attr' => array('class' => 'form-control'),
                 'required' => false,
             ))
-            ->add('zipCode', null, array(
+            ->add('zipCode', NumberType::class, array(
                 'attr' => array('class' => 'form-control', 'placeholder' => '75000')
             ))
-            ->add('city', null, array(
+            ->add('city', TextType::class, array(
                 'attr' => array('class' => 'form-control', 'placeholder' => 'Paris')
-            ))->add('countryAddress', ChoiceType::class, array(
+            ))
+            ->add('countryAddress', ChoiceType::class, array(
+                'choices_as_values' => true,
                 'choices' => array(
-                    'Séléctionner votre pays' => null,
-                    'France' => 'FR',
-                    'Belgique' => 'BE',
-                    'Suisse' => 'CH'
+                    'FR' => 'France',
+                    'BE' => 'Belgique',
+                    'CH' => 'Suisse'
                 ),
+                'placeholder' => 'Séléctionner votre pays d\'adresse',
                 'attr' => array('class' => 'form-control')
             ));
+
     }
 
-    /**
-     * @param OptionsResolver $resolver
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
 
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'ffjv_bobundle_user';
     }
 }

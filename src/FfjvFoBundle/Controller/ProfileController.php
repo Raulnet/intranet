@@ -2,8 +2,8 @@
 
 namespace FfjvFoBundle\Controller;
 
-use Ffjv\FoBundle\Form\UpdateProfilePasswordType;
-use Ffjv\FoBundle\Form\UpdateProfileType;
+use FfjvFoBundle\Form\UpdateProfilePasswordType;
+use FfjvFoBundle\Form\UpdateProfileType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -189,11 +189,11 @@ class ProfileController extends Controller
      * @return \Symfony\Component\Form\Form
      */
     private function getEditForm(User $user){
-        $editForm = $this->createForm(new UpdateProfileType(), $user, array(
+        $editForm = $this->createForm(UpdateProfileType::class, $user, array(
             'action' => $this->generateUrl('fo_profile_update', array('userUsername' => $user->getUsername()))
         ));
 
-        $editForm->add('submit', 'submit', array(
+        $editForm->add('submit', SubmitType::class, array(
             'label' => 'EDITER'
         ));
         return $editForm;
@@ -205,11 +205,11 @@ class ProfileController extends Controller
      * @return \Symfony\Component\Form\Form
      */
     private function getEditPasswordForm(User $user){
-        $editPasswordForm = $this->createForm(new UpdateProfilePasswordType(), $user, array(
+        $editPasswordForm = $this->createForm(UpdateProfilePasswordType::class, $user, array(
             'action' => $this->generateUrl('fo_profile_update_password', array('userUsername' => $user->getUsername()))
         ));
 
-        $editPasswordForm->add('submit', 'submit', array(
+        $editPasswordForm->add('submit', SubmitType::class, array(
             'label' => 'EDITER',
         ));
         return $editPasswordForm;

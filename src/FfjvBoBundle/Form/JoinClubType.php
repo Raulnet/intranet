@@ -3,6 +3,8 @@
 namespace FfjvBoBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -10,10 +12,10 @@ class JoinClubType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('club', 'hidden', array())
-            ->add('user', 'hidden', array())
-            ->add('club', 'hidden', array())
-            ->add('content', 'textarea', array(
+        $builder->add('club', HiddenType::class, array())
+            ->add('user', HiddenType::class, array())
+            ->add('club', HiddenType::class, array())
+            ->add('content', TextareaType::class, array(
                 'label' => 'Message : ',
                 'attr' => array(
                 'placeholder' => 'Bonjour, je souhaiterais rejoindre votre club .')

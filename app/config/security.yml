@@ -7,6 +7,9 @@ security:
             encode_as_base64:   true
             iterations:         11023
 
+    acl:
+        connection: default
+
     role_hierarchy:
         ROLE_USER_CONFIRMED:  ROLE_USER
         ROLE_ADMIN:           ROLE_USER_CONFIRMED

@@ -9,6 +9,7 @@
 namespace FfjvBoBundle\Service\Entity;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use FfjvBoBundle\Form\JoinClubType;
@@ -51,11 +52,11 @@ class UserHasClubs {
      * @return \Symfony\Component\Form\Form
      */
     public function getJoinClubForm($url = '', $data = array()){
-        $form = $this->formFactory->create(new JoinClubType(), $data, array(
+        $form = $this->formFactory->create(JoinClubType::class, $data, array(
             'method' => 'POST',
             'action' => $url
         ));
-        $form->add('submit', 'submit', array(
+        $form->add('submit', SubmitType::class, array(
             'label' => 'envoyer'
         ));
         return $form;

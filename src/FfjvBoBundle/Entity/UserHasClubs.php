@@ -21,13 +21,13 @@ class UserHasClubs
     const ROLE_MEMBER = 'ROLE_MEMBER';
 
     public static $listRoles = [
-        self::ROLE_CLUB_PRESIDENT => 'president',
-        self::ROLE_CLUB_SUB_PRESIDENT => 'vice-president',
-        self::ROLE_CLUB_TREASOR => 'tresorier',
-        self::ROLE_CLUB_SUB_TREASOR => 'vice-tresorier',
-        self::ROLE_CLUB_SECRETARY => 'secretaire',
-        self::ROLE_CLUB_SUB_SECRETARY => 'vice-secretaire',
-        self::ROLE_MEMBER => 'membre',];
+        'president' => self::ROLE_CLUB_PRESIDENT,
+        'vice-president' => self::ROLE_CLUB_SUB_PRESIDENT,
+        'tresorier' => self::ROLE_CLUB_TREASOR,
+        'vice-tresorier' => self::ROLE_CLUB_SUB_TREASOR,
+        'secretaire' => self::ROLE_CLUB_SECRETARY,
+        'vice-secretaire' => self::ROLE_CLUB_SUB_SECRETARY,
+        'membre' => self::ROLE_MEMBER];
 
     /**
      * @var array
@@ -35,6 +35,13 @@ class UserHasClubs
      * @ORM\Column(name="uhc_roles", type="array", nullable=false)
      */
     private $roles;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="uhc_permissions", type="array", nullable=true)
+     */
+    private $permissions;
 
     /**
      * @var \DateTime
@@ -251,5 +258,29 @@ class UserHasClubs
     public function getRequestToJoin()
     {
         return $this->requestToJoin;
+    }
+
+    /**
+     * Set permissions
+     *
+     * @param array $permissions
+     *
+     * @return UserHasClubs
+     */
+    public function setPermissions($permissions)
+    {
+        $this->permissions = $permissions;
+
+        return $this;
+    }
+
+    /**
+     * Get permissions
+     *
+     * @return array
+     */
+    public function getPermissions()
+    {
+        return $this->permissions;
     }
 }

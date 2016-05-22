@@ -10,10 +10,14 @@ namespace FfjvFoBundle\Controller;
 use FfjvBoBundle\Entity\Clubs;
 use FfjvBoBundle\Entity\User;
 use FfjvBoBundle\Entity\UserHasClubs;
-use Ffjv\FoBundle\Form\MemberType;
+use FfjvFoBundle\Form\MemberType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FfjvBoBundle\Entity\Messages;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class UserHasClubController extends Controller
 {
@@ -148,21 +152,27 @@ class UserHasClubController extends Controller
         $member = $em->getRepository('FfjvBoBundle:UserHasClubs')->find($memberId);
 
         $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(['id' => $member->getClub()->getId()]);
+        
+        $authorizationChecker = $this->get('security.authorization_checker');
+        
+        if (false === $authorizationChecker->isGranted('EDIT', $club)) {
+            throw new AccessDeniedException();
+        }
         //if club not esixt || user is not author
-        if (!$club || $club->getUser() != $this->getUser()) {
-            $this->addFlash('error', 'une erreur c\'est produite ! ce club n\'existe pas');
-            return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
+        if (!$club) {
+           throw new \Exception('Club unknown');
         }
         //if member not existe
         if (!$member) {
-            $this->addFlash('error', 'une erreur c\'est produite ! ce membre n\'existe pas .');
-            return $this->redirectToRoute('fo_clubs_show', ['clubId' => $club->getId()]);
+            throw new \Exception('Member unknown');
         }
         $form = $this->getFormUpdateMember($member);
         $form->handleRequest($request);
         if ($form->isValid()) {
             $data = $form->getData();
             $member->setRoles($data->getRoles());
+            $user = $member->getUser();
+            $this->get('permissions')->setAcl($club, $user, $data->getPermissions());
             $em->persist($member);
             $em->flush();
             $this->addFlash('success', 'votre membre à bien été mis a jour');
@@ -242,21 +252,21 @@ class UserHasClubController extends Controller
     private function getResponseRequestForm($userHasClubId = null)
     {
         $form = $this->createFormBuilder();
-        $form->add('user_has_club', 'hidden', array(
+        $form->add('user_has_club', HiddenType::class, array(
             'attr' => array('value' => $userHasClubId)
         ));
-        $form->add('message', 'text', array(
+        $form->add('message', TextType::class, array(
             'attr' => array()
         ));
-        $form->add('accepter', 'submit', array(
+        $form->add('accepter', SubmitType::class, array(
             'label' => 'accepter',
             'attr' => array('class' => 'btn btn-success')
         ));
-        $form->add('refuser', 'submit', array(
+        $form->add('refuser', SubmitType::class, array(
             'label' => 'refuser',
             'attr' => array('class' => 'btn btn-warning')
         ));
-        $form->add('supprimer', 'submit', array(
+        $form->add('supprimer', SubmitType::class, array(
             'label' => 'supprimer',
             'attr' => array('class' => 'btn btn-danger')
         ));
@@ -348,7 +358,7 @@ class UserHasClubController extends Controller
      */
     private function getFormUpdateMember(UserHasClubs $member)
     {
-        return $this->createForm(new MemberType(), $member, [
+        return $this->createForm(MemberType::class, $member, [
             "action" => $this->generateUrl('fo_user_has_club_update_member', ['memberId' => $member->getId()]),
             "method" => "PUT"
         ]);
@@ -359,7 +369,7 @@ class UserHasClubController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('fo_user_has_club_remove_member', array('memberId' => $memberId)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'confirmer', 'attr'=> array('class' => 'btn btn-danger')))
+            ->add('submit', SubmitType::class, array('label' => 'confirmer', 'attr'=> array('class' => 'btn btn-danger')))
             ->getForm()
             ;
     }

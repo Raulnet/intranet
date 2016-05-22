@@ -51,9 +51,9 @@ class Teams
     private $id;
 
     /**
-     * @var \Ffjv\BoBundle\Entity\LicencesTeams
+     * @var \FfjvBoBundle\Entity\LicencesTeams
      *
-     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\LicencesTeams")
+     * @ORM\ManyToOne(targetEntity="FfjvBoBundle\Entity\LicencesTeams")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="licence_id", referencedColumnName="lic_id")
      * })
@@ -61,9 +61,9 @@ class Teams
     private $licence;
 
     /**
-     * @var \Ffjv\BoBundle\Entity\User
+     * @var \FfjvBoBundle\Entity\User
      *
-     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="FfjvBoBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="usr_id", onDelete="SET NULL")
      * })
@@ -71,9 +71,9 @@ class Teams
     private $user;
 
     /**
-     * @var \Ffjv\BoBundle\Entity\Clubs
+     * @var \FfjvBoBundle\Entity\Clubs
      *
-     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\Clubs", inversedBy="teams")
+     * @ORM\ManyToOne(targetEntity="FfjvBoBundle\Entity\Clubs", inversedBy="teams")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="clubs_id", referencedColumnName="clu_id")
      * })
@@ -83,7 +83,7 @@ class Teams
     /**
      * @var ArrayCollection $members
      *
-     * @ORM\OneToMany(targetEntity="Ffjv\BoBundle\Entity\UserHasTeams", mappedBy="team", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="FfjvBoBundle\Entity\UserHasTeams", mappedBy="team", cascade={"persist", "remove"})
      */
     private $members = array();
 
@@ -214,11 +214,11 @@ class Teams
     /**
      * Set licence
      *
-     * @param \Ffjv\BoBundle\Entity\LicencesTeams $licence
+     * @param \FfjvBoBundle\Entity\LicencesTeams $licence
      *
      * @return Teams
      */
-    public function setLicence(\Ffjv\BoBundle\Entity\LicencesTeams $licence = null)
+    public function setLicence(\FfjvBoBundle\Entity\LicencesTeams $licence = null)
     {
         $this->licence = $licence;
 
@@ -228,7 +228,7 @@ class Teams
     /**
      * Get licence
      *
-     * @return \Ffjv\BoBundle\Entity\LicencesTeams
+     * @return \FfjvBoBundle\Entity\LicencesTeams
      */
     public function getLicence()
     {
@@ -238,11 +238,11 @@ class Teams
     /**
      * Set user
      *
-     * @param \Ffjv\BoBundle\Entity\User $user
+     * @param \FfjvBoBundle\Entity\User $user
      *
      * @return Teams
      */
-    public function setUser(\Ffjv\BoBundle\Entity\User $user = null)
+    public function setUser(\FfjvBoBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -252,7 +252,7 @@ class Teams
     /**
      * Get user
      *
-     * @return \Ffjv\BoBundle\Entity\User
+     * @return \FfjvBoBundle\Entity\User
      */
     public function getUser()
     {
@@ -262,11 +262,11 @@ class Teams
     /**
      * Set club
      *
-     * @param \Ffjv\BoBundle\Entity\Clubs $club
+     * @param \FfjvBoBundle\Entity\Clubs $club
      *
      * @return Teams
      */
-    public function setClub(\Ffjv\BoBundle\Entity\Clubs $club = null)
+    public function setClub(\FfjvBoBundle\Entity\Clubs $club = null)
     {
         $this->club = $club;
 
@@ -276,7 +276,7 @@ class Teams
     /**
      * Get club
      *
-     * @return \Ffjv\BoBundle\Entity\Clubs
+     * @return \FfjvBoBundle\Entity\Clubs
      */
     public function getClub()
     {
@@ -286,11 +286,11 @@ class Teams
     /**
      * Add member
      *
-     * @param \Ffjv\BoBundle\Entity\UserHasTeams $member
+     * @param \FfjvBoBundle\Entity\UserHasTeams $member
      *
      * @return Teams
      */
-    public function addMember(\Ffjv\BoBundle\Entity\UserHasTeams $member)
+    public function addMember(\FfjvBoBundle\Entity\UserHasTeams $member)
     {
         $this->members[] = $member;
 
@@ -300,9 +300,9 @@ class Teams
     /**
      * Remove member
      *
-     * @param \Ffjv\BoBundle\Entity\UserHasTeams $member
+     * @param \FfjvBoBundle\Entity\UserHasTeams $member
      */
-    public function removeMember(\Ffjv\BoBundle\Entity\UserHasTeams $member)
+    public function removeMember(\FfjvBoBundle\Entity\UserHasTeams $member)
     {
         $this->members->removeElement($member);
     }

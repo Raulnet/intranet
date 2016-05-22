@@ -16,27 +16,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CreateUserType extends AbstractType
 {
     /**
-     * @var bool
-     */
-    private $registering = false;
-
-    /**
-     * @var bool
-     */
-    private $generated = false;
-
-    /**
-     * CreateUserType constructor.
-     * @param bool $registering
-     * @param bool $generated
-     */
-    public function __construct($registering = false, $generated = false)
-    {
-        $this->registering = $registering;
-        $this->generated = $generated;
-    }
-
-    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
@@ -113,7 +92,7 @@ class CreateUserType extends AbstractType
                 'attr' => array('class' => 'form-control')
             ));
 
-        if(!$this->generated){
+        if(!$options['generated']){
             $builder->add('password', RepeatedType::class, array(
                 'type'            => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
@@ -125,7 +104,7 @@ class CreateUserType extends AbstractType
                 ->add('cgu', CheckboxType::class, array('attr' => array()));
         }
 
-        if(!$this->registering){
+        if(!$options['registering']){
             $builder->add('status', CheckboxType::class, array(
                 'required' => false
             ));
@@ -134,6 +113,9 @@ class CreateUserType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-
+        $resolver->setDefaults(array(
+            'registering'   => false,
+            'generated'   => false,
+        ));
     }
 }

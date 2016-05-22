@@ -189,9 +189,9 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @var \Ffjv\BoBundle\Entity\User
+     * @var \FfjvBoBundle\Entity\User
      *
-     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="FfjvBoBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="author_user_id", referencedColumnName="usr_id")
      * })
@@ -199,9 +199,9 @@ class User implements UserInterface
     private $authorUser;
 
     /**
-     * @var \Ffjv\BoBundle\Entity\LicencesUsers
+     * @var \FfjvBoBundle\Entity\LicencesUsers
      *
-     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\LicencesUsers")
+     * @ORM\ManyToOne(targetEntity="FfjvBoBundle\Entity\LicencesUsers")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="licence_id", referencedColumnName="lic_id")
      * })
@@ -211,7 +211,7 @@ class User implements UserInterface
     /**
      * @var ArrayCollection $clubs
      *
-     * @ORM\OneToMany(targetEntity="Ffjv\BoBundle\Entity\Clubs", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="FfjvBoBundle\Entity\Clubs", mappedBy="user")
      */
     private $clubs;
 
@@ -683,11 +683,11 @@ class User implements UserInterface
     /**
      * Add club
      *
-     * @param \Ffjv\BoBundle\Entity\Clubs $club
+     * @param \FfjvBoBundle\Entity\Clubs $club
      *
      * @return User
      */
-    public function addClub(\Ffjv\BoBundle\Entity\Clubs $club)
+    public function addClub(\FfjvBoBundle\Entity\Clubs $club)
     {
         $this->clubs[] = $club;
 
@@ -697,9 +697,9 @@ class User implements UserInterface
     /**
      * Remove club
      *
-     * @param \Ffjv\BoBundle\Entity\Clubs $club
+     * @param \FfjvBoBundle\Entity\Clubs $club
      */
-    public function removeClub(\Ffjv\BoBundle\Entity\Clubs $club)
+    public function removeClub(\FfjvBoBundle\Entity\Clubs $club)
     {
         $this->clubs->removeElement($club);
     }

@@ -57,9 +57,9 @@ class UserHasTeams
     private $id;
 
     /**
-     * @var \Ffjv\BoBundle\Entity\TTeams
+     * @var \FfjvBoBundle\Entity\TTeams
      *
-     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\Teams", inversedBy="members")
+     * @ORM\ManyToOne(targetEntity="FfjvBoBundle\Entity\Teams", inversedBy="members")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="teams_id", referencedColumnName="tea_id")
      * })
@@ -67,9 +67,9 @@ class UserHasTeams
     private $team;
 
     /**
-     * @var \Ffjv\BoBundle\Entity\TUser
+     * @var \FfjvBoBundle\Entity\TUser
      *
-     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="FfjvBoBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="usr_id")
      * })
@@ -172,11 +172,11 @@ class UserHasTeams
     /**
      * Set team
      *
-     * @param \Ffjv\BoBundle\Entity\Teams $team
+     * @param \FfjvBoBundle\Entity\Teams $team
      *
      * @return UserHasTeams
      */
-    public function setTeam(\Ffjv\BoBundle\Entity\Teams $team = null)
+    public function setTeam(\FfjvBoBundle\Entity\Teams $team = null)
     {
         $this->team = $team;
 
@@ -186,7 +186,7 @@ class UserHasTeams
     /**
      * Get team
      *
-     * @return \Ffjv\BoBundle\Entity\Teams
+     * @return \FfjvBoBundle\Entity\Teams
      */
     public function getTeam()
     {
@@ -196,11 +196,11 @@ class UserHasTeams
     /**
      * Set user
      *
-     * @param \Ffjv\BoBundle\Entity\User $user
+     * @param \FfjvBoBundle\Entity\User $user
      *
      * @return UserHasTeams
      */
-    public function setUser(\Ffjv\BoBundle\Entity\User $user = null)
+    public function setUser(\FfjvBoBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -210,7 +210,7 @@ class UserHasTeams
     /**
      * Get user
      *
-     * @return \Ffjv\BoBundle\Entity\User
+     * @return \FfjvBoBundle\Entity\User
      */
     public function getUser()
     {

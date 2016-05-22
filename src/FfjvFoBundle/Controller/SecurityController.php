@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
-use Ffjv\FoBundle\Form\Type\User\SendMailType;
+use FfjvFoBundle\Form\Type\User\SendMailType;
 
 class SecurityController extends Controller
 {
@@ -330,7 +330,7 @@ class SecurityController extends Controller
      * @return \Symfony\Component\Form\Form
      */
     private function getSendMailForm($userId){
-        $form = $this->createForm(new SendMailType($userId), null, array(
+        $form = $this->createForm(SendMailType::class, ['userId' => $userId], array(
             'action' => $this->generateUrl('ffjv_fo_security_send_mail_confirmation'),
             'method' => 'POST',
         ));

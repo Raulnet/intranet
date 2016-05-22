@@ -56,6 +56,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-sm-8 col-md-9">
                     <div class="box box-primary">
                         {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
@@ -63,13 +64,19 @@
                             <h3 class="box-title">Role - Membre - {{ member.user }}</h3>
                         </div>
                         <div class="box-body">
+                            {{ form_label(form.roles) }}
                             {{ form_widget(form.roles) }}
+                        </div>
+                        <div class="box-body">
+                            {{ form_label(form.permissions) }}
+                            {{ form_widget(form.permissions) }}
                         </div>
                         <div class="box-footer">
                             <div class="pull-left">
                                 {{ form_widget(form.submit) }}
                                 {{ form_end(form) }}
                             </div>
+                            {% if is_granted('DELETE', club) %}
                             <div class="pull-right">
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
                                     supprimer
@@ -93,19 +100,21 @@
                                     </div>
                                 </div>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     {% endblock %}
-{% block customJS %}
-    <script src="{{ asset('public/lib/bootstrap-switch/js/bootstrap-switch.js') }}"></script>
-    <script>
-        $.fn.bootstrapSwitch.defaults.size = 'small';
-        $.fn.bootstrapSwitch.defaults.onColor = 'primary';
-        $("[name='ffjv_fo_bundlemember_type[roles][]']").bootstrapSwitch();
-        $.fn.bootstrapSwitch.defaults.size = 'mini';
-        $.fn.bootstrapSwitch.defaults.labelText = '';
-    </script>
-{% endblock %}
+        {% block customJS %}
+            <script src="{{ asset('public/lib/bootstrap-switch/js/bootstrap-switch.js') }}"></script>
+            <script>
+                $.fn.bootstrapSwitch.defaults.size = 'small';
+                $.fn.bootstrapSwitch.defaults.onColor = 'primary';
+                $("[name='member[roles][]']").bootstrapSwitch();
+                $("[name='member[permissions][]']").bootstrapSwitch();
+                $.fn.bootstrapSwitch.defaults.size = 'mini';
+                $.fn.bootstrapSwitch.defaults.labelText = '';
+            </script>
+        {% endblock %}

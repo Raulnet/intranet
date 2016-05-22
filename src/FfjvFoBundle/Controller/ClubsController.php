@@ -12,7 +12,11 @@ use FfjvBoBundle\Form\TeamsType;
 use FfjvBoBundle\Form\CreateUserType;
 use FfjvBoBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 
 
 class ClubsController extends Controller
@@ -37,7 +41,8 @@ class ClubsController extends Controller
     {
         $club = $this->getDoctrine()->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
         $members = $this->getDoctrine()->getRepository('FfjvBoBundle:UserHasClubs')->findBy(array('club' => $club, 'requestToJoin' => 0));
-        $userRequestTojoin = $this->getDoctrine()->getRepository('FfjvBoBundle:UserHasClubs')->getRequestUserToJoin($club);
+        
+        $userRequestToJoin = $this->getDoctrine()->getRepository('FfjvBoBundle:UserHasClubs')->getRequestUserToJoin($club);
         $countMembersActive = $this->get('clubs')->getCountMemberActive($club->getId());
 
         $contactForm = $this->getContactForm($this->generateUrl('fo_clubs_contact'), array(
@@ -53,7 +58,7 @@ class ClubsController extends Controller
         return $this->render('@FfjvFo/Clubs/show.html.twig', array(
             'club'      => $club,
             'members'    => $members,
-            'requestMembers'    => $userRequestTojoin,
+            'requestMembers'    => $userRequestToJoin,
             'user_is_member' => $this->isMember($club),
             'count_members' => $countMembersActive,
             'contact_form'  => $contactForm->createView(),
@@ -433,11 +438,13 @@ class ClubsController extends Controller
      * @return \Symfony\Component\Form\Form
      */
     private function getUserForm(User $user, $url = ''){
-        $registerForm = $this->createForm(new CreateUserType(true, true), $user, array(
+        $registerForm = $this->createForm(CreateUserType::class, $user, array(
             'action' => $url,
-            'method' => 'POST'
+            'method' => 'POST',
+            'generated' => true,
+            'registering' => true
         ));
-        $registerForm->add('submit', 'submit', array(
+        $registerForm->add('submit', SubmitType::class, array(
             'label' => 'enregistrer'
         ));
         return $registerForm;
@@ -451,11 +458,11 @@ class ClubsController extends Controller
      * @return \Symfony\Component\Form\Form
      */
     private function getTeamsForm(Teams $teams, $url = ''){
-        $form = $this->createForm(new TeamsType(), $teams, array(
+        $form = $this->createForm(TeamsType::class, $teams, array(
             'method' => 'POST',
             'action' => $url
         ));
-        $form->add('submit', 'submit', array(
+        $form->add('submit', SubmitType::class, array(
             'label' => 'créer'
         ));
         return $form;
@@ -472,11 +479,11 @@ class ClubsController extends Controller
         if ($path == '') {
             $path = $this->generateUrl('fo_clubs_create');
         }
-        $form = $this->createForm(new ClubsType(), $club, array(
+        $form = $this->createForm(ClubsType::class, $club, array(
             'method' => 'POST',
             'action' => $path
         ));
-        $form->add('submit', 'submit', array(
+        $form->add('submit', SubmitType::class, array(
             'label' => 'Enregistrer',
             'attr'  => array('class' => 'btn btn-success')
         ));
@@ -492,10 +499,10 @@ class ClubsController extends Controller
     private function getDeleteClubForm($clubId = '')
     {
         $form = $this->createFormBuilder();
-        $form->add('title', 'hidden', array(
+        $form->add('title', HiddenType::class, array(
             'attr' => array('value' => $clubId)
         ));
-        $form->add('submit', 'submit', array(
+        $form->add('submit', SubmitType::class, array(
             'label' => 'supprimer',
             'attr'  => array('class' => 'btn btn-danger')
         ));
@@ -512,7 +519,7 @@ class ClubsController extends Controller
      */
     private function getContactForm($url = '', $data = array()){
         $form = $this->get('contact')->getFormContactClub($url, $data);
-        $form->add('submit', 'submit', array(
+        $form->add('submit', SubmitType::class, array(
             'label' => 'envoyer'
         ));
         return $form;

@@ -1,16 +1,21 @@
 <?php
-namespace FfjvFoBundle\Twig;
+namespace AppBundle\Twig;
+
 /**
  * Created by PhpStorm.
- * User: laurent
- * Date: 17/02/16
- * Time: 22:50
+ * User: raulnet
+ * Date: 22/05/16
+ * Time: 18:28
  */
+
 use FfjvBoBundle\Entity\UserHasClubs;
 use FfjvBoBundle\Entity\UserHasTeams;
 
 class AppExtension extends \Twig_Extension
 {
+    /**
+     * @return array
+     */
     public function getFilters()
     {
         return array(
@@ -43,11 +48,8 @@ class AppExtension extends \Twig_Extension
         return$roles[$role];
     }
 
-    /**
-     * @return string
-     */
     public function getName()
     {
-        return 'fo_extension';
+        return 'app_extension';
     }
 }

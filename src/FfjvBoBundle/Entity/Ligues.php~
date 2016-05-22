@@ -148,9 +148,9 @@ class Ligues
     private $id;
 
     /**
-     * @var \Ffjv\BoBundle\Entity\TUser
+     * @var \FfjvBoBundle\Entity\TUser
      *
-     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="FfjvBoBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="usr_id")
      * })
@@ -160,7 +160,7 @@ class Ligues
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Ffjv\BoBundle\Entity\Clubs", mappedBy="ligues")
+     * @ORM\ManyToMany(targetEntity="FfjvBoBundle\Entity\Clubs", mappedBy="ligues")
      */
     private $clubs;
 
@@ -579,11 +579,11 @@ class Ligues
     /**
      * Set user
      *
-     * @param \Ffjv\BoBundle\Entity\User $user
+     * @param \FfjvBoBundle\Entity\User $user
      *
      * @return Ligues
      */
-    public function setUser(\Ffjv\BoBundle\Entity\User $user = null)
+    public function setUser(\FfjvBoBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -593,7 +593,7 @@ class Ligues
     /**
      * Get user
      *
-     * @return \Ffjv\BoBundle\Entity\User
+     * @return \FfjvBoBundle\Entity\User
      */
     public function getUser()
     {
@@ -603,11 +603,11 @@ class Ligues
     /**
      * Add club
      *
-     * @param \Ffjv\BoBundle\Entity\Clubs $club
+     * @param \FfjvBoBundle\Entity\Clubs $club
      *
      * @return Ligues
      */
-    public function addClub(\Ffjv\BoBundle\Entity\Clubs $club)
+    public function addClub(\FfjvBoBundle\Entity\Clubs $club)
     {
         $this->clubs[] = $club;
 
@@ -617,9 +617,9 @@ class Ligues
     /**
      * Remove club
      *
-     * @param \Ffjv\BoBundle\Entity\Clubs $club
+     * @param \FfjvBoBundle\Entity\Clubs $club
      */
-    public function removeClub(\Ffjv\BoBundle\Entity\Clubs $club)
+    public function removeClub(\FfjvBoBundle\Entity\Clubs $club)
     {
         $this->clubs->removeElement($club);
     }

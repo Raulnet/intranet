@@ -21,13 +21,13 @@ class UserHasClubs
     const ROLE_MEMBER = 'ROLE_MEMBER';
 
     public static $listRoles = [
-        self::ROLE_CLUB_PRESIDENT => 'president',
-        self::ROLE_CLUB_SUB_PRESIDENT => 'vice-president',
-        self::ROLE_CLUB_TREASOR => 'tresorier',
-        self::ROLE_CLUB_SUB_TREASOR => 'vice-tresorier',
-        self::ROLE_CLUB_SECRETARY => 'secretaire',
-        self::ROLE_CLUB_SUB_SECRETARY => 'vice-secretaire',
-        self::ROLE_MEMBER => 'membre',];
+        'president' => self::ROLE_CLUB_PRESIDENT,
+        'vice-president' => self::ROLE_CLUB_SUB_PRESIDENT,
+        'tresorier' => self::ROLE_CLUB_TREASOR,
+        'vice-tresorier' => self::ROLE_CLUB_SUB_TREASOR,
+        'secretaire' => self::ROLE_CLUB_SECRETARY,
+        'vice-secretaire' => self::ROLE_CLUB_SUB_SECRETARY,
+        'membre' => self::ROLE_MEMBER];
 
     /**
      * @var array
@@ -35,6 +35,13 @@ class UserHasClubs
      * @ORM\Column(name="uhc_roles", type="array", nullable=false)
      */
     private $roles;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="uhc_permissions", type="array", nullable=true)
+     */
+    private $permissions;
 
     /**
      * @var \DateTime
@@ -60,9 +67,9 @@ class UserHasClubs
     private $id;
 
     /**
-     * @var \Ffjv\BoBundle\Entity\User
+     * @var \FfjvBoBundle\Entity\User
      *
-     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="FfjvBoBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="usr_id")
      * })
@@ -70,9 +77,9 @@ class UserHasClubs
     private $user;
 
     /**
-     * @var \Ffjv\BoBundle\Entity\Clubs
+     * @var \FfjvBoBundle\Entity\Clubs
      *
-     * @ORM\ManyToOne(targetEntity="Ffjv\BoBundle\Entity\Clubs", inversedBy="members")
+     * @ORM\ManyToOne(targetEntity="FfjvBoBundle\Entity\Clubs", inversedBy="members")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="clubs_id", referencedColumnName="clu_id")
      * })
@@ -184,11 +191,11 @@ class UserHasClubs
     /**
      * Set user
      *
-     * @param \Ffjv\BoBundle\Entity\User $user
+     * @param \FfjvBoBundle\Entity\User $user
      *
      * @return UserHasClubs
      */
-    public function setUser(\Ffjv\BoBundle\Entity\User $user = null)
+    public function setUser(\FfjvBoBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -198,7 +205,7 @@ class UserHasClubs
     /**
      * Get user
      *
-     * @return \Ffjv\BoBundle\Entity\User
+     * @return \FfjvBoBundle\Entity\User
      */
     public function getUser()
     {
@@ -208,11 +215,11 @@ class UserHasClubs
     /**
      * Set club
      *
-     * @param \Ffjv\BoBundle\Entity\Clubs $club
+     * @param \FfjvBoBundle\Entity\Clubs $club
      *
      * @return UserHasClubs
      */
-    public function setClub(\Ffjv\BoBundle\Entity\Clubs $club = null)
+    public function setClub(\FfjvBoBundle\Entity\Clubs $club = null)
     {
         $this->club = $club;
 
@@ -222,7 +229,7 @@ class UserHasClubs
     /**
      * Get club
      *
-     * @return \Ffjv\BoBundle\Entity\Clubs
+     * @return \FfjvBoBundle\Entity\Clubs
      */
     public function getClub()
     {

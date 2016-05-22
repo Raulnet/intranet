@@ -22,6 +22,9 @@
                             <h3 class="profile-username text-center">{{ club.title }} - {{ club.tag }}</h3>
                             {% if club.licence %}<p class="text-muted text-center">Licence {{ club.licence }}</p>{% endif %}
                             <p class="text-muted text-center">RNA {{ club.rna }}</p>
+                            {% if app.user and is_granted('EDIT', club) %}
+                                <p>EDITEuR</p>
+                                {% endif %}
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
                                     <b>Author</b><a class="pull-right">{% if club.user %}{{ club.user.firstname }} {{ club.user.lastname }}{% else %}utilisateur supprimer{% endif %}</a>
@@ -124,19 +127,19 @@
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#teams" data-toggle="tab">Teams</a></li>
-                            {% if club in app.user.clubs %}
+                            {% if is_granted('VIEW', club) %}
                                 <li><a href="#members" data-toggle="tab" aria-expanded="true">Membres</a></li>
                                 <li><a href="#requetes" data-toggle="tab" aria-expanded="true">Requêtes <span class="badge bg-light-blue-active">{{ requestMembers|length }}</span></a></li>
                             {% endif %}
                         </ul>
                         <div class="tab-content">
-                            {% if club in app.user.clubs %}
+                            {% if is_granted('VIEW') %}
                                 <div class="tab-pane" id="members">
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="box">
                                                 <div class="box-header">
-                                                    <h3 class="box-title">Members Board</h3>{% if club in app.user.clubs %}<a class="btn btn-info btn-xs pull-right" href="{{ path('fo_clubs_newmembers',{'clubId': club.id}) }}">Create a new Member</a>{% endif %}
+                                                    <h3 class="box-title">Members Board</h3>{% if is_granted('EDIT', club) %}<a class="btn btn-info btn-xs pull-right" href="{{ path('fo_clubs_newmembers',{'clubId': club.id}) }}">Create a new Member</a>{% endif %}
                                                 </div>
                                                 <div class="box-body">
                                                     <table id="teams_board" class="table table-bordered table-striped">
@@ -149,7 +152,7 @@
                                                             <th>Creationdate</th>
                                                             <th>Lastupdate</th>
                                                             <th>Authors</th>
-                                                            <th></th>
+                                                            {% if is_granted('EDIT', club) %}<th></th>{% endif %}
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -174,7 +177,7 @@
                                                                 <td>{{ member.user.registerDate|date('Y-m-d H:i:s') }}</td>
                                                                 <td>{{ member.user.lastUpdate|date('Y-m-d H:i:s') }}</td>
                                                                 <td>{{ member.user.authorUser }}</td>
-                                                                <td>{% if member.user != club.user %}<a class="btn btn-success btn-sm" href="{{ path('fo_user_has_club_edit_member', {'memberId': member.id}) }}">edit</a> {% endif %}</td>
+                                                                {% if is_granted('EDIT', club) %}<td><a class="btn btn-success btn-sm" href="{{ path('fo_user_has_club_edit_member', {'memberId': member.id}) }}">edit</a></td>{% endif %}
                                                             </tr>
                                                         {% endfor %}
                                                         </tbody>

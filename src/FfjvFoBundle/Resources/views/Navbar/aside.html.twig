@@ -11,7 +11,7 @@
     <ul class="sidebar-menu">
         <li class="header">Intranet</li>
         <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home "></i> <span>Home</span></a></li>
-        <li class="{% if userMenu is defined %}active{% endif %}"><a href="{{ path('fo_profile_show', {'userUsername': app.user.username }) }}"><i class="fa fa-user text-blue"></i> <span>Mon profile</span></a></li>
+        <li class="{% if userMenu is defined %}active{% endif %}"><a href="{{ path('fo_profile_show', {'userUsername': app.user.username }) }}"><i class="fa fa-user text-blue"></i> <span>Mon profil</span></a></li>
         <li class="treeview {% if clubsMenu is defined %}active{% endif %}">
             <a href="#">
                 <i class="fa fa-institution"></i> <span>Clubs</span>

@@ -110,7 +110,7 @@ class ContactService
      * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormInterface
      */
     public function getFormContactClub($url, $data){
-        return $this->formFactory->create(new ContactClubType(), $data, array(
+        return $this->formFactory->create(ContactClubType::class, $data, array(
             'method' => 'POST',
             'action' => $url
         ));
