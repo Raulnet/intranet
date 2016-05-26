@@ -2,6 +2,7 @@
 
 namespace FfjvBoBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -71,12 +72,12 @@ class TeamsController extends Controller
      */
     private function createCreateForm(Teams $entity, $clubId)
     {
-        $form = $this->createForm(new TeamsType(), $entity, array(
+        $form = $this->createForm(TeamsType::class, $entity, array(
             'action' => $this->generateUrl('teams_create', array('clubId' => $clubId)),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create', 'attr' => array('class' => 'btn btn-success')));
+        $form->add('submit', SubmitType::class, array('label' => 'Create', 'attr' => array('class' => 'btn btn-success')));
 
         return $form;
     }
@@ -156,12 +157,12 @@ class TeamsController extends Controller
     */
     private function createEditForm(Teams $entity)
     {
-        $form = $this->createForm(new TeamsType(), $entity, array(
+        $form = $this->createForm(TeamsType::class, $entity, array(
             'action' => $this->generateUrl('teams_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -231,7 +232,7 @@ class TeamsController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('teams_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

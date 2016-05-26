@@ -2,6 +2,7 @@
 
 namespace FfjvBoBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -64,12 +65,12 @@ class LiguesController extends Controller
      */
     private function createCreateForm(Ligues $ligue)
     {
-        $form = $this->createForm(new LiguesType(), $ligue, array(
+        $form = $this->createForm(LiguesType::class, $ligue, array(
             'action' => $this->generateUrl('ligues_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'btn btn-success col-xs-12')));
+        $form->add('submit', SubmitType::class, array('label' => 'Enregistrer', 'attr' => array('class' => 'btn btn-success col-xs-12')));
 
         return $form;
     }
@@ -146,12 +147,12 @@ class LiguesController extends Controller
     */
     private function createEditForm(Ligues $ligue)
     {
-        $form = $this->createForm(new LiguesType(), $ligue, array(
+        $form = $this->createForm(LiguesType::class, $ligue, array(
             'action' => $this->generateUrl('ligues_update', array('id' => $ligue->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Mettre à jours'));
+        $form->add('submit', SubmitType::class, array('label' => 'Mettre à jours'));
 
         return $form;
     }
@@ -221,7 +222,7 @@ class LiguesController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('ligues_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

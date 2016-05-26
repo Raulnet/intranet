@@ -2,6 +2,7 @@
 
 namespace FfjvBoBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -69,12 +70,12 @@ class ClubsController extends Controller
      */
     private function createCreateForm(Clubs $club)
     {
-        $form = $this->createForm(new ClubsType(), $club, array(
+        $form = $this->createForm(ClubsType::class, $club, array(
             'action' => $this->generateUrl('clubs_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create', 'attr' => array('class' => 'btn btn-success')));
+        $form->add('submit', SubmitType::class, array('label' => 'Create', 'attr' => array('class' => 'btn btn-success')));
 
         return $form;
     }
@@ -189,12 +190,12 @@ class ClubsController extends Controller
      */
     private function createEditForm(Clubs $club)
     {
-        $form = $this->createForm(new ClubsType(), $club, array(
+        $form = $this->createForm(ClubsType::class, $club, array(
             'action' => $this->generateUrl('clubs_update', array('id' => $club->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update',
+        $form->add('submit', SubmitType::class, array('label' => 'Update',
             'attr' => array('class' => 'btn btn-success')));
 
         return $form;
@@ -265,7 +266,7 @@ class ClubsController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('clubs_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }
@@ -277,7 +278,7 @@ class ClubsController extends Controller
      */
     private function getContactForm($url = '', $data = array()){
         $form = $this->get('contact')->getFormContactClub($url, $data);
-        $form->add('submit', 'submit', array(
+        $form->add('submit', SubmitType::class, array(
             'label' => 'envoyer'
         ));
         return $form;

@@ -67,7 +67,6 @@ class AclService
         $mask = 0;
         foreach ($roles as $role){
             if(!in_array($role, $this->getMaskList() )){
-                var_dump($role);
                 throw new \Exception('Role submit not exist');
             }
             if($role > $mask){
