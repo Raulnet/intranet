@@ -36,12 +36,16 @@ class ClubsController extends Controller
     /**
      * @param int $clubId
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function showAction($clubId = 0)
     {
         $club = $this->getDoctrine()->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
+        if(!$club){
+            throw new \Exception('this id club not exist');
+        }
+
         $members = $this->getDoctrine()->getRepository('FfjvBoBundle:UserHasClubs')->findBy(array('club' => $club, 'requestToJoin' => 0));
-        
         $userRequestToJoin = $this->getDoctrine()->getRepository('FfjvBoBundle:UserHasClubs')->getRequestUserToJoin($club);
         $countMembersActive = $this->get('clubs')->getCountMemberActive($club->getId());
 
@@ -91,8 +95,10 @@ class ClubsController extends Controller
         $form = $this->getClubForm($club);
         $form->handleRequest($request);
         if ($form->isValid()) {
+            $user = $this->getUser();
             $em = $this->getDoctrine()->getManager();
-            $club->setUser($this->getUser());
+            $club->setUser($user);
+
             $club->setIdZipCode($this->get('clubs')->getIdZipCode($club->getZipCode(), $club->getCountry()));
             $em->persist($club);
             $em->flush();
@@ -101,8 +107,8 @@ class ClubsController extends Controller
             $club->setLicence($licence);
             $em->persist($club);
             $em->flush();
-
-            $this->addMemberToClub($club, $this->getUser(), array('ROLE_AUTHOR'));
+            $this->get('permissions')->setAcl($club, $user, ['OWNER']);
+            $this->addMemberToClub($club, $user, array('ROLE_AUTHOR'));
 
 
             $this->addFlash('success', 'Félicitaion votre club a été créé');
@@ -119,13 +125,20 @@ class ClubsController extends Controller
 
     /**
      * @param string $clubId
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function editAction($clubId = '')
     {
         $em   = $this->getDoctrine()->getManager();
         $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
+        if(!$club){
+            throw new \Exception('this id club not exist');
+        }
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if (false === $authorizationChecker->isGranted('EDIT', $club)) {
+            throw new AccessDeniedException();
+        }
         //if user is author
         if ($club->getUser() == $this->getUser()) {
             $path = $this->generateUrl('fo_clubs_update', array('clubId' => $clubId));
@@ -142,20 +155,24 @@ class ClubsController extends Controller
 
     /**
      * @param Request $request
-     * @param string  $clubId
-     *
+     * @param string $clubId
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function updateAction(Request $request, $clubId = '')
     {
         $em   = $this->getDoctrine()->getManager();
         $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
-        //if club not esixt || user is not author
-        if (!$club || $club->getUser() != $this->getUser()) {
-            $this->addFlash('error', 'une erreur c\'est produite');
-
-            return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
+        
+        if(!$club){
+            throw new \Exception('this id club not exist');
         }
+        
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if (false === $authorizationChecker->isGranted('EDIT', $club)) {
+            throw new AccessDeniedException();
+        }
+        
         $path = $this->generateUrl('fo_clubs_update', array('clubId' => $clubId));
         $form = $this->getClubForm($club, $path);
         $form->handleRequest($request);
@@ -180,19 +197,23 @@ class ClubsController extends Controller
 
     /**
      * @param string $clubId
-     *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function removeAction($clubId = '')
     {
         $em   = $this->getDoctrine()->getManager();
         $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
-        //if club not esixt || user is not author
-        if (!$club || $club->getUser() != $this->getUser()) {
-            $this->addFlash('error', 'une erreur c\'est produite');
-
-            return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
+        
+        if(!$club){
+            throw new \Exception('this id club not exist');
         }
+        
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if (false === $authorizationChecker->isGranted('OWNER', $club)) {
+            throw new AccessDeniedException();
+        }
+        
         $form = $this->getDeleteClubForm($clubId);
 
         return $this->render('@FfjvFo/Clubs/delete.html.twig', array(
@@ -203,9 +224,9 @@ class ClubsController extends Controller
 
     /**
      * @param Request $request
-     * @param string  $clubId
-     *
+     * @param string $clubId
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
      */
     public function deleteAction(Request $request, $clubId = '')
     {
@@ -215,10 +236,8 @@ class ClubsController extends Controller
             $em   = $this->getDoctrine()->getManager();
             $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
             //if club not esixt || user is not author
-            if (!$club || $club->getUser() != $this->getUser()) {
-                $this->addFlash('error', 'une erreur c\'est produite');
-
-                return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
+            if(!$club){
+                throw new \Exception('this id club not exist');
             }
             $em->remove($club);
             $em->flush();
@@ -234,19 +253,24 @@ class ClubsController extends Controller
     }
 
     /**
-     * @param string $clubId
-     *
+     * @param $clubId
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function newTeamAction($clubId){
         $em = $this->getDoctrine()->getManager();
         $club = $em->getRepository('FfjvBoBundle:Clubs')->find($clubId);
-        //if club not esixt || user is not author
-        if (!$club || $club->getUser() != $this->getUser()) {
-            $this->addFlash('error', 'une erreur c\'est produite');
-
-            return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
+        
+        if(!$club){
+            throw new \Exception('this id club not exist');
         }
+        
+        //if club not esixt || user is not author
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if (false === $authorizationChecker->isGranted('EDIT', $club)) {
+            throw new AccessDeniedException();
+        }
+        
         $team = new Teams();
 
         $url = $this->generateUrl('fo_clubs_createteams', array('clubId' => $club->getId()));
@@ -260,19 +284,22 @@ class ClubsController extends Controller
 
     /**
      * @param Request $request
-     * @param string  $clubId
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @param string $clubId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
      */
     public function createTeamToClubAction(Request $request, $clubId = ''){
 
         $em = $this->getDoctrine()->getManager();
         $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
-        //if club not esixt || user is not author
-        if (!$club || $club->getUser() != $this->getUser()) {
-            $this->addFlash('error', 'une erreur c\'est produite');
+        if(!$club){
+            throw new \Exception('this id club not exist');
+        }
 
-            return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
+        //if club not esixt || user is not author
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if (false === $authorizationChecker->isGranted('EDIT', $club)) {
+            throw new AccessDeniedException();
         }
 
         $team = new Teams();
@@ -299,16 +326,20 @@ class ClubsController extends Controller
 
     /**
      * @param string $clubId
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function newMemberAction($clubId = ''){
         $em = $this->getDoctrine()->getManager();
         $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
-        //if club not esixt || user is not author
-        if (!$club || $club->getUser() != $this->getUser()) {
-            $this->addFlash('error', 'une erreur c\'est produite');
+        if(!$club){
+            throw new \Exception('this id club not exist');
+        }
 
-            return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
+        //if club not esixt || user is not author
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if (false === $authorizationChecker->isGranted('EDIT', $club)) {
+            throw new AccessDeniedException();
         }
         $user = new User();
 
@@ -323,21 +354,23 @@ class ClubsController extends Controller
 
     /**
      * @param Request $request
-     * @param string  $clubId
-     *
+     * @param string $clubId
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function createMemberToClubAction(Request $request, $clubId = ''){
 
         $em = $this->getDoctrine()->getManager();
         $club = $em->getRepository('FfjvBoBundle:Clubs')->findOneBy(array('id' => $clubId));
-
-        //if club not esixt || user is not author
-        if (!$club || $club->getUser() != $this->getUser()) {
-            $this->addFlash('error', 'une erreur c\'est produite');
-            return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
+        if(!$club){
+            throw new \Exception('this id club not exist');
         }
-
+        //if club not esixt || user is not author
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if (false === $authorizationChecker->isGranted('EDIT', $club)) {
+            throw new AccessDeniedException();
+        }
+        
         $user = new User();
         $url = $this->generateUrl('fo_clubs_createmembers', array('clubId' => $clubId));
         $form = $this->getUserForm($user, $url);
@@ -416,10 +449,19 @@ class ClubsController extends Controller
      * @param User $user
      * @param array $role
      * @return bool
+     * @throws \Exception
      */
     private function addMemberToClub(Clubs $club, User $user, $role = array("ROLE_USER")){
         $em = $this->getDoctrine()->getManager();
-
+        if(!$club){
+            throw new \Exception('this id club not exist');
+        }
+        //if club not esixt || user is not author
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if (false === $authorizationChecker->isGranted('EDIT', $club)) {
+            throw new AccessDeniedException();
+        }
+        
         $userHasClub = new UserHasClubs();
         $userHasClub->setClub($club);
         $userHasClub->setUser($user);

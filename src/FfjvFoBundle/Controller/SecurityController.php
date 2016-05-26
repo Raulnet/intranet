@@ -301,7 +301,7 @@ class SecurityController extends Controller
                 'second_options'  => array('label' => 'Repeat New password'),
                 'attr' => array('class' => 'form-control')
             ))
-            ->add('submit', 'submit', array('label' => 'Valider', 'attr' => array('class' => 'btn btn-sm btn-success')))
+            ->add('submit', SubmitType::class, array('label' => 'Valider', 'attr' => array('class' => 'btn btn-sm btn-success')))
             ->getForm();
     }
 
@@ -343,9 +343,10 @@ class SecurityController extends Controller
      * @return \Symfony\Component\Form\Form
      */
     private function getRegisterForm(User $user){
-        $registerForm = $this->createForm(new CreateUserType(true), $user, array(
+        $registerForm = $this->createForm(CreateUserType::class, $user, array(
             'action' => $this->generateUrl('ffjv_fo_security_createuser'),
-            'method' => 'POST'
+            'method' => 'POST',
+            'registering' => true
         ));
         $registerForm->add('submit', SubmitType::class, array(
             'label' => 'enregistrer'

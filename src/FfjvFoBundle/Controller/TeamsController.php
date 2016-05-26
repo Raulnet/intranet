@@ -5,6 +5,7 @@ namespace FfjvFoBundle\Controller;
 use FfjvBoBundle\Entity\Teams;
 use FfjvBoBundle\Form\TeamsType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use FfjvBoBundle\Entity\Messages;
 
@@ -37,18 +38,21 @@ class TeamsController extends Controller
     /**
      * @param Request $request
      * @param int $teamId
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws AccessDeniedException
+     * @throws \Exception
      */
     public function updateAction(Request $request, $teamId = 0){
         $em = $this->getDoctrine()->getManager();
         $team = $em->getRepository('FfjvBoBundle:Teams')->find($teamId);
-        if(!$team){
-            $this->addFlash('error', 'une erreur c\est produite . Cette team n\'existe pas');
-            return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
+        $authorizationChecker = $this->get('security.authorization_checker');
+
+        if (false === $authorizationChecker->isGranted('EDIT', $team->getClub())) {
+            throw new AccessDeniedException();
         }
-        if($team->getClub()->getUser() != $this->getUser()){
-            $this->addFlash('error', 'une erreur c\'est produite . Vous n\'êtes pas autorisez à modifier cette equipe .' );
-            return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
+        if($this->get('security'))
+        if(!$team){
+            throw new \Exception('this id team not exist');
         }
         $editForm = $this->getFormTeamEdit($team);
         $editForm->handleRequest($request);
@@ -71,17 +75,19 @@ class TeamsController extends Controller
      * @param Request $request
      * @param int $teamId
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws AccessDeniedException
+     * @throws \Exception
      */
     public function deleteAction(Request $request, $teamId = 0){
         $em = $this->getDoctrine()->getManager();
         $team = $em->getRepository('FfjvBoBundle:Teams')->find($teamId);
-        if(!$team){
-            $this->addFlash('error', 'une erreur c\est produite . Cette team n\'existe pas');
-            return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
+
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if (false === $authorizationChecker->isGranted('DELETE', $team->getClub())) {
+            throw new AccessDeniedException();
         }
-        if($team->getClub()->getUser() != $this->getUser()){
-            $this->addFlash('error', 'une erreur c\est produite . Vous n\'êtes pas autorisez à modifier cette equipe .' );
-            return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
+        if(!$team){
+            throw new \Exception('this id team not exist');
         }
         $deleteForm = $this->getDeleteForm($team);
         $deleteForm->handleRequest($request);
@@ -99,14 +105,14 @@ class TeamsController extends Controller
      * @param Request $request
      * @param int $teamId
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
      */
     public function contactClubTeamAction(Request $request, $teamId = 0){
 
         $em = $this->getDoctrine()->getManager();
         $team = $em->getRepository('FfjvBoBundle:Teams')->find($teamId);
         if(!$team){
-            $this->addFlash('error', 'Une erreur c\'est produite');
-            return $this->redirectToRoute('fo_profile_show', array('id' => $this->getUser()->getId()));
+            throw new \Exception('this id team not exist');
         }
 
         $form = $this->getContactForm();
@@ -148,10 +154,10 @@ class TeamsController extends Controller
      * @return $this|\Symfony\Component\Form\FormInterface
      */
     private function getFormTeamEdit(Teams $team){
-        return $this->createForm(new TeamsType(), $team, [
+        return $this->createForm(TeamsType::class, $team, [
             "method" => "PUT",
             "action" => $this->generateUrl("fo_teams_update", ["teamId" => $team->getId()])
-        ])->add("submit", "submit", [
+        ])->add("submit", SubmitType::class, [
             "label" => "enregistrer",
             "attr" => [
                 "class" => "btn btn-success"
@@ -168,7 +174,7 @@ class TeamsController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('fo_teams_delete', array('teamId' => $team->getId())))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', [
+            ->add('submit', SubmitType::class, [
                 'label' => 'Confirmer',
                 'attr'  => ["class" => "btn btn-danger"]
             ])
@@ -183,7 +189,7 @@ class TeamsController extends Controller
      */
     private function getContactForm($url = '', $data = array()){
         $form = $this->get('contact')->getFormContactClub($url, $data);
-        $form->add('submit', 'submit', array(
+        $form->add('submit', SubmitType::class, array(
             'label' => 'envoyer'
         ));
         return $form;

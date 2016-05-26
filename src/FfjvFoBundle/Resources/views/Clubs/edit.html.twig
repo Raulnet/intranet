@@ -7,6 +7,14 @@
     {% block customCSS %}
         <link rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Profile/show.css') }}">
     {% endblock %}
+{% block customJS %}
+    <script src="//cdn.ckeditor.com/4.5.9/basic/ckeditor.js"></script>
+    <script>
+        $(function () {
+            CKEDITOR.replace('clubs_about');
+        });
+    </script>
+{% endblock %}
     {% block content %}
         <section class="content-header">
             <h2>Edition {{ club.title }}</h2>
@@ -56,9 +64,8 @@
                                 {{ club.zipcode }}, {{ club.city }}</p>
                             <hr>
                             <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-
                             <p class="text-muted">
-                                {{ club.about }}
+                                {{ club.about|raw }}
                             </p>
                         </div>
                     </div>

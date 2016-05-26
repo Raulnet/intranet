@@ -29,6 +29,7 @@ class AppExtension extends \Twig_Extension
         $roles['auteur'] = 'ROLE_AUTHOR';
         $roles['enregistrer'] = 'ROLE_USER';
         $roles['postulant'] = 'ROLES_REQUEST_TO_JOIN';
+
         return array_keys($roles, $role)[0];
     }
     /**
@@ -38,9 +39,11 @@ class AppExtension extends \Twig_Extension
     public function rolesTeamMember($role = '')
     {
         $roles = UserHasTeams::$listRoles;
-        $roles['ROLE_AUTHOR'] = 'auteur';
-        $roles['ROLES_REQUEST_TO_JOIN'] = 'postulant';
-        return$roles[$role];
+        $roles['auteur'] = 'ROLE_AUTHOR';
+        $roles['postulant'] = 'ROLES_REQUEST_TO_JOIN';
+        $roles['membre'] = 'ROLE_TEAM_MEMBER';
+        
+        return array_keys($roles, $role)[0];
     }
 
     /**

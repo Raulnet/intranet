@@ -25,9 +25,9 @@ class UpdateProfileType extends AbstractType
             ->add('nationality', ChoiceType::class, array(
                 'choices_as_values' => true,
                 'choices' => array(
-                    'FR' => 'Français',
-                    'BE' => 'Belge',
-                    'CH' => 'Suisse'
+                    'Français' => 'FR',
+                    'Belge' => 'BE',
+                    'Suisse' => 'CH'
                 ),
                 'placeholder' => 'Séléctionner votre nationalité',
                 'attr' => array('class' => 'form-control')
@@ -52,8 +52,8 @@ class UpdateProfileType extends AbstractType
             ->add('gender', ChoiceType::class, array(
                 'choices_as_values' => true,
                 'choices' => [
-                    'M' => 'Homme',
-                    'F' => 'Femme'
+                    'Homme' => 'M',
+                    'Femme' => 'F'
                 ],
                 'attr' => array('class' => 'form-control')
             ))
@@ -73,9 +73,9 @@ class UpdateProfileType extends AbstractType
             ->add('countryAddress', ChoiceType::class, array(
                 'choices_as_values' => true,
                 'choices' => array(
-                    'FR' => 'France',
-                    'BE' => 'Belgique',
-                    'CH' => 'Suisse'
+                    'France' => 'FR',
+                    'Belgique' => 'BE',
+                    'Suisse' => 'CH'
                 ),
                 'placeholder' => 'Séléctionner votre pays d\'adresse',
                 'attr' => array('class' => 'form-control')

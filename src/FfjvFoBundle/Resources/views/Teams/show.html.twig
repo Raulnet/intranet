@@ -86,14 +86,18 @@
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#members" data-toggle="tab" aria-expanded="true">Membres</a></li>
-                            <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                            {% if is_granted('EDIT', team.club) %}
+                                <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                            {% endif %}
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="members">
                                 <div class="box">
                                     {% if members %}
                                         <div class="box-body">
-                                            <a class="btn btn-info btn-xs pull-right" href="{{ path('fo_user_has_teams_select_member', {'teamId': team.id}) }}">ajouter un membre</a>
+                                            {% if is_granted('VIEW', team.club) %}
+                                                <a class="btn btn-info btn-xs pull-right" href="{{ path('fo_user_has_teams_select_member', {'teamId': team.id}) }}">ajouter un membre</a>
+                                            {% endif %}
                                             <table id="team_members_board" class="table table-bordered table-striped">
                                                 <thead>
                                                 <tr>
@@ -120,7 +124,7 @@
                                                         <td>
                                                             <ul class="list-group">
                                                                 {% for role in member.roles %}
-                                                                    <li class="list-group-item">{{ role|rolesTeamMember }}</li>
+                                                                    <li class="list-group-item">{{ role }}</li>
                                                                 {% endfor %}
                                                             </ul>
                                                         </td>
@@ -139,12 +143,15 @@
                                     {% else %}
                                         <div class="box-body">
                                             <p class="pull-left">Aucun membres</p>
-                                            <a class="btn btn-info btn-xs pull-right" href="{{ path('fo_user_has_teams_select_member', {'teamId': team.id}) }}">ajouter un membre</a>
+                                            {% if is_granted('EDIT', team.club) %}
+                                                <a class="btn btn-info btn-xs pull-right" href="{{ path('fo_user_has_teams_select_member', {'teamId': team.id}) }}">ajouter un membre</a>
+                                            {% endif %}
                                             <div class="clearfix"></div>
                                         </div>
                                     {% endif %}
                                 </div>
                             </div>
+                            {% if is_granted('EDIT', team.club) %}
                             <div class="tab-pane" id="settings">
                                 {{ form_start(editForm, {'attr': {'class': 'form-horizontal'}}) }}
                                 <div class="form-group">
@@ -184,6 +191,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

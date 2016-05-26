@@ -2,11 +2,13 @@
 
 namespace FfjvBoBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use FfjvBoBundle\Entity\UserHasTeams;
 use FfjvBoBundle\Form\UserHasTeamsType;
+use FfjvFoBundle\Form\MemberType;
 
 /**
  * UserHasTeams controller.
@@ -62,12 +64,12 @@ class UserHasTeamsController extends Controller
      */
     private function createCreateForm(UserHasTeams $entity)
     {
-        $form = $this->createForm(new UserHasTeamsType(), $entity, array(
+        $form = $this->createForm(UserHasTeamsType::class, $entity, array(
             'action' => $this->generateUrl('userhasteams_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -217,7 +219,7 @@ class UserHasTeamsController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('userhasteams_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

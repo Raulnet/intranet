@@ -17,20 +17,24 @@ use FfjvBoBundle\Entity\User;
  */
 class AclService
 {
-    /**
-     * @var array
-     */
-    private $permission = [
-        'VIEW'      => 'view',
-        'EDIT'      => 'edit',
-        'CREATE'    => 'create',
-        'DELETE'    => 'delete',
-        'UNDELETE'  => 'undelete',
-        'OPERATOR'  => 'operator',
-        'MASTER'    => 'MASTER',
-        'OWNER'     => 'owner'
-    ];
+    const MASK_UNDEFINED = 0;
 
+    /**
+     * @return array
+     */
+    public static function getMaskList(){
+        return [
+            'VIEW'      => MaskBuilder::MASK_VIEW,
+            'EDIT'      => MaskBuilder::MASK_EDIT,
+//            'CREATE'    => MaskBuilder::MASK_CREATE,
+            'DELETE'    => MaskBuilder::MASK_DELETE,
+//            'UNDELETE'  => MaskBuilder::MASK_UNDELETE,
+            'OPERATOR'  => MaskBuilder::MASK_OPERATOR,
+            'MASTER'    => MaskBuilder::MASK_MASTER,
+            'OWNER'     => MaskBuilder::MASK_OWNER
+        ];
+    }
+    
     /**
      * @var MutableAclProvider
      */
@@ -60,37 +64,61 @@ class AclService
 
         $securityIdentity = UserSecurityIdentity::fromAccount($user);
         $objectIdentity = ObjectIdentity::fromDomainObject($entity);
-        $builder = new MaskBuilder();
+        $mask = 0;
         foreach ($roles as $role){
-            if(!array_key_exists($role, $this->permission )){
+            if(!in_array($role, $this->getMaskList() )){
+                var_dump($role);
                 throw new \Exception('Role submit not exist');
             }
-            $builder->add($this->permission[$role]);
+            if($role > $mask){
+                $mask = $role;
+            }
         }
-        $mask = $builder->get();
 
-        $objectAce = false;
         try{
-            $acl = $this->aclProvider->findAcl($objectIdentity, [$securityIdentity]);
+            $acl = $this->aclProvider->findAcl($objectIdentity);
             $objectAce = $acl->getObjectAces();
+            foreach ($objectAce as $key => $ace){
+                if($ace->getSecurityIdentity() == $securityIdentity){
+                    if($ace->getMask() < MaskBuilder::MASK_OWNER) { // don't remove OWNER ROLE
+                        $acl->deleteObjectAce($key);
+                        $this->aclProvider->updateAcl($acl);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
         } catch (\Exception $e){
             $acl = $this->aclProvider->createAcl($objectIdentity);
-
         }
 
-        if($objectAce){
-            $acl->updateObjectAce(0, $mask);
-        } else {
-            $acl->insertObjectAce($securityIdentity, $mask);
-        }
-
+        $acl->insertObjectAce($securityIdentity, $mask);
         $this->aclProvider->updateAcl($acl);
         return true;
     }
 
-
-
-
-
+    /**
+     * @param $entity
+     * @param User $user
+     * @return int
+     */
+    public function getPermission($entity, User $user){
+        $securityIdentity = UserSecurityIdentity::fromAccount($user);
+        $objectIdentity = ObjectIdentity::fromDomainObject($entity);
+        try{
+            $acl = $this->aclProvider->findAcl($objectIdentity);
+            $objectAce = $acl->getObjectAces();
+            foreach ($objectAce as $key => $ace){
+                if($ace->getSecurityIdentity() == $securityIdentity){
+                    return $ace->getMask() ;
+                }
+            }
+            return self::MASK_UNDEFINED;
+        } catch (\Exception $e){
+            return self::MASK_UNDEFINED;
+        }
+        return self::MASK_UNDEFINED;
+    }
 
 }

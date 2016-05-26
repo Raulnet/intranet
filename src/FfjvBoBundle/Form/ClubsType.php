@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ClubsType extends AbstractType
@@ -128,8 +130,16 @@ class ClubsType extends AbstractType
                 'required' => false,
                 'placeholder' => 'Sélectionner une ligues',
                 'attr' => array(
-                    'class' => 'form-control')
-            ))
+                    'class' => 'form-control')))
+            ->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event){
+               $club = $event->getData();
+                if($club['about']){
+                    $about = $club['about'];
+                    $about = str_replace('script', '', $about);
+                    $club['about'] = $about;
+                    $event->setData($club);
+                }
+            });
         ;
     }
 

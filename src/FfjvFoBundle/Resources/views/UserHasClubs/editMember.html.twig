@@ -62,6 +62,7 @@
                         {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
                         <div class="box-header with-border">
                             <h3 class="box-title">Role - Membre - {{ member.user }}</h3>
+                            <a href="{{ path('fo_clubs_show', {'clubId': club.id}) }}" class="btn btn-default btn-xs pull-right">retour</a>
                         </div>
                         <div class="box-body">
                             {{ form_label(form.roles) }}

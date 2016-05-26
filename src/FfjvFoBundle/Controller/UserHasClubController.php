@@ -145,6 +145,7 @@ class UserHasClubController extends Controller
      * @param Request $request
      * @param int $memberId
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function updateMemberAction(Request $request, $memberId = 0)
     {
@@ -360,17 +361,21 @@ class UserHasClubController extends Controller
     {
         return $this->createForm(MemberType::class, $member, [
             "action" => $this->generateUrl('fo_user_has_club_update_member', ['memberId' => $member->getId()]),
-            "method" => "PUT"
+            "method" => "PUT",
+            "user_ace" => $this->get('permissions')->getPermission($member->getClub(), $this->getUser())
         ]);
     }
 
+    /**
+     * @param $memberId
+     * @return \Symfony\Component\Form\Form
+     */
     private function getFormRemoveMember($memberId)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('fo_user_has_club_remove_member', array('memberId' => $memberId)))
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, array('label' => 'confirmer', 'attr'=> array('class' => 'btn btn-danger')))
-            ->getForm()
-            ;
+            ->getForm();
     }
 }

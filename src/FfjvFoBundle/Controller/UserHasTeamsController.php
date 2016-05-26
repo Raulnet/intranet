@@ -6,7 +6,7 @@ use FfjvBoBundle\Entity\Teams;
 use FfjvBoBundle\Entity\UserHasClubs;
 use FfjvBoBundle\Entity\User;
 use FfjvBoBundle\Entity\UserHasTeams;
-use Ffjv\FoBundle\Form\TeamMemberType;
+use FfjvFoBundle\Form\TeamMemberType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -206,7 +206,7 @@ class UserHasTeamsController extends Controller
         if($url == ""){
             $url = $this->generateUrl('fo_user_has_teams_add_member', ['teamId' => $teamId]);
         }
-        return $this->createForm(new TeamMemberType($userHasTeams), array('user_id' => ($user != null ? $user->getId() : null), 'roles' => $userHasTeams->getRoles()), [
+        return $this->createForm(TeamMemberType::class, array('user_id' => ($user != null ? $user->getId() : null), 'roles' => $userHasTeams->getRoles()), [
            'method' => 'POST',
             'action' => $url
         ]);
