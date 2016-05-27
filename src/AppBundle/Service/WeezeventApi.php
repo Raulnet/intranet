@@ -16,15 +16,15 @@ class WeezeventApi
     /**
      * @var string
      */
-    private $username = 'l.negre@weezevent.com';
+    private $username = '';
     /**
      * @var string
      */
-    private $password = '*Avier016';
+    private $password = '';
     /**
      * @var string
      */
-    private $apiKey = 'e938f10d417115b6c9bc05f578868c4c';
+    private $apiKey = '';
     /**
      * @var string
      */
@@ -42,23 +42,23 @@ class WeezeventApi
      */
     public function setAuthAccess($username = '', $password = '', $apiKey = ''){
 
-        $this->username = $username;
-        $this->password = $password;
-        $this->apiKey = $apiKey;
+        $this->username = base64_decode($username);
+        $this->password = base64_decode($password);
+        $this->apiKey = base64_decode($apiKey);
 
         return $this;
     }
 
     /**
      * @return $this
-     * @throws Exception
+     * @throws \Exception
      */
     public function initConnection(){
         $params = ['username'=>$this->username, 'password'=>$this->password, 'api_key'=>$this->apiKey];
         $options = $this->getPostOption(self::AUTH_ACCESS_URL, $params);
         $response = $this->getCurlResponse($options, true);
         if(array_key_exists('error', $response)){
-            throw new Exception($response['error']['message']);
+            throw new \Exception($response['error']['message']);
         }
         $this->accessToken = $response["accessToken"];
         return $this;
