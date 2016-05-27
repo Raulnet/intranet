@@ -22,7 +22,7 @@ class indexController extends Controller
         }
 
         
-        $form = $this->createForm(WeezEventApiLogType::class, $apiLog);
+        $form = $this->createForm(WeezEventApiLogType::class, $apiLog, ['method' => 'POST']);
         if($request->getMethod() == 'POST'){
             $form->handleRequest($request);
             if($form->isSubmitted()){
