@@ -1,6 +1,6 @@
 parameters:
-    path_lib: "/intranet/vendor/Polymer/"
-    path_component: "/intranet/src/WebComponentBundle/Resources/views/Components/"
+    path_lib: "../vendor/Polymer/"
+    path_component: "../src/WebComponentBundle/Resources/views/Components/"
     component_array:
         proto-element:
             - "polymer/polymer.html"
