@@ -44,7 +44,7 @@ class WebComponentService
     public function __construct($pathLib = "", $pathComponents = "",array $componentArray)
     {
         $this->pathLib = $pathLib;
-        $this->pathComponents = __DIR__.'/../Resources/views/Components/';
+        $this->pathComponents = '/'.__DIR__.'/../Resources/views/Components/';
         $this->componentArray = $componentArray;
     }
 
