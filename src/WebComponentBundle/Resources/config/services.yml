@@ -1,6 +1,6 @@
 parameters:
     path_lib: "/public/lib/"
-    path_component: "/../WebComponentBundle/Resources/views/Components/"
+    path_component: "/public/components/"
     component_array:
         proto-element:
             - "polymer/polymer.html"
