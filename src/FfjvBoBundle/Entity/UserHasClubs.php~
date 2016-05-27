@@ -259,4 +259,28 @@ class UserHasClubs
     {
         return $this->requestToJoin;
     }
+
+    /**
+     * Set permissions
+     *
+     * @param array $permissions
+     *
+     * @return UserHasClubs
+     */
+    public function setPermissions($permissions)
+    {
+        $this->permissions = $permissions;
+
+        return $this;
+    }
+
+    /**
+     * Get permissions
+     *
+     * @return array
+     */
+    public function getPermissions()
+    {
+        return $this->permissions;
+    }
 }

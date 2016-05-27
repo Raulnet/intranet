@@ -12,6 +12,9 @@ class HomeController extends Controller
      */
     public function indexAction()
     {
+
+        $json = $this->get('weezeventApi')->initConnection()->getListEvent();
+
         return $this->render('@FfjvFo/Home/index.html.twig', array());
     }
 

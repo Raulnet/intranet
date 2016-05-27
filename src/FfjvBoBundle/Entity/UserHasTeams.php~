@@ -21,10 +21,10 @@ class UserHasTeams
      * @var array
      */
     public static $listRoles = [
-        self::ROLE_TEAM_MEMBER => 'membre',
-        self::ROLE_TEAM_SUB_MEMBER => 'remplaçant',
-        self::ROLE_TEAM_LEADER => 'leader',
-        self::ROLE_TEAM_SUB_LEADER => 'second',];
+        'membre' =>  self::ROLE_TEAM_MEMBER,
+        'remplaçant' => self::ROLE_TEAM_SUB_MEMBER,
+        'leader' => self::ROLE_TEAM_LEADER,
+        'second' => self::ROLE_TEAM_SUB_LEADER];
 
     /**
      * @var array

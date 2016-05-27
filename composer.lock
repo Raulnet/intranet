@@ -4,9 +4,48 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3ce841d49e30061c0844955da8f48afb",
-    "content-hash": "0dd68aa08ad3f90378d9de6e952337e2",
+    "hash": "fe51551fbbc40ee841680016e6dd1c84",
+    "content-hash": "f39ef10b08bc0961c1824aa0d102436d",
     "packages": [
+        {
+            "name": "Polymer/polymer",
+            "version": "v1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Polymer/polymer.git",
+                "reference": "v1.4.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Polymer/polymer/archive/v1.4.0.zip",
+                "reference": "v1.4.0",
+                "shasum": null
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "../web/public/lib/polymer"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Polymer/webcomponents",
+            "version": "v0.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webcomponents/webcomponents-lite.git",
+                "reference": "v0.6.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/webcomponents/webcomponents-lite/archive/v0.6.0.zip",
+                "reference": "v0.6.0",
+                "shasum": null
+            },
+            "type": "component"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.7",

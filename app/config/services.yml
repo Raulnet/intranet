@@ -15,6 +15,8 @@ services:
     permissions:
         class: AppBundle\Service\AclService
         arguments: ["@security.acl.provider"]
+    weezeventApi:
+        class: AppBundle\Service\WeezeventApi
     clubs:
         class: FfjvBoBundle\Service\Entity\ClubsService
         arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]

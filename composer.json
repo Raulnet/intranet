@@ -16,6 +16,42 @@
             "Tests\\": "tests/"
         }
     },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "Polymer/polymer",
+                "type": "component",
+                "version": "v1.4.0",
+                "dist": {
+                    "url": "https://github.com/Polymer/polymer/archive/v1.4.0.zip",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/Polymer/polymer.git",
+                    "type": "git",
+                    "reference": "v1.4.0"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "Polymer/webcomponents",
+                "type": "component",
+                "version": "v0.6.0",
+                "dist": {
+                    "url": "https://github.com/webcomponents/webcomponents-lite/archive/v0.6.0.zip",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/webcomponents/webcomponents-lite.git",
+                    "type": "git",
+                    "reference": "v0.6.0"
+                }
+            }
+        }
+    ],
     "require": {
         "php": ">=5.5.9",
         "symfony/symfony": "3.0.*",
@@ -27,7 +63,9 @@
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
-        "symfony/security-acl": "^3.0"
+        "symfony/security-acl": "^3.0",
+        "Polymer/polymer": "v1.4.0",
+        "Polymer/webcomponents": "v0.6.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

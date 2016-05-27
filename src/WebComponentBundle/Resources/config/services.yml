@@ -1,0 +1,17 @@
+parameters:
+    path_lib: "/intranet/vendor/Polymer/"
+    path_component: "/intranet/src/WebComponentBundle/Resources/views/Components/"
+    component_array:
+        proto-element:
+            - "polymer/polymer.html"
+            - "paper-material/paper-material.html"
+services:
+    web.component.twig_extension:
+        class: WebComponentBundle\Twig\WebComponentTwigExtension
+        public: false
+        arguments: ["@service_container"]
+        tags:
+            - { name: twig.extension }
+    web_component:
+        class: WebComponentBundle\Service\WebComponentService
+        arguments: ["%path_lib%", "%path_component%", "%component_array%"]

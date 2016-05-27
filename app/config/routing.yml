@@ -1,3 +1,7 @@
+web_component:
+    resource: "@WebComponentBundle/Resources/config/routing.yml"
+    prefix:   /webcomponent
+
 ffjv_fo:
     resource: "@FfjvFoBundle/Resources/config/routing.yml"
     prefix:   /

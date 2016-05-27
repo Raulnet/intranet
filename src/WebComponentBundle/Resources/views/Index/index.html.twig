@@ -1,0 +1,7 @@
+{% extends('WebComponentBundle::layout.html.twig') %}
+{% block webComponent %}
+    {{ webComponent(['proto-element'])|raw }}
+{% endblock %}
+{% block content %}
+    <proto-element events="{{ events }}"></proto-element>
+{% endblock %}

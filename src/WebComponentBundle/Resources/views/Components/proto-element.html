@@ -1,0 +1,63 @@
+<dom-module id="proto-element">
+    <template>
+        <div id="container"></div>
+        <template is="dom-repeat" items="{{events.events}}">
+            <article id$="event{{item.id}}" class="z-depth-1" on-click="action">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{item.name}} <i class="fa fa-users"></i>{{item.participants}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div>{{item.date.start}}</div>
+                </div>
+            </article>
+        </template>
+    </template>
+    <script>
+        Polymer({
+            is: "proto-element",
+            properties: {
+                user: {
+                    type: String,
+                    value: 'Banana'
+                },
+                events: {
+                    type: Array,
+                    value: [
+                        {"id":177654,
+                            "name":"Raulnet Test 2016",
+                            "id_orga":"46798",
+                            "date":{
+                                "start":"2016-05-27 00:00:00",
+                                "end":""
+                            },
+                            "participants":4,
+                            "multiple_dates":0,
+                            "sales_status":{
+                                "id_status":5,
+                                "libelle_status":
+                                        "\u00c9v\u00e8nement non publi\u00e9 ou cl\u00f4tur\u00e9"
+                            }
+                        },
+                    ]
+                },
+            },
+            ready: function(){
+                this.panelClass = 'panel-default'
+            },
+            action: function(e){
+                var model = e.model;
+                var id = '#article'+model.item.championship_id;
+                var elem = this.$$(id);
+
+                var select = elem.getAttribute('selected');
+                if(select == 'true'){
+                    elem.setAttribute('class', 'z-depth-1');
+                    elem.setAttribute('selected', 'false');
+                } else {
+                    elem.setAttribute('class', 'z-depth-2');
+                    elem.setAttribute('selected', 'true');
+                }
+            },
+        });
+    </script>
+</dom-module>
