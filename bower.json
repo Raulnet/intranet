@@ -1,0 +1,27 @@
+{
+  "name": "intranet",
+  "homepage": "https://github.com/Raulnet/intranet",
+  "authors": [
+    "Raulnet <laurentnegre016@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0",
+    "bootstrap": "^3.3.6",
+    "paper-material": "PolymerElements/paper-material#^1.0.6",
+    "Materialize": "materialize#^0.97.5",
+    "noty": "^2.3.8",
+    "iron-ajax": "PolymerElements/iron-ajax#^1.2.0",
+    "paper-dialog": "PolymerElements/paper-dialog#^1.0.4"
+  }
+}
