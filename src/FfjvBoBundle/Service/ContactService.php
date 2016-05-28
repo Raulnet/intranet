@@ -12,7 +12,6 @@ use Doctrine\ORM\EntityManager;
 use FfjvBoBundle\Form\ContactClubType;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use FfjvBoBundle\Entity\User;
 use FfjvBoBundle\Entity\Messages;
 
 class ContactService

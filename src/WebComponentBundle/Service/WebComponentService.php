@@ -9,6 +9,7 @@
 namespace WebComponentBundle\Service;
 
 use Symfony\Component\Asset\Packages;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class WebComponentService
 {
@@ -38,15 +39,21 @@ class WebComponentService
 
     /**
      * WebComponentService constructor.
+     * @param ContainerInterface $container
      * @param Packages $packages
      * @param string $pathLib
      * @param string $pathComponents
      * @param array $componentArray
      */
-    public function __construct(Packages $packages, $pathLib = "", $pathComponents = "",array $componentArray)
+    public function __construct(ContainerInterface $container, Packages $packages, $pathLib = "", $pathComponents = "",array $componentArray)
     {
+        $request = $container->get('request_stack');
+        $request = $request->getCurrentRequest();
+        $scheme = $request->getScheme();
+        $httpHost = $request->getHttpHost();
+        $asset = $packages->getUrl($pathComponents);
         $this->pathLib = $packages->getUrl($pathLib);
-        $this->pathComponents = $pathComponents;
+        $this->pathComponents =  $scheme.'://'.$httpHost.$asset;
         $this->componentArray = $componentArray;
     }
 
@@ -79,7 +86,7 @@ class WebComponentService
             foreach($componentDepencies as $depency){
                 $dependencies[$depency] = $this->getLinkImportComponent($this->pathLib, $depency);
             }
-            $dependencies[$component] = $this->getLinkImportComponent($this->pathLib.$this->pathComponents, $component.self::COMPONENT_EXTEND);
+            $dependencies[$component] = $this->getLinkImportComponent($this->pathComponents, $component.self::COMPONENT_EXTEND);
         }
         return $dependencies;
     }
