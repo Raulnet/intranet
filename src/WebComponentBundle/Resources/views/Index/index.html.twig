@@ -4,7 +4,6 @@
 {% endblock %}
 
 {% block content %}
-    <link href="{{ absolute_url(asset('../src/WebComponentBundle/Resources/views/components/proto-element.html')) }}" rel="import">
     <proto-element events="{{ events }}"></proto-element>
     {{ form(form) }}
 {% endblock %}
