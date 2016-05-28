@@ -79,7 +79,7 @@ class WebComponentService
             foreach($componentDepencies as $depency){
                 $dependencies[$depency] = $this->getLinkImportComponent($this->pathLib, $depency);
             }
-            $dependencies[$component] = $this->getLinkImportComponent($this->pathComponents, $component.self::COMPONENT_EXTEND);
+            $dependencies[$component] = $this->getLinkImportComponent($this->pathLib.$this->pathComponents, $component.self::COMPONENT_EXTEND);
         }
         return $dependencies;
     }
