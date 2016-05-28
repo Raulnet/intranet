@@ -8,6 +8,7 @@
 
 namespace WebComponentBundle\Service;
 
+use Symfony\Component\Asset\Packages;
 
 class WebComponentService
 {
@@ -37,13 +38,14 @@ class WebComponentService
 
     /**
      * WebComponentService constructor.
+     * @param Packages $packages
      * @param string $pathLib
      * @param string $pathComponents
      * @param array $componentArray
      */
-    public function __construct($pathLib = "", $pathComponents = "",array $componentArray)
+    public function __construct(Packages $packages, $pathLib = "", $pathComponents = "",array $componentArray)
     {
-        $this->pathLib = $pathLib;
+        $this->pathLib = $packages->getUrl($pathLib);
         $this->pathComponents = $pathComponents;
         $this->componentArray = $componentArray;
     }
@@ -69,6 +71,7 @@ class WebComponentService
      * @return array
      */
     private function getDependencies(array $components){
+
         $dependencies = [];
         foreach($components as $component){
 

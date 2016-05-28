@@ -2,6 +2,7 @@
 {% block webComponent %}
     {{ webComponent(['proto-element'])|raw }}
 {% endblock %}
+
 {% block content %}
     <proto-element events="{{ events }}"></proto-element>
     {{ form(form) }}

@@ -1,6 +1,6 @@
 parameters:
-    path_lib: "/public/lib/"
-    path_component: "/public/components/"
+    path_lib: "public/lib/"
+    path_component: "../../../src/WebComponentBundle/Resources/views/components/"
     component_array:
         proto-element:
             - "polymer/polymer.html"
@@ -14,4 +14,4 @@ services:
             - { name: twig.extension }
     web_component:
         class: WebComponentBundle\Service\WebComponentService
-        arguments: ["%path_lib%", "%path_component%", "%component_array%"]
+        arguments: ["@assets.packages", "%path_lib%", "%path_component%", "%component_array%"]

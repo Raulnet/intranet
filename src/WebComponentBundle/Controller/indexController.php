@@ -11,6 +11,7 @@ class indexController extends Controller
 {
     public function indexAction(Request $request)
     {
+
         $em = $this->getDoctrine()->getManager();
         $apiLog = $em->getRepository('FfjvBoBundle:WeezeventApiLog')->findOneBy(['user' => $this->getUser()]);
         if(!$apiLog){

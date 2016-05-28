@@ -52,3 +52,4 @@ security:
         - { path: ^/club, roles:  ROLE_USER_CONFIRMED }
         - { path: ^/team, roles:  ROLE_USER_CONFIRMED }
         - { path: ^/administration, roles: ROLE_ADMIN }
+        - { path: ^/webcomponent, roles: ROLE_ADMIN }
