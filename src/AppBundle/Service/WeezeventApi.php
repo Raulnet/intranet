@@ -58,7 +58,7 @@ class WeezeventApi
         $options = $this->getPostOption(self::AUTH_ACCESS_URL, $params);
         $response = $this->getCurlResponse($options, true);
         if(array_key_exists('error', $response)){
-            var_dump($response['error']['message']);
+            var_dump($response['error']['message']);exit;
         }
         $this->accessToken = $response["accessToken"];
         return $this;
