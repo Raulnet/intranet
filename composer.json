@@ -65,7 +65,16 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "symfony/security-acl": "^3.0",
         "Polymer/polymer": "v1.4.0",
-        "Polymer/webcomponents": "v0.6.0"
+        "Polymer/webcomponents": "v0.6.0",
+        "leafo/scssphp": "^0.6.3",
+        "patchwork/jsqueeze": "~1.0",
+        "symfony/assetic-bundle": "^2.8",
+        "zendframework/zend-db": "2.*",
+        "zendframework/zend-stdlib": "2.*",
+        "zendframework/zend-eventmanager": "~2.6",
+        "zendframework/zend-code": "~3.0.1",
+        "robmorgan/phinx": "^0.5.3",
+        "symfony/translation": "^3.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
@@ -78,7 +87,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
+            "bin/console assetic:dump"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -86,7 +96,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
+            "bin/console assetic:dump"
         ]
     },
     "config": {

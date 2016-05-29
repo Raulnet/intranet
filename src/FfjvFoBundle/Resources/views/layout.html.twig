@@ -4,7 +4,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/lib/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/css/mdb.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/lib/noty/css/animate.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/main.css') }}">
+    {% stylesheets filter="scssphp" output="css/app.css"
+    "public/scss/Fo/main.scss"
+    "public/scss/Fo/Home/index.scss"
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
+    {% endstylesheets %}
     {% block customCSS %}{% endblock %}
 {% endblock %}
 {% block javascripts %}

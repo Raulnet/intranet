@@ -1,9 +1,11 @@
 {% extends('WebComponentBundle::layout.html.twig') %}
+{% trans_default_domain "index" %}
 {% block webComponent %}
     {{ webComponent(['proto-element'])|raw }}
 {% endblock %}
 
 {% block content %}
+    <h2>{{ 'Symfony.is.great'|trans }}</h2>
     <proto-element events="{{ events }}"></proto-element>
     {{ form(form) }}
 {% endblock %}

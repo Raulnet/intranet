@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new FfjvBoBundle\FfjvBoBundle(),
             new FfjvFoBundle\FfjvFoBundle(),
             new WebComponentBundle\WebComponentBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

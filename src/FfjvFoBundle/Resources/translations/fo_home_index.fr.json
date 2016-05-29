@@ -1,0 +1,13 @@
+{
+  "fo.home.index.title": "BIENVENUE SUR VOTRE ESPACE MEMBRE FFJV",
+  "fo.home.index.subtitle": "La gestion du licencié, de ses équipes, de sa structure jusqu'à sa ligne nationale.",
+  "fo.home.index.btn.login": "Connectez-vous",
+  "fo.home.index.btn.registering": "Inscrivez-vous gratuitement",
+  "fo.home.index.description.title": "Qu’est ce que l’espace membre ?",
+  "fo.home.index.description.content": "En tant que club ou joueur affilié à la FFJV, vous bénéficiez d’un accès exclusif à l’espace membre de la Fédération. Cet outil sera pour ses utilisateurs une vraie place d’échange, où chacun pourra avoir accès, en fonction de son statut (manager, eSporteur, ...) aux données des licences le concernant.",
+  "fo.home.index.maps.title": "Où nous trouver ?",
+  "fo.home.index.maps.title.graduate": "Licenciés",
+  "fo.home.index.maps.title.clubs": "Clubs",
+  "fo.home.index.footer.link.cgu": "Conditions général d'utilisation",
+  "fo.home.index.modal.btn.close": "fermer"
+}

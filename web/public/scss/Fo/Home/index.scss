@@ -1,0 +1,75 @@
+
+header {
+  background-color: #000000;
+  margin-top: 50px;
+  &>.jumbotron{
+    color: white;
+    background-image: url("/public/img/bandeau.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: Lato, HelveticaNeue, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+    font-weight: normal!important;
+    h1 {
+      font-size: 35px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
+      background-color: inherit;
+    }
+    p {
+    font-size: 18px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
+    background-color: inherit;
+      a{
+        text-shadow: none;
+      }
+    }
+  }
+  .btn:first-child{
+    margin-left: 0px;
+  }
+}
+
+#francemap_players {
+  width: 100%;
+  height:500px;
+}
+
+#francemap_clubs {
+  width: 100%;
+  height:500px;
+}
+
+#panel_map .panel{
+  border-radius: 1px;
+}
+
+#panel_map .panel-primary>.panel-heading{
+  background-color: #509dff;
+}
+
+#panel_map .panel-danger{
+  border-color: #bb353e;
+}
+
+#panel_map .panel-danger>.panel-heading{
+  background-color: #ff434d;
+  color: #FFFFFF;
+}
+
+#panel_map .panel>.panel-heading{
+  border-radius: 1px;
+}
+
+.footer{
+  margin-top: 15px;
+  min-height: 100px;
+  box-shadow: 1px -1px 3px rgba(0,0,0,0.1);
+  border-top: 1px solid lightgrey;
+}
+
+@media screen and (max-width : 642px) {
+  header .btn:last-child{
+    margin-left: 0px;
+  }
+}
+
+

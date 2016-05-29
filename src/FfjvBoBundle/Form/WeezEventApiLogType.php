@@ -22,8 +22,8 @@ class WeezEventApiLogType extends AbstractType
         ])->add('apiPassword', RepeatedType::class, array(
             'type'            => PasswordType::class,
             'invalid_message' => 'The password fields must match.',
-            'first_options'   => array('label' => 'Password'),
-            'second_options'  => array('label' => 'Repeat password'),
+            'first_options'   => array('label' => 'webcomponent.form.password'),
+            'second_options'  => array('label' => 'webcomponent.form.repeadpassword'),
             'attr' => array('class' => 'form-control')
         ))->add('apiKey', TextType::class, []);
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {

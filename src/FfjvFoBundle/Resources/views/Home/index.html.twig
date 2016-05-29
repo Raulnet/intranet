@@ -1,24 +1,29 @@
 {% extends('@FfjvFo/layout.html.twig') %}
- {% block customCSS %}
-     <link rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Home/index.css') }}">
-     <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/lib/jqueryMap/jqvmap.css') }}">
- {% endblock %}
+{% trans_default_domain 'fo_home_index' %}
+{% block customCSS %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Home/index.css') }}">
+    <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/lib/jqueryMap/jqvmap.css') }}">
+{% endblock %}
 {% block customJS %}
-    <script src="{{ asset('public/lib/jqueryMap/jquery.vmap.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/lib/jqueryMap/jquery.vmap.france.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/lib/jqueryMap/jquery.vmap.colorsFrance.js') }}" type="text/javascript"></script>
     <script src="{{ asset('public/lib/noty/js/noty/packaged/jquery.noty.packaged.min.js') }}"></script>
-    <script src="{{ asset('public/js/Home/index.js') }}" type="text/javascript"></script>
+    {% javascripts filter="?jsqueeze" output="js/app.js"
+    'public/lib/jqueryMap/jquery.vmap.js'
+    'public/lib/jqueryMap/jquery.vmap.france.js'
+    'public/lib/jqueryMap/jquery.vmap.colorsFrance.js'
+    'public/js/Home/index.js'
+    %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
 {% endblock %}
 {% block header %}
     <header class="z-depth-1">
         <div class="jumbotron">
             <div class="container">
-                <h1>BIENVENUE SUR VOTRE ESPACE MEMBRE FFJV</h1>
-                <p>La gestion du licencié, de ses équipes, de sa structure jusqu'à sa ligne nationale.</p>
+                <h1>{{ "fo.home.index.title"|trans|upper }}</h1>
+                <p>{{ "fo.home.index.subtitle"|trans }}</p>
                 <p>
-                    <a class="btn btn-default btn-lg" href="{{ path('login') }}" role="button">Connectez-vous</a>
-                    <a class="btn btn-primary btn-lg" href="{{ path('ffjv_fo_security_register') }}" role="button">Inscrivez-vous gratuitement</a>
+                    <a class="btn btn-default btn-lg" href="{{ path('login') }}" role="button">{{ "fo.home.index.btn.login"|trans }}</a>
+                    <a class="btn btn-primary btn-lg" href="{{ path('ffjv_fo_security_register') }}" role="button">{{ "fo.home.index.btn.registering"|trans }}</a>
                 </p>
             </div>
         </div>
@@ -27,17 +32,17 @@
 {% block content %}
     <div class="row">
         <div class="col-xs-12">
-            <h4>Qu’est ce que l’espace membre ?</h4>
-            <p>En tant que club ou joueur affilié à la FFJV, vous bénéficiez d’un accès exclusif à l’espace membre de la Fédération. Cet outil sera pour ses utilisateurs une vraie place d’échange, où chacun pourra avoir accès, en fonction de son statut (manager, eSporteur, ...) aux données des licences le concernant.</p>
+            <h4>{{ "fo.home.index.description.title"|trans }}</h4>
+            <p>{{ "fo.home.index.description.content"|trans }}</p>
         </div>
         <div class="col-sm-12">
-            <h4>Où nous trouver ?</h4>
+            <h4>{{ "fo.home.index.maps.title"|trans }}</h4>
         </div>
         <div class="row">
             <div id="panel_map" class="col-sm-12" data-url="{{ path('ffjv_fo_home_colors') }}">
                 <div class="col-sm-6">
                     <div class="panel panel-primary z-depth-1" id="players">
-                        <div class="panel-heading">Licenciers</div>
+                        <div class="panel-heading">{{ "fo.home.index.maps.title.graduate"|trans }}</div>
                         <div class="panel-body">
                             <div id="francemap_players"  data-type="players"></div>
                         </div>
@@ -61,7 +66,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="panel panel-danger z-depth-1" id="clubs">
-                        <div class="panel-heading">Clubs</div>
+                        <div class="panel-heading">{{ "fo.home.index.maps.title.clubs"|trans }}</div>
                         <div class="panel-body">
                             <div id="francemap_clubs" data-url="{{ path('ffjv_fo_home_colors') }}" data-type="clubs"></div>
                         </div>
@@ -71,13 +76,13 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="modal_clubs_label">Modal Clubs</h4>
+                                        <h5 class="modal-title" id="modal_clubs_label">Modal Clubs</h5>
                                     </div>
                                     <div id="modal_clubs_content" class="modal-body">
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">{{ "fo.home.index.modal.btn.close"|trans }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -93,13 +98,13 @@
     <div class="footer">
         <div class="container">
             <p class="pull-left">Copyright © 2016 <a href="http://www.ffjv.org/">FFJV</a></p>
-            <p class="pull-right"><a data-toggle="modal" data-target="#footer_cgu">Conditions Générales d'Utilisation</a></p>
+            <p class="pull-right"><a data-toggle="modal" data-target="#footer_cgu">{{ "fo.home.index.footer.link.cgu"|trans }}</a></p>
             <div class="modal fade" id="footer_cgu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Conditions général d'utilisation</h4>
+                            <h4 class="modal-title" id="myModalLabel">{{ "fo.home.index.footer.link.cgu"|trans }}</h4>
                         </div>
                         <div class="modal-body ">
                             <p>Mentions légales - Conditions Générales d&#39;utilisation</p>
@@ -124,7 +129,7 @@
                             <p>En conséquence, l&#39;utilisateur reconnaît utiliser ces informations sous sa responsabilité exclusive.</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{ "fo.home.index.modal.btn.close"|trans }}</button>
                         </div>
                     </div>
                 </div>
