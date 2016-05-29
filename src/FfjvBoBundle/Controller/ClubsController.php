@@ -2,6 +2,8 @@
 
 namespace FfjvBoBundle\Controller;
 
+use FfjvBoBundle\Entity\WeezeventApiLog;
+use FfjvBoBundle\Form\WeezeventApiLogType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -105,10 +107,18 @@ class ClubsController extends Controller
         $club = $em->getRepository('FfjvBoBundle:Clubs')->find($id);
         $ligues = $em->getRepository('FfjvBoBundle:Clubs')->findLigueByClub($club->getId());
         $members = $this->getDoctrine()->getRepository('FfjvBoBundle:UserHasClubs')->findBy(array('club' => $club));
+        $apiLog = $this->getDoctrine()->getRepository('FfjvBoBundle:WeezeventApiLog')->findOneBy(array('club' => $club));
+        if(!$apiLog){
+            $apiLog = new WeezeventApiLog();
+            $apiLog->setUser($this->getUser());
+            $apiLog->setClub($club);
+        }
+
         if (!$club) {
             throw $this->createNotFoundException('Unable to find Clubs club.');
         }
         $editForm = $this->createEditForm($club);
+        $apiLogForm = $this->getApiLogForm($apiLog);
         $contactForm = $this->getContactForm($this->generateUrl('clubs_contact'), array(
             'user' => $this->getUser()->getId(),
             'club' => $club->getId()
@@ -118,7 +128,8 @@ class ClubsController extends Controller
             'members'       => $members,
             'ligues'        => $ligues,
             'edit_form'     => $editForm->createView(),
-            'contact_form'  => $contactForm->createView()
+            'contact_form'  => $contactForm->createView(),
+            'weezevent_api_form' => $apiLogForm->createView()
         ));
     }
 
@@ -282,5 +293,22 @@ class ClubsController extends Controller
             'label' => "bo.form.contact.club.send"
         ));
         return $form;
+    }
+
+    /**
+     * @param WeezeventApiLog $apiLog
+     * @return $this|\Symfony\Component\Form\FormInterface
+     */
+    private function getApiLogForm(WeezeventApiLog $apiLog){
+        
+        return $this->createForm(WeezeventApiLogType::class, $apiLog->toArray(), [
+            'method' => 'POST',
+            'action' => $this->generateUrl('weezeventapilog_new')
+        ])->add('submit', SubmitType::class, [
+            'label' => 'submit',
+            'attr' => [
+                'class' => 'btn btn-success'
+            ]
+        ]);
     }
 }

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>WeezeventApiLog list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Apiusername</th>
+                <th>Apipassword</th>
+                <th>Apikey</th>
+                <th>Dateregister</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for weezeventApiLog in weezeventApiLogs %}
+            <tr>
+                <td><a href="{{ path('weezeventapilog_show', { 'id': weezeventApiLog.id }) }}">{{ weezeventApiLog.apiUsername }}</a></td>
+                <td>{{ weezeventApiLog.apiPassword }}</td>
+                <td>{{ weezeventApiLog.apiKey }}</td>
+                <td>{% if weezeventApiLog.dateRegister %}{{ weezeventApiLog.dateRegister|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ weezeventApiLog.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('weezeventapilog_show', { 'id': weezeventApiLog.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('weezeventapilog_edit', { 'id': weezeventApiLog.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('weezeventapilog_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

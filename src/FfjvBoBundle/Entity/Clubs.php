@@ -6,6 +6,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use FfjvBoBundle\Entity\WeezeventApiLog;
 
 /**
  * Clubs
@@ -195,7 +196,7 @@ class Clubs
      * })
      */
     private $user;
-
+    
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
@@ -217,6 +218,13 @@ class Clubs
      * @ORM\OneToMany(targetEntity="FfjvBoBundle\Entity\Teams", mappedBy="club", cascade={"persist", "remove"})
      */
     private $teams;
+
+    /**
+     * @var ArrayCollection $events
+     *
+     * @ORM\OneToMany(targetEntity="FfjvBoBundle\Entity\Evenements", mappedBy="club", cascade={"persist", "remove"})
+     */
+    private $events;
 
     /**
      * @var ArrayCollection $messages
@@ -243,6 +251,7 @@ class Clubs
         $this->teams = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->members = new ArrayCollection();
+        $this->events = new ArrayCollection();
         $this->activationCode = base_convert(md5(uniqid(mt_rand(), true)), 16, 36);
     }
 
@@ -253,9 +262,7 @@ class Clubs
     {
         return $this->title;
     }
-
-
-
+    
     /**
      * Set title
      *
@@ -952,5 +959,39 @@ class Clubs
     public function getMembers()
     {
         return $this->members;
+    }
+
+    /**
+     * Add event
+     *
+     * @param \FfjvBoBundle\Entity\Evenements $event
+     *
+     * @return Clubs
+     */
+    public function addEvent(\FfjvBoBundle\Entity\Evenements $event)
+    {
+        $this->events[] = $event;
+
+        return $this;
+    }
+
+    /**
+     * Remove event
+     *
+     * @param \FfjvBoBundle\Entity\Evenements $event
+     */
+    public function removeEvent(\FfjvBoBundle\Entity\Evenements $event)
+    {
+        $this->events->removeElement($event);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }

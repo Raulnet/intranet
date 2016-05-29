@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 
-class WeezEventApiLogType extends AbstractType
+class WeezEventbababaApiLogType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
