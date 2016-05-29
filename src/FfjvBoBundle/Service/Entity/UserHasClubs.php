@@ -57,7 +57,7 @@ class UserHasClubs {
             'action' => $url
         ));
         $form->add('submit', SubmitType::class, array(
-            'label' => 'envoyer'
+            'label' => "bo.form.contact.club.send"
         ));
         return $form;
     }

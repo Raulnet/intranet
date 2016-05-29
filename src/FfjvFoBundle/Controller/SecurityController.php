@@ -319,7 +319,7 @@ class SecurityController extends Controller
                     'class' => 'form-control'
                 )
             ))
-            ->add('submit', SubmitType::class, array('label' => 'Envoyer', 'attr' => array('class' => 'btn btn-success')))
+            ->add('submit', SubmitType::class, array('label' => "bo.form.contact.club.send", 'attr' => array('class' => 'btn btn-success')))
             ->getForm();
     }
 

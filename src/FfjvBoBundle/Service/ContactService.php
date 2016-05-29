@@ -75,7 +75,6 @@ class ContactService
     {
 
         $content =  $this->templating->render($this->template['default'], array('message' => $message->getMessage(), 'user' => $message->getAuthorUser()));
-
         return $this->sendMail($source, $message->getEmail(), $message->getSubject(), $content);
     }
 

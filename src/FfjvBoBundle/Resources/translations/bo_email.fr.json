@@ -1,6 +1,6 @@
 {
   "bo.club.contact._contactClub": "%username% vous transmez ce message depuis l'intranet FFJV",
-  "bo.club.contact._requestjoinClub.hello": "Bonjour %username%,",
+  "bo.club.contact._requestjoinClub.hello": "Bonjour %username%",
   "bo.club.contact._requestjoinClub.player": "Le joueur",
   "bo.club.contact._requestjoinClub.join": "souhaite rejoindre votre club %club%.",
   "bo.club.contact._requestjoinClub.action": "Vous pouvez accepter ou refuser, depuis l'intranet FFJV",

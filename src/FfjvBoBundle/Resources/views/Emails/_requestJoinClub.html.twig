@@ -1,8 +1,9 @@
 {% extends('@FfjvBo/Emails/layout.html.twig') %}
+{% trans_default_domain "bo_email" %}
 {% block email_lead %}{{ "bo.club.contact._contactClub"|trans({"%username%": user.username  }) }}{% endblock %}
 {% block email_content %}
     <p>{{ "bo.club.contact._requestjoinClub.hello"|trans({"%username%": club.user }) }},</p><br />
-    <p>{{ "bo.club.contact._requestjoinClub.player":trans }} <a href="{{ path('fo_profile_show', {'userUsername': user.username }) }}">{{ user.username }}</a> {{ "bo.club.contact._requestjoinClub.join"|trans({"%club%": club}) }}.<br />
+    <p>{{ "bo.club.contact._requestjoinClub.player"|trans }} <a href="{{ path('fo_profile_show', {'userUsername': user.username }) }}">{{ user.username }}</a> {{ "bo.club.contact._requestjoinClub.join"|trans({"%club%": club}) }}.<br />
     {{ "bo.club.contact._requestjoinClub.action"|trans }}<br /></p>
     <p>{{ "bo.club.contact._requestjoinClub.haveniceseason"|trans }}</p>
     <p>{{ "bo.club.contact._requestjoinClub.cdt"|trans }}</p>

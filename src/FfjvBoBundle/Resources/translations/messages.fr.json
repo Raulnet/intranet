@@ -1,3 +1,6 @@
 {
-
+  "bo.form.contact.club.subject": "Sujet :",
+  "bo.form.contact.club.message": "Message :",
+  "bo.form.contact.club.send": "envoyer",
+  "bo.form.contact.club.join.placeholder": "Bonjour, je souhaiterais rejoindre votre club ."
 }

@@ -16,11 +16,11 @@ class ContactClubType extends AbstractType
         $builder->add('club', HiddenType::class, array())
             ->add('user', HiddenType::class, array())
             ->add('subject', TextType::class, array(
-                'label' => 'Sujet :',
+                'label' => 'bo.form.contact.club.subject',
                 'attr' => ['max' => '80']
             ))
             ->add('content', TextareaType::class, array(
-                'label' => 'Message : ',
+                'label' => 'bo.form.contact.club.message',
             ))
         ;
     }

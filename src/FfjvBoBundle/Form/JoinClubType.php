@@ -16,9 +16,9 @@ class JoinClubType extends AbstractType
             ->add('user', HiddenType::class, array())
             ->add('club', HiddenType::class, array())
             ->add('content', TextareaType::class, array(
-                'label' => 'Message : ',
+                'label' =>  "bo.form.contact.club.message",
                 'attr' => array(
-                'placeholder' => 'Bonjour, je souhaiterais rejoindre votre club .')
+                'placeholder' => "bo.form.contact.club.join.placeholder")
             ))
         ;
     }

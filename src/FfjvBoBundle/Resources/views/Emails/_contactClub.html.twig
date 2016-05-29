@@ -1,3 +1,4 @@
 {% extends('@FfjvBo/Emails/layout.html.twig') %}
+{% trans_default_domain "bo_email" %}
 {% block email_lead %}{{ "bo.club.contact._contactClub"|trans({"%username%": user.username  }) }}{% endblock %}
 {% block email_content %}{{ message }}{% endblock %}

@@ -279,7 +279,7 @@ class ClubsController extends Controller
     private function getContactForm($url = '', $data = array()){
         $form = $this->get('contact')->getFormContactClub($url, $data);
         $form->add('submit', SubmitType::class, array(
-            'label' => 'envoyer'
+            'label' => "bo.form.contact.club.send"
         ));
         return $form;
     }
