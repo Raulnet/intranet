@@ -1,3 +1,3 @@
 {% extends('@FfjvBo/Emails/layout.html.twig') %}
-{% block email_lead %}{{ user.username }} vous transmet ce message depuis l'intranet FFJV{% endblock %}
+{% block email_lead %}{{ "bo.club.contact._contactClub"|trans({"%username%": user.username  }) }}{% endblock %}
 {% block email_content %}{{ message }}{% endblock %}
