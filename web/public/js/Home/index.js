@@ -17,8 +17,7 @@ $(document).ready(function() {
     });
 
     var countPlayer = [];
-
-
+    
     function findColors(url){
 
         $.ajax({
