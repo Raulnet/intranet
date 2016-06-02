@@ -182,7 +182,7 @@ class SecurityController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('FfjvBoBundle:User')->findBy(array('email' => $email, 'activationCode' => $activationCode));
-     
+
         if(!$user){
             return $this->redirectToRoute('ffjv_fo_home_index');
         }
@@ -204,12 +204,10 @@ class SecurityController extends Controller
         $form->handleRequest($request);
 
         if($form->isValid()){
-
             $data = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $user = $em->getRepository('FfjvBoBundle:User')->findOneBy(array('email' => $data['email'], 'birthday' => $data['birthday'], 'activationCode' => $data['activationCode']));
             if($user){
-
                 //set password
                 $encoder = $this->container->get('security.password_encoder');
                 $encoded = $encoder->encodePassword($user, $data['password']);
@@ -218,14 +216,10 @@ class SecurityController extends Controller
                 //persiste and flush
                 $em->persist($user);
                 $em->flush();
-
                 $this->addFlash('success', 'Votre mot de passe à été mis a jours.');
                 return $this->redirectToRoute('logout');
-
             }
-
         }
-
         return $this->redirectToRoute('login');
     }
 
