@@ -38,7 +38,6 @@ class HomeController extends Controller
 
         $regionId = $request->get('regionId');
         $clubs = $this->getDoctrine()->getRepository('FfjvBoBundle:Clubs')->findBy(array('idZipCode' => $regionId));
-        var_dump($clubs);exit;
         $listClubs = array();
         foreach($clubs as $club){
             $listClubs[] = array(
