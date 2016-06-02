@@ -284,10 +284,6 @@ class SecurityController extends Controller
                     'class' => 'form-control'
                 )
             ))
-            ->add('birthday', BirthdayType::class, array(
-                'label' => 'Votre date de naissance:',
-                'attr' => array('class' => 'form-control-date')
-            ))
             ->add('password', RepeatedType::class, array(
                 'type'            => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
@@ -295,6 +291,10 @@ class SecurityController extends Controller
                 'first_options'   => array('label' => 'New Password'),
                 'second_options'  => array('label' => 'Repeat New password'),
                 'attr' => array('class' => 'form-control')
+            ))
+            ->add('birthday', BirthdayType::class, array(
+                'label' => 'Votre date de naissance:',
+                'attr' => array('class' => 'form-control-date')
             ))
             ->add('submit', SubmitType::class, array('label' => 'Valider', 'attr' => array('class' => 'btn btn-sm btn-success')))
             ->getForm();
