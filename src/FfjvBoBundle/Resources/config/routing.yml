@@ -30,6 +30,10 @@ ffjv_bo_weezeventapilog:
         resource: "@FfjvBoBundle/Resources/config/routing/weezeventapilog.yml"
         prefix:   /weezeventapilog
 
+ffjv_bo_evenements:
+        resource: "@FfjvBoBundle/Resources/config/routing/evenements.yml"
+        prefix:   /evenements
+
 ffjv_bo_home_index:
     path:     /
     defaults: { _controller: FfjvBoBundle:Admin:index }

@@ -8,11 +8,18 @@
 
 namespace AppBundle\Service;
 
+use FfjvBoBundle\Service\AppService;
+
 class WeezeventApi
 {
     const API_URL = 'https://api.weezevent.com/';
     const AUTH_ACCESS_URL = 'auth/access_token';
     const EVENT_URL = 'events';
+
+    /**
+     * @var AppService|null
+     */
+    private $appService = null;
     /**
      * @var string
      */
@@ -35,6 +42,16 @@ class WeezeventApi
     private $curl;
 
     /**
+     * WeezeventApi constructor.
+     * @param AppService $appService
+     */
+    public function __construct(AppService $appService)
+    {
+        $this->appService = $appService;
+    }
+
+
+    /**
      * @param string $username
      * @param string $password
      * @param string $apiKey
@@ -42,23 +59,22 @@ class WeezeventApi
      */
     public function setAuthAccess($username = '', $password = '', $apiKey = ''){
 
-        $this->username = base64_decode($username);
-        $this->password = base64_decode($password);
-        $this->apiKey = base64_decode($apiKey);
+        $this->username = $this->appService->deCrypt($username);
+        $this->password = $this->appService->deCrypt($password);
+        $this->apiKey = $this->appService->deCrypt($apiKey);
 
         return $this;
     }
 
     /**
-     * @return $this
-     * @throws \Exception
+     * @return $this|bool
      */
     public function initConnection(){
         $params = ['username'=>$this->username, 'password'=>$this->password, 'api_key'=>$this->apiKey];
         $options = $this->getPostOption(self::AUTH_ACCESS_URL, $params);
         $response = $this->getCurlResponse($options, true);
         if(array_key_exists('error', $response)){
-            var_dump($response['error']['message']);exit;
+            return false;
         }
         $this->accessToken = $response["accessToken"];
         return $this;

@@ -1,0 +1,89 @@
+{% extends('@FfjvBo/layout.html.twig') %}
+{% set adminMenu = true %}
+{% block breadcrumb %}
+    <h1>
+        Intranet FFJV
+        <small>Version 0.1</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> Home</a></li>
+        <li class="active"><i class="fa fa-cogs"></i> Administration</li>
+    </ol>
+{% endblock %}
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Evenement Board</h3> <a class="btn btn-info btn-xs pull-right" href="{{ path('evenements_new') }}">Create a new event</a>
+                    </div>
+                    <div class="box-body" style="margin:0; overflow:scroll">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Startdate</th>
+                                <th>Enddate</th>
+                                <th>Creationdate</th>
+                                <th>Lastupdate</th>
+                                <th>Description</th>
+                                <th>Place</th>
+                                <th>Address1</th>
+                                <th>Address2</th>
+                                <th>Zipcode</th>
+                                <th>Idzipcode</th>
+                                <th>City</th>
+                                <th>Country</th>
+                                <th>Visibility</th>
+                                <th>Deleted</th>
+                                <th>Close</th>
+                                <th>Usesession</th>
+                                <th>Eventweezeventid</th>
+                                <th>Id</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for evenement in evenements %}
+                                <tr>
+                                    <td><a href="{{ path('evenements_show', { 'id': evenement.id }) }}">{{ evenement.title }}</a></td>
+                                    <td>{% if evenement.startDate %}{{ evenement.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td>{% if evenement.endDate %}{{ evenement.endDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td>{% if evenement.creationDate %}{{ evenement.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td>{% if evenement.lastUpdate %}{{ evenement.lastUpdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td>{{ evenement.description }}</td>
+                                    <td>{{ evenement.place }}</td>
+                                    <td>{{ evenement.address1 }}</td>
+                                    <td>{{ evenement.address2 }}</td>
+                                    <td>{{ evenement.zipCode }}</td>
+                                    <td>{{ evenement.idZipCode }}</td>
+                                    <td>{{ evenement.city }}</td>
+                                    <td>{{ evenement.country }}</td>
+                                    <td>{{ evenement.visibility }}</td>
+                                    <td>{% if evenement.deleted %}Yes{% else %}No{% endif %}</td>
+                                    <td>{% if evenement.close %}Yes{% else %}No{% endif %}</td>
+                                    <td>{% if evenement.useSession %}Yes{% else %}No{% endif %}</td>
+                                    <td>{{ evenement.eventWeezeventId }}</td>
+                                    <td>{{ evenement.id }}</td>
+                                    <td>
+                                        <ul>
+                                            <li>
+                                                <a href="{{ path('evenements_show', { 'id': evenement.id }) }}">show</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('evenements_edit', { 'id': evenement.id }) }}">edit</a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

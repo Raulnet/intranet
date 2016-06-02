@@ -169,6 +169,12 @@ class Clubs
     private $status = false;
 
     /**
+     * @var null
+     * @ORM\OneToOne(targetEntity="FfjvBoBundle\Entity\WeezeventApiLog", mappedBy="club", cascade={"persist", "remove"})
+     */
+    private $weezeventApiLog = null;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="clu_id", type="integer")

@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Evenements</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <td>{{ evenement.title }}</td>
+            </tr>
+            <tr>
+                <th>Startdate</th>
+                <td>{% if evenement.startDate %}{{ evenement.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Enddate</th>
+                <td>{% if evenement.endDate %}{{ evenement.endDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Creationdate</th>
+                <td>{% if evenement.creationDate %}{{ evenement.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Lastupdate</th>
+                <td>{% if evenement.lastUpdate %}{{ evenement.lastUpdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ evenement.description }}</td>
+            </tr>
+            <tr>
+                <th>Place</th>
+                <td>{{ evenement.place }}</td>
+            </tr>
+            <tr>
+                <th>Address1</th>
+                <td>{{ evenement.address1 }}</td>
+            </tr>
+            <tr>
+                <th>Address2</th>
+                <td>{{ evenement.address2 }}</td>
+            </tr>
+            <tr>
+                <th>Zipcode</th>
+                <td>{{ evenement.zipCode }}</td>
+            </tr>
+            <tr>
+                <th>Idzipcode</th>
+                <td>{{ evenement.idZipCode }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ evenement.city }}</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>{{ evenement.country }}</td>
+            </tr>
+            <tr>
+                <th>Visibility</th>
+                <td>{{ evenement.visibility }}</td>
+            </tr>
+            <tr>
+                <th>Deleted</th>
+                <td>{% if evenement.deleted %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Close</th>
+                <td>{% if evenement.close %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Usesession</th>
+                <td>{% if evenement.useSession %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Eventweezeventid</th>
+                <td>{{ evenement.eventWeezeventId }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ evenement.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('evenements_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('evenements_edit', { 'id': evenement.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

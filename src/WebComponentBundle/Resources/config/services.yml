@@ -5,6 +5,12 @@ parameters:
         proto-element:
             - "polymer/polymer.html"
             - "paper-material/paper-material.html"
+        tabs-element:
+            - "polymer/polymer.html"
+            - "iron-pages/iron-pages.html"
+            - "iron-ajax/iron-ajax.html"
+            - "paper-tabs/paper-tabs.html"
+            - "paper-tabs/paper-tab.html"
 services:
     web.component.twig_extension:
         class: WebComponentBundle\Twig\WebComponentTwigExtension

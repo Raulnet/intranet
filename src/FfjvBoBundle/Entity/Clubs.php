@@ -169,6 +169,12 @@ class Clubs
     private $status = false;
 
     /**
+     * @var null
+     * @ORM\OneToOne(targetEntity="FfjvBoBundle\Entity\WeezeventApiLog", mappedBy="club", cascade={"persist", "remove"})
+     */
+    private $weezeventApiLog = null;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="clu_id", type="integer")
@@ -993,5 +999,29 @@ class Clubs
     public function getEvents()
     {
         return $this->events;
+    }
+
+    /**
+     * Set weezeventApiLog
+     *
+     * @param \FfjvBoBundle\Entity\WeezeventApiLog $weezeventApiLog
+     *
+     * @return Clubs
+     */
+    public function setWeezeventApiLog(\FfjvBoBundle\Entity\WeezeventApiLog $weezeventApiLog = null)
+    {
+        $this->weezeventApiLog = $weezeventApiLog;
+
+        return $this;
+    }
+
+    /**
+     * Get weezeventApiLog
+     *
+     * @return \FfjvBoBundle\Entity\WeezeventApiLog
+     */
+    public function getWeezeventApiLog()
+    {
+        return $this->weezeventApiLog;
     }
 }

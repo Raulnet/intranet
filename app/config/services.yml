@@ -17,6 +17,10 @@ services:
         arguments: ["@security.acl.provider"]
     weezeventApi:
         class: AppBundle\Service\WeezeventApi
+        arguments: ["@app_service"]
+    app_service:
+        class: FfjvBoBundle\Service\AppService
+        arguments: ["%secret%"]
     clubs:
         class: FfjvBoBundle\Service\Entity\ClubsService
         arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]

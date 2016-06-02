@@ -6,35 +6,34 @@ use FfjvBoBundle\Entity\WeezeventApiLog;
 use FfjvBoBundle\Form\WeezEventApiLogType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class indexController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $apiLog = $em->getRepository('FfjvBoBundle:WeezeventApiLog')->findOneBy(['user' => $this->getUser()]);
-        if(!$apiLog){
-            $apiLog = new WeezeventApiLog();
-            $listEvent = json_encode([]);
-        } else {
-            $this->get('weezeventapi')->setAuthAccess($apiLog->getApiUsername(), $apiLog->getApiPassword(), $apiLog->getApiKey());
-            $listEvent = $this->get('weezeventapi')->getListEvent();
-        }
-
-        
-        $form = $this->createForm(WeezEventApiLogType::class, $apiLog, ['method' => 'POST']);
         if($request->getMethod() == 'POST'){
-            $form->handleRequest($request);
-            if($form->isSubmitted()){
-                $apiLog->setUser($this->getUser());
-                $em->persist($apiLog);
-                $em->flush();
-            }
+            $item = json_decode($request->getContent(), true);
+            $content = $this->renderView('WebComponentBundle:Index/tabs:_tabs1.html.twig', [
+               'item' => $item 
+            ]);
+         
+            return new Response(json_encode(['content'=>$content, 'item'=> $item]), 200, ['Content-Type'=>'applcation/json']);
         }
 
         return $this->render('WebComponentBundle:Index:index.html.twig', array(
-            'events' => $listEvent,
-            'form'  => $form->createView()
+            
         ));
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function getTabContent(Request $request){
+        
     }
 }

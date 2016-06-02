@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormError;
@@ -181,7 +182,7 @@ class SecurityController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('FfjvBoBundle:User')->findBy(array('email' => $email, 'activationCode' => $activationCode));
-
+     
         if(!$user){
             return $this->redirectToRoute('ffjv_fo_home_index');
         }
@@ -294,7 +295,7 @@ class SecurityController extends Controller
                 'attr' => array('class' => 'form-control-date')
             ))
             ->add('password', RepeatedType::class, array(
-                'type'            => 'password',
+                'type'            => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
                 'options'         => array('required' => true),
                 'first_options'   => array('label' => 'New Password'),

@@ -1,0 +1,24 @@
+weezeventapilog_index:
+    path:     /
+    defaults: { _controller: "FfjvBoBundle:WeezeventApiLog:index" }
+    methods:  GET
+
+weezeventapilog_show:
+    path:     /{id}/show
+    defaults: { _controller: "FfjvBoBundle:WeezeventApiLog:show" }
+    methods:  GET
+
+weezeventapilog_new:
+    path:     /new
+    defaults: { _controller: "FfjvBoBundle:WeezeventApiLog:new" }
+    methods:  [GET, POST]
+
+weezeventapilog_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FfjvBoBundle:WeezeventApiLog:edit" }
+    methods:  [GET, POST]
+
+weezeventapilog_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FfjvBoBundle:WeezeventApiLog:delete" }
+    methods:  DELETE

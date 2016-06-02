@@ -14,7 +14,7 @@ use FfjvBoBundle\Entity\User;
 /**
  * WeezeventApiLog
  *
- * @ORM\Table(name="weezevent_api_log", uniqueConstraints={@ORM\UniqueConstraint(name="api_username", columns={"api_username"})}, indexes={@ORM\Index(name="fk_weezevent_api_log_user1_idx", columns={"user_id"})})
+ * @ORM\Table(name="weezevent_api_log", uniqueConstraints={@ORM\UniqueConstraint(name="api_username", columns={"api_username"})})
  * @ORM\Entity(repositoryClass="FfjvBoBundle\Repository\WeezeventApiLog")
  */
 class WeezeventApiLog
@@ -59,7 +59,7 @@ class WeezeventApiLog
     /**
      * @var User
      *
-     * @ORM\OneToOne(targetEntity="FfjvBoBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="FfjvBoBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="usr_id", onDelete="SET NULL")
      * })
@@ -69,7 +69,7 @@ class WeezeventApiLog
     /**
      * @var Clubs
      *
-     * @ORM\OneToOne(targetEntity="FfjvBoBundle\Entity\Clubs")
+     * @ORM\OneToOne(targetEntity="FfjvBoBundle\Entity\Clubs", inversedBy="weezeventApiLog")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="club_id", referencedColumnName="clu_id", onDelete="SET NULL")
      * })
@@ -213,7 +213,6 @@ class WeezeventApiLog
     {
         return $this->user;
     }
-    
 
     /**
      * Set club
@@ -237,5 +236,20 @@ class WeezeventApiLog
     public function getClub()
     {
         return $this->club;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(){
+        return [
+            'weezevent_api_log_id'  => $this->getId(),
+            'user_id'               => ($this->getUser() ? $this->getUser()->getId() : null),
+            'api_username'          => $this->apiUsername,
+            'api_password'          => $this->apiPassword,
+            'api_key'               => $this->getApiKey(),
+            'date_register'         => $this->getDateRegister()->format('Y-m-d H:i:s'),
+            'club_id'               => ($this->club ? $this->club->getId() : null)
+        ];
     }
 }

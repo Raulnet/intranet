@@ -59,7 +59,7 @@ class WeezeventApiLog
     /**
      * @var User
      *
-     * @ORM\OneToOne(targetEntity="FfjvBoBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="FfjvBoBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="usr_id", onDelete="SET NULL")
      * })
@@ -69,7 +69,7 @@ class WeezeventApiLog
     /**
      * @var Clubs
      *
-     * @ORM\OneToOne(targetEntity="FfjvBoBundle\Entity\Clubs")
+     * @ORM\OneToOne(targetEntity="FfjvBoBundle\Entity\Clubs", inversedBy="weezeventApiLog")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="club_id", referencedColumnName="clu_id", onDelete="SET NULL")
      * })

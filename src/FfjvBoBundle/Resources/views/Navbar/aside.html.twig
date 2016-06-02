@@ -16,6 +16,7 @@
         <li class="{% if userMenu is defined %}active{% endif %}"><a href="{{ path('user') }}"><i class="fa fa-user text-blue"></i> <span>Utilisateurs</span></a></li>
         <li class="{% if liguesMenu is defined %}active{% endif %}"><a href="{{ path('ligues') }}"><i class="fa fa-industry text-blue"></i> <span>Ligues</span></a></li>
         <li class="{% if clubsMenu is defined %}active{% endif %}"><a href="{{ path('clubs') }}"><i class="fa fa-institution "></i> <span>Clubs</span></a></li>
+        <li class="{% if eventsMenu is defined %}active{% endif %}"><a href="{{ path('evenements_index') }}"><i class="fa fa-trophy "></i> <span>Evenements</span></a></li>
         <li class="{% if teamsMenu is defined %}active{% endif %}"><a href="{{ path('teams') }}"><i class="fa fa-users text-red"></i> <span>Teams</span></a></li>
         <li class="header">Media</li>
         <li class="{% if messagesMenu is defined %}active{% endif %}"><a href="{{ path('bo_messages') }}"><i class="fa fa-envelope "></i> <span>Messages</span></a></li>

@@ -1,0 +1,61 @@
+<dom-module id="tabs-element">
+    <template>
+        <iron-ajax
+                id="addRequest"
+                headers='{"X-Requested-With": "XMLHttpRequest"}'
+                handleAs="json"
+                content-type="application/json"
+                on-response="handleResponse"></iron-ajax>
+        <paper-tabs selected="{{selected}}" noink="true">
+            <template is="dom-repeat" items="{{tabs}}">
+                <paper-tab on-tap="handleTab" link>
+                    <a href="#link{{item.id}}" class="link" tabindex="-1">{{item.title}}</a></paper-tab>
+            </template>
+        </paper-tabs>
+        <iron-pages selected="{{selected}}">
+            <template is="dom-repeat" items="{{tabs}}">
+                <div id$="tabs{{item.id}}"></div>
+            </template>
+        </iron-pages>
+    </template>
+    <script>
+        Polymer({
+            is: "tabs-element",
+            properties: {
+                tabs: {
+                    type: Array,
+                    value: [
+                        {id:1, title:"Tab One", content:"Content Tab One"},
+                        {id:2, title:"Tab Two", content:"Content Tab Two"},
+                        {id:3, title:"Tab Tree", content:"Content Tab Tree"}
+                    ]
+                },
+                request_url: {
+                    type: String,
+                    value: ''
+                },
+            },
+            ready: function(){
+                this.selected = 0;
+            },
+            handleTab: function(e){
+                e.preventDefault();
+                var model = e.model;
+                var indexOf = this.tabs.indexOf(model.item);
+                this.indexOfItem = indexOf;
+                this.$.addRequest.body = model.item;
+                this.$.addRequest.url = this.request_url;
+                this.$.addRequest.method = 'POST';
+                this.$.addRequest.generateRequest();
+            },
+            handleResponse: function (e, request) {
+                var response = request.xhr.response;
+                console.log(response);
+                var item = response.item;
+                var elem = this.$$("#tabs"+item.id);
+                elem.innerHTML = response.content;
+                this.set('tabs.'+this.indexOfItem+'.content', response.content);
+            },
+        });
+    </script>
+</dom-module>

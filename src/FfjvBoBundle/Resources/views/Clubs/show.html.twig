@@ -34,6 +34,11 @@
                                 <li class="list-group-item">
                                     <b>Ligues</b><a class="pull-right"><span class="badge bg-light-blue-active">{{ club.ligues|length }}</span> </a>
                                 </li>
+                                {% if club.weezeventApiLog %}
+                                <li class="list-group-item">
+                                    <b>Weezevent</b><a class="pull-right"><i style="color: green;" class="fa fa-check fa-lg"></i></a>
+                                </li>
+                                {% endif %}
                             </ul>
                             <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#contactClub">
                                 Contact - Club
@@ -361,7 +366,30 @@
                                                 </div>
                                             </div>
                                             <div class="box-body">
-                                                {{ form_start(weezevent_api_form) }}
+                                                {{ form_start(weezevent_api_form, {'attr': {'class': 'form-horizontal'}}) }}
+                                                <div class="form-group">
+                                                    {{ form_label(weezevent_api_form.api_username, null, { 'label_attr': {'class': 'control-label col-sm-3'} }) }}
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(weezevent_api_form.api_username) }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    {{ form_label(weezevent_api_form.api_password, null, { 'label_attr': {'class': 'control-label col-sm-3'} }) }}
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(weezevent_api_form.api_password) }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    {{ form_label(weezevent_api_form.api_key, null, { 'label_attr': {'class': 'control-label col-sm-3'} }) }}
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(weezevent_api_form.api_key) }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-10 col-sm-offset-3">
+                                                        {{ form_widget(weezevent_api_form.submit, {'attr': {'class': 'btn btn-success col-sm-6'}}) }}
+                                                    </div>
+                                                </div>
                                                 {{ form_end(weezevent_api_form) }}
                                             </div>
                                         </div>
