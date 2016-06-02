@@ -182,7 +182,7 @@ class SecurityController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('FfjvBoBundle:User')->findBy(array('email' => $email, 'activationCode' => $activationCode));
-
+var_dump($user);exit;
         if(!$user){
             return $this->redirectToRoute('ffjv_fo_home_index');
         }
