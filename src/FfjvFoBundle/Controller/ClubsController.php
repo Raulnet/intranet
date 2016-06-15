@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 
 
@@ -107,7 +108,7 @@ class ClubsController extends Controller
             $club->setLicence($licence);
             $em->persist($club);
             $em->flush();
-            $this->get('permissions')->setAcl($club, $user, ['OWNER']);
+            $this->get('permissions')->setAcl($club, $user, [MaskBuilder::MASK_OWNER]);
             $this->addMemberToClub($club, $user, array('ROLE_AUTHOR'));
 
 
