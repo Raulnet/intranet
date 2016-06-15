@@ -6,6 +6,7 @@ use FfjvBoBundle\Entity\WeezeventApiLog;
 use FfjvBoBundle\Form\WeezeventApiLogType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use FfjvBoBundle\Entity\Clubs;
@@ -18,7 +19,6 @@ use FfjvBoBundle\Entity\Messages;
  */
 class ClubsController extends Controller
 {
-
     /**
      * Lists all Clubs clubs.
      *
@@ -103,10 +103,116 @@ class ClubsController extends Controller
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $club = $em->getRepository('FfjvBoBundle:Clubs')->find($id);
-        $ligues = $em->getRepository('FfjvBoBundle:Clubs')->findLigueByClub($club->getId());
+        if (!$club) {
+            throw $this->createNotFoundException('Unable to find Clubs club.');
+        }
+        $contactForm = $this->getContactForm($this->generateUrl('clubs_contact'), array(
+            'user' => $this->getUser()->getId(),
+            'club' => $club->getId()
+        ));
+        $tabs = [
+            [
+                'id' => 'member',
+                'title'     => 'Membres',
+                'template'  => false,
+                'club_id'   => $club->getId(),
+                'url'       => $this->generateUrl('clubs_get_members_template', ['club_id' => $club->getId()])
+            ],
+            [
+                'id'        => 'team',
+                'title'     => 'Equipe',
+                'template'  => false,
+                'club_id'   => $club->getId(),
+                'url'       => $this->generateUrl('clubs_get_teams_template', ['club_id' => $club->getId()])
+            ],
+            [
+                'id'        => 'ligue',
+                'title'     => 'Ligues',
+                'club_id'   => $club->getId(),
+                'template'  => false,
+                'url'       =>  $this->generateUrl('clubs_get_ligues_template', ['club_id' => $club->getId()])
+            ],
+            [
+                'id' => 'setting',
+                'title' => 'Settings',
+                'club_id'   => $club->getId(),
+                'template' => false,
+                'url' => $this->generateUrl('clubs_get_setting_template', ['club_id' => $club->getId()])
+            ]
+        ];
+        return $this->render('FfjvBoBundle:Clubs:show.html.twig', array(
+            'club'          => $club,
+            'tabs'          => $tabs,
+            'contact_form'  => $contactForm->createView(),
+        ));
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function getMemberClubAction(Request $request){
+        $item = json_decode($request->getContent(), true);
+        $em = $this->getDoctrine()->getManager();
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->find($item['club_id']);
+        if (!$club) {
+            throw $this->createNotFoundException('Unable to find Clubs club.');
+        }
         $members = $this->getDoctrine()->getRepository('FfjvBoBundle:UserHasClubs')->findBy(array('club' => $club));
+        $content = $this->renderView('FfjvBoBundle:Clubs:_member.html.twig', [
+            'members' => $members,
+            'club' => $club
+        ]);
+        return new Response(json_encode(['template'=>$content, 'item'=> $item]), 200, ['Content-Type'=>'applcation/json']);
+
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function getTeamClubAction(Request $request){
+        $item = json_decode($request->getContent(), true);
+        $em = $this->getDoctrine()->getManager();
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->find($item['club_id']);
+        if (!$club) {
+            throw $this->createNotFoundException('Unable to find Clubs club.');
+        }
+        $content = $this->renderView('FfjvBoBundle:Clubs:_team.html.twig', [
+            'club' => $club
+        ]);
+        return new Response(json_encode(['template'=>$content, 'item'=> $item]), 200, ['Content-Type'=>'applcation/json']);
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function getLigueClubAction(Request $request){
+        $item = json_decode($request->getContent(), true);
+        $em = $this->getDoctrine()->getManager();
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->find($item['club_id']);
+        if (!$club) {
+            throw $this->createNotFoundException('Unable to find Clubs club.');
+        }
+        $content = $this->renderView('FfjvBoBundle:Clubs:_ligue.html.twig', [
+            'club' => $club
+        ]);
+        return new Response(json_encode(['template'=>$content, 'item'=> $item]), 200, ['Content-Type'=>'applcation/json']);
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function getSettingClubAction(Request $request){
+        $item = json_decode($request->getContent(), true);
+        $em = $this->getDoctrine()->getManager();
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->find($item['club_id']);
+        if (!$club) {
+            throw $this->createNotFoundException('Unable to find Clubs club.');
+        }
         $apiLog = $this->getDoctrine()->getRepository('FfjvBoBundle:WeezeventApiLog')->findOneBy(array('club' => $club));
         if(!$apiLog){
             $apiLog = new WeezeventApiLog();
@@ -114,25 +220,15 @@ class ClubsController extends Controller
             $apiLog->setClub($club);
         }
 
-        if (!$club) {
-            throw $this->createNotFoundException('Unable to find Clubs club.');
-        }
         $editForm = $this->createEditForm($club);
         $apiLogForm = $this->getApiLogForm($apiLog);
-        $contactForm = $this->getContactForm($this->generateUrl('clubs_contact'), array(
-            'user' => $this->getUser()->getId(),
-            'club' => $club->getId()
-        ));
-        return $this->render('FfjvBoBundle:Clubs:show.html.twig', array(
-            'club'          => $club,
-            'members'       => $members,
-            'ligues'        => $ligues,
-            'edit_form'     => $editForm->createView(),
-            'contact_form'  => $contactForm->createView(),
-            'weezevent_api_form' => $apiLogForm->createView()
-        ));
-    }
 
+        $content = $this->renderView('FfjvBoBundle:Clubs:_setting.html.twig', [
+            'edit_form'         => $editForm->createView(),
+            'weezevent_api_form'=> $apiLogForm->createView()
+        ]);
+        return new Response(json_encode(['template'=>$content, 'item'=> $item]), 200, ['Content-Type'=>'applcation/json']);
+    }
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -279,7 +375,7 @@ class ClubsController extends Controller
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
-        ;
+            ;
     }
 
     /**
@@ -300,7 +396,7 @@ class ClubsController extends Controller
      * @return $this|\Symfony\Component\Form\FormInterface
      */
     private function getApiLogForm(WeezeventApiLog $apiLog){
-        
+
         return $this->createForm(WeezeventApiLogType::class, $apiLog->toArray(), [
             'method' => 'POST',
             'action' => $this->generateUrl('weezeventapilog_new'),

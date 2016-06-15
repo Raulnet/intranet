@@ -6,6 +6,26 @@ clubs_show:
     path:     /{id}/show
     defaults: { _controller: "FfjvBoBundle:Clubs:show" }
 
+clubs_get_members_template:
+    path:     /{club_id}/getmemberstemplate
+    defaults: { _controller: "FfjvBoBundle:Clubs:getMemberClub" }
+    methods: POST
+
+clubs_get_teams_template:
+    path:     /{club_id}/getteamstemplate
+    defaults: { _controller: "FfjvBoBundle:Clubs:getTeamClub" }
+    methods: POST
+
+clubs_get_ligues_template:
+    path:     /{club_id}/getliguestemplate
+    defaults: { _controller: "FfjvBoBundle:Clubs:getLigueClub" }
+    methods: POST
+
+clubs_get_setting_template:
+    path:     /{club_id}/getsettingtemplate
+    defaults: { _controller: "FfjvBoBundle:Clubs:getSettingClub" }
+    methods: POST
+
 clubs_new:
     path:     /new
     defaults: { _controller: "FfjvBoBundle:Clubs:new" }
