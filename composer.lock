@@ -1252,16 +1252,16 @@
         },
         {
             "name": "robmorgan/phinx",
-            "version": "v0.5.3",
+            "version": "v0.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robmorgan/phinx.git",
-                "reference": "4e7fee7792f4bf3dbf55ee29001850ba26c86a88"
+                "reference": "16015e73fd900392e477869d04e068514076c40f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/4e7fee7792f4bf3dbf55ee29001850ba26c86a88",
-                "reference": "4e7fee7792f4bf3dbf55ee29001850ba26c86a88",
+                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/16015e73fd900392e477869d04e068514076c40f",
+                "reference": "16015e73fd900392e477869d04e068514076c40f",
                 "shasum": ""
             },
             "require": {
@@ -1288,16 +1288,16 @@
             ],
             "authors": [
                 {
-                    "name": "Rob Morgan",
-                    "email": "robbym@gmail.com",
-                    "homepage": "http://robmorgan.id.au",
-                    "role": "Lead Developer"
-                },
-                {
                     "name": "Woody Gilk",
                     "email": "woody.gilk@gmail.com",
                     "homepage": "http://shadowhand.me",
                     "role": "Developer"
+                },
+                {
+                    "name": "Rob Morgan",
+                    "email": "robbym@gmail.com",
+                    "homepage": "https://robmorgan.id.au",
+                    "role": "Lead Developer"
                 }
             ],
             "description": "Phinx makes it ridiculously easy to manage the database migrations for your PHP app.",
@@ -1309,7 +1309,7 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2016-03-07 14:09:22"
+            "time": "2016-04-25 10:45:50"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -2056,16 +2056,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "a821ed51b87f5ceda834140e5f0c06e9547a86d4"
+                "reference": "272ab3327c3d311aaa9f634730162ea00e9d9e93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/a821ed51b87f5ceda834140e5f0c06e9547a86d4",
-                "reference": "a821ed51b87f5ceda834140e5f0c06e9547a86d4",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/272ab3327c3d311aaa9f634730162ea00e9d9e93",
+                "reference": "272ab3327c3d311aaa9f634730162ea00e9d9e93",
                 "shasum": ""
             },
             "require": {
@@ -2182,7 +2182,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-05-09 22:13:31"
+            "time": "2016-06-06 16:52:46"
         },
         {
             "name": "twig/twig",
@@ -2575,7 +2575,7 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.1.0",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",

@@ -1,4 +1,5 @@
 /.idea/
+/.vagrant/
 /app/config/parameters.yml
 /build/
 /phpunit.xml
@@ -6,6 +7,6 @@
 /vendor/
 /web/bundles/
 /web/app.php
-/web/app_dev.php
+/web/.htaccess
 # Composer PHAR
 /composer.phar
