@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Members Board</h3>{% if club in app.user.clubs %}<a class="btn btn-info btn-xs pull-right" href="{{ path('fo_clubs_newmembers',{'clubId': club.id}) }}">Create a new Member</a>{% endif %}
+            </div>
+            <div class="box-body">
+                <table id="teams_board" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Username</th>
+                        <th>Licence</th>
+                        <th>Roles</th>
+                        <th>Creationdate</th>
+                        <th>Lastupdate</th>
+                        <th>Authors</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for member in members %}
+                        <tr>
+                            <td>
+                                {% if member.user.status %}
+                                    <i style="color: green;" class="fa fa-check fa-lg"></i>
+                                {% else %}
+                                    <i style="color: red;" class="fa fa-close fa-lg"></i>
+                                {% endif %}
+                            </td>
+                            <td>{{ member.user }}</td>
+                            <td>{{ member.user.licence }}</td>
+                            <td>
+                                <ul class="list-group">
+                                    {% for role in member.roles %}
+                                        <li class="list-group-item">{{ role|rolesMember }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td>{{ member.user.registerDate|date('Y-m-d H:i:s') }}</td>
+                            <td>{{ member.user.lastUpdate|date('Y-m-d H:i:s') }}</td>
+                            <td>{{ member.user.authorUser }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

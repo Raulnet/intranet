@@ -1,0 +1,154 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box box-primary collapsed-box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Coordonées</h3>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                {{ form_start(edit_form, {'attr': {'class': 'form-horizontal'}}) }}
+                <div class="form-group">
+                    {{ form_label(edit_form.title, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(edit_form.title) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_form.tag, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(edit_form.tag) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_form.rna, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(edit_form.rna) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_form.siren, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(edit_form.siren) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_form.siret, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(edit_form.siret) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_form.ape, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(edit_form.ape) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_form.email, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(edit_form.email) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_form.telFix, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(edit_form.telFix) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_form.telMobile, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(edit_form.telMobile) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_form.country, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(edit_form.country) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_form.address1, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(edit_form.address1) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_form.address2, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(edit_form.address2) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_form.zipCode, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(edit_form.zipCode) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_form.city, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(edit_form.city) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_form.about, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(edit_form.about) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_form.ligues, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(edit_form.ligues) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-10 col-sm-offset-2">
+                        {{ form_widget(edit_form.submit, {'attr': {'class': 'btn btn-success col-sm-6'}}) }}
+                    </div>
+                </div>
+                {{ form_end(edit_form) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="box box-primary collapsed-box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Weezevent Api Log</h3>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                {{ form_start(weezevent_api_form, {'attr': {'class': 'form-horizontal'}}) }}
+                <div class="form-group">
+                    {{ form_label(weezevent_api_form.api_username, null, { 'label_attr': {'class': 'control-label col-sm-3'} }) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(weezevent_api_form.api_username) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(weezevent_api_form.api_password, null, { 'label_attr': {'class': 'control-label col-sm-3'} }) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(weezevent_api_form.api_password) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(weezevent_api_form.api_key, null, { 'label_attr': {'class': 'control-label col-sm-3'} }) }}
+                    <div class="col-sm-6">
+                        {{ form_widget(weezevent_api_form.api_key) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-10 col-sm-offset-3">
+                        {{ form_widget(weezevent_api_form.submit, {'attr': {'class': 'btn btn-success col-sm-6'}}) }}
+                    </div>
+                </div>
+                {{ form_end(weezevent_api_form) }}
+            </div>
+        </div>
+    </div>
+</div>

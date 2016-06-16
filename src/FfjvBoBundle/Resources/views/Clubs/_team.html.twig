@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Teams Board</h3><a class="btn btn-info btn-xs pull-right" href="{{ path('teams_new',{'clubId': club.id}) }}">Create a new teams</a>
+            </div>
+            <div class="box-body">
+                <table id="teams_board" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Tag</th>
+                        <th>Licence</th>
+                        <th>Creationdate</th>
+                        <th>Lastupdate</th>
+                        <th>Authors</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for team in club.teams %}
+                        <tr>
+                            <td><a href="{{ path('teams_show', { 'id': team.id }) }}">{{ team.title }}</a></td>
+                            <td>{{ team.tag }}</td>
+                            <td>{{ team.licence }}</td>
+                            <td>{% if team.creationDate %}{{ team.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>{% if team.lastUpdate %}{{ team.lastUpdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>
+                                <a href="{{ path('user_show', {'id': team.user.id}) }}">{{ team.user }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
