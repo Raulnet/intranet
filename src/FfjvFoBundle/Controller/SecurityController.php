@@ -83,7 +83,7 @@ class SecurityController extends Controller
             //SendMail to confirm email
             $this->sendMailToConfirmation($user);
 
-            $this->addFlash('success', 'Un email vous à êtait envoyer');
+            $this->addFlash('success', 'Un email vous a êtait envoyer');
             return $this->redirect($this->generateUrl('ffjv_fo_security_confirmation', array('userId' => $user->getId())));
         }
         return $this->render('@FfjvFo/Security/register.html.twig', array(
@@ -102,7 +102,7 @@ class SecurityController extends Controller
             $this->addFlash('success', 'vous êtes déjà connecté !');
             return $this->redirectToRoute('ffjv_fo_home_index');
         }
-        $this->addFlash('success', 'vous ête maintenant enregistrer ! Veuillez confirmer votre adresse email .');
+        $this->addFlash('success', 'vous êtes maintenant enregistré ! Veuillez confirmer votre adresse email .');
         $form = $this->getSendMailForm($userId);
         return $this->render('@FfjvFo/Security/confirmation.html.twig', array('form' => $form->createView()));
     }

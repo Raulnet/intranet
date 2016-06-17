@@ -1,0 +1,10 @@
+@import "mixins/button";
+
+.btn-tools{
+  border-radius: 50px;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  padding: 3px 11px;
+  font-size: 1.3em;
+}

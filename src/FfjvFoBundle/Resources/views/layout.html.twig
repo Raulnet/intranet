@@ -5,8 +5,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/css/mdb.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/lib/noty/css/animate.css') }}">
     {% stylesheets filter="scssphp" output="css/app.css"
+    "public/scss/core/core.scss"
     "public/scss/Fo/main.scss"
-    "public/scss/Fo/Home/index.scss"
     %}
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
     {% endstylesheets %}
@@ -34,5 +34,12 @@
     </div>
     {% block footer %}
 
+    {% endblock %}
+    {% block adminTools %}
+        {% if adminTools is defined %}
+            {% if app.user and is_granted('ROLE_ADMIN') %}
+                <a class="btn-tools btn btn-warning" data-url="" href="{{ adminTools }}"><span class="glyphicon glyphicon-pencil"></span></a>
+            {% endif %}
+        {% endif %}
     {% endblock %}
 {% endblock %}

@@ -67,3 +67,8 @@ ffjv_fo_teams:
 ffjv_fo_userhasteams:
     resource: "@FfjvFoBundle/Resources/config/routing/userHasTeams.yml"
     prefix:   /team/members
+
+ffjv_fo_admin_tools:
+    path: /gettext/{filename}
+    defaults: { _controller: FfjvFoBundle:Tools:editText}
+    methods: GET
