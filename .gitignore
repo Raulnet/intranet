@@ -7,5 +7,6 @@
 /vendor/
 /web/bundles/
 /web/app.php
+/web/.htaccess
 # Composer PHAR
 /composer.phar
