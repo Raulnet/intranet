@@ -1,12 +1,11 @@
 {% extends('@FfjvFo/layout.html.twig') %}
 {% form_theme form 'FfjvFoBundle:Form:fields.html.twig' %}
-
-    {% block title %}User registering{% endblock %}
+{% trans_default_domain 'fo_security_registering' %}
+    {% block title %}Ffjv-{{ "fo.security.registering.title"|trans }}{% endblock %}
     {% block customCSS %}
         <link type="text/css" rel="stylesheet" href="{{ asset('public/lib/bootstrap-switch/css/bootstrap-switch.min.css') }}">
         <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Home/index.css') }}">
         <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Home/register.css') }}">
-
     {% endblock %}
 {% block customJS %}
     <script src="{{ asset('public/lib/bootstrap-switch/js/bootstrap-switch.js') }}"></script>

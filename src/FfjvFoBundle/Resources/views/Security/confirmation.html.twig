@@ -1,5 +1,6 @@
 {% extends('@FfjvFo/layout.html.twig') %}
-    {% block title %}confirmation{% endblock %}
+{% trans_default_domain 'fo_security_confirmation' %}
+    {% block title %}{{ "fo.security.confirmation.title"|trans }}{% endblock %}
     {% block customCSS %}
         <link rel="stylesheet" type="text/css" href="{{ asset('public/css/Home/index.css') }}">
         <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/css/Home/register.css') }}">
@@ -8,7 +9,7 @@
         <div class="main-wrapper">
             <div class="col-md-12">
                 <h4 class="text-center">{{ block('title') }}</h4>
-                <p>vous ête maintenant enregistré ! Veuillez confirmer votre adresse email . <br />Si vous n'avez pas reçus d'email {{ form(form) }}</p>
+                <p>{{ "fo.security.confirmation.confirme_email"|trans }}<br />{{ "fo.security.confirmation.resend_email"|trans }} {{ form(form) }}</p>
             </div>
         </div>
     {% endblock %}
