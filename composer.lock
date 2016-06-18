@@ -993,16 +993,16 @@
         },
         {
             "name": "leafo/scssphp",
-            "version": "v0.6.3",
+            "version": "v0.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/scssphp.git",
-                "reference": "a27edad3d16635a222d7204706572e24c338aa17"
+                "reference": "f73a054101715a2cd288658291c7425c39fdcfc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp/zipball/a27edad3d16635a222d7204706572e24c338aa17",
-                "reference": "a27edad3d16635a222d7204706572e24c338aa17",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/f73a054101715a2cd288658291c7425c39fdcfc8",
+                "reference": "f73a054101715a2cd288658291c7425c39fdcfc8",
                 "shasum": ""
             },
             "require": {
@@ -1042,7 +1042,7 @@
                 "scss",
                 "stylesheet"
             ],
-            "time": "2016-01-15 02:50:06"
+            "time": "2016-06-15 22:20:16"
         },
         {
             "name": "monolog/monolog",
@@ -1252,16 +1252,16 @@
         },
         {
             "name": "robmorgan/phinx",
-            "version": "v0.5.4",
+            "version": "v0.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robmorgan/phinx.git",
-                "reference": "16015e73fd900392e477869d04e068514076c40f"
+                "reference": "da9950a5e5b9314ebf72ddc6317ed587ce9ba8dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/16015e73fd900392e477869d04e068514076c40f",
-                "reference": "16015e73fd900392e477869d04e068514076c40f",
+                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/da9950a5e5b9314ebf72ddc6317ed587ce9ba8dc",
+                "reference": "da9950a5e5b9314ebf72ddc6317ed587ce9ba8dc",
                 "shasum": ""
             },
             "require": {
@@ -1309,7 +1309,7 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2016-04-25 10:45:50"
+            "time": "2016-06-17 15:29:02"
         },
         {
             "name": "sensio/distribution-bundle",
