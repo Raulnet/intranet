@@ -1,6 +1,7 @@
 {% extends('@FfjvFo/layout.html.twig') %}
+{% trans_default_domain 'fo_security_login' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}{{ "fo.security.login.title"|trans }}{% endblock %}
    {% block customCSS %}
        <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Home/index.css') }}">
        <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Home/register.css') }}">
@@ -12,7 +13,7 @@
             <div class="col-xs-12">
                 {% if error %}
                     <div class="alert alert-danger">
-                        <strong>Login failed!</strong> {{ error.message}}
+                        <strong>{{ "fo.security.login.login_failed"|trans }}</strong> {{ error.message}}
                     </div>
                 {% endif %}
                 <form class="form-signin form-horizontal" role="form" action="{{ path('login_check') }}" method="post">
@@ -23,11 +24,11 @@
                         <input type="password" name="_password" class="form-control" placeholder="Entrer votre mot de passe" required>
                     </div>
                     <div class="form-group">
-                        <a href="#" data-toggle="modal" data-target="#lostPassword">mot de passe oublié ?</a>
+                        <a href="#" class="pull-right" data-toggle="modal" data-target="#lostPassword">{{ "fo.security.login.password_forget"|trans }}</a>
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-log-in"></span> Login</button>
+                            <button type="submit" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-log-in"></span> {{ "fo.security.login.btn.login"|trans }}</button>
                         </div>
                     </div>
                 </form>
@@ -40,7 +41,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Mot de passe perdu ?</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{ "fo.security.login.password_forget"|trans }}</h4>
                 </div>
                 {{ form_start(emailForm, {'attr': {'class': 'form-horizontal'}}) }}
                 <div class="modal-body">
@@ -52,7 +53,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <a class="btn btn-default pull-left" data-dismiss="modal">{{ "fo.security.login.modal.btn.cancel"|trans }}</a>
                     {{ form_widget(emailForm.submit) }}
                 </div>
                 {{ form_end(emailForm) }}

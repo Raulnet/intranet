@@ -5,28 +5,28 @@
         </div>
         <div class="pull-left info">
             <p>{{ app.user.firstname }} {{ app.user.lastname }}</p>
-            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            <a href="#"><i class="fa fa-circle text-success"></i> {{ "fo.navbar.aside.info.online"|trans }}</a>
         </div>
     </div>
     <ul class="sidebar-menu">
-        <li class="header">Intranet</li>
-        <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home "></i> <span>Home</span></a></li>
-        <li class="{% if userMenu is defined %}active{% endif %}"><a href="{{ path('fo_profile_show', {'userUsername': app.user.username }) }}"><i class="fa fa-user text-blue"></i> <span>Mon profil</span></a></li>
+        <li class="header">Intranet </li>
+        <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home "></i> <span>{{ "fo.navbar._aside.menu.home"|trans }}</span></a></li>
+        <li class="{% if userMenu is defined %}active{% endif %}"><a href="{{ path('fo_profile_show', {'userUsername': app.user.username }) }}"><i class="fa fa-user text-blue"></i> <span>{{ "fo.navbar._aside.menu.profile"|trans }}</span></a></li>
         <li class="treeview {% if clubsMenu is defined %}active{% endif %}">
             <a href="#">
-                <i class="fa fa-institution"></i> <span>Clubs</span>
+                <i class="fa fa-institution"></i> <span>{{ "fo.navbar._aside.menu.title"|trans }}</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li class="{% if clubsList is defined %}active{% endif %}"><a href="{{ path('fo_clubs_index') }}"><i class="fa fa-list"></i> Liste des clubs</a></li>
-                {% if app.user.clubs|length < 1 %}<li><a href="{{ path('fo_clubs_new') }}"><i class="fa fa-edit"></i> Créer un club</a></li>{% endif %}
+                <li class="{% if clubsList is defined %}active{% endif %}"><a href="{{ path('fo_clubs_index') }}"><i class="fa fa-list"></i> {{ "fo.navbar._aside.menu.listclubs"|trans }}</a></li>
+                {% if app.user.clubs|length < 1 %}<li><a href="{{ path('fo_clubs_new') }}"><i class="fa fa-edit"></i> {{ "fo.navbar._aside.menu.createclub"|trans }}</a></li>{% endif %}
                 {% for club in app.user.clubs %}
                 <li class="{% if (clubTitle is defined) and (clubTitle == club.title) %}active{% endif %}">
                     <a href="#"><i class="fa fa-university"></i> {{ club.title }} <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                         <li><a href="{{ path('fo_clubs_show', {'clubId': club.id} ) }}"><i class="fa fa-institution"></i> {{ club.title }}</a></li>
-                        <li><a href="{{ path('fo_clubs_edit', {'clubId': club.id} ) }}"><i class="fa fa-edit"></i> Editer</a></li>
-                        <li><a href="{{ path('fo_clubs_remove', {'clubId': club.id} ) }}"><i class="fa fa-trash"></i> Supprimer</a></li>
+                        <li><a href="{{ path('fo_clubs_edit', {'clubId': club.id} ) }}"><i class="fa fa-edit"></i> {{ "fo.navbar._aside.menu.editclub"|trans }}</a></li>
+                        <li><a href="{{ path('fo_clubs_remove', {'clubId': club.id} ) }}"><i class="fa fa-trash"></i> {{ "fo.navbar._aside.menu.deleteclub"|trans }}</a></li>
                     </ul>
                 </li>
                 {% endfor %}

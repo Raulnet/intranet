@@ -6,7 +6,7 @@
                 handleAs="json"
                 content-type="application/json"
                 on-response="handleResponse"></iron-ajax>
-        <div class="tabs">
+        <div class$="{{tabs_theme}}">
             <paper-tabs selected="{{selected}}" noink="true" no-slide="true" align-bottom>
                 <template is="dom-repeat" items="{{tabs}}">
                     <paper-tab class="tab-nav" on-tap="handleTab">
@@ -22,7 +22,6 @@
                 </template>
             </iron-pages>
         </div>
-
     </template>
     <script>
         Polymer({
@@ -37,14 +36,26 @@
                         {id:"about", title:"Club", url: "", template:false},
                     ]
                 },
+                tabs_theme:{
+                    type: String,
+                    value: 'tabs tabs-primary'
+                },
                 request_url: {
                     type: String,
                     value: ''
                 },
+                selected: {
+                    type: Number,
+                    value: 0
+                }
             },
             ready: function(){
-                this.selected = 0;
-                this.launchRequest(this.tabs[0]);
+                var item = this.tabs[this.selected];
+                if(item.template == false) {
+                    this.launchRequest(item);
+                } else {
+                    this.insertTemplate(item, item.template);
+                }
             },
             handleTab: function(e){
                 e.preventDefault();

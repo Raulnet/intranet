@@ -1,0 +1,56 @@
+@mixin various-tabs() {
+  & .tab-nav{
+    padding: 6px 4px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    cursor: pointer;
+    -webkit-user-select: none;
+  }
+  & .paper-tabs-0 #selectionBar.paper-tabs{
+    height: 3px;
+    z-index: 1000;
+  }
+  .tab-body{
+    padding: 5px;
+  }
+}
+
+@mixin various-themes-tabs($theme-color, $background-color: #FFFFFF, $border-color: lighten($theme-color, 20%)){
+  background-color: $background-color;
+  box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  & .tab-nav{
+    border-bottom: 1px solid $border-color;
+    background-color: $background-color;
+    a{
+      color:  $theme-color;
+    }
+    &.iron-selected{
+      border-left: 1px solid $border-color;
+      border-top: 1px solid $border-color;
+      border-right: 1px solid $border-color;
+      border-bottom: none;
+      a{
+        font-weight: bolder;
+        color: $theme-color;
+      }
+    }
+  }
+  & .tab-nav:nth-child(2){
+    &.iron-selected{
+      border-right: 1px solid $border-color;
+      border-left: none;
+    }
+  }
+  & .tab-nav:nth-last-child(2){
+    &.iron-selected{
+      border-left: 1px solid $border-color;
+      border-right: none;
+    }
+  }
+  & .paper-tabs-0 #selectionBar.paper-tabs{
+    background-color: $theme-color;
+  }
+}

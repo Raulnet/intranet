@@ -11,7 +11,7 @@
 
 // ***** THEME *****
 .spinner-default{@include spinner-square($light-grey)};
-.spinner-primary{@include spinner-square($primary)};
+.spinner-primary{@include spinner-square($primary-color)};
 
 // ***** KEYFRAME *****
 @-webkit-keyframes sk-rotateplane {

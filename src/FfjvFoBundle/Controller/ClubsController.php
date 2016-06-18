@@ -112,7 +112,7 @@ class ClubsController extends Controller
             $this->addMemberToClub($club, $user, array('ROLE_AUTHOR'));
 
 
-            $this->addFlash('success', 'Félicitaion votre club a été créé');
+            $this->addFlash('success', 'Félicitation votre club a été créé');
 
             return $this->redirect($this->generateUrl('fo_clubs_show', array('clubId' => $club->getId())));
         }

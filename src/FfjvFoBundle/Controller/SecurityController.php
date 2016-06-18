@@ -24,7 +24,7 @@ class SecurityController extends Controller
     {
         // if user already registered
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $this->addFlash('success', 'vous êtes déjà connecté !');
+            $this->addFlash('success', $this->get('translator')->trans("fo.global.noty.all_ready_connected"));
             return $this->redirectToRoute('ffjv_fo_home_index');
         }
 
@@ -46,7 +46,7 @@ class SecurityController extends Controller
     {
         // if user already registered
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $this->addFlash('success', 'vous êtes déjà connecté !');
+            $this->addFlash('success', $this->get('translator')->trans("fo.global.noty.all_ready_connected"));
             return $this->redirectToRoute('ffjv_fo_home_index');
         }
 
@@ -83,7 +83,7 @@ class SecurityController extends Controller
             //SendMail to confirm email
             $this->sendMailToConfirmation($user);
 
-            $this->addFlash('success', 'Un email vous a êtait envoyer');
+            $this->addFlash('success', $this->get('translator')->trans("fo.global.noty.email_sended"));
             return $this->redirect($this->generateUrl('ffjv_fo_security_confirmation', array('userId' => $user->getId())));
         }
         return $this->render('@FfjvFo/Security/register.html.twig', array(
@@ -99,10 +99,10 @@ class SecurityController extends Controller
     public function getConfirmationRegisteringAction($userId){
         // if user already registered
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED') && $this->getUser()->getStatus() == 1 && $this->get('security.authorization_checker')->isGranted('ROLE_USER_CONFIRMED')) {
-            $this->addFlash('success', 'vous êtes déjà connecté !');
+            $this->addFlash('success', $this->get('translator')->trans("fo.global.noty.all_ready_connected"));
             return $this->redirectToRoute('ffjv_fo_home_index');
         }
-        $this->addFlash('success', 'vous êtes maintenant enregistré ! Veuillez confirmer votre adresse email .');
+        $this->addFlash('success', $this->get('translator')->trans("fo.global.noty.email_need_confirmation"));
         $form = $this->getSendMailForm($userId);
         return $this->render('@FfjvFo/Security/confirmation.html.twig', array('form' => $form->createView()));
     }
@@ -127,7 +127,7 @@ class SecurityController extends Controller
                 //SendMail to confirm email
                 $this->sendMailToConfirmation($user);
 
-                $this->addFlash('success', 'Un email vous à êtait envoyer');
+                $this->addFlash('success', $this->get('translator')->trans("fo.global.noty.email_sended"));
             }
         }
 
@@ -139,7 +139,7 @@ class SecurityController extends Controller
      */
     public function checkstatusAction(){
         if($this->getUser()->getStatus()){
-            $this->addFlash('success', 'Bienvenue sur l\'intranet FFJV');
+            $this->addFlash('success', $this->get('translator')->trans("fo.global.noty.welcome"));
             return $this->redirectToRoute("ffjv_fo_home_index");
         }
         $userId = $this->getUser()->getId();
@@ -166,7 +166,7 @@ class SecurityController extends Controller
             // persist entity and flush it
             $em->persist($user);
             $em->flush();
-            $this->addFlash('success', 'Félicitation votre compte est activé ! Il ne vous reste plus qu\'a vous connecter !');
+            $this->addFlash('success', $this->get('translator')->trans("fo.global.noty.acount_successfully"));
             return $this->redirectToRoute("login");
         }
         return $this->redirectToRoute("ffjv_fo_home_index");
@@ -216,7 +216,7 @@ class SecurityController extends Controller
                 //persiste and flush
                 $em->persist($user);
                 $em->flush();
-                $this->addFlash('success', 'Votre mot de passe à été mis a jours.');
+                $this->addFlash('success', $this->get('translator')->trans("fo.global.noty.password_updated"));
                 return $this->redirectToRoute('logout');
             }
         }
@@ -229,9 +229,9 @@ class SecurityController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function sendMailLostPasswordAction(Request $request){
-
+        $translator = $this->get('translator');
         $type = 'error';
-        $message = 'une erreur c\'est produite ?!';
+        $message = $translator->trans("fo.global.noty.error");
 
         $form = $this->getLostPasswordForm();
         $form->handleRequest($request);
@@ -249,9 +249,9 @@ class SecurityController extends Controller
                 $em->flush();
                 $this->sendMailToNewPassword($user, $activationCode);
                 $type = 'success';
-                $message = 'Un email vous a été envoyé pour renouveller votre mot de passe.';
+                $message = $translator->trans("fo.global.noty.email_send_reset_password");
             } else {
-                $message = 'Cette email n\'exist pas';
+                $message = $translator->trans("fo.global.noty.email_not_exist");
             }
             $this->addFlash($type, $message);
             return $this->redirectToRoute('logout');

@@ -1,4 +1,8 @@
 {% extends('@FfjvFo/layoutManager.html.twig') %}
+
+{% trans_default_domain 'fo_club_index' %}
+{% set adminTools = path('ffjv_fo_admin_tools', {'filename': 'fo_club_index'}) %}
+
 {% set clubsMenu = true %}
 {% set clubsList = true %}
 
@@ -8,8 +12,8 @@
     <section class="content-header">
         <h2><i class="fa fa-institution"></i> Clubs</h2>
         <ol class="breadcrumb">
-            <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> Home</a></li>
-            <li class="active"><i class="fa fa-institution"></i> Clubs</li>
+            <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> {{ "fo.clubs.index.breadcrumb.home"|trans }}</a></li>
+            <li class="active"><i class="fa fa-institution"></i> {{ "fo.clubs.index.breadcrumb.clubs"|trans }}</li>
         </ol>
     </section>
     <section class="content">
@@ -20,13 +24,13 @@
                         <table id="clubs_board" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Tag</th>
-                                    <th>Licence</th>
-                                    <th>zipcode</th>
-                                    <th>Country</th>
-                                    <th>Creationdate</th>
-                                    <th>Lastupdate</th>
+                                    <th>{{ "fo.clubs.index.clubs_board.title"|trans }}</th>
+                                    <th>{{ "fo.clubs.index.clubs_board.tag"|trans }}</th>
+                                    <th>{{ "fo.clubs.index.clubs_board.licence"|trans }}</th>
+                                    <th>{{ "fo.clubs.index.clubs_board.zipcode"|trans }}</th>
+                                    <th>{{ "fo.clubs.index.clubs_board.country"|trans }}</th>
+                                    <th>{{ "fo.clubs.index.clubs_board.creation_date"|trans }}</th>
+                                    <th>{{ "fo.clubs.index.clubs_board.last_update"|trans }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,7 +68,8 @@
                 "searching": true,
                 "ordering": true,
                 "info": true,
-                "autoWidth": false
+                "autoWidth": false,
+                language: ffjv.Translate.dataTable,
             });
         });
     </script>

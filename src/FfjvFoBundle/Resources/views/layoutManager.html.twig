@@ -11,6 +11,11 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    {% stylesheets filter="scssphp" output="css/app.css"
+    "public/scss/core/core.scss"
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
+    {% endstylesheets %}
     {% block customCSS %}{% endblock %}
 {% endblock %}
 {% block javascripts %}
@@ -107,5 +112,39 @@
         </footer>
     {% endblock %}
     </div>{# ***** ./wrapper ***** #}
-
+    {% block adminTools %}
+        {% if adminTools is defined %}
+            {% if app.user and is_granted('ROLE_ADMIN') %}
+                <a class="btn-tools btn btn-warning" data-url="" href="{{ adminTools }}"><span class="glyphicon glyphicon-pencil"></span></a>
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+    <script>
+        var ffjv = {
+          Translate: {
+              dataTable: {
+                  processing:     "{{"fo.global.datatable.language.processing"|trans }}",
+                  search:         "{{"fo.global.datatable.language.search"|trans }}",
+                  lengthMenu:    "{{"fo.global.datatable.language.lengthmenu"|trans }}",
+                  info:           "{{"fo.global.datatable.language.info"|trans }}",
+                  infoEmpty:      "{{"fo.global.datatable.language.infoEmpty"|trans }}",
+                  infoFiltered:   "{{"fo.global.datatable.language.infoFiltered"|trans }}",
+                  infoPostFix:    "{{"fo.global.datatable.language.infoPostFix"|trans }}",
+                  loadingRecords: "{{"fo.global.datatable.language.loadingRecords"|trans }}",
+                  zeroRecords:    "{{"fo.global.datatable.language.zeroRecords"|trans }}",
+                  emptyTable:     "{{"fo.global.datatable.language.emptyTable"|trans }}",
+                  paginate: {
+                      first:      "{{"fo.global.datatable.language.paginate.first"|trans }}",
+                      previous:   "{{"fo.global.datatable.language.paginate.previous"|trans }}",
+                      next:       "{{"fo.global.datatable.language.paginate.next"|trans }}",
+                      last:       "{{"fo.global.datatable.language.paginate.last"|trans }}"
+                  },
+                  aria: {
+                      sortAscending:  "{{"fo.global.datatable.language.aria.sortAscending"|trans }}",
+                      sortDescending: "{{"fo.global.datatable.language.aria.sortDescending"|trans }}"
+                  }
+              }
+          }
+        };
+    </script>
 {% endblock %}

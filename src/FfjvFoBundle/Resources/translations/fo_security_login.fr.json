@@ -1,0 +1,7 @@
+{
+  "fo.security.login.title": "Connection",
+  "fo.security.login.btn.login": "Connection",
+  "fo.security.login.password_forget": "mot de passe oublié ?",
+  "fo.security.login.login_failed": "Erreur de connection",
+  "fo.security.login.modal.btn.cancel": "Annuler"
+}
