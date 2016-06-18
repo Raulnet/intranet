@@ -309,7 +309,7 @@ class SecurityController extends Controller
             ->setAction($this->generateUrl('ffjv_fo_security_send_mail_lostpassword'))
             ->setMethod('POST')
             ->add('email', EmailType::class, array(
-                'label' => 'Votre email:',
+                'label' => "fo.security.login.form.lost_password.label.email",
                 'attr'  => array(
                     'class' => 'form-control'
                 )

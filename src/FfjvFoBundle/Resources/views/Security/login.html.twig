@@ -3,8 +3,13 @@
 
 {% block title %}{{ "fo.security.login.title"|trans }}{% endblock %}
    {% block customCSS %}
-       <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Home/index.css') }}">
-       <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Home/register.css') }}">
+       {% stylesheets filter="scssphp" output="css/app.css"
+       "public/scss/core/core.scss"
+       "public/scss/Fo/Home/index.scss"
+       "public/scss/Fo/Security/register.scss"
+       %}
+       <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
+       {% endstylesheets %}
    {% endblock %}
 {% block content %}
     <div class="main-wrapper">
@@ -43,10 +48,11 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">{{ "fo.security.login.password_forget"|trans }}</h4>
                 </div>
+
                 {{ form_start(emailForm, {'attr': {'class': 'form-horizontal'}}) }}
                 <div class="modal-body">
                     <div class="form-group">
-                        {{ form_label(emailForm.email, 'Email*', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+                        {{ form_label(emailForm.email, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
                         <div class="col-sm-10">
                             {{ form_widget(emailForm.email) }}
                         </div>

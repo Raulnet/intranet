@@ -24,6 +24,7 @@
   "fo.global.datatable.language.paginate.last":       "Dernier",
   "fo.global.datatable.language.aria.sortAscending":  ": activer pour trier la colonne par ordre croissant",
   "fo.global.datatable.language.aria.sortDescending": ": activer pour trier la colonne par ordre décroissant",
+  "fo.security.login.form.lost_password.label.email": "Votre email :",
   "fo.navbar.aside.info.online": "En ligne",
   "fo.navbar._aside.menu.home": "Accueil",
   "fo.navbar._aside.menu.title": "Clubs",

@@ -1,0 +1,68 @@
+.well{
+  background-color: #FFFFFF;
+  border-radius: 0px;
+}
+
+.form-control{
+  border-radius: 0px;
+}
+
+.label_title{
+  text-align: right;
+}
+.label_title a{
+  text-align: right;
+}
+
+.form-control-date select{
+  border: 1px solid #d2d6de;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  background-color: white;
+  height: 30px;
+  padding: 5px 15px 5px 15px;
+}
+
+.form-control-date select:nth-child(1){
+  border-right: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.form-control-date select:nth-child(3){
+  border-left: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.main-wrapper .bootstrap-switch, .bootstrap-switch-container{
+  border-radius: 0px;
+}
+
+#cgu_container .bootstrap-switch .bootstrap-switch-handle-on{
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+#cgu_container .bootstrap-switch .bootstrap-switch-handle-off{
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+.modal-cgu{
+  padding: 20px;
+}
+
+
+
+.modal-cgu p{
+  line-height: 1.3;
+}

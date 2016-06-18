@@ -4,8 +4,13 @@
     {% block title %}Ffjv-{{ "fo.security.registering.title"|trans }}{% endblock %}
     {% block customCSS %}
         <link type="text/css" rel="stylesheet" href="{{ asset('public/lib/bootstrap-switch/css/bootstrap-switch.min.css') }}">
-        <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Home/index.css') }}">
-        <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/css/Fo/Home/register.css') }}">
+        {% stylesheets filter="scssphp" output="css/app.css"
+        "public/scss/core/core.scss"
+        "public/scss/Fo/Home/index.scss"
+        "public/scss/Fo/Security/register.scss"
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
+        {% endstylesheets %}
     {% endblock %}
 {% block customJS %}
     <script src="{{ asset('public/lib/bootstrap-switch/js/bootstrap-switch.js') }}"></script>

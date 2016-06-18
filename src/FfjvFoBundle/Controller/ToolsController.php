@@ -37,12 +37,12 @@ class ToolsController extends Controller
 
         $globalContent = file_get_contents($globalFilename);
         $content = file_get_contents($filename);
-        $content = "***** Traduction de la page"."\n".$content."\r"." "."\n"." "."\n"."***** Traduction Global"."\n".$globalContent;
+        $newFile = "***** Traduction de la page"."\n".$content."\r"." "."\n"." "."\n"."***** Traduction Global"."\n".$globalContent;
         
         $response = new Response();
         $response->headers->set('Content-Type', 'text/plain');
         $response->headers->set('Content-Disposition', 'attachment;filename="'.$fileNameDownloaded.'.fr.txt');
-        $response->setContent($content);
+        $response->setContent($newFile);
         $response->send();
         return $response;
     }
