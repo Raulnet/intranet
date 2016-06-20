@@ -1,0 +1,54 @@
+<dom-module id="toast-element">
+    <style>
+        paper-toast{
+            border-radius: 10px;
+            max-height: none;
+        }
+        #toast_container{
+            padding: 50px;
+            border: 1px solid gray;
+            bottom: 10px;
+            position: fixed;
+            width: 350px;
+            height: 300px;
+            max-height: none;
+        }
+    </style>
+    <template>
+        <div id$="{{container}}">
+            <paper-toast id="toast" class$="{{noty.type}}" text="{{text}}">
+            </paper-toast>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "toast-element",
+            properties: {
+                container: {
+                    type: Text,
+                    value: 'toast_container'
+                },
+                noty: {
+                    type: Boolean,
+                    value: false
+                },
+                text: {
+                    type: Text,
+                    value: "i'm a Toast"
+                },
+                duration: {
+                    type: Number,
+                    value: 6000
+                }
+            },
+            ready: function(){
+                if(this.noty){
+                    this.$.toast.setAttribute('duration', this.duration);
+                    this.$.toast.setAttribute('style', 'max-height: none;');
+                    this.$.toast.fitInto = toast_container;
+                    this.$.toast.open();
+                }
+            },
+        });
+    </script>
+</dom-module>

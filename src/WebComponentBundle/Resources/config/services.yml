@@ -11,6 +11,12 @@ parameters:
             - "iron-ajax/iron-ajax.html"
             - "paper-tabs/paper-tabs.html"
             - "paper-tabs/paper-tab.html"
+        toast-element:
+            - "polymer/polymer.html"
+            - "paper-toast/paper-toast.html"
+        table-element:
+            - "polymer/polymer.html"
+            - "aha-table/dist/aha-table.html"
 services:
     web.component.twig_extension:
         class: WebComponentBundle\Twig\WebComponentTwigExtension

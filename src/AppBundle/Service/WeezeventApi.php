@@ -9,6 +9,7 @@
 namespace AppBundle\Service;
 
 use FfjvBoBundle\Service\AppService;
+use FfjvBoBundle\Entity\User;
 
 class WeezeventApi
 {
@@ -50,7 +51,15 @@ class WeezeventApi
         $this->appService = $appService;
     }
 
-
+    /**
+     * @param User $user
+     * @return $this
+     */
+    public function setUser(User $user){
+        $this->appService->setUser($user);
+        return $this;
+    }
+    
     /**
      * @param string $username
      * @param string $password
@@ -83,9 +92,8 @@ class WeezeventApi
     /**
      * @param bool $toArray
      * @return json|array
-     * @throws Exception
      */
-    public function getListEvent($toArray = false){
+    public function getEvents($toArray = false){
         if($this->accessToken == ''){
             $this->initConnection();
         }

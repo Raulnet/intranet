@@ -21,6 +21,9 @@ services:
     app_service:
         class: FfjvBoBundle\Service\AppService
         arguments: ["%secret%"]
+    evenements:
+        class: FfjvBoBundle\Service\Entity\EvenementsService
+        arguments: ["@doctrine.orm.default_entity_manager", "@request_stack", "@weezeventapi"]
     clubs:
         class: FfjvBoBundle\Service\Entity\ClubsService
         arguments: ["@doctrine.orm.default_entity_manager", "@request_stack"]

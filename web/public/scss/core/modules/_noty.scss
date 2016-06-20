@@ -1,0 +1,8 @@
+@import "mixins/noty";
+
+#toast.bottom-right{
+  position: fixed;
+  bottom: 30px;
+  left: 235px;
+  width: 100%;
+}

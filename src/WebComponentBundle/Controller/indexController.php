@@ -11,20 +11,11 @@ use Symfony\Component\HttpFoundation\Response;
 class indexController extends Controller
 {
     /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        if($request->getMethod() == 'POST'){
-            $item = json_decode($request->getContent(), true);
-            $content = $this->renderView('WebComponentBundle:Index/tabs:_tabs1.html.twig', [
-               'item' => $item 
-            ]);
-         
-            return new Response(json_encode(['content'=>$content, 'item'=> $item]), 200, ['Content-Type'=>'applcation/json']);
-        }
-
+        $this->addFlash('error', 'hello la banana');
         return $this->render('WebComponentBundle:Index:index.html.twig', array(
             
         ));

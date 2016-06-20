@@ -63,7 +63,7 @@
                 this.launchRequest(model.item)
             },
             launchRequest: function(item){
-                if(item.template == false){
+                if(item.template == false && item.url != ""){
                     var indexOf = this.tabs.indexOf(item);
                     this.indexOfItem = indexOf;
                     this.$.addRequest.body = item;

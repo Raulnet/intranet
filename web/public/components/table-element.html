@@ -1,0 +1,63 @@
+<dom-module id="table-element">
+    <template>
+        <div>
+            <input type="text" on-keyup="onSearch" value="{{search}}" placeholder="search" id="search">
+            <table id="table" class$="{{theming}}">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>title</th>
+                        <th>content</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <template is="dom-repeat" items="{{data}}">
+                    <tr>
+                        <td>{{item.id}}</td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.content}}</td>
+                    </tr>
+                </template>
+                </tbody>
+            </table>
+        </div>
+
+    </template>
+    <script>
+        Polymer({
+            is: "table-element",
+            properties: {
+                data: {
+                    type: Array,
+                    value: [
+                        {id: 1, title: 'banana', content: 'cest la mega banana'},
+                        {id: 2, title: 'paple', content: 'cest la supa Paple'},
+                        {id: 3, title: 'kevin', content: 'Hello le Kevin'}
+                    ]
+                },
+                theming: {
+                    type: String,
+                    value: ''
+                }
+            },
+            ready: function(){
+                this.search = "";
+                var rows = this.$$('#table tr');
+                console.log(rows);
+            },
+            onSearch: function(){
+                var rows = this.$$('#table tr');
+                console.log('ok');
+
+                    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+                        console.log(val);
+                    rows.filter(function() {
+                        var text = this.text().replace(/\s+/g, ' ').toLowerCase();
+                        return !~text.indexOf(val);
+                    });
+
+            }
+
+        });
+    </script>
+</dom-module>

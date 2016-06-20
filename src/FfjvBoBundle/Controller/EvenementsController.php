@@ -4,9 +4,10 @@ namespace FfjvBoBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\HttpFoundation\Response;
 use FfjvBoBundle\Entity\Evenements;
 use FfjvBoBundle\Form\EvenementsType;
+use FfjvBoBundle\Entity\Clubs;
 
 /**
  * Evenements controller.
@@ -27,6 +28,26 @@ class EvenementsController extends Controller
         return $this->render('evenements/index.html.twig', array(
             'evenements' => $evenements,
         ));
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function getEventClubAction(Request $request)
+    {
+        $item = json_decode($request->getContent(), true);
+        $em = $this->getDoctrine()->getManager();
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->find($item['club_id']);
+        if (!$club) {
+            throw $this->createNotFoundException('Unable to find Clubs club.');
+        }
+        $events = $this->get('evenements')->getListEventClub($club);
+        $content = $this->renderView('FfjvBoBundle:evenements:_board.html.twig', [
+            'events' => $events,
+            'club' => $club
+        ]);
+        return new Response(json_encode(['template'=>$content, 'item'=> $item]), 200, ['Content-Type'=>'applcation/json']);
     }
 
     /**

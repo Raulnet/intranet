@@ -22,3 +22,8 @@ evenements_delete:
     path:     /{id}/delete
     defaults: { _controller: "FfjvBoBundle:Evenements:delete" }
     methods:  DELETE
+
+ffjv_bo_evenements_listevent:
+    path:     /getlist
+    defaults: { _controller: "FfjvBoBundle:Evenements:getEventClub"}
+    methods: POST

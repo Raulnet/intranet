@@ -118,22 +118,25 @@ class ClubsController extends Controller
                 'template'  => false,
                 'club_id'   => $club->getId(),
                 'url'       => $this->generateUrl('clubs_get_members_template', ['club_id' => $club->getId()])
-            ],
-            [
+            ],[
                 'id'        => 'team',
                 'title'     => 'Equipe',
                 'template'  => false,
                 'club_id'   => $club->getId(),
                 'url'       => $this->generateUrl('clubs_get_teams_template', ['club_id' => $club->getId()])
-            ],
-            [
+            ],[
                 'id'        => 'ligue',
                 'title'     => 'Ligues',
                 'club_id'   => $club->getId(),
                 'template'  => false,
                 'url'       =>  $this->generateUrl('clubs_get_ligues_template', ['club_id' => $club->getId()])
-            ],
-            [
+            ],[
+              'id' => 'event',
+                'title' => 'Evénement',
+                'club_id'   => $club->getId(),
+                'template'  => false,
+                'url'       => $this->generateUrl("ffjv_bo_evenements_listevent")
+            ],[
                 'id' => 'setting',
                 'title' => 'Settings',
                 'club_id'   => $club->getId(),

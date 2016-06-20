@@ -1,0 +1,14 @@
+@mixin noty-variante($bottom: 30px, $left: 235px, $top: 0px){
+  position: fixed;
+  top: $top;
+  bottom: $bottom;
+  left: $left;
+  width: 100%;
+}
+
+@mixin noty-theme-variante($background-color: $default-color, $color: #FFFFFF){
+  background-color: $background-color;
+  border-color: darken($background-color, 20%);
+  color: $color;
+  box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}

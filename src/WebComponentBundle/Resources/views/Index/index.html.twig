@@ -1,14 +1,11 @@
 {% extends('WebComponentBundle::layout.html.twig') %}
-{% trans_default_domain "index" %}
+{% block customCSS %}
+
+{% endblock %}
 {% block webComponent %}
-    {{ webComponent(['tabs-element'])|raw }}
+    {{ webComponent(['table-element'])|raw }}
 {% endblock %}
 
 {% block content %}
-    <h2>{{ 'Symfony.is.great'|trans }}</h2>
-    <div class="col-md-6 col-md-offset-3">
-        <tabs-element request_url="{{ path('ffjv_webcomponent_index') }}"></tabs-element>
-    </div>
-
-
+  <table-element theming="table table-bordered table-striped"></table-element>
 {% endblock %}
