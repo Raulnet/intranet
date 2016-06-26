@@ -36,7 +36,8 @@
         "zendframework/zend-eventmanager": "~2.6",
         "zendframework/zend-code": "~3.0.1",
         "robmorgan/phinx": "^0.5.3",
-        "symfony/translation": "^3.0"
+        "symfony/translation": "^3.0",
+        "mtdowling/jmespath.php": "2.3.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

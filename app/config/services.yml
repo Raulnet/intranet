@@ -21,6 +21,9 @@ services:
     app_service:
         class: FfjvBoBundle\Service\AppService
         arguments: ["%secret%"]
+    jmespath:
+        class: AppBundle\Service\JmespathService
+        arguments: ["%kernel.cache_dir%"]
     evenements:
         class: FfjvBoBundle\Service\Entity\EvenementsService
         arguments: ["@doctrine.orm.default_entity_manager", "@request_stack", "@weezeventapi"]
