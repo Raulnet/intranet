@@ -75,6 +75,8 @@ class ClubsController extends Controller
         $form = $this->createForm(ClubsType::class, $club, array(
             'action' => $this->generateUrl('clubs_create'),
             'method' => 'POST',
+            'ligues' => true
+
         ));
 
         $form->add('submit', SubmitType::class, array('label' => 'Create', 'attr' => array('class' => 'btn btn-success')));
@@ -303,6 +305,7 @@ class ClubsController extends Controller
         $form = $this->createForm(ClubsType::class, $club, array(
             'action' => $this->generateUrl('clubs_update', array('id' => $club->getId())),
             'method' => 'PUT',
+            'ligues' => true
         ));
 
         $form->add('submit', SubmitType::class, array('label' => 'Update',

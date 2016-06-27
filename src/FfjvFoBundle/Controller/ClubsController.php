@@ -140,18 +140,15 @@ class ClubsController extends Controller
         if (false === $authorizationChecker->isGranted('EDIT', $club)) {
             throw new AccessDeniedException();
         }
-        //if user is author
-        if ($club->getUser() == $this->getUser()) {
-            $path = $this->generateUrl('fo_clubs_update', array('clubId' => $clubId));
-            $form = $this->getClubForm($club, $path);
+   
+        $path = $this->generateUrl('fo_clubs_update', array('clubId' => $clubId));
+        $form = $this->getClubForm($club, $path);
 
-            return $this->render('FfjvFoBundle:Clubs:edit.html.twig', array(
-                'edit_form' => $form->createView(),
-                'club' => $club
-            ));
-        }
-
-        return $this->redirectToRoute('fo_profile_show', array('userUsername' => $this->getUser()->getUsername()));
+        return $this->render('FfjvFoBundle:Clubs:edit.html.twig', array(
+            'edit_form' => $form->createView(),
+            'club' => $club
+        ));
+   
     }
 
     /**

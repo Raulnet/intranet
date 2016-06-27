@@ -125,12 +125,6 @@ class ClubsType extends AbstractType
                     'placeholder' => 'Présentation de l\'association',
                     'class' => 'form-control')
             ))
-            ->add('ligues', null, array(
-                'label' => 'Ligues ',
-                'required' => false,
-                'placeholder' => 'Sélectionner une ligues',
-                'attr' => array(
-                    'class' => 'form-control')))
             ->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event){
                $club = $event->getData();
                 if($club['about']){
@@ -140,7 +134,15 @@ class ClubsType extends AbstractType
                     $event->setData($club);
                 }
             });
-        ;
+        if($options['ligues']){
+            $builder->add('ligues', null, array(
+                'label' => 'Ligues ',
+                'required' => false,
+                'placeholder' => 'Sélectionner une ligues',
+                'attr' => array(
+                    'class' => 'form-control')));
+        }
+
     }
 
     /**
@@ -148,6 +150,9 @@ class ClubsType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setDefaults([
+            'ligues' => false
+        ]);
 
     }
 

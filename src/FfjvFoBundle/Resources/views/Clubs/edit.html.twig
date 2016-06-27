@@ -29,9 +29,7 @@
                     <div class="box box-success">
                         <div class="box-body box-profile">
                             <img class="profile-user-img img-responsive img-circle" src="{{ asset('public/img/logo/logo_ffjv.png') }}" alt="User profile picture">
-
                             <h3 class="profile-username text-center">{{ club.title }} - {{ club.tag }}</h3>
-
                             <p class="text-muted text-center">RNA {{ club.rna }}</p>
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
@@ -53,11 +51,9 @@
                         </div>
                         <div class="box-body">
                             <strong><i class="fa fa-envelope margin-r-5"></i> Contact</strong>
-
                             <p class="text-muted">{{ club.email }}</p>
                             <hr>
                             <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-
                             <p class="text-muted">
                                 {{ club.address1 }}<br/>
                                 {{ club.address2 }}<br/>
@@ -172,12 +168,6 @@
                                 {{ form_label(edit_form.about, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
                                 <div class="col-sm-10">
                                     {{ form_widget(edit_form.about) }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                {{ form_label(edit_form.ligues, null, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
-                                <div class="col-sm-10">
-                                    {{ form_widget(edit_form.ligues) }}
                                 </div>
                             </div>
                             <div class="form-group">
