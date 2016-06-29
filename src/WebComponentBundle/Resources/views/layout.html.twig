@@ -4,66 +4,65 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/lib/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/lib/dist/css/AdminLTE.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/lib/dist/css/skins/_all-skins.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/lib/noty/css/animate.css') }}">
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    {% stylesheets filter="scssphp" output="css/app.css"
+    "public/scss/wc/main.scss" %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
+    {% endstylesheets %}
+    <script src="{{ asset('public/lib/webcomponentsjs/webcomponents-lite.min.js') }}"></script>
+    <link rel="import" href="{{ asset('public/lib/polymer/polymer.html') }}">
+    <link rel="import" href="{{ asset('public/lib/app-layout/app-layout.html') }}">
+    <link rel="import" href="{{ asset('public/lib/app-layout/app-scroll-effects/effects/waterfall.html') }}">
+    <link rel="import" href="{{ asset('public/lib/iron-selector/iron-selector.html') }}">
+    <link rel="import" href="{{ asset('public/lib/iron-icons/iron-icons.html') }}">
+    <link rel="import" href="{{ asset('public/lib/paper-dialog/paper-dialog.html') }}">
+    <link rel="import" href="{{ asset('public/lib/iron-dropdown/iron-dropdown.html') }}">
     {% block webComponent %}
     {% endblock %}
     {% block customCSS %}
     {% endblock %}
 {% endblock %}
 {% block javascripts %}
-    <script src="{{ asset('public/lib/jQuery/jQuery-2.1.4.min.js') }}"></script>
-    <script src="{{ asset('public/lib/jQuery/jquery-1.11.2.min.js') }}"></script>
-    <script src="{{ asset('public/lib/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('public/lib/fastclick/fastclick.min.js') }}"></script>
-    <script src="{{ asset('public/lib/dist/js/app.min.js') }}"></script>
-    <script src="{{ asset('public/lib/sparkline/jquery.sparkline.min.js') }}"></script>
-    <script src="{{ asset('public/lib/slimScroll/jquery.slimscroll.min.js') }}"></script>
-    <script src="{{ asset('public/lib/chartjs/Chart.min.js') }}"></script>
-    <script src="{{ asset('public/lib/noty/js/noty/packaged/jquery.noty.packaged.min.js') }}"></script>
-
+    {% javascripts filter="?jsqueeze" output="js/app.js"
+    'public/js/webcomponent/layout.js'
+    %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
     {% block customJS %}{% endblock %}
-    {% include '@FfjvBo/Message/message.html.twig' %}
+
 {% endblock %}
-{% block classbody %}hold-transition skin-black sidebar-mini{% endblock %}
+{% block classbody %}{% endblock %}
 {% block body %}
-    <div class="wrapper">
-    <header class="main-header">
+    <app-header-layout>
         {% block header %}
-            {# ***** LOGO ***** #}
-            <a href="{{ path('ffjv_fo_home_index') }}" class="logo">
-                <span class="logo-mini"><b>FF</b>JV</span>
-                <span class="logo-lg"><b>Intranet</b>-FFjv</span>
-            </a>
-            {# ***** ./LOGO ***** #}
             {% block navbar %}
-                {{ include('@FfjvBo/Navbar/navbar.html.twig') }}
+                {{ include('WebComponentBundle:navbar:_navbar.html.twig') }}
             {% endblock %}
         {% endblock %}
-    </header>
-    <aside class="main-sidebar">
         {% block aside %}
-            {{ include('@FfjvBo/Navbar/aside.html.twig') }}
         {% endblock %}
-    </aside>
-    <div class="content-wrapper">
-        <section class="content-header">
-            {% block breadcrumb %}
+        {% block breadcrumb %}
+
+        {% endblock %}
+        <div class="container">
+            {% block content %}
 
             {% endblock %}
-        </section>
-        {% block content %}
+        </div>
+
+        {% block footer %}
 
         {% endblock %}
-    </div>
-    {% block footer %}
-
+    </app-header-layout>
+    {% block modal %}
+        <paper-dialog id="dialog_logout" modal>
+            <h2>Déconnexion</h2>
+            <p>Vous êtes sur le point de vous déconnecter</p>
+            <div class="buttons">
+                <a dialog-dismiss>Annuler</a>
+                <a href="{{ path('logout') }}">confirmer</a>
+            </div>
+        </paper-dialog>
+        {% block customModal %}
+        {% endblock %}
     {% endblock %}
-    </div>{# ***** ./wrapper ***** #}
-
 {% endblock %}

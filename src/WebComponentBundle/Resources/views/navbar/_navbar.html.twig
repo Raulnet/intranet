@@ -1,0 +1,44 @@
+<app-header reveals>
+    <div class="container">
+        <a class="brand" href="{{ path('ffjv_fo_home_index') }}">
+            <iron-icon class="brand-logo" src="{{ asset('public/img/logo/logo_ffjv.png') }}" alt="logo-ffjv"></iron-icon>
+            Espace-membre.FFJV.org</a>
+        <nav class="nav-right">
+            <ul>
+                <li>
+                    <iron-selector class="nav-selector" selected="0">
+                        <a href="{{ path('ffjv_fo_home_index') }}"> Accueil</a>
+                        <a href="{{ path('ffjv_bo_home_index') }}"> Administration</a>
+                    </iron-selector>
+                </li>
+                <li>
+                    <a class="dropdown_toggle" onclick="dropdown.open()"><iron-icon icon="icons:perm-identity"></iron-icon> Mon compte</a>
+                    <iron-dropdown id="dropdown" horizontal-align="right">
+                        <ul class="dropdown-content">
+                            <li><a href="#"><iron-icon icon="icons:account-box"></iron-icon> Mon profile</a></li>
+                            <li><a href="#"><iron-icon icon="icons:account-balance"></iron-icon> Mon club</a></li>
+                            <li><a onclick="dialog_logout.open()"><iron-icon icon="icons:power-settings-new"></iron-icon> Déconnexion</a></li>
+                        </ul>
+                    </iron-dropdown>
+                </li>
+            </ul>
+        </nav>
+        <a class="toggle-menu" onclick="toggleNavDrawner()">
+            <iron-icon icon="icons:menu"></iron-icon>
+        </a>
+    </div>
+</app-header>
+<app-drawer id="nav_drawner">
+    <div class="drawner_content">
+        <ul>
+            <li><a href="{{ path('ffjv_fo_home_index') }}"><iron-icon icon="icons:home"></iron-icon> Accueil</a></li>
+            <li><a href="{{ path('ffjv_bo_home_index') }}"><iron-icon icon="icons:settings"></iron-icon> Administration</a></li>
+            <li><p class="drawner_list_title"><iron-icon icon="icons:perm-identity"></iron-icon> Compte</p></li>
+            <li><a href="#"><iron-icon icon="icons:account-box"></iron-icon> Mon profile</a></li>
+            <li><a href="#"><iron-icon icon="icons:account-balance"></iron-icon> Mon club</a></li>
+            <li><a onclick="dialog_logout.open()"><iron-icon icon="icons:power-settings-new"></iron-icon> Déconnexion</a></li>
+        </ul>
+    </div>
+</app-drawer>
+
+
