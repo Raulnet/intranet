@@ -12,8 +12,8 @@
                     </iron-selector>
                 </li>
                 <li>
-                    <a class="dropdown_toggle" onclick="dropdown.open()"><iron-icon icon="icons:perm-identity"></iron-icon> Mon compte</a>
-                    <iron-dropdown id="dropdown" horizontal-align="right">
+                    <a class="dropdown_toggle" onclick="nav_dropdown.open()"><iron-icon icon="icons:perm-identity"></iron-icon> Mon compte</a>
+                    <iron-dropdown class="z-depth-2" id="nav_dropdown" horizontal-align="right">
                         <ul class="dropdown-content">
                             <li><a href="#"><iron-icon icon="icons:account-box"></iron-icon> Mon profile</a></li>
                             <li><a href="#"><iron-icon icon="icons:account-balance"></iron-icon> Mon club</a></li>
@@ -31,7 +31,7 @@
 <app-drawer id="nav_drawner">
     <div class="drawner_content">
         <ul>
-            <li><a href="{{ path('ffjv_fo_home_index') }}"><iron-icon icon="icons:home"></iron-icon> Accueil</a></li>
+            <li><a href="{{ path('ffjv_fo_home_index') }}" raised><iron-icon icon="icons:home"></iron-icon> Accueil</a></li>
             <li><a href="{{ path('ffjv_bo_home_index') }}"><iron-icon icon="icons:settings"></iron-icon> Administration</a></li>
             <li><p class="drawner_list_title"><iron-icon icon="icons:perm-identity"></iron-icon> Compte</p></li>
             <li><a href="#"><iron-icon icon="icons:account-box"></iron-icon> Mon profile</a></li>

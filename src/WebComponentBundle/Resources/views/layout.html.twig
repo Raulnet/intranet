@@ -2,10 +2,18 @@
 {% block title %}FFJV - Intranet{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{ asset('public/lib/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/lib/noty/css/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/mdb.min.css') }}">
+    {#{% stylesheets filter="scssphp" output="css/mdb.min.css"#}
+    {#"public/scss/mdb/mdb.scss"#}
+    {#%}#}
+    {#<link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>#}
+    {#{% endstylesheets %}#}
     {% stylesheets filter="scssphp" output="css/app.css"
-    "public/scss/wc/main.scss" %}
+    "public/scss/core/core.scss"
+    "public/scss/wc/reset.scss"
+    "public/scss/wc/main.scss"
+    %}
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
     {% endstylesheets %}
     <script src="{{ asset('public/lib/webcomponentsjs/webcomponents-lite.min.js') }}"></script>
@@ -28,15 +36,14 @@
     <script src="{{ asset_url }}" type="text/javascript"></script>
     {% endjavascripts %}
     {% block customJS %}{% endblock %}
-
 {% endblock %}
-{% block classbody %}{% endblock %}
 {% block body %}
     <app-header-layout>
+        {% block navbar %}
+            {{ include('WebComponentBundle:navbar:_navbar.html.twig') }}
+        {% endblock %}
         {% block header %}
-            {% block navbar %}
-                {{ include('WebComponentBundle:navbar:_navbar.html.twig') }}
-            {% endblock %}
+
         {% endblock %}
         {% block aside %}
         {% endblock %}
