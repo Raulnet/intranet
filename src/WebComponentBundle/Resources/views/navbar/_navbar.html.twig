@@ -12,14 +12,14 @@
                     </iron-selector>
                 </li>
                 <li>
-                    <a class="dropdown_toggle" onclick="nav_dropdown.open()"><iron-icon icon="icons:perm-identity"></iron-icon> Mon compte</a>
-                    <iron-dropdown class="z-depth-2" id="nav_dropdown" horizontal-align="right">
-                        <ul class="dropdown-content">
-                            <li><a href="#"><iron-icon icon="icons:account-box"></iron-icon> Mon profile</a></li>
-                            <li><a href="#"><iron-icon icon="icons:account-balance"></iron-icon> Mon club</a></li>
-                            <li><a onclick="dialog_logout.open()"><iron-icon icon="icons:power-settings-new"></iron-icon> Déconnexion</a></li>
-                        </ul>
-                    </iron-dropdown>
+                    <paper-menu-button>
+                        <paper-button class="dropdown-trigger">Mon compte <iron-icon icon="icons:arrow-drop-down"></iron-icon></paper-button>
+                        <paper-menu class="dropdown-content">
+                            <paper-item><a href="#"><iron-icon icon="icons:account-box"></iron-icon> Mon profile</a></paper-item>
+                            <paper-item><a href="#"><iron-icon icon="icons:account-balance"></iron-icon> Mon club</a></paper-item>
+                            <paper-item><a onclick="dialog_logout.open()"><iron-icon icon="icons:power-settings-new"></iron-icon> Déconnexion</a></paper-item>
+                        </paper-menu>
+                    </paper-menu-button>
                 </li>
             </ul>
         </nav>

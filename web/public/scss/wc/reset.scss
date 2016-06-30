@@ -7,3 +7,17 @@
 .btn{
   position: static; // reset mdb
 }
+
+// ***** POLYMER ****
+.paper-menu-button-0[vertical-align="top"] .dropdown-content.paper-menu-button{
+  margin-bottom: 0px;
+  margin-top: 0px;
+  top:0px
+}
+
+.paper-menu-button-0 .dropdown-content.paper-menu-button{
+  box-shadow: none;
+  position: static;
+  border-radius: 0px;
+  background-color: none;
+}

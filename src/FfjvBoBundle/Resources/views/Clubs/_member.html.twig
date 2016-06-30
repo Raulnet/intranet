@@ -4,7 +4,7 @@
             <div class="box-header">
                 <h3 class="box-title">Members Board</h3>{% if club in app.user.clubs %}<a class="btn btn-info btn-xs pull-right" href="{{ path('fo_clubs_newmembers',{'clubId': club.id}) }}">Create a new Member</a>{% endif %}
             </div>
-            <div class="box-body">
+            <div class="box-body table-responsive">
                 <table id="teams_board" class="table table-bordered table-striped">
                     <thead>
                     <tr>

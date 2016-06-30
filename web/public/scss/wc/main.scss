@@ -1,163 +1,153 @@
-app-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-
-  background-color: #223741;
-  background-size: 100%;
-  height: auto;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  .toggle-menu {
-    float: right;
-    color: #FFFFFF;
-    padding-top: 18px;
-    display: none;
-  }
-  .brand {
-    float: left;
-    font-size: 18px;
-    font-weight: 400;
-    color: #ffffff;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    .brand-logo {
-      float: left;
-      height: 32px;
-      width: 32px;
-      margin-top: -3px;
-      margin-right: 5px;
-    }
-  }
-  a.brand:hover {
-    color: #00FFFF;
-    text-decoration: none;
-    text-underline: none;
-    cursor: pointer;
-  }
-  .nav-right {
-    float: right;
-    color: #DDDDDD;
-    ul {
-      margin-bottom: 0px; //reset bootstrap
-      li {
-        display: inline-block;
-        .dropdown_toggle {
-          color: #DDDDDD;
-          padding: 20px 0px;
-        }
-        .dropdown_toggle:hover {
-          color: #CCCCCC;
-          text-decoration: none;
-          text-underline: none;
-          cursor: pointer;
-        }
-        .nav-selector a {
-          color: #DDDDDD;
-          padding-top: 20px;
-          padding-bottom: 13px;
-          display: inline-block;
-          margin: 0 10px;
-          box-sizing: border-box;
-          text-decoration: none;
-          text-underline: none;
-          iron-icon {
-            width: 22px;
-            margin-top: -4px;
-            height: 22px;
-          }
-        }
-        .nav-selector a:hover {
-          color: #CCCCCC;
-          text-decoration: none;
-          text-underline: none;
-        }
-        .nav-selector a.iron-selected {
-          color: #FFFFFF;
-          border-bottom: 6px solid #509DFF;
-        }
-      }
-    }
-    iron-dropdown {
-      background-color: #FFFFFF;
-      box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      width: 200px;
-      margin-top: 25px;
-      .dropdown-content {
-        margin: 0;
-        padding: 0;
-        li {
-          display: block;
-          position: relative;
-          margin: 0;
-          padding: 0;
-        }
-        a {
-          display: block;
-          position: relative;
-          padding: 1em;
-          text-decoration: none;
-        }
-        li:not(:last-of-type) {
-          border-bottom: 1px solid #eee;
-        }
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 768px) {
+app-header-layout{
   app-header {
-    nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #223741;
+    background-size: 100%;
+    height: 60px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    .toggle-menu {
+      float: right;
+      color: #FFFFFF;
+      padding-top: 18px;
       display: none;
     }
-    .toggle-menu {
-      display: block;
+    .brand {
+      float: left;
+      height: 60px;
+      font-size: 18px;
+      font-weight: 400;
+      color: #ffffff;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      .brand-logo {
+        float: left;
+        height: 32px;
+        width: 32px;
+        margin-top: -3px;
+        margin-right: 5px;
+      }
     }
-  }
-}
-
-#nav_drawner {
-  z-index: 1001;
-  .drawner_content {
-    margin-top: 60px;
-    ul {
-      -webkit-padding-start: 0px;
-      list-style-type: none;
-      li {
-        border-bottom: 1px solid #c5e3ff;
-        .drawner_list_title{
-          display: block;
-          position: relative;
-          padding: 1em ;
-          padding-left:1.5em;
-          background-color: #223741;
-          color: #FFFFFF;
-          margin: 0px; // FIX Boostrap
-          margin-top: 5px;
+    a.brand:hover {
+      color: #00FFFF;
+      text-decoration: none;
+      text-underline: none;
+      cursor: pointer;
+    }
+    .nav-right {
+      float: right;
+      color: #DDDDDD;
+      ul {
+        margin-bottom: 0px; //reset bootstrap
+        li {
+          display: inline-block;
+          paper-button{
+            text-transform: none;
+            font-size: 14px;
+            font-weight: bold;
+          }
+          .nav-selector a {
+            color: #DDDDDD;
+            padding-top: 20px;
+            padding-bottom: 14px;
+            display: inline-block;
+            margin: 0 10px;
+            box-sizing: border-box;
+            text-decoration: none;
+            text-underline: none;
+            iron-icon {
+              width: 22px;
+              margin-top: -4px;
+              height: 22px;
+            }
+          }
+          .nav-selector a:hover {
+            color: #CCCCCC;
+            text-decoration: none;
+            text-underline: none;
+          }
+          .nav-selector a.iron-selected {
+            color: #FFFFFF;
+            border-bottom: 6px solid #509DFF;
+          }
         }
-        a {
-          display: block;
-          outline: none; // FIX Bootstrap
-          position: relative;
-          padding: 1em;
-          padding-left:2em;
-          width: 100%;
-          cursor: pointer;
-          text-decoration: none;
-          text-underline: none;
-        }
-        a:hover {
-          background-color: #EEEEEE;
+      }
+      iron-dropdown {
+        background-color: #FFFFFF;
+        box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        width: 200px;
+        margin-top: 50px;
+        .dropdown-content {
+          margin: 0;
+          padding: 0;
+          li {
+            display: block;
+            position: relative;
+            margin: 0;
+            padding: 0;
+          }
+          a {
+            display: block;
+            position: relative;
+            padding: 1em;
+            text-decoration: none;
+          }
+          li:not(:last-of-type) {
+            border-bottom: 1px solid #eee;
+          }
         }
       }
     }
   }
-}
 
-article {
-  padding: 8px;
-  margin: 10px;
-  background-color: white;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  @media screen and (max-width: 768px) {
+    app-header {
+      nav {
+        display: none;
+      }
+      .toggle-menu {
+        display: block;
+      }
+    }
+  }
+
+  #nav_drawner {
+    z-index: 1001;
+    .drawner_content {
+      margin-top: 60px;
+      ul {
+        -webkit-padding-start: 0px;
+        list-style-type: none;
+        li {
+          border-bottom: 1px solid #c5e3ff;
+          .drawner_list_title{
+            display: block;
+            position: relative;
+            padding: 1em ;
+            padding-left:1.5em;
+            background-color: #223741;
+            color: #FFFFFF;
+            margin: 0px; // FIX Boostrap
+            margin-top: 5px;
+          }
+          a {
+            display: block;
+            outline: none; // FIX Bootstrap
+            position: relative;
+            padding: 1em;
+            padding-left:2em;
+            width: 100%;
+            cursor: pointer;
+            text-decoration: none;
+            text-underline: none;
+          }
+          a:hover {
+            background-color: #EEEEEE;
+          }
+        }
+      }
+    }
+  }
 }
