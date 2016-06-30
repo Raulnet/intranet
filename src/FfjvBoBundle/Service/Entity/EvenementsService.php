@@ -56,7 +56,7 @@ class EvenementsService
         $listEvents = [];
         foreach ($listEventClub as $evenements){
             $keyEvent = $evenements->getStartDate()->format('Y-m-d_H:i:s').'_ffjv';
-            $listEvents[$keyEvent] = $evenements;
+            $listEvents[$keyEvent] = $evenements->toArray();
             $listEvents[$keyEvent]['origin'] = self::EVENT_ORIGIN_FFJV;
             $listEvents[$keyEvent]['participants'] = '0';
         }
@@ -88,8 +88,8 @@ class EvenementsService
     private function convertApiEvent($event){
         $eventConverted = [
             'title' => $event['name'],
-            'startDate' => $event['date']['start'],
-            'endDate' => $event['date']['end'],
+            'start_date' => $event['date']['start'],
+            'end_date' => $event['date']['end'],
             'origin' => self::EVENT_ORIGIN_WEEZ,
             'participants' => $event['participants']
         ];

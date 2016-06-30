@@ -25,7 +25,7 @@ class EvenementsController extends Controller
 
         $evenements = $em->getRepository('FfjvBoBundle:Evenements')->findAll();
 
-        return $this->render('evenements/index.html.twig', array(
+        return $this->render('FfjvBoBundle:evenements:index.html.twig', array(
             'evenements' => $evenements,
         ));
     }
@@ -65,10 +65,10 @@ class EvenementsController extends Controller
             $em->persist($evenement);
             $em->flush();
 
-            return $this->redirectToRoute('evenements_show', array('id' => $evenement->getId()));
+            return $this->redirectToRoute('ffjv_bo_evenements_show', array('id' => $evenement->getId()));
         }
 
-        return $this->render('evenements/new.html.twig', array(
+        return $this->render('FfjvBoBundle:evenements:new.html.twig', array(
             'evenement' => $evenement,
             'form' => $form->createView(),
         ));
@@ -82,7 +82,7 @@ class EvenementsController extends Controller
     {
         $deleteForm = $this->createDeleteForm($evenement);
 
-        return $this->render('evenements/show.html.twig', array(
+        return $this->render('FfjvBoBundle:evenements:show.html.twig', array(
             'evenement' => $evenement,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -103,10 +103,10 @@ class EvenementsController extends Controller
             $em->persist($evenement);
             $em->flush();
 
-            return $this->redirectToRoute('evenements_edit', array('id' => $evenement->getId()));
+            return $this->redirectToRoute('ffjv_bo_evenements_edit', array('id' => $evenement->getId()));
         }
 
-        return $this->render('evenements/edit.html.twig', array(
+        return $this->render('FfjvBoBundle:evenements:edit.html.twig', array(
             'evenement' => $evenement,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -128,7 +128,7 @@ class EvenementsController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('evenements_index');
+        return $this->redirectToRoute('ffjv_bo_evenements_index');
     }
 
     /**
@@ -141,7 +141,7 @@ class EvenementsController extends Controller
     private function createDeleteForm(Evenements $evenement)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('evenements_delete', array('id' => $evenement->getId())))
+            ->setAction($this->generateUrl('ffjv_bo_evenements_delete', array('id' => $evenement->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

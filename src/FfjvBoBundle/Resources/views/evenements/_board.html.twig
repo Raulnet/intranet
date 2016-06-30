@@ -1,3 +1,4 @@
+{% set tagOrigin = {'0': 'FFJV', '1': 'WEEZ'} %}
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
@@ -13,19 +14,21 @@
                             <th>Titre</th>
                             <th>Participant</th>
                             <th>Debut</th>
-                            <th>Fin</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                             {% for event in events %}
                                 <tr>
-                                    <td>{{ event.origin }}</td>
+                                    <td>{{ tagOrigin[event.origin] }}</td>
                                     <td>{{ event.title }}</td>
                                     <td>{{ event.participants }}</td>
-                                    <td>{{ event.startDate|date('Y-m-d H:i:s') }}</td>
-                                    <td>{{ event.endDate|date('Y-m-d H:i:s') }}</td>
-                                    <td><a class="btn btn-primary btn-xs" href="#">Action</a> </td>
+                                    <td>{{ event.start_date|date('Y-m-d H:i') }}</td>
+                                    <td>
+                                        {% if event.origin == 0 %}
+                                            <a class="btn btn-success btn-xs" href="{{ path('ffjv_bo_evenements_edit', {'id': event.evenement_id}) }}">Editer</a>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>

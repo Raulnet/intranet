@@ -1,1 +1,29 @@
 textarea{}
+
+select, .form-control{
+  border-radius: 0px;
+}
+
+.form-control-date{
+  div {
+    display: inline-block;
+    select{
+      border: 1px solid #d2d6de;
+      -webkit-appearance: none;
+      -webkit-border-radius: 0px;
+      background-color: white;
+      height: 30px;
+      padding: 5px 15px 5px 15px;
+    }
+    select:nth-child(1){
+      border-right: none;
+    }
+    select:nth-child(3){
+      border-left: none;
+    }
+  }
+  div:nth-child(2){
+    margin-left: 5px;
+  }
+
+}

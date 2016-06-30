@@ -1,24 +1,24 @@
-evenements_index:
+ffjv_bo_evenements_index:
     path:     /
     defaults: { _controller: "FfjvBoBundle:Evenements:index" }
     methods:  GET
 
-evenements_show:
+ffjv_bo_evenements_show:
     path:     /{id}/show
     defaults: { _controller: "FfjvBoBundle:Evenements:show" }
     methods:  GET
 
-evenements_new:
+ffjv_bo_evenements_new:
     path:     /new
     defaults: { _controller: "FfjvBoBundle:Evenements:new" }
     methods:  [GET, POST]
 
-evenements_edit:
+ffjv_bo_evenements_edit:
     path:     /{id}/edit
     defaults: { _controller: "FfjvBoBundle:Evenements:edit" }
     methods:  [GET, POST]
 
-evenements_delete:
+ffjv_bo_evenements_delete:
     path:     /{id}/delete
     defaults: { _controller: "FfjvBoBundle:Evenements:delete" }
     methods:  DELETE

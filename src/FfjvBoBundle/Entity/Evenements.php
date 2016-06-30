@@ -5,7 +5,6 @@
  * Date: 29/05/16
  * Time: 16:56
  */
-
 namespace FfjvBoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -28,9 +27,9 @@ class Evenements
      * @var array
      */
     public static $listVisibility = [
-        "entity.evenements.visibility.draft" => self::STATUS_VISIBILITY_DRAFT,
+        "entity.evenements.visibility.draft"   => self::STATUS_VISIBILITY_DRAFT,
         "entity.evenements.visibility.private" => self::STATUS_VISIBILITY_PRIVATE,
-        "entity.evenements.visibility.public" => self::STATUS_VISIBILITY_PUBLIC,
+        "entity.evenements.visibility.public"  => self::STATUS_VISIBILITY_PUBLIC,
     ];
 
     /**
@@ -53,7 +52,7 @@ class Evenements
      * @ORM\Column(name="end_date", type="datetime", nullable=false)
      */
     private $endDate;
-    
+
     /**
      * @var \DateTime
      *
@@ -189,12 +188,45 @@ class Evenements
     private $club;
 
     /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'title'              => $this->title,
+            'start_date'         => $this->startDate,
+            'end_date'           => $this->endDate,
+            'creation_date'      => $this->creationDate,
+            'last_update'        => $this->lastUpdate,
+            'description'        => $this->description,
+            'place'              => $this->place,
+            'address1'           => $this->address1,
+            'address2'           => $this->address2,
+            'zip_code'           => $this->zipCode,
+            'id_zip_code'        => $this->idZipCode,
+            'city'               => $this->city,
+            'country'            => $this->country,
+            'visibility'         => $this->visibility,
+            'close'              => $this->close,
+            'deleted'            => $this->deleted,
+            'use_session'        => $this->useSession,
+            'event_weezevent_id' => $this->eventWeezeventId,
+            'evenement_id'       => $this->id,
+            'user_id'            => (!$this->user ? null : $this->user->getId()),
+            'club_id'            => (!$this->club ? null : $this->club->getId())
+        ];
+    }
+
+    /**
      * Clubs constructor.
      */
     public function __construct()
     {
         $this->creationDate = new \DateTime('now');
         $this->lastUpdate   = new \DateTime('now');
+        $this->startDate    = new \DateTime('now');
+        $endate             = new \DateTime('now');
+        $this->endDate      = $endate->modify('+1day');
     }
 
     /**
@@ -686,4 +718,5 @@ class Evenements
     {
         return $this->club;
     }
+
 }

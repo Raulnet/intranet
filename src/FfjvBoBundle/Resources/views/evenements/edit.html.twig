@@ -1,21 +1,105 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <h1>Evenements edit</h1>
-
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('evenements_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+{% extends('@FfjvBo/layout.html.twig') %}
+{% form_theme edit_form 'FfjvFoBundle:Form:fields.html.twig' %}
+{% set eventsMenu = true %}
+{% block breadcrumb %}
+    <h1>
+        Intranet FFJV
+        <small>Version 0.1</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="{{ path('ffjv_bo_home_index') }}"><i class="fa fa-cogs"></i> Administration</a> </li>
+        <li><a href="{{ path('ffjv_bo_evenements_index') }}"><i class="fa fa-star-o"></i> Evenement</a></li>
+        <li class="active"> creation</li>
+    </ol>
 {% endblock %}
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">Evenements creation</div>
+                    {{ form_start(edit_form, {'attr': {'class': 'form-horizontal'}}) }}
+                    <div class="panel-body">
+                        <div class="form-group">
+                            {{ form_label(edit_form.club, null, { 'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(edit_form.club) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(edit_form.title, null, { 'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(edit_form.title) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(edit_form.startDate, null, { 'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(edit_form.startDate) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(edit_form.endDate, null, { 'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(edit_form.endDate) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(edit_form.description, null, { 'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(edit_form.description) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(edit_form.place, null, { 'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(edit_form.place) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(edit_form.address1, null, { 'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(edit_form.address1) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(edit_form.address2, null, { 'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(edit_form.address2) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(edit_form.zipCode, null, { 'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(edit_form.zipCode) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(edit_form.city, null, { 'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(edit_form.city) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(edit_form.country, null, { 'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(edit_form.country) }}
+                            </div>
+                        </div>
+                        <input class="btn btn-success pull-right" type="submit" value="Editer"/>
+                        {{ form_end(edit_form) }}
+                        {{ form_start(delete_form) }}
+                        <input class="btn btn-danger pull-left" type="submit" value="Delete">
+                        {{ form_end(delete_form) }}
+                    </div>
+                    <div class="panel-footer">
+                        <a class="btn btn-default pull-left" href="{{ path('ffjv_bo_evenements_index') }}">Back to the list</a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
