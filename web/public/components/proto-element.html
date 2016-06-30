@@ -1,4 +1,15 @@
+<!--
+Hello all
+-->
+<!--
+Hello all
+-->
 <dom-module id="proto-element">
+    <style is="custom-style">
+        .panel-heading{
+            background-color: #FFFFFF;
+        }
+    </style>
     <template>
         <h3>PROTO-ELEMENET</h3>
         <template is="dom-repeat" items="{{events.events}}">
@@ -59,5 +70,11 @@
                 }
             },
         });
+    </script>
+    <!-- Script test -->
+    <script>
+        var data = function(){
+            console.log('hello');
+        }
     </script>
 </dom-module>

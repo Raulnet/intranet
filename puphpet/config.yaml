@@ -195,33 +195,11 @@ xdebug:
     install: '1'
     settings:
         xdebug.default_enable: '1'
-        xdebug.remote_autostart: '0'
+        xdebug.remote_autostart: '1'
         xdebug.remote_connect_back: '1'
         xdebug.remote_enable: '1'
         xdebug.remote_handler: dbgp
         xdebug.remote_port: '9000'
-blackfire:
-    install: '0'
-    settings:
-        server_id: ''
-        server_token: ''
-        agent:
-            http_proxy: ''
-            https_proxy: ''
-            log_file: stderr
-            log_level: '1'
-        php:
-            agent_timeout: '0.25'
-            log_file: ''
-            log_level: '1'
-xhprof:
-    install: '0'
-wpcli:
-    install: '0'
-    version: v0.21.1
-drush:
-    install: '0'
-    version: 8.0.5
 ruby:
     install: '1'
     versions:
@@ -243,21 +221,7 @@ nodejs:
         version: '5'
     npm_packages:
         - bower
-hhvm:
-    install: '0'
-    nightly: 0
-    composer: '1'
-    composer_home: ''
-    settings: {  }
-    server_ini:
-        hhvm.server.host: 127.0.0.1
-        hhvm.server.port: '9000'
-        hhvm.log.use_log_file: '1'
-        hhvm.log.file: /var/log/hhvm/error.log
-    php_ini:
-        display_errors: 'On'
-        error_reporting: '-1'
-        date.timezone: UTC
+        - vulcanize
 mariadb:
     install: '1'
     settings:
@@ -274,55 +238,6 @@ mariadb:
             name: intranet
             sql: ''
     grants: {  }
-mysql:
-    install: '0'
-    settings:
-        version: '5.6'
-        root_password: '123'
-        override_options: {  }
-    adminer: 0
-    users:
-        mysqlnu_nmuqyan62icy:
-            name: dbuser
-            password: '123'
-    databases:
-        mysqlnd_s6wfpeon6ifs:
-            name: dbname
-            sql: ''
-    grants:
-        mysqlng_c7i434csoqvv:
-            user: dbuser
-            table: '*.*'
-            privileges:
-                - ALL
-postgresql:
-    install: '0'
-    settings:
-        global:
-            encoding: UTF8
-            version: '9.4'
-        server:
-            postgres_password: '123'
-    databases: {  }
-    users: {  }
-    grants: {  }
-    adminer: 0
-mongodb:
-    install: '0'
-    settings:
-        bind_ip: 127.0.0.1
-        port: '27017'
-    globals:
-        version: 2.6.0
-    databases: {  }
-redis:
-    install: '0'
-    settings:
-        port: '6379'
-sqlite:
-    install: '0'
-    adminer: 0
-    databases: {  }
 mailhog:
     install: '1'
     settings:
@@ -331,35 +246,4 @@ mailhog:
         http_ip: 0.0.0.0
         http_port: '8025'
         path: /usr/local/bin/mailhog
-beanstalkd:
-    install: '0'
-    settings:
-        listenaddress: 0.0.0.0
-        listenport: '11300'
-        maxjobsize: '65535'
-        maxconnections: '1024'
-        binlogdir: /var/lib/beanstalkd/binlog
-        binlogfsync: null
-        binlogsize: '10485760'
-    beanstalk_console: 0
-rabbitmq:
-    install: '0'
-    settings:
-        port: '5672'
-    users: {  }
-    vhosts: {  }
-    plugins: {  }
-elastic_search:
-    install: '0'
-    settings:
-        version: 2.3.1
-        java_install: true
-    instances:
-        esi_hjl8ex2328um:
-            name: es-01
-solr:
-    install: '0'
-    settings:
-        version: 4.10.2
-        port: '8984'
 

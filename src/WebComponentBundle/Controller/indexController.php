@@ -15,7 +15,11 @@ class indexController extends Controller
      */
     public function indexAction()
     {
-        $this->addFlash('error', 'hello la banana');
+//
+//        $wcService = $this->get('web_component');
+//
+//        $response = $wcService->cacheComponentMinify();
+        
         return $this->render('WebComponentBundle:Index:index.html.twig', array(
             
         ));
@@ -27,4 +31,5 @@ class indexController extends Controller
     public function getTabContent(Request $request){
         
     }
+    
 }
