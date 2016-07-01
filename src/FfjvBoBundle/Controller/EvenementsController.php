@@ -62,9 +62,12 @@ class EvenementsController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $evenement->setUser($this->getUser());
+            $idZipCode = $this->get('evenements')->getIdZipCode($evenement->getZipCode());
+            $evenement->setIdZipCode($idZipCode);
             $em->persist($evenement);
             $em->flush();
-
+            $this->addFlash('success', 'l\\\'événement '.$evenement->getTitle().' a bien été créé');
             return $this->redirectToRoute('ffjv_bo_evenements_show', array('id' => $evenement->getId()));
         }
 
@@ -80,11 +83,8 @@ class EvenementsController extends Controller
      */
     public function showAction(Evenements $evenement)
     {
-        $deleteForm = $this->createDeleteForm($evenement);
-
         return $this->render('FfjvBoBundle:evenements:show.html.twig', array(
             'evenement' => $evenement,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -100,10 +100,14 @@ class EvenementsController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $idZipCode = $this->get('evenements')->getIdZipCode($evenement->getZipCode());
+            $evenement->setIdZipCode($idZipCode);
+            $now = new \DateTime('now');
+            $evenement->setLastUpdate($now);
             $em->persist($evenement);
             $em->flush();
-
-            return $this->redirectToRoute('ffjv_bo_evenements_edit', array('id' => $evenement->getId()));
+            $this->addFlash('success', 'l\\\'événement '.$evenement->getTitle().' a bien été édité');
+            return $this->redirectToRoute('ffjv_bo_evenements_show', array('id' => $evenement->getId()));
         }
 
         return $this->render('FfjvBoBundle:evenements:edit.html.twig', array(

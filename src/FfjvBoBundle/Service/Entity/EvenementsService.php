@@ -9,6 +9,7 @@
 namespace FfjvBoBundle\Service\Entity;
 
 use Doctrine\ORM\EntityManager;
+use FfjvBoBundle\Entity\Evenements;
 use Symfony\Component\HttpFoundation\RequestStack;
 use FfjvBoBundle\Entity\Clubs;
 use AppBundle\Service\WeezeventApi;
@@ -44,6 +45,24 @@ class EvenementsService
         $this->em           = $em;
         $this->request      = $request;
         $this->weezeventApi = $weezeventApi;
+    }
+
+    /**
+     * @param string $zipCode
+     * @param string $country
+     *
+     * @return string
+     */
+    public function getIdZipCode($zipCode = '', $country = "FR"){
+
+        $zipCode = strtoupper($zipCode);
+        if($country == "FR"){
+            if(strlen($zipCode) > 3){
+                return substr($zipCode, 0, 2);
+            }
+            return $zipCode;
+        }
+        return substr($zipCode, 0, 2);
     }
 
     /**

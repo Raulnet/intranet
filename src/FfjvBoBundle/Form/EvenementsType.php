@@ -45,6 +45,7 @@ class EvenementsType extends AbstractType
                 'attr' => ['class' => 'form-control']
             ])
             ->add('address2', TextType::class, [
+                'required' => false,
                 'attr' => ['class' => 'form-control']
             ])
             ->add('zipCode', TextType::class, [
