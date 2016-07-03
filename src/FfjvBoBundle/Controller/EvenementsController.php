@@ -61,14 +61,18 @@ class EvenementsController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $evenement->setUser($this->getUser());
-            $idZipCode = $this->get('evenements')->getIdZipCode($evenement->getZipCode());
-            $evenement->setIdZipCode($idZipCode);
-            $em->persist($evenement);
-            $em->flush();
-            $this->addFlash('success', 'l\\\'événement '.$evenement->getTitle().' a bien été créé');
-            return $this->redirectToRoute('ffjv_bo_evenements_show', array('id' => $evenement->getId()));
+            if($evenement->getEndDate() > $evenement->getStartDate()){
+                $em = $this->getDoctrine()->getManager();
+                $evenement->setUser($this->getUser());
+                $idZipCode = $this->get('evenements')->getIdZipCode($evenement->getZipCode());
+                $evenement->setIdZipCode($idZipCode);
+                $em->persist($evenement);
+                $em->flush();
+                $this->addFlash('success', 'l\\\'événement '.$evenement->getTitle().' a bien été créé');
+                return $this->redirectToRoute('ffjv_bo_evenements_show', array('id' => $evenement->getId()));
+            }
+            $form->get('startDate')->addError('La date de fin doit être supérieur à la date de départ');
+
         }
 
         return $this->render('FfjvBoBundle:evenements:new.html.twig', array(

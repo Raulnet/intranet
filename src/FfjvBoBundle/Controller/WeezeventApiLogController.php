@@ -37,7 +37,7 @@ class WeezeventApiLogController extends Controller
     public function newAction(Request $request)
     {
         $weezeventApiLog = new WeezeventApiLog();
-        $form = $this->createForm(WeezeventApiLogType::class, $weezeventApiLog->toArray(), ['app_service' => $this->get('app_service')->setUser($this->getUser())])->add('submit', SubmitType::class);
+        $form = $this->createForm(WeezeventApiLogType::class, $weezeventApiLog->toArray())->add('submit', SubmitType::class);
         $form->handleRequest($request);
         if ($form->isValid()) {
             $data = $form->getData();
@@ -52,11 +52,11 @@ class WeezeventApiLogController extends Controller
             }
             $weezeventApiLog->setClub($club);
             $weezeventApiLog->setUser($this->getUser());
-            $weezeventApiLog->setApiPassword($data['api_password']);
-            $weezeventApiLog->setApiKey($data['api_key']);
-            $weezeventApiLog->setApiUsername($data['api_username']);
-
             if($this->get('weezeventapi')->setAuthAccess($data['api_username'], $data['api_password'], $data['api_key'])->initConnection()){
+                $token = $this->get('weezeventapi')->getAccessToken();
+                $appService = $this->get('app_service')->setUser($weezeventApiLog->getUser());
+                $weezeventApiLog->setApiToken($appService->crypt($token));
+                $weezeventApiLog->setApiKey($appService->crypt($data['api_key']));
                 $em->persist($weezeventApiLog);
                 $em->flush();
                 $this->addFlash('success', 'Connection successfully');

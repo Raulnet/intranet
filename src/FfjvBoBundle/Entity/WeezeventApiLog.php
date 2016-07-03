@@ -14,7 +14,7 @@ use FfjvBoBundle\Entity\User;
 /**
  * WeezeventApiLog
  *
- * @ORM\Table(name="weezevent_api_log", uniqueConstraints={@ORM\UniqueConstraint(name="api_username", columns={"api_username"})})
+ * @ORM\Table(name="weezevent_api_log")
  * @ORM\Entity(repositoryClass="FfjvBoBundle\Repository\WeezeventApiLog")
  */
 class WeezeventApiLog
@@ -22,21 +22,14 @@ class WeezeventApiLog
     /**
      * @var string
      *
-     * @ORM\Column(name="api_username", type="string", length=80, nullable=false)
+     * @ORM\Column(name="api_token", type="string", length=200, nullable=false)
      */
-    private $apiUsername;
+    private $apiToken;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="api_password", type="string", length=80, nullable=false)
-     */
-    private $apiPassword;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="api_key", type="string", length=80, nullable=false)
+     * @ORM\Column(name="api_key", type="string", length=200, nullable=false)
      */
     private $apiKey;
 
@@ -83,77 +76,43 @@ class WeezeventApiLog
     {
         $this->dateRegister = new \DateTime('now');
     }
-    
+
     /**
-     * Set apiUsername
+     * @return array
+     */
+    public function toArray(){
+        return [
+            'weezevent_api_log_id'  => $this->getId(),
+            'user_id'               => ($this->getUser() ? $this->getUser()->getId() : null),
+            'api_token'             => $this->apiToken,
+            'api_key'               => $this->apiToken,
+            'date_register'         => $this->getDateRegister()->format('Y-m-d H:i:s'),
+            'club_id'               => ($this->club ? $this->club->getId() : null)
+        ];
+    }
+
+    /**
+     * Set apiToken
      *
-     * @param string $apiUsername
+     * @param string $apiToken
      *
      * @return WeezeventApiLog
      */
-    public function setApiUsername($apiUsername)
+    public function setApiToken($apiToken)
     {
-        $this->apiUsername = $apiUsername;
+        $this->apiToken = $apiToken;
 
         return $this;
     }
 
     /**
-     * Get apiUsername
+     * Get apiToken
      *
      * @return string
      */
-    public function getApiUsername()
+    public function getApiToken()
     {
-        return $this->apiUsername;
-    }
-
-    /**
-     * Set apiPassword
-     *
-     * @param string $apiPassword
-     *
-     * @return WeezeventApiLog
-     */
-    public function setApiPassword($apiPassword)
-    {
-        $this->apiPassword = $apiPassword;
-
-        return $this;
-    }
-
-    /**
-     * Get apiPassword
-     *
-     * @return string
-     */
-    public function getApiPassword()
-    {
-        return $this->apiPassword;
-    }
-
-    /**
-     * Set apiKey
-     *
-     * @param string $apiKey
-     *
-     * @return WeezeventApiLog
-     */
-    public function setApiKey($apiKey)
-    {
-        $this->apiKey = $apiKey;
-
-        return $this;
-    }
-
-    /**
-     * Get apiKey
-     *
-     * @return string
-     */
-    public function getApiKey()
-    {
-        return $this->apiKey;
+        return $this->apiToken;
     }
 
     /**
@@ -193,11 +152,11 @@ class WeezeventApiLog
     /**
      * Set user
      *
-     * @param User $user
+     * @param \FfjvBoBundle\Entity\User $user
      *
      * @return WeezeventApiLog
      */
-    public function setUser(User $user = null)
+    public function setUser(\FfjvBoBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -207,7 +166,7 @@ class WeezeventApiLog
     /**
      * Get user
      *
-     * @return User
+     * @return \FfjvBoBundle\Entity\User
      */
     public function getUser()
     {
@@ -217,11 +176,11 @@ class WeezeventApiLog
     /**
      * Set club
      *
-     * @param Clubs $club
+     * @param \FfjvBoBundle\Entity\Clubs $club
      *
      * @return WeezeventApiLog
      */
-    public function setClub(Clubs $club = null)
+    public function setClub(\FfjvBoBundle\Entity\Clubs $club = null)
     {
         $this->club = $club;
 
@@ -231,7 +190,7 @@ class WeezeventApiLog
     /**
      * Get club
      *
-     * @return Clubs
+     * @return \FfjvBoBundle\Entity\Clubs
      */
     public function getClub()
     {
@@ -239,17 +198,26 @@ class WeezeventApiLog
     }
 
     /**
-     * @return array
+     * Set apiKey
+     *
+     * @param string $apiKey
+     *
+     * @return WeezeventApiLog
      */
-    public function toArray(){
-        return [
-            'weezevent_api_log_id'  => $this->getId(),
-            'user_id'               => ($this->getUser() ? $this->getUser()->getId() : null),
-            'api_username'          => $this->apiUsername,
-            'api_password'          => $this->apiPassword,
-            'api_key'               => $this->getApiKey(),
-            'date_register'         => $this->getDateRegister()->format('Y-m-d H:i:s'),
-            'club_id'               => ($this->club ? $this->club->getId() : null)
-        ];
+    public function setApiKey($apiKey)
+    {
+        $this->apiKey = $apiKey;
+
+        return $this;
+    }
+
+    /**
+     * Get apiKey
+     *
+     * @return string
+     */
+    public function getApiKey()
+    {
+        return $this->apiKey;
     }
 }

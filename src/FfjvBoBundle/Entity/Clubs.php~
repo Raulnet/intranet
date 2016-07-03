@@ -1000,4 +1000,28 @@ class Clubs
     {
         return $this->events;
     }
+
+    /**
+     * Set weezeventApiLog
+     *
+     * @param \FfjvBoBundle\Entity\WeezeventApiLog $weezeventApiLog
+     *
+     * @return Clubs
+     */
+    public function setWeezeventApiLog(\FfjvBoBundle\Entity\WeezeventApiLog $weezeventApiLog = null)
+    {
+        $this->weezeventApiLog = $weezeventApiLog;
+
+        return $this;
+    }
+
+    /**
+     * Get weezeventApiLog
+     *
+     * @return \FfjvBoBundle\Entity\WeezeventApiLog
+     */
+    public function getWeezeventApiLog()
+    {
+        return $this->weezeventApiLog;
+    }
 }

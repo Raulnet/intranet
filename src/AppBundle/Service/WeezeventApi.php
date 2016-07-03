@@ -8,8 +8,6 @@
 
 namespace AppBundle\Service;
 
-use FfjvBoBundle\Service\AppService;
-use FfjvBoBundle\Entity\User;
 
 class WeezeventApi
 {
@@ -17,10 +15,6 @@ class WeezeventApi
     const AUTH_ACCESS_URL = 'auth/access_token';
     const EVENT_URL = 'events';
 
-    /**
-     * @var AppService|null
-     */
-    private $appService = null;
     /**
      * @var string
      */
@@ -43,20 +37,32 @@ class WeezeventApi
     private $curl;
 
     /**
-     * WeezeventApi constructor.
-     * @param AppService $appService
+     * @return string
      */
-    public function __construct(AppService $appService)
+    public function getAccessToken()
     {
-        $this->appService = $appService;
+        return $this->accessToken;
     }
 
     /**
-     * @param User $user
+     * @param $accessToken
+     *
      * @return $this
      */
-    public function setUser(User $user){
-        $this->appService->setUser($user);
+    public function setAccessToken($accessToken)
+    {
+        $this->accessToken = $accessToken;
+        return $this;
+    }
+
+    /**
+     * @param $apiKey
+     *
+     * @return $this
+     */
+    public function setApiKey($apiKey)
+    {
+        $this->apiKey = $apiKey;
         return $this;
     }
     
@@ -68,9 +74,9 @@ class WeezeventApi
      */
     public function setAuthAccess($username = '', $password = '', $apiKey = ''){
 
-        $this->username = $this->appService->deCrypt($username);
-        $this->password = $this->appService->deCrypt($password);
-        $this->apiKey = $this->appService->deCrypt($apiKey);
+        $this->username = $username;
+        $this->password = $password;
+        $this->apiKey = $apiKey;
 
         return $this;
     }
@@ -91,11 +97,16 @@ class WeezeventApi
 
     /**
      * @param bool $toArray
+     *
      * @return json|array
+     * @throws \Exception
      */
     public function getEvents($toArray = false){
         if($this->accessToken == ''){
-            $this->initConnection();
+            throw new \Exception('Access Token not define');
+        }
+        if($this->apiKey == ''){
+            throw new \Exception('Api Key not define');
         }
         $params = ['access_token' => $this->accessToken, 'api_key' => $this->apiKey];
         $options = $this->getGetOption(self::EVENT_URL, $params);

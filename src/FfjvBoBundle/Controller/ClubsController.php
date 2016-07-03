@@ -406,7 +406,6 @@ class ClubsController extends Controller
         return $this->createForm(WeezeventApiLogType::class, $apiLog->toArray(), [
             'method' => 'POST',
             'action' => $this->generateUrl('weezeventapilog_new'),
-            'app_service' => $this->get('app_service')->setUser($this->getUser())
         ])->add('submit', SubmitType::class, [
             'label' => 'submit',
             'attr' => [
