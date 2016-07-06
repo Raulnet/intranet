@@ -15,12 +15,12 @@
                 </template>
             </paper-tabs>
             <iron-pages selected="{{selected}}">
-                <template is="dom-repeat" items="{{tabs}}">
-                    <div id$="tabs{{item.id}}" class="tab-body">
-                        <div class="spinner-default"></div>
-                    </div>
-                </template>
-            </iron-pages>
+            <template is="dom-repeat" items="{{tabs}}">
+                <div id$="tabs{{item.id}}" class="tab-body">
+                    <div class="spinner-primary"></div>
+                </div>
+            </template>
+        </iron-pages>
         </div>
     </template>
     <script>

@@ -1,0 +1,26 @@
+{% extends('@FfjvBo/layout.html.twig') %}
+{% set eventsMenu = true %}
+{% block webComponent %}
+    {{ webComponent(['pages-element'])|raw }}
+    {% endblock %}
+{% block breadcrumb %}
+    <h1>
+        Intranet FFJV
+        <small>Version 0.1</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('ffjv_fo_home_index') }}"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="{{ path('ffjv_bo_home_index') }}"><i class="fa fa-cogs"></i> Administration</a></li>
+        <li><a href="{{ path('clubs_show', {'id': club.id}) }}"><i class="fa fa-institution"></i> {{ club.title }}</a></li>
+        <li class="active"><i class="fa fa-globe"></i> Weez evenement</li>
+    </ol>
+{% endblock %}
+{% block content %}
+    <section class="content">
+        <div class="box">
+            <div class="box-body">
+                <pages-element url_request="{{ path('ffjv_bo_evenements_getweezevenementdetail') }}" data="{{ events|json_encode }}" selected="{{ selected }}"></pages-element>
+            </div>
+        </div>
+    </section>
+{% endblock %}

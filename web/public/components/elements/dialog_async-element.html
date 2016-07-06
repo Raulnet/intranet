@@ -1,0 +1,71 @@
+<dom-module id="dialog_async-element">
+    <template>
+        <iron-signals on-iron-signal-dialog-async-show="dialogAsyncShow"></iron-signals>
+        <iron-ajax
+                id="request"
+                headers='{"X-Requested-With": "XMLHttpRequest"}'
+                handleAs="json"
+                content-type="application/json"
+                on-response="handleResponse"></iron-ajax>
+        <paper-dialog id="dialog_async">
+            <paper-button dialog-dismiss class="" style="float: right; margin-top: 6px; margin-right: -18px; color: dodgerblue;"><iron-icon icon="icons:close"></iron-icon></paper-button>
+            <div class="dialog_header">
+                <h2>{{title}}</h2>
+            </div>
+            <div id="dialog_body">
+
+            </div>
+            <div id="dialog_footer">
+                <paper-button dialog-dismiss class="pull-left">Cancel</paper-button>
+                <paper-button dialog-confirm>Accept</paper-button>
+            </div>
+        </paper-dialog>
+    </template>
+    <script>
+        Polymer({
+            is: "dialog_async-element",
+            properties: {
+                _token: {
+                    type: String,
+                    value: ''
+                },
+                title: {
+                    type: String,
+                    value: 'Search ...'
+                },
+
+            },
+            listeners: {
+                'dialogAsyncShow': 'dialogAsyncShow'
+            },
+            launchRequest: function(url, weezEvenementId, clubId){
+                this.$.request.body = {club_id: clubId, weez_evenement_id: weezEvenementId};
+                this.$.request.url = url;
+                this.$.request.method = 'POST';
+                this.$.request.generateRequest();
+            },
+            dialogAsyncShow: function (e, detail) {
+                this.$.dialog_async.removeAttribute('modal')
+                if(detail.modal){
+                    this.$.dialog_async.setAttribute('modal', detail.modal);
+                }
+                this.$.dialog_body.innerHTML = '<div class="spinner-primary"></div>';
+                var weezEvenementId = detail.params.weez_evenement_id;
+                var clubId = detail.params.club_id;
+
+                this.launchRequest(detail.url, weezEvenementId, clubId)
+                this.$.dialog_async.toggle();
+            },
+            handleResponse: function (e, request) {
+                var response = request.xhr.response;
+                if(response.template != undefined){
+                    this.title = response.title;
+                    this.$.dialog_body.innerHTML = response.template.content;
+                    if(response.template.footer != undefined){
+                        this.$.dialog_footer.innerHTML = response.template.footer;
+                    }
+                }
+            }
+        });
+    </script>
+</dom-module>

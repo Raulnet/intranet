@@ -3,6 +3,7 @@
 namespace FfjvBoBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -21,6 +22,13 @@ class EvenementsType extends AbstractType
         $builder
             ->add('club', null, [
                 'placeholder' => 'Séléctionner un club',
+                'attr' => [
+                    'class' => 'form-control',
+                ]
+            ])
+            ->add('type', ChoiceType::class, [
+                'placeholder' => 'Séléctionner un type',
+                'choices' => Evenements::$listType,
                 'attr' => [
                     'class' => 'form-control',
                 ]
@@ -63,6 +71,8 @@ class EvenementsType extends AbstractType
                 ],
                 'attr' => ['class' => 'form-control']
             ])
+            ->add('eventWeezeventId', HiddenType::class, [])
+            ->add('useSeance', HiddenType::class, [])
         ;
     }
     

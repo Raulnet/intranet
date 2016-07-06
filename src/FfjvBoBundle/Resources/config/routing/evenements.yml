@@ -27,3 +27,13 @@ ffjv_bo_evenements_listevent:
     path:     /getlist
     defaults: { _controller: "FfjvBoBundle:Evenements:getEventClub"}
     methods: POST
+
+ffjv_bo_evenements_getpagesweezevenementdetail:
+    path:     /{id}/weez/details/{weezEvenementId}
+    defaults: { _controller: "FfjvBoBundle:Evenements:getPagesWeezEvenementDetail"}
+    methods: GET
+
+ffjv_bo_evenements_getweezevenementdetail:
+    path:     /weez/detailsrequest
+    defaults: { _controller: "FfjvBoBundle:Evenements:getWeezEvenementDetail"}
+    methods: POST

@@ -59,12 +59,12 @@
     {% block modal %}
         <paper-dialog id="dialog_logout" modal>
             <div class="top-tools"><a  class="pull-right" dialog-dismiss><iron-icon icon="icons:close"></iron-icon></a></div>
-            <div class="dialog_title"><h2>Déconnexion</h2></div>
+            <div class="dialog_header"><h2>Déconnexion</h2></div>
             <div class="dialog_content">
                 <p>Vous êtes sur le point de vous déconnecter</p>
             </div>
             <div class="dialog_footer">
-                <a  class="pull-left" dialog-dismiss>Annuler</a>
+                <a class="pull-left" dialog-dismiss>Annuler</a>
                 <a class="pull-right" href="{{ path('logout') }}">confirmer</a>
                 <div class="clearfix"></div>
             </div>

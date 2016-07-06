@@ -196,4 +196,28 @@ class WeezeventApiLog
     {
         return $this->club;
     }
+
+    /**
+     * Set apiKey
+     *
+     * @param string $apiKey
+     *
+     * @return WeezeventApiLog
+     */
+    public function setApiKey($apiKey)
+    {
+        $this->apiKey = $apiKey;
+
+        return $this;
+    }
+
+    /**
+     * Get apiKey
+     *
+     * @return string
+     */
+    public function getApiKey()
+    {
+        return $this->apiKey;
+    }
 }

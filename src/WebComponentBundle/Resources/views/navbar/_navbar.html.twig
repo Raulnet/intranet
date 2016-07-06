@@ -23,7 +23,7 @@
                 </li>
             </ul>
         </nav>
-        <paper-button class="toggle-menu" style="text-align: center; padding: 18px 10px 16px 10px; border-radius: 0px" onclick="toggleNavDrawner()"><iron-icon icon="menu"></iron-icon></paper-button>
+        <paper-button class="toggle-menu" style="text-align: center; padding: 18px 10px 16px 10px; border-radius: 0px" onclick="toggleNavDrawner()" data-url="la banana"><iron-icon icon="menu"></iron-icon></paper-button>
     </div>
 </app-header>
 <app-drawer id="nav_drawner">
@@ -34,7 +34,7 @@
             <li><p class="drawner_list_title"><iron-icon icon="icons:perm-identity"></iron-icon> Compte</p></li>
             <li><a href="#"><iron-icon icon="icons:account-box"></iron-icon> Mon profile</a></li>
             <li><a href="#"><iron-icon icon="icons:account-balance"></iron-icon> Mon club</a></li>
-            <li><a onclick="dialog_logout.open()"><iron-icon icon="icons:power-settings-new"></iron-icon> Déconnexion</a></li>
+            <li><a onclick="dialog_logout.open()" ><iron-icon icon="icons:power-settings-new"></iron-icon> Déconnexion</a></li>
         </ul>
     </div>
 </app-drawer>

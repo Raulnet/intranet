@@ -20,30 +20,32 @@
                         <h3 class="box-title">Teams Board</h3>
                     </div>
                     <div class="box-body">
-                        <table id="teams_board" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>Clubs</th>
-                                <th>Team</th>
-                                <th>Tag</th>
-                                <th>Licence</th>
-                                <th>Creationdate</th>
-                                <th>Lastupdate</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for team in teams %}
+                        <div class="table-responsive">
+                            <table id="teams_board" class="table table-bordered table-striped">
+                                <thead>
                                 <tr>
-                                    <td><a href="{{ path('clubs_show', {'id': team.club.id}) }}">{{ team.club }}</a></td>
-                                    <td><a href="{{ path('teams_show', { 'id': team.id }) }}">{{ team.title }}</a></td>
-                                    <td>{{ team.tag }}</td>
-                                    <td>{{ team.licence }}</td>
-                                    <td>{% if team.creationDate %}{{ team.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                                    <td>{% if team.lastUpdate %}{{ team.lastUpdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <th>Clubs</th>
+                                    <th>Team</th>
+                                    <th>Tag</th>
+                                    <th>Licence</th>
+                                    <th>Creationdate</th>
+                                    <th>Lastupdate</th>
                                 </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                {% for team in teams %}
+                                    <tr>
+                                        <td><a href="{{ path('clubs_show', {'id': team.club.id}) }}">{{ team.club }}</a></td>
+                                        <td><a href="{{ path('teams_show', { 'id': team.id }) }}">{{ team.title }}</a></td>
+                                        <td>{{ team.tag }}</td>
+                                        <td>{{ team.licence }}</td>
+                                        <td>{% if team.creationDate %}{{ team.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                        <td>{% if team.lastUpdate %}{{ team.lastUpdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

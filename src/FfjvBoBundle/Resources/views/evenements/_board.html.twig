@@ -18,19 +18,21 @@
                         </tr>
                         </thead>
                         <tbody>
-                            {% for event in events %}
-                                <tr>
-                                    <td>{{ tagOrigin[event.origin] }}</td>
-                                    <td>{{ event.title }}</td>
-                                    <td>{{ event.participants }}</td>
-                                    <td>{{ event.start_date|date('Y-m-d H:i') }}</td>
-                                    <td>
-                                        {% if event.origin == 0 %}
-                                            <a class="btn btn-success btn-xs" href="{{ path('ffjv_bo_evenements_edit', {'id': event.evenement_id}) }}">Editer</a>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                            {% endfor %}
+                        {% for event in events %}
+                            <tr>
+                                <td>{{ tagOrigin[event.origin] }}</td>
+                                <td>{{ event.title }}</td>
+                                <td>{{ event.participants }}</td>
+                                <td>{{ event.start_date|date('Y-m-d H:i') }}</td>
+                                <td>
+                                    {% if event.origin == 0 %}
+                                        <a class="btn btn-success btn-xs" href="{{ path('ffjv_bo_evenements_edit', {'id': event.evenement_id}) }}">Editer</a>
+                                    {% elseif event.origin == 1 %}
+                                        <paper-button class="btn-xs"><a href="{{ path('ffjv_bo_evenements_getpagesweezevenementdetail', {'id': club.id, 'weezEvenementId':event.weez_evenement_id}) }}"><iron-icon icon="icons:info"></iron-icon> info</a></paper-button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>

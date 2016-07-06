@@ -20,32 +20,34 @@
                         <h3 class="box-title">Clubs Board</h3><a class="btn btn-info btn-xs pull-right" href="{{ path('clubs_new') }}">Create a new clubs</a>
                     </div>
                     <div class="box-body">
-                        <table id="clubs_board" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Tag</th>
-                                <th>Licence</th>
-                                <th>zipcode</th>
-                                <th>Country</th>
-                                <th>Creationdate</th>
-                                <th>Lastupdate</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for club in clubs %}
+                        <div class="table-responsive">
+                            <table id="clubs_board" class="table table-bordered table-striped">
+                                <thead>
                                 <tr>
-                                    <td><a href="{{ path('clubs_show', { 'id': club.id }) }}">{{ club.title }}</a></td>
-                                    <td>{{ club.tag }}</td>
-                                    <td>{{ club.licence }}</td>
-                                    <td>{{ club.zipCode }}</td>
-                                    <td>{{ club.country }}</td>
-                                    <td>{% if club.creationDate %}{{ club.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                                    <td>{% if club.lastUpdate %}{{ club.lastUpdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <th>Title</th>
+                                    <th>Tag</th>
+                                    <th>Licence</th>
+                                    <th>zipcode</th>
+                                    <th>Country</th>
+                                    <th>Creationdate</th>
+                                    <th>Lastupdate</th>
                                 </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                {% for club in clubs %}
+                                    <tr>
+                                        <td><a href="{{ path('clubs_show', { 'id': club.id }) }}">{{ club.title }}</a></td>
+                                        <td>{{ club.tag }}</td>
+                                        <td>{{ club.licence }}</td>
+                                        <td>{{ club.zipCode }}</td>
+                                        <td>{{ club.country }}</td>
+                                        <td>{% if club.creationDate %}{{ club.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                        <td>{% if club.lastUpdate %}{{ club.lastUpdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

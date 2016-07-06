@@ -1,7 +1,7 @@
 {% extends('@FfjvBo/layout.html.twig') %}
     {% set clubsMenu = true %}
 {% block webComponent %}
-    {{ webComponent(['tabs-element'])|raw }}
+    {{ webComponent(['tabs-element', 'button_dialog_async-element', 'dialog_async-element'])|raw }}
 {% endblock %}
     {% block breadcrumb %}
         <h1>
@@ -107,6 +107,9 @@
     <link type="text/css" rel="stylesheet" href="{{ asset('public/lib/bootstrap-switch/css/bootstrap-switch.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/css/Bo/Clubs/show.css') }}">
 {% endblock %}
+ {% block customModal %}
+     <dialog_async-element></dialog_async-element>
+ {% endblock %}
 {% block customJS %}
 
 {% endblock %}

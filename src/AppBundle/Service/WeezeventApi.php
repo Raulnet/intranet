@@ -13,7 +13,11 @@ class WeezeventApi
 {
     const API_URL = 'https://api.weezevent.com/';
     const AUTH_ACCESS_URL = 'auth/access_token';
-    const EVENT_URL = 'events';
+    const API_PARAM_ACCESS_TOKEN = 'access_token';
+    const API_PARAM_API_KEY = 'api_key';
+    const URL_EVENTS = 'events';
+    const URL_EVENT_DETAIL = '/event/:id/details';
+    const URL_TICKETS = '/tickets';
 
     /**
      * @var string
@@ -101,16 +105,53 @@ class WeezeventApi
      * @return json|array
      * @throws \Exception
      */
-    public function getEvents($toArray = false){
+    public function getEvents($toArray = true){
+        $params = $this->getParams();
+        $options = $this->getGetOption(self::URL_EVENTS, $params);
+        return $this->getCurlResponse($options, $toArray);
+    }
+
+    /**
+     * @param int  $weezEventId
+     * @param bool $toArray
+     *
+     * @return json|array
+     * @throws \Exception
+     */
+    public function getEventDetails($weezEventId = 0, $toArray = true){
+        $params = $this->getParams();
+        $params['id_event'] = $weezEventId;
+        $url = str_replace(':id', $weezEventId, self::URL_EVENT_DETAIL);
+        $options = $this->getGetOption($url, $params);
+        return $this->getCurlResponse($options, $toArray);
+    }
+
+    /**
+     * @param int  $weezEventId
+     * @param bool $toArray
+     *
+     * @return json|array
+     * @throws \Exception
+     */
+    public function getTickets($weezEventId = 0, $toArray = true){
+        $params = $this->getParams();
+        $params['id_event'] = $weezEventId;
+        $options = $this->getGetOption(self::URL_TICKETS, $params);
+        return $this->getCurlResponse($options, $toArray);
+    }
+
+    /**
+     * @return array
+     * @throws \Exception
+     */
+    private function getParams(){
         if($this->accessToken == ''){
             throw new \Exception('Access Token not define');
         }
         if($this->apiKey == ''){
             throw new \Exception('Api Key not define');
         }
-        $params = ['access_token' => $this->accessToken, 'api_key' => $this->apiKey];
-        $options = $this->getGetOption(self::EVENT_URL, $params);
-        return $this->getCurlResponse($options, $toArray);
+        return [self::API_PARAM_ACCESS_TOKEN => $this->accessToken, self::API_PARAM_API_KEY => $this->apiKey];
     }
 
     /**

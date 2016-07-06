@@ -94,14 +94,8 @@ class EvenementsService
         $apiLog = $club->getWeezeventApiLog();
         if ($apiLog) {
             $appService = $this->appService->setUser($apiLog->getUser());
-            $api       = $this->weezeventApi->setAccessToken(
-                $appService->deCrypt(
-                    $apiLog->getApiToken()
-                ))->setApiKey(
-                $appService->deCrypt(
-                    $apiLog->getApiKey()
-                ));
-            $apiEvents = $api->getEvents(true);
+            $api        = $this->weezeventApi->setAccessToken($appService->deCrypt($apiLog->getApiToken()))->setApiKey($appService->deCrypt($apiLog->getApiKey()));
+            $apiEvents  = $api->getEvents();
             foreach ($apiEvents['events'] as $event) {
                 $keyEvent              = str_replace(" ", "_", $event['date']['start']) . '_weezevent';
                 $listEvents[$keyEvent] = $this->convertApiEvent($event);
@@ -114,6 +108,63 @@ class EvenementsService
     }
 
     /**
+     * @param Clubs  $club
+     * @param string $weezEvenementId
+     *
+     * @return \AppBundle\Service\json|array
+     * @throws \Exception
+     */
+    public function getWeezEventDetail(Clubs $club, $weezEvenementId = ''){
+        $apiLog = $club->getWeezeventApiLog();
+        
+        if(!$apiLog){
+            throw new \Exception ('Apilog Undefined');
+        }
+       
+        $appService = $this->appService->setUser($apiLog->getUser());
+        $api        = $this->weezeventApi->setAccessToken($appService->deCrypt($apiLog->getApiToken()))->setApiKey($appService->deCrypt($apiLog->getApiKey()));
+        return $api->getEventDetails($weezEvenementId);
+    }
+
+    /**
+     * @param Clubs $club
+     *
+     * @return \AppBundle\Service\json|array
+     * @throws \Exception
+     */
+    public function getListWeezEvenement(Clubs $club){
+        $apiLog = $club->getWeezeventApiLog();
+
+        if(!$apiLog){
+            throw new \Exception ('Apilog Undefined');
+        }
+
+        $appService = $this->appService->setUser($apiLog->getUser());
+        $api        = $this->weezeventApi->setAccessToken($appService->deCrypt($apiLog->getApiToken()))->setApiKey($appService->deCrypt($apiLog->getApiKey()));
+        return $api->getEvents(true);
+    }
+
+    /**
+     * @param Clubs  $club
+     * @param string $weezEvenementId
+     *
+     * @return \AppBundle\Service\json|array
+     * @throws \Exception
+     */
+    public function getWeezEventTickets(Clubs $club, $weezEvenementId = ''){
+        $apiLog = $club->getWeezeventApiLog();
+
+        if(!$apiLog){
+            throw new \Exception ('Apilog Undefined');
+        }
+
+        $appService = $this->appService->setUser($apiLog->getUser());
+        $api        = $this->weezeventApi->setAccessToken($appService->deCrypt($apiLog->getApiToken()))->setApiKey($appService->deCrypt($apiLog->getApiKey()));
+        return $api->getTickets($weezEvenementId);
+    }
+    
+
+    /**
      * @param $event
      *
      * @return array
@@ -121,11 +172,12 @@ class EvenementsService
     private function convertApiEvent($event)
     {
         $eventConverted = [
-            'title'        => $event['name'],
-            'start_date'   => $event['date']['start'],
-            'end_date'     => $event['date']['end'],
-            'origin'       => self::EVENT_ORIGIN_WEEZ,
-            'participants' => $event['participants']
+            'weez_evenement_id' => $event['id'],
+            'title'             => $event['name'],
+            'start_date'        => $event['date']['start'],
+            'end_date'          => $event['date']['end'],
+            'origin'            => self::EVENT_ORIGIN_WEEZ,
+            'participants'      => $event['participants']
         ];
 
         return $eventConverted;

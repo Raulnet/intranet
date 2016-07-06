@@ -20,55 +20,57 @@
                         <h3 class="box-title">User Board</h3> <a class="btn btn-info btn-xs pull-right" href="{{ path('user_new') }}">Create a new users</a>
                     </div>
                     <div class="box-body">
-                        <table id="user_board" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Roles</th>
-                                <th>Nationality</th>
-                                <th>Licence</th>
-                                <th>Firstname</th>
-                                <th>Lastname</th>
-                                <th>Registerdate</th>
-                                <th>Lastupdate</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for user in users %}
+                        <div class="table-responsive">
+                            <table id="user_board" class="table table-bordered table-striped">
+                                <thead>
                                 <tr>
-                                    <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.username }}</a></td>
-                                    <td>{{ user.email }}</td>
-                                    <td>
-                                        <ul class="nav nas-stacked">
-                                            {% for role in user.roles %}
-                                                <li>{{ role }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    </td>
-                                    <td>{{ user.nationality }}</td>
-                                    <td>{{ user.licence }}</td>
-                                    <td>{{ user.firstName }}</td>
-                                    <td>{{ user.lastName }}</td>
-                                    <td>{% if user.registerDate %}{{ user.registerDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                                    <td>{% if user.lastUpdate %}{{ user.lastUpdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Roles</th>
+                                    <th>Nationality</th>
+                                    <th>Licence</th>
+                                    <th>Firstname</th>
+                                    <th>Lastname</th>
+                                    <th>Registerdate</th>
+                                    <th>Lastupdate</th>
                                 </tr>
-                            {% endfor %}
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Roles</th>
-                                <th>Nationality</th>
-                                <th>Licence</th>
-                                <th>Firstname</th>
-                                <th>Lastname</th>
-                                <th>Registerdate</th>
-                                <th>Lastupdate</th>
-                            </tr>
-                            </tfoot>
-                        </table>
+                                </thead>
+                                <tbody>
+                                {% for user in users %}
+                                    <tr>
+                                        <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.username }}</a></td>
+                                        <td>{{ user.email }}</td>
+                                        <td>
+                                            <ul class="nav nas-stacked">
+                                                {% for role in user.roles %}
+                                                    <li>{{ role }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </td>
+                                        <td>{{ user.nationality }}</td>
+                                        <td>{{ user.licence }}</td>
+                                        <td>{{ user.firstName }}</td>
+                                        <td>{{ user.lastName }}</td>
+                                        <td>{% if user.registerDate %}{{ user.registerDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                        <td>{% if user.lastUpdate %}{{ user.lastUpdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Roles</th>
+                                    <th>Nationality</th>
+                                    <th>Licence</th>
+                                    <th>Firstname</th>
+                                    <th>Lastname</th>
+                                    <th>Registerdate</th>
+                                    <th>Lastupdate</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>

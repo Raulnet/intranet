@@ -1,0 +1,121 @@
+<dom-module id="pages-element">
+    <style is="custom-style">
+        neon-animated-pages {
+            width: 100%;
+            height: 980px;
+        }
+    </style>
+    <template>
+        <iron-ajax
+                id="request"
+                headers='{"X-Requested-With": "XMLHttpRequest"}'
+                handleAs="json"
+                content-type="application/json"
+                on-response="handleResponse"></iron-ajax>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="btn-group btn-group-xs">
+                    <button class="btn btn-default btn-xs" on-click="_onPrevClick">
+                        <iron-icon icon="icons:chevron-left"></iron-icon>
+                    </button>
+                    <button class="btn btn-default btn-xs" on-click="_onNextClick">
+                        <iron-icon icon="icons:chevron-right"></iron-icon>
+                    </button>
+                </div>
+                <button class="btn btn-default btn-xs" on-click="onRefreshClick">
+                    <iron-icon icon="icons:cached"></iron-icon>
+                </button>
+                <hr>
+            </div>
+        </div>
+        <neon-animated-pages id="pages" selected="[[selected]]" entry-animation="[[entryAnimation]]" exit-animation="[[exitAnimation]]">
+            <template is="dom-repeat" items="{{data}}">
+                <neon-animatable style="height: 900px;  overflow-y: scroll;">
+                    <div class="col-xs-12">
+                        <h2 class="page-header">
+                            <i class="fa fa-globe"></i> {{ item.name }}: {{ item.id }}
+                            <small class="pull-right">date: {{ item.date.start }}</small>
+                        </h2>
+                    </div>
+                    <div id$="pages{{item.id}}">
+                        <div class="spinner-primary"></div>
+                    </div>
+                </neon-animatable>
+            </template>
+        </neon-animated-pages>
+    </template>
+    <script>
+        Polymer({
+            is: "pages-element",
+            properties: {
+                _token: {
+                    type: String,
+                    value: ''
+                },
+                url_request: {
+                    type: String,
+                    value: ''
+                },
+                data: {
+                    type: Array,
+                    value: [
+                        {id: '0', template: false},
+                        {id: '1', template: false},
+                    ]
+                },
+                selected: {
+                    type: Number,
+                    value: 0
+                },
+                countItem: {
+                    type: Number,
+                    value: 0
+                }
+            },
+            ready: function () {
+                var item = this.data[this.selected];
+                if (item.template === false) {
+                    this.launchRequest(item);
+                }
+                var data = this.data;
+                this.countItem = data.length - 1;
+            },
+            insertTemplate: function (item, template) {
+                var elem = this.$$('#pages' + item.id);
+                elem.innerHTML = template;
+                this.set('data.' + this.indexOfItem + '.template', true);
+            },
+            launchRequest: function (item) {
+                this.$.request.body = item;
+                this.$.request.url = this.url_request;
+                this.$.request.method = 'POST';
+                this.$.request.generateRequest();
+            },
+            handleResponse: function (e, request) {
+                var response = request.xhr.response;
+                if (response.template != undefined) {
+                    this.insertTemplate(response.item, response.template)
+                }
+            },
+            _onPrevClick: function () {
+                this.entryAnimation = 'slide-from-left-animation';
+                this.exitAnimation = 'slide-right-animation';
+                this.selected = this.selected === 0 ? this.countItem : (this.selected - 1);
+                var item = this.data[this.selected];
+                this.launchRequest(item);
+            },
+            _onNextClick: function () {
+                this.entryAnimation = 'slide-from-right-animation';
+                this.exitAnimation = 'slide-left-animation';
+                this.selected = this.selected === this.countItem ? 0 : (this.selected + 1);
+                var item = this.data[this.selected];
+                this.launchRequest(item);
+
+            },
+            onRefreshClick: function () {
+                var item = data[this.selected];
+                this.launchRequest(item);
+            }
+        });
+    </script>
+</dom-module>

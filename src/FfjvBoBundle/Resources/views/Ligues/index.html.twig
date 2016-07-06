@@ -20,34 +20,36 @@
                         <h3 class="box-title">User Board</h3> <a class="btn btn-info btn-xs pull-right" href="{{ path('ligues_new') }}">Create a new ligues</a>
                     </div>
                     <div class="box-body">
-                        <table id="user_board" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Tag</th>
-                                <th>Creationdate</th>
-                                <th>Lastupdate</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for ligue in ligues %}
+                        <div class="table-responsive">
+                            <table id="user_board" class="table table-bordered table-striped">
+                                <thead>
                                 <tr>
-                                    <td><a href="{{ path('ligues_show', { 'id': ligue.id }) }}">{{ ligue.title }}</a></td>
-                                    <td>{{ ligue.tag }}</td>
-                                    <td>{% if ligue.creationDate %}{{ ligue.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                                    <td>{% if ligue.lastUpdate %}{{ ligue.lastUpdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <th>Title</th>
+                                    <th>Tag</th>
+                                    <th>Creationdate</th>
+                                    <th>Lastupdate</th>
                                 </tr>
-                            {% endfor %}
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <th>Title</th>
-                                <th>Tag</th>
-                                <th>Creationdate</th>
-                                <th>Lastupdate</th>
-                            </tr>
-                            </tfoot>
-                        </table>
+                                </thead>
+                                <tbody>
+                                {% for ligue in ligues %}
+                                    <tr>
+                                        <td><a href="{{ path('ligues_show', { 'id': ligue.id }) }}">{{ ligue.title }}</a></td>
+                                        <td>{{ ligue.tag }}</td>
+                                        <td>{% if ligue.creationDate %}{{ ligue.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                        <td>{% if ligue.lastUpdate %}{{ ligue.lastUpdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Tag</th>
+                                    <th>Creationdate</th>
+                                    <th>Lastupdate</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

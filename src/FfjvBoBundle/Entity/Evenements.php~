@@ -22,14 +22,27 @@ class Evenements
     const STATUS_VISIBILITY_DRAFT = 0;
     const STATUS_VISIBILITY_PRIVATE = 1;
     const STATUS_VISIBILITY_PUBLIC = 2;
+    
+    const TYPE_OTHER = 0;
+    const TYPE_LOUNGE = 1;
+    const TYPE_TOURNAMENT = 2;
 
     /**
-     * @var array
-     */
+ * @var array
+ */
     public static $listVisibility = [
         "entity.evenements.visibility.draft"   => self::STATUS_VISIBILITY_DRAFT,
         "entity.evenements.visibility.private" => self::STATUS_VISIBILITY_PRIVATE,
         "entity.evenements.visibility.public"  => self::STATUS_VISIBILITY_PUBLIC,
+    ];
+
+    /**
+     * @var array
+     */
+    public static $listType = [
+        "entity.evenements.Type.other"   => self::TYPE_OTHER,
+        "entity.evenements.Type.lounge"   => self::TYPE_LOUNGE,
+        "entity.evenements.Type.tournement"   => self::TYPE_TOURNAMENT
     ];
 
     /**
@@ -129,6 +142,13 @@ class Evenements
      * @ORM\Column(name="visibility", type="integer", nullable=false, length=1)
      */
     private $visibility = self::STATUS_VISIBILITY_DRAFT;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="type", type="integer", nullable=false, length=1)
+     */
+    private $type= self::STATUS_VISIBILITY_DRAFT;
 
     /**
      * @var integer

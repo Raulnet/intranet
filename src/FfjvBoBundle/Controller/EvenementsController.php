@@ -140,6 +140,54 @@ class EvenementsController extends Controller
     }
 
     /**
+     * @param Clubs  $club
+     * @param string $weezEvenementId
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public function getPagesWeezEvenementDetailAction(Clubs $club, $weezEvenementId = ''){
+
+        if(!$club){
+            throw new \Exception('This club not exist');
+        }
+        $events = $this->get('evenements')->getListWeezEvenement($club);
+        $events = $events['events'];
+        $indexOf = 0;
+        foreach ($events as $key => $event){
+            if($event['id'] == $weezEvenementId){
+                $indexOf = $key;
+            }
+            $events[$key]['club_id'] = $club->getId();
+            $events[$key]['template'] = false;
+        }
+        return $this->render('FfjvBoBundle:evenements:weez_evenement_detail.html.twig', [
+            'club' => $club,
+            'events' => $events,
+            'selected' => $indexOf
+        ]);
+    }
+    
+    public function getWeezEvenementDetailAction(Request $request){
+        $item = json_decode($request->getContent(), true);
+        $em = $this->getDoctrine()->getManager();
+        $club = $em->getRepository('FfjvBoBundle:Clubs')->find($item['club_id']);
+        if (!$club) {
+            throw $this->createNotFoundException('Unable to find Clubs club.');
+        }
+        $eventDetail = $this->get('evenements')->getWeezEventDetail($club, $item['id']);
+        $tickets = $this->get('evenements')->getWeezEventTickets($club, $item['id']);
+        $item['last_update'] = $eventDetail['last_update'];
+        $content = $this->renderView('FfjvBoBundle:evenements:_weez_event_details.html.twig', [
+            'club' => $club,
+            'eventTickets' => $tickets['events'][0],
+            'event' => $eventDetail['events'],
+            'last_update' => $eventDetail['last_update']
+        ]);
+        return new Response(json_encode(['template'=>$content, 'item'=> $item]), 200, ['Content-Type'=>'applcation/json']);
+    }
+
+    /**
      * Creates a form to delete a Evenements entity.
      *
      * @param Evenements $evenement The Evenements entity

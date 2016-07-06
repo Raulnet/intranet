@@ -1,0 +1,41 @@
+<dom-module id="button_dialog_async-element">
+    <template>
+        <paper-button id="btn_call_modal" class$="{{button_class}}" on-click="callModal">{{button-value}}</paper-button>
+    </template>
+    <script>
+        Polymer({
+            is: "button_dialog_async-element",
+            properties:{
+                button_value: {
+                    type: String,
+                    value: 'click me'
+                },
+                button_class: {
+                    type: String,
+                    value: ''
+                },
+                url: {
+                    type: String,
+                    value: ''
+                },
+                modal: {
+                    type: Boolean,
+                    value: false
+                },
+                params: {
+                    type: Object,
+                    value: {}
+                }
+            },
+            ready: function(){
+                this.displayBtnValue();
+            },
+            displayBtnValue: function(){
+                this.$.btn_call_modal.innerHTML = this.button_value;
+            },
+            callModal: function(){
+                this.fire('iron-signal', {name: 'dialog-async-show', data: {url: this.url, modal: this.modal, params : this.params}})
+            }
+        });
+    </script>
+</dom-module>

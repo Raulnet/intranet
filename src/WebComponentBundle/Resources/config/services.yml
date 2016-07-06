@@ -1,6 +1,6 @@
 parameters:
     path_lib: "public/lib/"
-    path_component: "public/components/"
+    path_component: "public/components/elements/"
     component_array:
         proto-element:
             - "polymer/polymer.html"
@@ -11,12 +11,28 @@ parameters:
             - "iron-ajax/iron-ajax.html"
             - "paper-tabs/paper-tabs.html"
             - "paper-tabs/paper-tab.html"
+        button_dialog_async-element:
+            - "polymer/polymer.html"
+            - "iron-signals/iron-signals.html"
+            - "paper-button/paper-button.html"
+        dialog_async-element:
+            - "polymer/polymer.html"
+            - "iron-signals/iron-signals.html"
+            - "iron-icons/iron-icons.html"
+            - "paper-dialog/paper-dialog.html"
+            - "paper-dialog-scrollable/paper-dialog-scrollable.html"
+        pages-element:
+            - "polymer/polymer.html"
+            - "iron-pages/iron-pages.html"
+            - "iron-ajax/iron-ajax.html"
+            - "neon-animation/neon-animated-pages.html"
+            - "neon-animation/neon-animatable.html"
+            - "neon-animation/neon-animations.html"
+            - "iron-icons/iron-icons.html"
         toast-element:
             - "polymer/polymer.html"
             - "paper-toast/paper-toast.html"
-        table-element:
-            - "polymer/polymer.html"
-            - "aha-table/dist/aha-table.html"
+
 services:
     web.component.twig_extension:
         class: WebComponentBundle\Twig\WebComponentTwigExtension
