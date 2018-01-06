@@ -277,6 +277,9 @@
 
     applyTransformParams: function (scale, transX, transY)
     {
+      var scale = parseInt(scale);
+      var transX = parseInt(transX);
+      var transY = parseInt(transY);
       if (this.mode == 'svg')
       {
         this.rootGroup.setAttribute('transform', 'scale(' + scale + ') translate(' + transX + ', ' + transY + ')');
