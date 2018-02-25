@@ -1,0 +1,29 @@
+version: "2"
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "33018:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "intranet"
+      MYSQL_USER: "intranet"
+      MYSQL_PASSWORD: "intranet"
+      MYSQL_DATABASE: "intranet"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+  www:
+    build: .
+    ports:
+      - "7080:80"
+    links:
+      - mysql
+      - mailhog
+    volumes:
+      - .:/var/www/html:cached
+    environment:
+      WEB_DOCUMENT_ROOT: "/var/www/html/web"
+      APP_ENV: "dev"
