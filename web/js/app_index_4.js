@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    console.log('ok');
     var url = $("#panel_map").data('url');
     findColors(url);
 
@@ -7,7 +6,6 @@ $(document).ready(function() {
         $('svg').attr('width', $('#panel_map').width());
         var scale = $('#panel_map').width()/735;
         scale = (scale < 1)?1:scale;
-        console.log(scale);
         $('svg g').attr('transform', 'scale(' + scale + ') translate(' + scale + ', ' + 0 + ')');
     });
 
