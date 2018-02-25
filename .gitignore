@@ -1,6 +1,7 @@
 /.idea/
 /.vagrant/
 /app/config/parameters.yml
+/app/bootstrap.php.cache
 /build/
 /phpunit.xml
 /var/
