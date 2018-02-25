@@ -277,6 +277,9 @@
 
         applyTransformParams: function (scale, transX, transY)
         {
+            console.log(transX);
+            console.log(transY);
+            console.log(scale);
             var scale = parseFloat(scale) || 0;
             var transX = parseFloat(transX) || 0;
             var transY = parseFloat(transY) || 0;
