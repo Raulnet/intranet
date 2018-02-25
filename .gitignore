@@ -11,4 +11,3 @@
 /web/.htaccess
 # Composer PHAR
 /composer.phar
-/web/css/
