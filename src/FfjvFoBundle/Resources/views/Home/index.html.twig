@@ -2,7 +2,7 @@
 {% trans_default_domain 'fo_home_index' %}
 {% set adminTools = path('ffjv_fo_admin_tools', {'filename': 'fo_home_index'}) %}
 {% block customCSS %}
-    <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('public/lib/jqueryMap/jqvmap.css') }}">
+    <link media="screen" rel="stylesheet" type="text/css" href="{{ asset('lib/jqueryMap/jqvmap.css') }}">
     {% stylesheets filter="scssphp" output="css/app.css"
     "public/scss/Fo/Home/index.scss"
     %}
@@ -10,11 +10,10 @@
     {% endstylesheets %}
 {% endblock %}
 {% block customJS %}
-    <script src="{{ asset('public/lib/noty/js/noty/packaged/jquery.noty.packaged.min.js') }}"></script>
     {% javascripts filter="?jsqueeze" output="js/app.js"
-    'public/lib/jqueryMap/jquery.vmap.js'
-    'public/lib/jqueryMap/jquery.vmap.france.js'
-    'public/lib/jqueryMap/jquery.vmap.colorsFrance.js'
+    'lib/jqueryMap/jquery.vmap.js'
+    'lib/jqueryMap/jquery.vmap.france.js'
+    'lib/jqueryMap/jquery.vmap.colorsFrance.js'
     'public/js/Home/index.js'
     %}
     <script src="{{ asset_url }}" type="text/javascript"></script>
