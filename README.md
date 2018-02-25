@@ -7,8 +7,9 @@ intranet
 
 #### Install
 ``
-docker-compose up --build
+$ docker-compose up --build
 ``
 
 #### Util
-[localhost](http://localhost:7080/)
+- [localhost](http://localhost:7080/)
+- [mailhog](http://localhost:8025/)
